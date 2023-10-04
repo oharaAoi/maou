@@ -2,15 +2,15 @@
 
 const char kWindowTitle[] = "回王";
 
-enum GemeScene {
+//シーン
+enum GameScene {
 	TITLE,
 	TUTORIAL,
-	GAME
+	GAME,
+	RESULT
 };
 
-//コメント
-
-//コメントを追加2
+GameScene scene = TITLE;
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
@@ -31,21 +31,87 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		memcpy(preKeys, keys, 256);
 		Novice::GetHitKeyStateAll(keys);
 
-		///
-		/// ↓更新処理ここから
-		///
+		switch (scene) {
+		case TITLE:
 
-		///
-		/// ↑更新処理ここまで
-		///
+			///
+			/// ↓更新処理ここから
+			/// 
 
-		///
-		/// ↓描画処理ここから
-		///
+			///
+			/// ↑更新処理ここまで
+			/// 
 
-		///
-		/// ↑描画処理ここまで
-		///
+			///
+			/// ↓描画処理ここから
+			/// 
+
+			///
+			/// ↑描画処理ここまで
+			/// 
+
+			break;
+
+		case TUTORIAL:
+
+			///
+			/// ↓更新処理ここから
+			/// 
+
+			///
+			/// ↑更新処理ここまで
+			///
+
+			///
+			/// ↓描画処理ここから
+			/// 
+
+			///
+			/// ↑描画処理ここまで
+			/// 
+
+			break;
+
+		case GAME:
+
+			///
+			/// ↓更新処理ここから
+			/// 
+
+			///
+			/// ↑更新処理ここまで
+			/// 
+
+			///
+			/// ↓描画処理ここから
+			/// 
+
+			///
+			/// ↑描画処理ここまで
+			/// 
+
+			break;
+
+		case RESULT:
+
+			///
+			/// ↓更新処理ここから
+			/// 
+
+			///
+			/// ↑更新処理ここまで
+			/// 
+
+			///
+			/// ↓描画処理ここから
+			/// 
+
+			///
+			/// ↑描画処理ここまで
+			/// 
+
+			break;
+		}
 
 		// フレームの終了
 		Novice::EndFrame();
