@@ -38,20 +38,19 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓更新処理ここから
 			/// 
 
+
 			///
 			/// ↑更新処理ここまで
 			/// 
-			
+
 			///
 			/// ↓描画処理ここから
 			/// 
 
-			//test
-
 			///
 			/// ↑描画処理ここまで
 			/// 
-			
+
 			break;
 
 		case TUTORIAL:
@@ -59,11 +58,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			///
 			/// ↓更新処理ここから
 			/// 
-			
+
 			///
 			/// ↑更新処理ここまで
 			///
-			
+
 			///
 			/// ↓描画処理ここから
 			/// 
@@ -71,7 +70,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			///
 			/// ↑描画処理ここまで
 			/// 
-		
+
 			break;
 
 		case GAME:
@@ -79,11 +78,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			///
 			/// ↓更新処理ここから
 			/// 
-			
+
 			///
 			/// ↑更新処理ここまで
 			/// 
-			
+
 			///
 			/// ↓描画処理ここから
 			/// 
@@ -91,19 +90,19 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			///
 			/// ↑描画処理ここまで
 			/// 
-			
+
 			break;
-			
+
 		case RESULT:
 
 			///
 			/// ↓更新処理ここから
 			/// 
-			
+
 			///
 			/// ↑更新処理ここまで
 			/// 
-			
+
 			///
 			/// ↓描画処理ここから
 			/// 
@@ -111,7 +110,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			///
 			/// ↑描画処理ここまで
 			/// 
-			
+
 			break;
 		}
 
