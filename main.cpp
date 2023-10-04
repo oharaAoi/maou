@@ -8,6 +8,8 @@ enum GemeScene {
 	GAME
 };
 
+///コメント
+
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
