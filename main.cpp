@@ -2,6 +2,12 @@
 
 const char kWindowTitle[] = "回王";
 
+enum GemeScene {
+	TITLE,
+	TUTORIAL,
+	GAME
+};
+
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
