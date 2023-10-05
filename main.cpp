@@ -1,5 +1,6 @@
 #include <Novice.h>
 
+
 const char kWindowTitle[] = "回王";
 
 //シーン
