@@ -39,7 +39,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// 
 
 			if (keys[DIK_SPACE]) {
-
+				scene = TUTORIAL;
 			}
 
 			///
