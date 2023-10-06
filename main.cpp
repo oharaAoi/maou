@@ -1,22 +1,15 @@
 #include <Novice.h>
 
-const char kWindowTitle[] = "回王";
-
-//シーン
-enum GameScene {
-	TITLE,
-	TUTORIAL,
-	GAME,
-	RESULT
-};
-
-GameScene scene = TITLE;
+// MySource //
+#include "MyDeta/Source/Environment.h"
+#include "MyDeta/Source/MyStruct.h"
+#include "MyDeta/Source/Easing.h"
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	// ライブラリの初期化
-	Novice::Initialize(kWindowTitle, 1280, 720);
+	Novice::Initialize(kWindowTitle, kWindowWidth, kWindowHeight);
 
 	// キー入力結果を受け取る箱
 	char keys[256] = {0};
