@@ -29,7 +29,7 @@ void Player::Update(char* keys, char* preKeys) { /// 更新処理
 				mode_ = Mode::SHOT;
 			}
 
-
+			
 
 			break;
 

@@ -53,6 +53,9 @@
     <ClCompile Include="MyDeta\Object\Player.cpp">
       <Filter>MyDeta\Object</Filter>
     </ClCompile>
+    <ClCompile Include="MyDeta\Object\Reflection.cpp">
+      <Filter>MyDeta\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -136,6 +139,9 @@
       <Filter>MyDeta\Source</Filter>
     </ClInclude>
     <ClInclude Include="MyDeta\Object\Player.h">
+      <Filter>MyDeta\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="MyDeta\Object\Reflection.h">
       <Filter>MyDeta\Object</Filter>
     </ClInclude>
   </ItemGroup>

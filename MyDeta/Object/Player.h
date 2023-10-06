@@ -25,7 +25,7 @@ private:
 	Vector2 <float>velocity_;
 	Vector2 <float>acceleration_;
 
-	// world座標のpx1とzoomした1pxは違うので注意。
+	// world座標の1pxとzoomした1pxは違うので注意。
 
 
 
@@ -35,7 +35,7 @@ public:
 	Player();
 	~Player();
 
-	// 基礎関数
+	// default method
 	void Init();
 	void Update(char* keys, char* preKeys);
 	void Draw();

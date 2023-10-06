@@ -3,7 +3,7 @@
 // MySource //
 #include "MyDeta/Source/Environment.h"
 #include "MyDeta/Source/MyStruct.h"
-#include "MyDeta/Source/Easing.h"
+//#include "MyDeta/Source/Easing.h"
 
 //シーン
 enum GameScene {
@@ -24,6 +24,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	char preKeys[256] = {0};
 
 	GameScene scene = TITLE;
+
+	
 
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
@@ -48,7 +50,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			///
 			/// ↑更新処理ここまで
 			/// 
-
+			
 			///
 			/// ↓描画処理ここから
 			/// 
