@@ -1,4 +1,4 @@
-#include "Player.h"
+ï»¿#include "Player.h"
 
 Player::Player() {
 	Init();
@@ -7,7 +7,7 @@ Player::Player() {
 Player::~Player() {
 }
 
-void Player::Init() { // •Ï”‚Ì‰Šú‰»
+void Player::Init() { // å¤‰æ•°ã®åˆæœŸåŒ–
 
 	mode_ = SEARCH;
 
@@ -21,7 +21,7 @@ void Player::Init() { // •Ï”‚Ì‰Šú‰»
 	speed_ = 1.0f;
 }
 
-void Player::Update(char* keys, char* preKeys) { /// XVˆ—
+void Player::Update(char* keys, char* preKeys) { /// æ›´æ–°å‡¦ç†
 	switch (mode_) {
 		case Mode::SEARCH:
 
@@ -45,6 +45,6 @@ void Player::Update(char* keys, char* preKeys) { /// XVˆ—
 	}
 }
 
-void Player::Draw() { /// •`‰æˆ—
+void Player::Draw() { /// æç”»å‡¦ç†
 
 }
