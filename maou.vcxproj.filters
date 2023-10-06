@@ -20,6 +20,9 @@
     <Filter Include="MyDeta\Source">
       <UniqueIdentifier>{bdfa39ce-a1c8-4f14-82c5-06f68f911038}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MyDeta\Object">
+      <UniqueIdentifier>{c2e8d610-6071-4ce0-bad0-724eddb6ee6b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\DirectXCommon.cpp">
@@ -46,6 +49,9 @@
     </ClCompile>
     <ClCompile Include="MyDeta\Source\Easing.cpp">
       <Filter>MyDeta\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="MyDeta\Object\Player.cpp">
+      <Filter>MyDeta\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -128,6 +134,9 @@
     </ClInclude>
     <ClInclude Include="MyDeta\Source\MyStruct.h">
       <Filter>MyDeta\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="MyDeta\Object\Player.h">
+      <Filter>MyDeta\Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
