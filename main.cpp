@@ -1,9 +1,12 @@
 #include <Novice.h>
+#include <time.h>
 
 // MySource //
 #include "MyDeta/Source/Environment.h"
 #include "MyDeta/Source/MyStruct.h"
 //#include "MyDeta/Source/Easing.h"
+
+#include "Emitter.h"
 
 //シーン
 enum GameScene {
@@ -16,6 +19,9 @@ enum GameScene {
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
+	// 乱数のシード決定
+	srand(static_cast<unsigned int>(time(nullptr)));
+
 	// ライブラリの初期化
 	Novice::Initialize(kWindowTitle, kWindowWidth, kWindowHeight);
 
@@ -23,9 +29,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	char keys[256] = {0};
 	char preKeys[256] = {0};
 
+	// マウス入力を受け取る
+	int mouseX, mouseY;
+
 	GameScene scene = TITLE;
 
-	
+	Emitter emitter;
 
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
@@ -35,6 +44,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		// キー入力を受け取る
 		memcpy(preKeys, keys, 256);
 		Novice::GetHitKeyStateAll(keys);
+
+		// マウス入力を受け取る
+		Novice::GetMousePosition(&mouseX, &mouseY);
 
 		switch (scene) {
 		case TITLE:
@@ -47,6 +59,19 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				scene = TUTORIAL;
 			}
 
+			emitter.centerX = mouseX;
+			emitter.centerY = mouseY;
+
+			if (keys[DIK_D]) {
+				emitter.rangeX += 2;
+			}
+
+			if (keys[DIK_A] && emitter.rangeX > 20) {
+				emitter.rangeX -= 2;
+			}
+
+			emitter.Update();
+
 			///
 			/// ↑更新処理ここまで
 			/// 
@@ -54,6 +79,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			///
 			/// ↓描画処理ここから
 			/// 
+
+			emitter.Draw();
 
 			///
 			/// ↑描画処理ここまで

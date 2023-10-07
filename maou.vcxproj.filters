@@ -56,6 +56,12 @@
     <ClCompile Include="MyDeta\Object\Reflection.cpp">
       <Filter>MyDeta\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>MyDeta\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Emitter.cpp">
+      <Filter>MyDeta\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -143,6 +149,12 @@
     </ClInclude>
     <ClInclude Include="MyDeta\Object\Reflection.h">
       <Filter>MyDeta\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>MyDeta\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Emitter.h">
+      <Filter>MyDeta\Source</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
