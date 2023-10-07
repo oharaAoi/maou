@@ -1,5 +1,9 @@
 ﻿#pragma once
+#define _USE_MATH_DEFINES
 #include <math.h>
+/*==================================*/
+#include <random>
+/*==================================*/
 
 // MySource //
 #include "MyDeta/Source/MyStruct.h"
@@ -15,6 +19,9 @@ float CheckLength(const Vector2<float>& standerd, const Vector2<float>& target);
 
 /* --- Normalize --- */
 Vector2 <float>ConversionNormalizeVector(const Vector2 <float>& vectorA, const Vector2 <float>& vectorB);
+
+/* --- Random --- */
+void ValueRand(float num, float theta);
 
 /* ==================================
  collision Function
