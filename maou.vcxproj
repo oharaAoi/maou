@@ -119,6 +119,7 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClCompile Include="MyDeta\Object\Player.cpp" />
     <ClCompile Include="MyDeta\Object\Reflection.cpp" />
     <ClCompile Include="MyDeta\Source\Easing.cpp" />
+    <ClCompile Include="MyDeta\System\CollisionManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\base\StringUtility.h" />
@@ -153,6 +154,7 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClInclude Include="MyDeta\Source\Easing.h" />
     <ClInclude Include="MyDeta\Source\Environment.h" />
     <ClInclude Include="MyDeta\Source\MyStruct.h" />
+    <ClInclude Include="MyDeta\System\CollisionManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

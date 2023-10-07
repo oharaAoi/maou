@@ -23,6 +23,9 @@
     <Filter Include="MyDeta\Object">
       <UniqueIdentifier>{c2e8d610-6071-4ce0-bad0-724eddb6ee6b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MyDeta\System">
+      <UniqueIdentifier>{e636f5b6-b73c-4321-9a68-51719c1361d7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\DirectXCommon.cpp">
@@ -55,6 +58,9 @@
     </ClCompile>
     <ClCompile Include="MyDeta\Object\Reflection.cpp">
       <Filter>MyDeta\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="MyDeta\System\CollisionManager.cpp">
+      <Filter>MyDeta\System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -143,6 +149,9 @@
     </ClInclude>
     <ClInclude Include="MyDeta\Object\Reflection.h">
       <Filter>MyDeta\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="MyDeta\System\CollisionManager.h">
+      <Filter>MyDeta\System</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
