@@ -21,7 +21,7 @@ float CheckLength(const Vector2<float>& standerd, const Vector2<float>& target);
 Vector2 <float>ConversionNormalizeVector(const Vector2 <float>& vectorA, const Vector2 <float>& vectorB);
 
 /* --- Random --- */
-void ValueRand(float num, float theta);
+void ValueRand(float num, float theta, int bossRadius, int stageRadius);
 
 /* ==================================
  collision Function

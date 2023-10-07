@@ -30,12 +30,13 @@ Vector2 <float>ConversionNormalizeVector(const Vector2 <float>& vectorA, const V
 }
 
 /* --- Rand --- */
-void ValueRand(float *num, float *theta) {
+void ValueRand(float *num, float *theta, int bossRadius, int stageRadius) {
 	unsigned seed = static_cast<unsigned>(std::time(nullptr));
 	std::mt19937 gen(seed); // Mersenne Twister 乱数生成器をシード値で初期化
 
-	///最小値、最大値
-	std::uniform_int_distribution<int> enemyPosRand(100, 200);
+	//最小値,最大値(ボスの半径,stageの半径)
+	//エネミーの座標をステージの半径内に決める
+	std::uniform_int_distribution<int> enemyPosRand(bossRadius, stageRadius);
 	std::uniform_real_distribution<float> thetaRand(0, 2.0f * float(M_PI));
 
 	for (int i = 0; i < 5; i++) {
