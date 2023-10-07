@@ -38,5 +38,13 @@ public:
 	void Draw();
 
 	// user method
+	// accessor
+	// center_
+	Vector2 <float>GetCenter(int i) { return object_[i].center; }
 
+	// size
+	Size <float>GetSize() { return size_; }
+
+	// isAlive
+	void SetIsAlive(int i, bool isAlive) { object_[i].isAlive = isAlive; }
 };

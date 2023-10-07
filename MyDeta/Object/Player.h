@@ -15,7 +15,7 @@ private:
 
 	Mode mode_;
 
-	Vector2 <float>pos_; // world座標基準
+	Vector2 <float>center_; // world座標基準
 	Size <float>size_; // world座標基準
 
 	// world座標基準はカメラzoom率をかけてscreenに映すこと。
@@ -39,5 +39,16 @@ public:
 	void Init();
 	void Update(char* keys, char* preKeys);
 	void Draw();
+
+	// accessor
+	// center_
+	Vector2 <float>GetCenter() { return center_; }
+
+	// size_
+	Size <float>GetSize() { return size_; }
+
+	// velocity_
+	Vector2 <float>GetVelocity() { return velocity_; }
+	void SetVelocity(Vector2 <float>velocity) { velocity_ = velocity; }
 };
 
