@@ -5,6 +5,13 @@
 #include "MyDeta/Source/MyStruct.h"
 //#include "MyDeta/Source/Easing.h"
 
+// MySystem //
+#include "MyDeta/System/CollisionManager.h"
+
+// MyObject //
+#include "MyDeta/Object/Player.h"
+#include "MyDeta/Object/Reflection.h"
+
 //シーン
 enum GameScene {
 	TITLE,
