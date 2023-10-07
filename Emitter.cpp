@@ -31,10 +31,11 @@ void Emitter::Update()
 	for (auto itr = particleList.begin(); itr != particleList.end();) {
 		itr->Update();
 
+		// Delフラグがtrueだったら
 		if (itr->GetDelFlag()) {
-			itr = particleList.erase(itr);
+			itr = particleList.erase(itr); // その要素を削除する
 		} else {
-			itr++;
+			itr++; // eraseしなかった場合のみイテレーターをインクリメント
 		}
 	}
 }
