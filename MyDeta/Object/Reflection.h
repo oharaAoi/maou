@@ -1,25 +1,29 @@
-#pragma once
+﻿#pragma once
+#include <Novice.h>
 
 // MySource //
 #include "MyDeta/Source/MyStruct.h"
 
-class Reflection {
+class Reflection { // 赤色のやつ
 private:
 
 	enum ShapeType {
-
+		CIRCLE,
+		SQUARE,
 	};
 
 
 	struct Base {
 		ShapeType shapeType;
-		Vector2 <float>pos; // world
+
+		bool isAlive;
+		Vector2 <float>center; // world
 	};
 
 	Size <float>size_; // world
 
 	static const int kMaxObjectNum = 10;
-	Base Object_[kMaxObjectNum];
+	Base object_[kMaxObjectNum];
 
 public:
 
