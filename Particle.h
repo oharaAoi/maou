@@ -4,7 +4,7 @@
 class Particle
 {
 public:
-	Particle(Vector2<float> pos,int maxTime);
+	Particle(Vector2<float> pos,Vector2<float> velocity,int maxTime);
 	~Particle();
 
 	void Update();

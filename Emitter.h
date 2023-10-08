@@ -11,12 +11,9 @@ public:
 	void Update();
 	void Draw();
 
-	//パーティクルの範囲
-	int centerX = 640;
-	int rangeX = 300;
+	void Emit(int centerX,int centerY,int count);
 
-	int centerY = 100;
-	int rangeY = 50;
+	
 
 private:
 	/*Particle particle = Particle ({ 640,0 });*/
@@ -24,6 +21,13 @@ private:
 	/*Particle particles[300];*/
 
 	std::list<Particle> particleList;
+
+	//パーティクルの範囲
+	int centerX_ = 640;
+	int rangeX_ = 20;
+
+	int centerY_ = 100;
+	int rangeY_ = 20;
 
 };
 

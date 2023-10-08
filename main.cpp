@@ -59,18 +59,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				scene = TUTORIAL;
 			}
 
-			emitter.centerX = mouseX;
-			emitter.centerY = mouseY;
-
-			if (keys[DIK_D]) {
-				emitter.rangeX += 2;
-			}
-
-			if (keys[DIK_A] && emitter.rangeX > 20) {
-				emitter.rangeX -= 2;
-			}
-
 			emitter.Update();
+
+			// Pキーが押されたときのみパーティクルを生成
+			if (keys[DIK_P] && !preKeys[DIK_P]) {
+				emitter.Emit(mouseX,mouseY,12);
+			}
 
 			///
 			/// ↑更新処理ここまで

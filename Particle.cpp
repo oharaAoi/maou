@@ -1,10 +1,10 @@
 #include "Particle.h"
 #include <Novice.h>
 
-Particle::Particle(Vector2<float> pos,int maxTime)
+Particle::Particle(Vector2<float> pos,Vector2<float> velocity,int maxTime)
 {
 	pos_ = pos;
-	velocity_ = { 0,8.f };
+	velocity_ = velocity;
 	maxTime_ = maxTime;
 }
 

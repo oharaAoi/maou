@@ -19,13 +19,6 @@ Emitter::~Emitter()
 
 void Emitter::Update()
 {
-	// パーティクルを生成する処理
-
-	float particleX = static_cast<float>(Random(centerX - rangeX, centerX + rangeX));
-	float particleY = static_cast<float>(Random(centerY - rangeY, centerY + rangeY));
-
-	Particle newParticle = Particle({ particleX,particleY },60);
-	particleList.push_back(newParticle);
 
 	// パーティクル全ての更新処理を呼ぶ
 	for (auto itr = particleList.begin(); itr != particleList.end();) {
@@ -48,11 +41,27 @@ void Emitter::Draw()
 	}
 
 	// デバッグ用パーティクル範囲表示
-	Novice::DrawBox(
-		centerX - rangeX, centerY - rangeY,
-		rangeX * 2, rangeY * 2,
+	/*Novice::DrawBox(
+		centerX_ - rangeX_, centerY_ - rangeY_,
+		rangeX_ * 2, rangeY_ * 2,
 		0.0f,
 		WHITE, kFillModeWireFrame
-	);
+	);*/
 
+}
+
+void Emitter::Emit(int centerX, int centerY, int count)
+{
+	// パーティクルを生成する処理を1フレームで12回行う
+
+	for (int i = 0; i < count; i++) {
+		float particleX = static_cast<float>(Random(centerX - rangeX_, centerX + rangeX_));
+		float particleY = static_cast<float>(Random(centerY - rangeY_, centerY + rangeY_));
+
+		float velocityX = static_cast<float>(Random(-8, 8));
+		float velocityY = static_cast<float>(Random(-8, 8));
+
+		Particle newParticle = Particle({ particleX,particleY }, { velocityX,velocityY }, 30);
+		particleList.push_back(newParticle);
+	}
 }

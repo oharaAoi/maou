@@ -23,6 +23,9 @@
     <Filter Include="MyDeta\Object">
       <UniqueIdentifier>{c2e8d610-6071-4ce0-bad0-724eddb6ee6b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MyDeta\Particle">
+      <UniqueIdentifier>{9bbe517c-802c-4efe-900c-2a0b1e54cada}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\DirectXCommon.cpp">
@@ -57,10 +60,10 @@
       <Filter>MyDeta\Object</Filter>
     </ClCompile>
     <ClCompile Include="Particle.cpp">
-      <Filter>MyDeta\Source</Filter>
+      <Filter>MyDeta\Particle</Filter>
     </ClCompile>
     <ClCompile Include="Emitter.cpp">
-      <Filter>MyDeta\Source</Filter>
+      <Filter>MyDeta\Particle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -151,10 +154,10 @@
       <Filter>MyDeta\Object</Filter>
     </ClInclude>
     <ClInclude Include="Particle.h">
-      <Filter>MyDeta\Source</Filter>
+      <Filter>MyDeta\Particle</Filter>
     </ClInclude>
     <ClInclude Include="Emitter.h">
-      <Filter>MyDeta\Source</Filter>
+      <Filter>MyDeta\Particle</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
