@@ -23,6 +23,9 @@
     <Filter Include="MyDeta\Object">
       <UniqueIdentifier>{c2e8d610-6071-4ce0-bad0-724eddb6ee6b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MyDeta\Particle">
+      <UniqueIdentifier>{9bbe517c-802c-4efe-900c-2a0b1e54cada}</UniqueIdentifier>
+    </Filter>
     <Filter Include="MyDeta\System">
       <UniqueIdentifier>{e636f5b6-b73c-4321-9a68-51719c1361d7}</UniqueIdentifier>
     </Filter>
@@ -58,6 +61,21 @@
     </ClCompile>
     <ClCompile Include="MyDeta\Object\Reflection.cpp">
       <Filter>MyDeta\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>MyDeta\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Emitter.cpp">
+      <Filter>MyDeta\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Emitter2.cpp">
+      <Filter>MyDeta\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle2.cpp">
+      <Filter>MyDeta\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Util.cpp">
+      <Filter>MyDeta\Particle</Filter>
     </ClCompile>
     <ClCompile Include="MyDeta\System\CollisionManager.cpp">
       <Filter>MyDeta\System</Filter>
@@ -155,6 +173,21 @@
     </ClInclude>
     <ClInclude Include="MyDeta\Object\Reflection.h">
       <Filter>MyDeta\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>MyDeta\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Emitter.h">
+      <Filter>MyDeta\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Emitter2.h">
+      <Filter>MyDeta\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle2.h">
+      <Filter>MyDeta\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Util.h">
+      <Filter>MyDeta\Particle</Filter>
     </ClInclude>
     <ClInclude Include="MyDeta\System\CollisionManager.h">
       <Filter>MyDeta\System</Filter>

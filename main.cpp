@@ -1,4 +1,5 @@
 #include <Novice.h>
+#include <time.h>
 
 // MySource //
 #include "MyDeta/Source/Environment.h"
@@ -23,6 +24,9 @@ enum GameScene {
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
+	// 乱数のシード決定
+	srand(static_cast<unsigned int>(time(nullptr)));
+
 	// ライブラリの初期化
 	Novice::Initialize(kWindowTitle, kWindowWidth, kWindowHeight);
 
@@ -32,7 +36,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	GameScene scene = TITLE;
 
-	
 
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
