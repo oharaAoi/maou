@@ -6,9 +6,6 @@
 #include "MyDeta/Source/MyStruct.h"
 //#include "MyDeta/Source/Easing.h"
 
-#include "Emitter.h"
-#include "Emitter2.h"
-
 //シーン
 enum GameScene {
 	TITLE,
@@ -30,12 +27,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	char keys[256] = {0};
 	char preKeys[256] = {0};
 
-	// マウス入力を受け取る
-	int mouseX, mouseY;
-
 	GameScene scene = TITLE;
 
-	Emitter2 emitter;
 
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
@@ -45,9 +38,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		// キー入力を受け取る
 		memcpy(preKeys, keys, 256);
 		Novice::GetHitKeyStateAll(keys);
-
-		// マウス入力を受け取る
-		Novice::GetMousePosition(&mouseX, &mouseY);
 
 		switch (scene) {
 		case TITLE:
@@ -60,13 +50,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				scene = TUTORIAL;
 			}
 
-			emitter.Update();
-
-			// Pキーが押されたときのみパーティクルを生成
-			if (keys[DIK_P] && !preKeys[DIK_P]) {
-				emitter.Emit(mouseX,mouseY,12);
-			}
-
 			///
 			/// ↑更新処理ここまで
 			/// 
@@ -74,8 +57,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			///
 			/// ↓描画処理ここから
 			/// 
-
-			emitter.Draw();
 
 			///
 			/// ↑描画処理ここまで
