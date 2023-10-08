@@ -17,7 +17,7 @@ private:
 		ShapeType shapeType;
 
 		bool isAlive;
-		Vector2 <float>center; // world
+		Vector2 <float>pos; // world
 	};
 
 	Size <float>size_; // world
@@ -38,13 +38,15 @@ public:
 	void Draw();
 
 	// user method
+	// 
 	// accessor
 	// center_
-	Vector2 <float>GetCenter(int i) { return object_[i].center; }
+	Vector2 <float>GetPos(int i) { return object_[i].pos; }
 
 	// size
 	Size <float>GetSize() { return size_; }
 
 	// isAlive
+	bool GetIsAlive(int i) { return object_[i].isAlive; }
 	void SetIsAlive(int i, bool isAlive) { object_[i].isAlive = isAlive; }
 };

@@ -11,7 +11,7 @@ void Player::Init() { // 変数の初期化
 
 	mode_ = SEARCH;
 
-	center_ = {
+	pos_ = {
 		0.0f, // x
 		0.0f, // y
 	};

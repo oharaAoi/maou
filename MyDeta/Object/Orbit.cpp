@@ -15,7 +15,7 @@ void Orbit::Init() {
 	for (int oi = 0; oi < kMaxObjectNum_; oi++) {
 		object_[oi] = {
 			false, // = isAlive
-			{0.0f, 0.0f,} // center
+			{0.0f, 0.0f,} // pos
 
 			// positionはランダムになる
 		};
@@ -23,4 +23,9 @@ void Orbit::Init() {
 }
 
 void Orbit::Update() {
+
+}
+
+void Orbit::Draw() {
+
 }

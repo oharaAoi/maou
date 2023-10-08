@@ -12,7 +12,7 @@ private:
 
 	struct Base {
 		bool isAlive;
-		Vector2 <float>center; // world
+		Vector2 <float>pos; // world
 	};
 
 	static const int kMaxObjectNum_ = 10;
@@ -32,6 +32,15 @@ public:
 	// user method
 
 	// accossor
+	// center_
+	Vector2 <float>GetPos(int i) { return object_[i].pos; }
+
+	// size
+	Size <float>GetCollisionSize() { return collisionSize_; }
+
+	// isAlive
+	bool GetIsAlive(int i) { return object_[i].isAlive; }
+	void SetIsAlive(int i, bool isAlive) { object_[i].isAlive = isAlive; }
 
 };
 

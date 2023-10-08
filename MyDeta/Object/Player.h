@@ -15,7 +15,7 @@ private:
 
 	Mode mode_;
 
-	Vector2 <float>center_; // world座標基準
+	Vector2 <float>pos_; // world座標基準
 	Size <float>size_; // world座標基準
 
 	// world座標基準はカメラzoom率をかけてscreenに映すこと。
@@ -27,7 +27,11 @@ private:
 
 	// world座標の1pxとzoomした1pxは違うので注意。
 
-
+	/* --- totate --- */
+	Vector2 <float>rotateCenter_; // world座標基準
+	float b2radius_;
+	float radian_;
+	float theta_;
 
 public:
 
@@ -42,7 +46,7 @@ public:
 
 	// accessor
 	// center_
-	Vector2 <float>GetCenter() { return center_; }
+	Vector2 <float>GetPos() { return pos_; }
 
 	// size_
 	Size <float>GetSize() { return size_; }

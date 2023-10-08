@@ -15,7 +15,7 @@ void Reflection::Init() {
 			ShapeType::CIRCLE,// shapeType
 
 			false, // = isAlive
-			{0.0f, 0.0f} // center
+			{0.0f, 0.0f} // pos
 
 			// positionはランダムになる
 		};
@@ -34,7 +34,7 @@ void Reflection::Draw() {
 		if (object_[oi].isAlive) {
 			if (object_[oi].shapeType == CIRCLE) {
 				Novice::DrawEllipse(
-					static_cast<int>(object_[oi].center.x), static_cast<int>(object_[oi].center.y),
+					static_cast<int>(object_[oi].pos.x), static_cast<int>(object_[oi].pos.y),
 					static_cast<int>(size_.radius), static_cast<int>(size_.radius),
 					0.0f,
 					0xFA0000FF,
@@ -43,7 +43,7 @@ void Reflection::Draw() {
 
 			} else if (object_[oi].shapeType == SQUARE) {
 				Novice::DrawBox(
-					static_cast<int>(object_[oi].center.x), static_cast<int>(object_[oi].center.y),
+					static_cast<int>(object_[oi].pos.x), static_cast<int>(object_[oi].pos.y),
 					static_cast<int>(size_.width), static_cast<int>(size_.height),
 					0.0f,
 					0xFA0000FF,
