@@ -1,16 +1,19 @@
 ﻿#pragma once
 #include <Novice.h>
+#define _USE_MATH_DEFINES
+#include <math.h>
 
 // MySource //
 #include "MyDeta/Source/Environment.h"
 #include "MyDeta/Source/MyStruct.h"
+#include "MyDeta/Source/MyMath.h"
 
 class Player {
 private:
 
 	enum Mode {
 		SEARCH,
-		SHOT,
+		SHOOT,
 	};
 
 	Mode mode_;
@@ -22,16 +25,25 @@ private:
 
 	float speed_; // world座標基準
 
-	Vector2 <float>velocity_;
-	Vector2 <float>acceleration_;
-
 	// world座標の1pxとzoomした1pxは違うので注意。
 
 	/* --- totate --- */
 	Vector2 <float>rotateCenter_; // world座標基準
-	float b2radius_;
+	float b2Length_;
+
+	float radius_;
 	float radian_;
 	float theta_;
+
+	enum ShotDirection {
+		TO_CENTER, // 中心方向
+		FROM_CENTER, // 中心と反対方向
+	};
+
+	ShotDirection shotDirection_;
+
+	Vector2 <float>velocity_;
+	Vector2 <float>acceleration_;
 
 public:
 

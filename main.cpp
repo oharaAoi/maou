@@ -2,9 +2,10 @@
 #include <time.h>
 
 // MySource //
+//#include "MyDeta/Source/Easing.h"
 #include "MyDeta/Source/Environment.h"
 #include "MyDeta/Source/MyStruct.h"
-//#include "MyDeta/Source/Easing.h"
+#include "MyDeta/Source/MyMath.h"
 
 // MySystem //
 #include "MyDeta/System/CollisionManager.h"
