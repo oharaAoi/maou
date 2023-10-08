@@ -2,6 +2,7 @@
 
 void CollisionManager::CheckCollision(Player& player, Reflection& reflection) {
 	for (int ri = 0; ri < 10; ri++) {
+		// TODO: if isAlive
 		if (CheckCollisionCircles( // 見にくかったら修正します...
 			player.GetCenter(), player.GetSize().radius, // player: center_, size_.radius
 			reflection.GetCenter(ri), reflection.GetSize().radius // reflection: center_, size_.radius
