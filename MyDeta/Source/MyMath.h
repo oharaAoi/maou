@@ -12,6 +12,12 @@
 * 関数 *
 ***********************************/
 /* ---------------------------------
+ Default Function
+---------------------------------- */
+/* --- Random --- */
+void ValueRand(float num, float theta, int bossRadius, int stageRadius);
+
+/* ---------------------------------
  Math Function
 ---------------------------------- */
 /* --- Length --- */
@@ -19,9 +25,6 @@ float CheckLength(const Vector2<float>& standerd, const Vector2<float>& target);
 
 /* --- Normalize --- */
 Vector2 <float>ConversionNormalizeVector(const Vector2 <float>& vectorA, const Vector2 <float>& vectorB);
-
-/* --- Random --- */
-void ValueRand(float num, float theta, int bossRadius, int stageRadius);
 
 /* ==================================
  collision Function

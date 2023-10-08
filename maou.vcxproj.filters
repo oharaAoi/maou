@@ -65,6 +65,9 @@
     <ClCompile Include="MyDeta\Source\MyMath.cpp">
       <Filter>MyDeta\Source</Filter>
     </ClCompile>
+    <ClCompile Include="MyDeta\Object\Orbit.cpp">
+      <Filter>MyDeta\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -158,6 +161,9 @@
     </ClInclude>
     <ClInclude Include="MyDeta\Source\MyMath.h">
       <Filter>MyDeta\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="MyDeta\Object\Orbit.h">
+      <Filter>MyDeta\Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

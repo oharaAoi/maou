@@ -3,8 +3,8 @@
 void CollisionManager::CheckCollision(Player& player, Reflection& reflection) {
 	for (int ri = 0; ri < 10; ri++) {
 		if (CheckCollisionCircles( // 見にくかったら修正します...
-								  player.GetCenter(), player.GetSize().radius, // player: center_, size_.radius
-								  reflection.GetCenter(ri), reflection.GetSize().radius // reflection: center_, size_.radius
+			player.GetCenter(), player.GetSize().radius, // player: center_, size_.radius
+			reflection.GetCenter(ri), reflection.GetSize().radius // reflection: center_, size_.radius
 		)) { // hit
 
 			Vector2 <float>p2rVector = ConversionNormalizeVector(player.GetCenter(), reflection.GetCenter(ri));
