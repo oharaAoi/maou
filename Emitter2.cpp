@@ -1,17 +1,17 @@
 ﻿#include <Novice.h>
-#include "Emitter.h"
+#include "Emitter2.h"
 #include "Util.h"
 
-Emitter::Emitter()
+Emitter2::Emitter2()
 {
 
 }
 
-Emitter::~Emitter()
+Emitter2::~Emitter2()
 {
 }
 
-void Emitter::Update()
+void Emitter2::Update()
 {
 
 	// パーティクル全ての更新処理を呼ぶ
@@ -27,7 +27,7 @@ void Emitter::Update()
 	}
 }
 
-void Emitter::Draw()
+void Emitter2::Draw()
 {
 	// パーティクル全ての描画処理を呼ぶ
 	for (auto& particle : particleList) {
@@ -44,7 +44,7 @@ void Emitter::Draw()
 
 }
 
-void Emitter::Emit(int centerX, int centerY, int count)
+void Emitter2::Emit(int centerX, int centerY, int count)
 {
 	// パーティクルを生成する処理を1フレームで12回行う
 
@@ -55,7 +55,8 @@ void Emitter::Emit(int centerX, int centerY, int count)
 		float velocityX = static_cast<float>(Random(-8, 8));
 		float velocityY = static_cast<float>(Random(-8, 8));
 
-		Particle newParticle = Particle({ particleX,particleY }, { velocityX,velocityY }, 30);
+		Particle2 newParticle = Particle2({ particleX,particleY }, { velocityX,velocityY }, 30);
 		particleList.push_back(newParticle);
 	}
 }
+

@@ -7,6 +7,7 @@
 //#include "MyDeta/Source/Easing.h"
 
 #include "Emitter.h"
+#include "Emitter2.h"
 
 //シーン
 enum GameScene {
@@ -34,7 +35,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	GameScene scene = TITLE;
 
-	Emitter emitter;
+	Emitter2 emitter;
 
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {

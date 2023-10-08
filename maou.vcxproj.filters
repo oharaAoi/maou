@@ -65,6 +65,15 @@
     <ClCompile Include="Emitter.cpp">
       <Filter>MyDeta\Particle</Filter>
     </ClCompile>
+    <ClCompile Include="Emitter2.cpp">
+      <Filter>MyDeta\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle2.cpp">
+      <Filter>MyDeta\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Util.cpp">
+      <Filter>MyDeta\Particle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -157,6 +166,15 @@
       <Filter>MyDeta\Particle</Filter>
     </ClInclude>
     <ClInclude Include="Emitter.h">
+      <Filter>MyDeta\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Emitter2.h">
+      <Filter>MyDeta\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle2.h">
+      <Filter>MyDeta\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Util.h">
       <Filter>MyDeta\Particle</Filter>
     </ClInclude>
   </ItemGroup>
