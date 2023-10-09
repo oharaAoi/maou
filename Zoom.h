@@ -33,11 +33,13 @@ public:
 	void ZoomOutInit();
 
 	template <typename T>
-	void ZoomIn(T& value, T zoomValue, float time);
+	void ZoomEase(T& value, T zoomValue, float time);
 
-	void ZoomIn(Vector2<float>& value, Vector2<float> zoomValue, float time);
+	void ZoomEase(Vector2<float>& value, Vector2<float> zoomValue, float time);
 
-	void Update();
+	void ZoomIn();
+
+	void Update(Vector2<float> pos);
 
 	//アクセッサ
 	Vector2<float> GetScroll() { return scroll_; }
