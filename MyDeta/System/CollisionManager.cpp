@@ -34,8 +34,21 @@ void CollisionManager::CheckCollision(Player& player, Orbit& orbit) {
 				orbit.GetPos(oi), orbit.GetCollisionSize().radius // orbit: center_, size_.radius
 			)) { // hit
 
+				player.SetDirection(ShotDirection::FROM_CENTER);
+				player.SetMode(Mode::SEARCH);
 
+				player.SetRotateCenter(orbit.GetPos(oi));
+				player.SetRadius(orbit.GetCollisionSize().radius);
 
+				float o2pRadius = (atan2f(player.GetPos().y - orbit.GetPos(oi).y, player.GetPos().x - orbit.GetPos(oi).x) / 2.0f * static_cast<float>(M_PI)) * 400.0f;
+				// HACK: 内積, 外積使いたい
+
+				player.SetRadius(o2pRadius);
+
+				orbit.SetIsAlive(oi, false);
+				orbit.SetIsHit(oi, false);
+
+				break;
 			}
 		}
 	}

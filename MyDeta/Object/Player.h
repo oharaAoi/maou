@@ -8,13 +8,18 @@
 #include "MyDeta/Source/MyStruct.h"
 #include "MyDeta/Source/MyMath.h"
 
+enum Mode {
+	SEARCH,
+	SHOOT,
+};
+
+enum ShotDirection {
+	TO_CENTER, // 中心方向
+	FROM_CENTER, // 中心と反対方向
+};
+
 class Player {
 private:
-
-	enum Mode {
-		SEARCH,
-		SHOOT,
-	};
 
 	Mode mode_;
 
@@ -34,11 +39,6 @@ private:
 	float radius_;
 	float radian_;
 	float theta_;
-
-	enum ShotDirection {
-		TO_CENTER, // 中心方向
-		FROM_CENTER, // 中心と反対方向
-	};
 
 	ShotDirection shotDirection_;
 
@@ -66,5 +66,20 @@ public:
 	// velocity_
 	Vector2 <float>GetVelocity() { return velocity_; }
 	void SetVelocity(Vector2 <float>velocity) { velocity_ = velocity; }
+
+	// mode_
+	void SetMode(Mode mode) { mode_ = mode; }
+
+	// shotDirection
+	void SetDirection(ShotDirection shotDirection) { shotDirection_ = shotDirection; }
+
+	// radius_
+	void SetRadius(float radius) { radius_ = radius; }
+
+	// radian_
+	void SetRadian(float radian) { radian_ = radian; }
+
+	// rotateCenter_
+	void SetRotateCenter(Vector2 <float>center) { rotateCenter_ = center; }
 };
 
