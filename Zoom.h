@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <cmath>
 
 // MySource //
@@ -8,16 +8,20 @@ class Zoom
 {
 private:
 
+	//倍率
 	float scalar_;
 	float maxScalar_;
 
+	//フレーム
 	float time_;
 	float timeLimit_;
 	float t_;
 
+	//スクロール値
 	Vector2<float> scroll_;
 	Vector2<float> maxScroll_;
 
+	//フラグ
 	bool isZoom_;
 
 public:
@@ -35,7 +39,7 @@ public:
 
 	void Update();
 
-	//�A�N�Z�b�T
+	//アクセッサ
 	Vector2<float> GetScroll() { return scroll_; }
 	void SetScroll(Vector2<float> value) { scroll_ = value; }
 

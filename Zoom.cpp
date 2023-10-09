@@ -1,4 +1,4 @@
-#include "Zoom.h"
+ï»¿#include "Zoom.h"
 #include "MyDeta/Source/Easing.h"
 
 Zoom::Zoom() {
@@ -19,7 +19,7 @@ Zoom::Zoom() {
 
 
 void Zoom::ZoomInInit(Vector2<float> pos) {
-	//ƒXƒNƒ[ƒ‹’l‚ªƒvƒŒƒCƒ„[‚ÌÀ•W‚É‚È‚é‚æ‚¤‚É‚·‚é(player‚ÌÀ•W‚ªƒJƒƒ‰À•W‚Å0,0‚É‚È‚é)
+	//ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«å€¤ãŒãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®åº§æ¨™ã«ãªã‚‹ã‚ˆã†ã«ã™ã‚‹(playerã®åº§æ¨™ãŒã‚«ãƒ¡ãƒ©åº§æ¨™ã§0,0ã«ãªã‚‹)
 	maxScroll_.x = pos.x;
 	maxScroll_.y = pos.y;
 
@@ -31,7 +31,7 @@ void Zoom::ZoomInInit(Vector2<float> pos) {
 }
 
 void Zoom::ZoomOutInit() {
-	//ƒXƒNƒ[ƒ‹’l‚ğ0,0‚É‚·‚é
+	//ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«å€¤ã‚’0,0ã«ã™ã‚‹
 	maxScroll_.x = 0;
 	maxScroll_.y = 0;
 
@@ -43,18 +43,18 @@ void Zoom::ZoomOutInit() {
 }
 
 template <typename T>
-//”{—¦‚ÌƒY[ƒ€
+//å€ç‡ã®ã‚ºãƒ¼ãƒ 
 void Zoom::ZoomIn(T& value, T zoomValue, float time) {
 	value = std::lerp(value, zoomValue, time);
 }
 
-//ƒXƒNƒ[ƒ‹’l‚ÌƒY[ƒ€
+//ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«å€¤ã®ã‚ºãƒ¼ãƒ 
 void Zoom::ZoomIn(Vector2<float>& value, Vector2<float> zoomValue, float time) {
 	value.x = std::lerp(value.x, zoomValue.x, time);
 	value.y = std::lerp(value.y, zoomValue.y, time);
 }
 
-//flag‚ªtrue‚Ì‚±‚ê‚ğŒÄ‚Ño‚·
+//flagãŒtrueã®æ™‚ã“ã‚Œã‚’å‘¼ã³å‡ºã™
 void Zoom::Update() {
 	time_++;
 
