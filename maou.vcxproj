@@ -127,6 +127,7 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClCompile Include="Util.cpp" />
     <ClCompile Include="MyDeta\Source\MyMath.cpp" />
     <ClCompile Include="MyDeta\System\CollisionManager.cpp" />
+    <ClCompile Include="Zoom.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\base\StringUtility.h" />
@@ -169,6 +170,7 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClInclude Include="Particle2.h" />
     <ClInclude Include="Util.h" />
     <ClInclude Include="MyDeta\System\CollisionManager.h" />
+    <ClInclude Include="Zoom.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
