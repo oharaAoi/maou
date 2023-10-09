@@ -15,6 +15,7 @@ void Orbit::Init() {
 	for (int oi = 0; oi < kMaxObjectNum_; oi++) {
 		object_[oi] = {
 			false, // = isAlive
+			false, // = isHit
 			{0.0f, 0.0f,} // pos
 
 			// positionはランダムになる

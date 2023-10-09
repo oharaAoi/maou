@@ -12,6 +12,7 @@ private:
 
 	struct Base {
 		bool isAlive;
+		bool isHit;
 		Vector2 <float>pos; // world
 	};
 
@@ -42,5 +43,8 @@ public:
 	bool GetIsAlive(int i) { return object_[i].isAlive; }
 	void SetIsAlive(int i, bool isAlive) { object_[i].isAlive = isAlive; }
 
+
+	// isHit
+	void SetIsHit(int i, bool isHit) { object_[i].isHit = isHit; }
 };
 

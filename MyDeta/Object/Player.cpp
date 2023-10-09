@@ -20,8 +20,6 @@ void Player::Init() { // 変数の初期化
 
 	speed_ = 1.0f;
 
-	speed_;
-
 	/* --- totate --- */
 	rotateCenter_ = {
 		0.0f, // x
