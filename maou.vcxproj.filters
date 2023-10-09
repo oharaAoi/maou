@@ -89,6 +89,9 @@
     <ClCompile Include="Zoom.cpp">
       <Filter>MyDeta\System</Filter>
     </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>MyDeta\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -203,6 +206,9 @@
     </ClInclude>
     <ClInclude Include="Zoom.h">
       <Filter>MyDeta\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>MyDeta\Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
