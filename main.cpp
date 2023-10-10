@@ -14,6 +14,9 @@
 #include "MyDeta/Object/Player.h"
 #include "MyDeta/Object/Reflection.h"
 
+// MyParticle //
+#include "Particle.h"
+
 //シーン
 enum GameScene {
 	TITLE,
@@ -36,7 +39,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	char preKeys[256] = {0};
 
 	GameScene scene = TITLE;
-
 
 
 
