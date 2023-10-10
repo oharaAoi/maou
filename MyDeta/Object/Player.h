@@ -8,6 +8,9 @@
 #include "MyDeta/Source/MyStruct.h"
 #include "MyDeta/Source/MyMath.h"
 
+// MySystem //
+#include "MyDeta/System/Zoom.h"
+
 enum Mode {
 	SEARCH,
 	SHOOT,

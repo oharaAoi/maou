@@ -62,21 +62,6 @@
     <ClCompile Include="MyDeta\Object\Reflection.cpp">
       <Filter>MyDeta\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Particle.cpp">
-      <Filter>MyDeta\Particle</Filter>
-    </ClCompile>
-    <ClCompile Include="Emitter.cpp">
-      <Filter>MyDeta\Particle</Filter>
-    </ClCompile>
-    <ClCompile Include="Emitter2.cpp">
-      <Filter>MyDeta\Particle</Filter>
-    </ClCompile>
-    <ClCompile Include="Particle2.cpp">
-      <Filter>MyDeta\Particle</Filter>
-    </ClCompile>
-    <ClCompile Include="Util.cpp">
-      <Filter>MyDeta\Particle</Filter>
-    </ClCompile>
     <ClCompile Include="MyDeta\System\CollisionManager.cpp">
       <Filter>MyDeta\System</Filter>
     </ClCompile>
@@ -86,11 +71,26 @@
     <ClCompile Include="MyDeta\Object\Orbit.cpp">
       <Filter>MyDeta\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Zoom.cpp">
+    <ClCompile Include="MyDeta\System\Zoom.cpp">
       <Filter>MyDeta\System</Filter>
     </ClCompile>
-    <ClCompile Include="Boss.cpp">
+    <ClCompile Include="MyDeta\Object\Boss.cpp">
       <Filter>MyDeta\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="MyDeta\Particle\Emitter.cpp">
+      <Filter>MyDeta\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="MyDeta\Particle\Emitter2.cpp">
+      <Filter>MyDeta\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="MyDeta\Particle\Particle.cpp">
+      <Filter>MyDeta\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="MyDeta\Particle\Particle2.cpp">
+      <Filter>MyDeta\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="MyDeta\Particle\Util.cpp">
+      <Filter>MyDeta\Particle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -180,21 +180,6 @@
     <ClInclude Include="MyDeta\Object\Reflection.h">
       <Filter>MyDeta\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Particle.h">
-      <Filter>MyDeta\Particle</Filter>
-    </ClInclude>
-    <ClInclude Include="Emitter.h">
-      <Filter>MyDeta\Particle</Filter>
-    </ClInclude>
-    <ClInclude Include="Emitter2.h">
-      <Filter>MyDeta\Particle</Filter>
-    </ClInclude>
-    <ClInclude Include="Particle2.h">
-      <Filter>MyDeta\Particle</Filter>
-    </ClInclude>
-    <ClInclude Include="Util.h">
-      <Filter>MyDeta\Particle</Filter>
-    </ClInclude>
     <ClInclude Include="MyDeta\System\CollisionManager.h">
       <Filter>MyDeta\System</Filter>
     </ClInclude>
@@ -204,11 +189,26 @@
     <ClInclude Include="MyDeta\Object\Orbit.h">
       <Filter>MyDeta\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Zoom.h">
+    <ClInclude Include="MyDeta\System\Zoom.h">
       <Filter>MyDeta\System</Filter>
     </ClInclude>
-    <ClInclude Include="Boss.h">
+    <ClInclude Include="MyDeta\Object\Boss.h">
       <Filter>MyDeta\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="MyDeta\Particle\Emitter.h">
+      <Filter>MyDeta\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="MyDeta\Particle\Emitter2.h">
+      <Filter>MyDeta\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="MyDeta\Particle\Particle.h">
+      <Filter>MyDeta\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="MyDeta\Particle\Particle2.h">
+      <Filter>MyDeta\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="MyDeta\Particle\Util.h">
+      <Filter>MyDeta\Particle</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

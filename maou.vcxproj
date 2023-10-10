@@ -108,7 +108,6 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Boss.cpp" />
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\StringUtility.cpp" />
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\DirectXCommon.cpp" />
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\WinApp.cpp" />
@@ -116,22 +115,22 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\TextureManager.cpp" />
     <ClCompile Include="C:\KamataEngine\DirectXGame\2d\ImGuiManager.cpp" />
     <ClCompile Include="C:\KamataEngine\Adapter\Novice.cpp" />
-    <ClCompile Include="Emitter.cpp" />
-    <ClCompile Include="Emitter2.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MyDeta\Object\Boss.cpp" />
     <ClCompile Include="MyDeta\Object\Orbit.cpp" />
     <ClCompile Include="MyDeta\Object\Player.cpp" />
     <ClCompile Include="MyDeta\Object\Reflection.cpp" />
+    <ClCompile Include="MyDeta\Particle\Emitter.cpp" />
+    <ClCompile Include="MyDeta\Particle\Emitter2.cpp" />
+    <ClCompile Include="MyDeta\Particle\Particle.cpp" />
+    <ClCompile Include="MyDeta\Particle\Particle2.cpp" />
+    <ClCompile Include="MyDeta\Particle\Util.cpp" />
     <ClCompile Include="MyDeta\Source\Easing.cpp" />
-    <ClCompile Include="Particle.cpp" />
-    <ClCompile Include="Particle2.cpp" />
-    <ClCompile Include="Util.cpp" />
+    <ClCompile Include="MyDeta\System\Zoom.cpp" />
     <ClCompile Include="MyDeta\Source\MyMath.cpp" />
     <ClCompile Include="MyDeta\System\CollisionManager.cpp" />
-    <ClCompile Include="Zoom.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Boss.h" />
     <ClInclude Include="C:\KamataEngine\DirectXGame\base\StringUtility.h" />
     <ClInclude Include="C:\KamataEngine\DirectXGame\math\Matrix4x4.h" />
     <ClInclude Include="C:\KamataEngine\DirectXGame\math\Vector2.h" />
@@ -159,20 +158,21 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClInclude Include="C:\KamataEngine\DirectXGame\input\Input.h" />
     <ClInclude Include="C:\KamataEngine\DirectXGame\scene\GameScene.h" />
     <ClInclude Include="C:\KamataEngine\Adapter\Novice.h" />
-    <ClInclude Include="Emitter.h" />
-    <ClInclude Include="Emitter2.h" />
+    <ClInclude Include="MyDeta\Object\Boss.h" />
     <ClInclude Include="MyDeta\Object\Orbit.h" />
     <ClInclude Include="MyDeta\Object\Player.h" />
     <ClInclude Include="MyDeta\Object\Reflection.h" />
+    <ClInclude Include="MyDeta\Particle\Emitter.h" />
+    <ClInclude Include="MyDeta\Particle\Emitter2.h" />
+    <ClInclude Include="MyDeta\Particle\Particle.h" />
+    <ClInclude Include="MyDeta\Particle\Particle2.h" />
+    <ClInclude Include="MyDeta\Particle\Util.h" />
     <ClInclude Include="MyDeta\Source\Easing.h" />
     <ClInclude Include="MyDeta\Source\Environment.h" />
     <ClInclude Include="MyDeta\Source\MyMath.h" />
     <ClInclude Include="MyDeta\Source\MyStruct.h" />
-    <ClInclude Include="Particle.h" />
-    <ClInclude Include="Particle2.h" />
-    <ClInclude Include="Util.h" />
+    <ClInclude Include="MyDeta\System\Zoom.h" />
     <ClInclude Include="MyDeta\System\CollisionManager.h" />
-    <ClInclude Include="Zoom.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

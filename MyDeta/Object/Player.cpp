@@ -49,6 +49,8 @@ void Player::Update(char* keys, char* preKeys) { /// 更新処理
 
 				velocity_.x *= speed_;
 				velocity_.y *= speed_;
+
+				// zoomIn
 			}
 
 			radian_ = static_cast<float>(static_cast<int>(++radian_) % 400);
@@ -92,6 +94,7 @@ void Player::Update(char* keys, char* preKeys) { /// 更新処理
 				// HACK: 内積,外積でたぶんできる。
 
 				// conbo = 0;
+				// zoomOut
 			}
 
 			pos_.x += velocity_.x;
