@@ -14,6 +14,7 @@ public:
 
 private:
 	Vector2<float> pos_;
+	float radius_;
 	Vector2<float> velocity_;
 	int timer_ = 0;
 	int maxTime_;

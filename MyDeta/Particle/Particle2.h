@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <MyDeta/Source/MyStruct.h>
 
 class Particle2
@@ -15,6 +15,10 @@ public:
 private:
 	Vector2<float> pos_;
 	Vector2<float> velocity_;
+
+	//パーティクルの粒の長さを設定
+	float length_ = 24.0f;
+
 	int timer_ = 0;
 	int maxTime_;
 	bool del_ = false;
