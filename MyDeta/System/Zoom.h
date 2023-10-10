@@ -28,6 +28,8 @@ public:
 
 	Zoom();
 
+	void ZoomInit();
+
 	void ZoomInInit(Vector2<float> pos);
 
 	void ZoomOutInit();
