@@ -41,8 +41,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	GameScene scene = TITLE;
 
-	Emitter2 emitter;
-
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
 		// フレームの開始
@@ -63,12 +61,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				scene = TUTORIAL;
 			}
 
-			emitter.Update();
-
-			if (keys[DIK_P] && !preKeys[DIK_P]) {
-				emitter.Emit(640, 360, 16);
-			}
-
 			///
 			/// ↑更新処理ここまで
 			/// 
@@ -76,8 +68,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			///
 			/// ↓描画処理ここから
 			/// 
-
-			emitter.Draw();
 
 			///
 			/// ↑描画処理ここまで
