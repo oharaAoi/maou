@@ -46,16 +46,19 @@ void Emitter2::Draw()
 
 void Emitter2::Emit(int centerX, int centerY, int count)
 {
-	// パーティクルを生成する処理を1フレームで12回行う
+	// パーティクルを生成する処理を1フレームで指定回数行う
 
 	for (int i = 0; i < count; i++) {
+		//パーティクルの粒の初期座標をランダムに生成
 		float particleX = static_cast<float>(Random(centerX - rangeX_, centerX + rangeX_));
 		float particleY = static_cast<float>(Random(centerY - rangeY_, centerY + rangeY_));
 
+		//パーティクルの速度をランダムに生成
 		float velocityX = static_cast<float>(Random(-8, 8));
 		float velocityY = static_cast<float>(Random(-8, 8));
 
-		Particle2 newParticle = Particle2({ particleX,particleY }, { velocityX,velocityY }, 30);
+		//座標、速度、消えるまでのフレーム数を設定したパーティクルをリストに入れる
+		Particle2 newParticle = Particle2({ particleX,particleY }, { velocityX,velocityY }, 60);
 		particleList.push_back(newParticle);
 	}
 }

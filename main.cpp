@@ -15,7 +15,8 @@
 #include "MyDeta/Object/Reflection.h"
 
 // MyParticle //
-#include "Particle.h"
+#include "Emitter.h"
+#include "Emitter2.h"
 
 //シーン
 enum GameScene {
@@ -39,8 +40,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	char preKeys[256] = {0};
 
 	GameScene scene = TITLE;
-
-
 
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
