@@ -70,6 +70,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓描画処理ここから
 			/// 
 
+			Novice::ScreenPrintf(10, 10, "scene:%d", scene);
+
 			///
 			/// ↑描画処理ここまで
 			/// 
@@ -82,6 +84,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓更新処理ここから
 			/// 
 
+			if (keys[DIK_SPACE]) {
+				scene = GAME;
+			}
+
 			///
 			/// ↑更新処理ここまで
 			///
@@ -89,6 +95,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			///
 			/// ↓描画処理ここから
 			/// 
+
+			Novice::ScreenPrintf(10, 10, "scene:%d", scene);
 
 			///
 			/// ↑描画処理ここまで

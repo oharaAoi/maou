@@ -15,7 +15,9 @@ void Boss::Init() {
 }
 
 void Boss::UpDate() {
-
+	if (type_ == wave1) {
+		hp_ = 50.0f;
+	}
 }
 
 void Boss::Draw() {

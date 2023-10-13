@@ -4,6 +4,12 @@
 #include "MyDeta/Source/MyStruct.h"
 #include <MyDeta/Source/Environment.h>
 
+enum BossType {
+	wave1,
+	wave2,
+	wave3
+};
+
 class Boss
 {
 private:
@@ -13,6 +19,8 @@ private:
 	unsigned int color_;
 
 	float hp_;
+
+	BossType type_;
 
 public:
 

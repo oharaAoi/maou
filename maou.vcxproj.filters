@@ -92,6 +92,12 @@
     <ClCompile Include="MyDeta\Particle\Util.cpp">
       <Filter>MyDeta\Particle</Filter>
     </ClCompile>
+    <ClCompile Include="BossBullet.cpp">
+      <Filter>MyDeta\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage.cpp">
+      <Filter>MyDeta\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -209,6 +215,12 @@
     </ClInclude>
     <ClInclude Include="MyDeta\Particle\Util.h">
       <Filter>MyDeta\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="BossBullet.h">
+      <Filter>MyDeta\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage.h">
+      <Filter>MyDeta\Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
