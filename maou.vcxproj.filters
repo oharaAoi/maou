@@ -101,6 +101,9 @@
     <ClCompile Include="Coordinate.cpp">
       <Filter>MyDeta\Source</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerRangeDetector.cpp">
+      <Filter>MyDeta\System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -227,6 +230,9 @@
     </ClInclude>
     <ClInclude Include="Coordinate.h">
       <Filter>MyDeta\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerRangeDetector.h">
+      <Filter>MyDeta\System</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
