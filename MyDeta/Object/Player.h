@@ -10,6 +10,7 @@
 
 // MySystem //
 #include "MyDeta/System/Zoom.h"
+#include "Coordinate.h"
 
 enum Mode {
 	SEARCH,
@@ -29,24 +30,23 @@ private:
 	Vector2 <float>pos_; // world座標基準
 	Size <float>size_; // world座標基準
 
-	// world座標基準はカメラzoom率をかけてscreenに映すこと。
-
 	float speed_; // world座標基準
 
-	// world座標の1pxとzoomした1pxは違うので注意。
+	float theta_;
 
 	/* --- totate --- */
 	Vector2 <float>rotateCenter_; // world座標基準
 	float b2Length_;
 
 	float radius_;
-	float radian_;
-	float theta_;
 
 	ShotDirection shotDirection_;
 
 	Vector2 <float>velocity_;
 	Vector2 <float>acceleration_;
+
+	//インスタンス
+	Coordinate* cie_ = Coordinate::GetInstance();
 
 public:
 
@@ -56,7 +56,7 @@ public:
 
 	// default method
 	void Init();
-	void Update(char* keys, char* preKeys);
+	void Update(char* keys, Vector2<float> stagePos, float radius);
 	void Draw();
 
 	// accessor
@@ -78,9 +78,6 @@ public:
 
 	// radius_
 	void SetRadius(float radius) { radius_ = radius; }
-
-	// radian_
-	void SetRadian(float radian) { radian_ = radian; }
 
 	// rotateCenter_
 	void SetRotateCenter(Vector2 <float>center) { rotateCenter_ = center; }

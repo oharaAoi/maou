@@ -37,5 +37,10 @@ public:
 
 	void Draw();
 
+	//アクセッサ
+	Vector2 <float>GetPos() { return pos_; }
+
+	float GetRadius() { return radius_; }
+
 };
 

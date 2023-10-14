@@ -44,6 +44,23 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	GameScene scene = TITLE;
 
+	//========================================================
+		//System
+	Coordinate* cie_ = Coordinate::GetInstance();
+	cie_->Init();
+
+	//========================================================
+	//Object
+	//boss
+	Boss boss_;
+	boss_.Init();
+
+	Stage stage_;
+	stage_.Init();
+
+	Player player_;
+	player_.Init();
+
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
 		// フレームの開始
@@ -53,19 +70,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		memcpy(preKeys, keys, 256);
 		Novice::GetHitKeyStateAll(keys);
 
-		//========================================================
-		//System
-		Coordinate* cie_ = Coordinate::GetInstance();
-		cie_->Init();
-
-		//========================================================
-		//Object
-		//boss
-		Boss boss_;
-		boss_.Init();
-
-		Stage stage_;
-		stage_.Init();
 
 		switch (scene) {
 		case TITLE:
@@ -126,6 +130,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓更新処理ここから
 			/// 
 
+			player_.Update(keys, stage_.GetPos(), stage_.GetRadius());
+
 			///
 			/// ↑更新処理ここまで
 			/// 
@@ -136,6 +142,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			boss_.Draw();
 			stage_.Draw();
+			player_.Draw();
 
 			///
 			/// ↑描画処理ここまで
