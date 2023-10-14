@@ -19,6 +19,10 @@ private:
 	//方向を変えたりいろいろ
 	float theta_;
 
+	struct Base {
+		
+	};
+
 public:
 
 	BossBullet();
