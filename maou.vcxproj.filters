@@ -98,10 +98,10 @@
     <ClCompile Include="Stage.cpp">
       <Filter>MyDeta\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Coordinate.cpp">
+    <ClCompile Include="MyDeta\Source\Coordinate.cpp">
       <Filter>MyDeta\Source</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerRangeDetector.cpp">
+    <ClCompile Include="MyDeta\System\PlayerRangeDetector.cpp">
       <Filter>MyDeta\System</Filter>
     </ClCompile>
   </ItemGroup>
@@ -228,10 +228,10 @@
     <ClInclude Include="Stage.h">
       <Filter>MyDeta\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Coordinate.h">
+    <ClInclude Include="MyDeta\Source\Coordinate.h">
       <Filter>MyDeta\Source</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerRangeDetector.h">
+    <ClInclude Include="MyDeta\System\PlayerRangeDetector.h">
       <Filter>MyDeta\System</Filter>
     </ClInclude>
   </ItemGroup>

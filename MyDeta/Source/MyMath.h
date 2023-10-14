@@ -26,6 +26,15 @@ float CheckLength(const Vector2<float>& standerd, const Vector2<float>& target);
 /* --- Normalize --- */
 Vector2 <float>ConversionNormalizeVector(const Vector2 <float>& vectorA, const Vector2 <float>& vectorB);
 
+/* --- calcVector --- */
+Vector2<float> CalcVector(Vector2<float> obj, Vector2<float> other);
+
+/* --- DotProduct --- */
+float DotProduct(Vector2<float> v1, Vector2<float> v2);
+
+/* --- Clamp --- */
+float Clamp(float t, float start, float end);
+
 /* ==================================
  collision Function
 ================================== */

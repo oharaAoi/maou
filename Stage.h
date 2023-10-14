@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include <Novice.h>
 #include "MyDeta/Source/MyStruct.h"
-#include "Coordinate.h"
+#include "MyDeta/Source/Coordinate.h"
 
 class Stage
 {

@@ -6,10 +6,11 @@
 #include "MyDeta/Source/Environment.h"
 #include "MyDeta/Source/MyStruct.h"
 #include "MyDeta/Source/MyMath.h"
+#include "MyDeta/Source/Coordinate.h"
 
 // MySystem //
 #include "MyDeta/System/CollisionManager.h"
-#include "Coordinate.h"
+#include "MyDeta/System/PlayerRangeDetector.h"
 
 // MyObject //
 #include "MyDeta/Object/Player.h"
@@ -45,9 +46,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	GameScene scene = TITLE;
 
 	//========================================================
-		//System
+	//System
 	Coordinate* cie_ = Coordinate::GetInstance();
 	cie_->Init();
+
+	PlayerRangeDetector range_;
+	range_.Init();
 
 	//========================================================
 	//Object
@@ -131,6 +135,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// 
 
 			player_.Update(keys, stage_.GetPos(), stage_.GetRadius());
+
+			/*range_.Update(player_.GetPos(), boss_.GetPos())*/
 
 			///
 			/// ↑更新処理ここまで

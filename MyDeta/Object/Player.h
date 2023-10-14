@@ -10,7 +10,7 @@
 
 // MySystem //
 #include "MyDeta/System/Zoom.h"
-#include "Coordinate.h"
+#include "MyDeta/Source/Coordinate.h"
 
 enum Mode {
 	SEARCH,

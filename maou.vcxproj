@@ -116,7 +116,6 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\TextureManager.cpp" />
     <ClCompile Include="C:\KamataEngine\DirectXGame\2d\ImGuiManager.cpp" />
     <ClCompile Include="C:\KamataEngine\Adapter\Novice.cpp" />
-    <ClCompile Include="Coordinate.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MyDeta\Object\Boss.cpp" />
     <ClCompile Include="MyDeta\Object\Orbit.cpp" />
@@ -127,11 +126,12 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClCompile Include="MyDeta\Particle\Particle.cpp" />
     <ClCompile Include="MyDeta\Particle\Particle2.cpp" />
     <ClCompile Include="MyDeta\Particle\Util.cpp" />
+    <ClCompile Include="MyDeta\Source\Coordinate.cpp" />
     <ClCompile Include="MyDeta\Source\Easing.cpp" />
+    <ClCompile Include="MyDeta\System\PlayerRangeDetector.cpp" />
     <ClCompile Include="MyDeta\System\Zoom.cpp" />
     <ClCompile Include="MyDeta\Source\MyMath.cpp" />
     <ClCompile Include="MyDeta\System\CollisionManager.cpp" />
-    <ClCompile Include="PlayerRangeDetector.cpp" />
     <ClCompile Include="Stage.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -163,7 +163,6 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClInclude Include="C:\KamataEngine\DirectXGame\input\Input.h" />
     <ClInclude Include="C:\KamataEngine\DirectXGame\scene\GameScene.h" />
     <ClInclude Include="C:\KamataEngine\Adapter\Novice.h" />
-    <ClInclude Include="Coordinate.h" />
     <ClInclude Include="MyDeta\Object\Boss.h" />
     <ClInclude Include="MyDeta\Object\Orbit.h" />
     <ClInclude Include="MyDeta\Object\Player.h" />
@@ -173,13 +172,14 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClInclude Include="MyDeta\Particle\Particle.h" />
     <ClInclude Include="MyDeta\Particle\Particle2.h" />
     <ClInclude Include="MyDeta\Particle\Util.h" />
+    <ClInclude Include="MyDeta\Source\Coordinate.h" />
     <ClInclude Include="MyDeta\Source\Easing.h" />
     <ClInclude Include="MyDeta\Source\Environment.h" />
     <ClInclude Include="MyDeta\Source\MyMath.h" />
     <ClInclude Include="MyDeta\Source\MyStruct.h" />
+    <ClInclude Include="MyDeta\System\PlayerRangeDetector.h" />
     <ClInclude Include="MyDeta\System\Zoom.h" />
     <ClInclude Include="MyDeta\System\CollisionManager.h" />
-    <ClInclude Include="PlayerRangeDetector.h" />
     <ClInclude Include="Stage.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -4,7 +4,7 @@
 #include "MyDeta/Source/MyStruct.h"
 #include <MyDeta/Source/Environment.h>
 //System
-#include "Coordinate.h"
+#include "MyDeta/Source/Coordinate.h"
 
 enum BossType {
 	wave1,

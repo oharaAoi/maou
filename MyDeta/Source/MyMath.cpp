@@ -49,6 +49,33 @@ Vector2 <float>ConversionNormalizeVector(const Vector2 <float>& vectorA, const V
 	return result;
 }
 
+/* --- calcVector --- */
+Vector2<float> CalcVector(Vector2<float> obj, Vector2<float> other) {
+	Vector2<float> result{};
+	result.x = obj.x - other.x;
+	result.y = obj.y - other.y;
+
+	return result;
+}
+
+/* --- DotProduct --- */
+float DotProduct(Vector2<float> v1, Vector2<float> v2) {
+	float dot = v1.x * v2.x + v1.y * v2.y;
+
+	return dot;
+}
+
+/* --- Clamp --- */
+float Clamp(float t, float start, float end) {
+	if (t < start) {
+		t = start;
+	} else if (t > end) {
+		t = end;
+	}
+
+	return t;
+}
+
 /* ==================================
  collision Function
 ================================== */
