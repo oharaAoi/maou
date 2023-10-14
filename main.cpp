@@ -9,10 +9,13 @@
 
 // MySystem //
 #include "MyDeta/System/CollisionManager.h"
+#include "Coordinate.h"
 
 // MyObject //
 #include "MyDeta/Object/Player.h"
 #include "MyDeta/Object/Reflection.h"
+#include "Stage.h"
+#include "MyDeta/Object/Boss.h"
 
 // MyParticle //
 #include "Emitter.h"
@@ -50,6 +53,20 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		memcpy(preKeys, keys, 256);
 		Novice::GetHitKeyStateAll(keys);
 
+		//========================================================
+		//System
+		Coordinate* cie_ = Coordinate::GetInstance();
+		cie_->Init();
+
+		//========================================================
+		//Object
+		//boss
+		Boss boss_;
+		boss_.Init();
+
+		Stage stage_;
+		stage_.Init();
+
 		switch (scene) {
 		case TITLE:
 
@@ -57,7 +74,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓更新処理ここから
 			/// 
 
-			if (keys[DIK_SPACE]) {
+			if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == false) {
 				scene = TUTORIAL;
 			}
 
@@ -83,7 +100,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓更新処理ここから
 			/// 
 
-			if (keys[DIK_SPACE]) {
+			if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == false) {
 				scene = GAME;
 			}
 
@@ -116,6 +133,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			///
 			/// ↓描画処理ここから
 			/// 
+
+			boss_.Draw();
+			stage_.Draw();
 
 			///
 			/// ↑描画処理ここまで

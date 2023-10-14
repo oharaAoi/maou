@@ -98,6 +98,9 @@
     <ClCompile Include="Stage.cpp">
       <Filter>MyDeta\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Coordinate.cpp">
+      <Filter>MyDeta\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -221,6 +224,9 @@
     </ClInclude>
     <ClInclude Include="Stage.h">
       <Filter>MyDeta\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Coordinate.h">
+      <Filter>MyDeta\Source</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

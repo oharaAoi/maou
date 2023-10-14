@@ -1,8 +1,10 @@
-#pragma once
+﻿#pragma once
 #include <Novice.h>
 // MySource //
 #include "MyDeta/Source/MyStruct.h"
 #include <MyDeta/Source/Environment.h>
+//System
+#include "Coordinate.h"
 
 enum BossType {
 	wave1,
@@ -21,6 +23,9 @@ private:
 	float hp_;
 
 	BossType type_;
+
+	//インスタンス
+	Coordinate* cie_ = Coordinate::GetInstance();
 
 public:
 
