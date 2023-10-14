@@ -33,5 +33,9 @@ public:
 	void Update();
 
 	void Draw();
+
+	/*アクセッサ*/
+
+	Vector2<float>GetPos() { return pos_; }
 };
 

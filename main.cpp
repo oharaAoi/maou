@@ -17,6 +17,7 @@
 #include "MyDeta/Object/Reflection.h"
 #include "Stage.h"
 #include "MyDeta/Object/Boss.h"
+#include "BossBullet.h"
 
 // MyParticle //
 #include "Emitter.h"
@@ -58,6 +59,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	//boss
 	Boss boss_;
 	boss_.Init();
+
+	BossBullet bossBullet_;
+	bossBullet_.Init();
 
 	Stage stage_;
 	stage_.Init();
@@ -136,7 +140,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			player_.Update(keys, stage_.GetPos(), stage_.GetRadius());
 
-			/*range_.Update(player_.GetPos(), boss_.GetPos())*/
+			range_.Update(player_.GetPos(), boss_.GetPos(), bossBullet_.GetPos());
 
 			///
 			/// ↑更新処理ここまで
@@ -149,6 +153,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			boss_.Draw();
 			stage_.Draw();
 			player_.Draw();
+			range_.Draw();
 
 			///
 			/// ↑描画処理ここまで
