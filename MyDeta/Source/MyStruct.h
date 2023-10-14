@@ -11,7 +11,7 @@ struct Vector2 {
 	// operator overload //
 	// Add
 	Vector2 operator+(const Vector2& other) const {
-		return { x + other.x, y + other.y; }
+		return { x + other.x, y + other.y };
 	}
 	void operator+=(const Vector2& other) {
 		x += other.x;
@@ -20,7 +20,7 @@ struct Vector2 {
 
 	// Subtract
 	Vector2 operator-(const Vector2& other) const {
-		return { x - other.x, y - other.y; }
+		return { x - other.x, y - other.y };
 	}
 	void operator-=(const Vector2& other) {
 		x -= other.x;
@@ -29,7 +29,7 @@ struct Vector2 {
 
 	// Multiply
 	Vector2 operator*(const Vector2& other) const {
-		return { x * other.x, y * other.y; }
+		return { x * other.x, y * other.y };
 	}
 	void operator*=(const Vector2& other) {
 		x *= other.x;
