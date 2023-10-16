@@ -1,4 +1,4 @@
-ï»¿#include "BossBullet.h"
+#include "BossBullet.h"
 
 BossBullet::BossBullet() {
 }
@@ -85,7 +85,7 @@ void BossBullet::Init() {
 }
 
 void BossBullet::IsShot(char* keys, char* preKeys, Vector2<float> playerPos) {
-	//å¼¾ã‚’æ’ƒã¤(å®Ÿéš›ã¯ãƒ©ãƒ³ãƒ€ãƒ ã ã£ãŸã‚Šhpã®çŠ¶æ³ã§æ’ƒã¤)
+	//’e‚ğŒ‚‚Â(ÀÛ‚Íƒ‰ƒ“ƒ_ƒ€‚¾‚Á‚½‚èhp‚Ìó‹µ‚ÅŒ‚‚Â)
 	if (keys[DIK_Q] && preKeys[DIK_Q] == false) {
 		if (isShot_ == false) {
 
@@ -105,11 +105,11 @@ void BossBullet::IsShot(char* keys, char* preKeys, Vector2<float> playerPos) {
 }
 
 void BossBullet::Update(Vector2<float> bossPos) {
-	//å¼¾ã‚’é€²ã‚ã‚‹
+	//’e‚ği‚ß‚é
 	if (isShot_ == true) {
 		if (isPushBacked_ == true) {
 			if (isRange_) {
-				//ç¯„å›²å†…ã«ã‚ã‚‹æ™‚
+				//”ÍˆÍ“à‚É‚ ‚é
 				bullet2pDis_.x = pos_.x - bossPos.x;
 				bullet2pDis_.y = pos_.y - bossPos.y;
 

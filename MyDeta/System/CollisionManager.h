@@ -7,6 +7,7 @@
 #include "MyDeta/Object/Player.h"
 #include "MyDeta/Object/Reflection.h"
 #include "MyDeta/Object/Orbit.h"
+#include "MyDeta/Object/BossBullet.h"
 
 #include "MyDeta/Object/Boss.h"
 #include "MyDeta/Object/BossBullet.h"
@@ -26,4 +27,6 @@ public:
 	void CheckCollision(Boss& boss_, BossBullet& bossBullet_);
 	void CheckCollision(Player& player, BossBullet& bossBullet_);
 
+	// sennpuuki
+	void CheckCollision(Player& player, BossBullet& bossBullet);
 };
