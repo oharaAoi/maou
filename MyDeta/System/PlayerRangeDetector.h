@@ -53,7 +53,7 @@ public:
 
 	void Init();
 
-	void Update(Player player_, BossBullet& bossBullet_, Vector2<float>bossPos_);
+	void Update(Player player_, BossBullet& bossBullet_);
 
 	void Draw();
 

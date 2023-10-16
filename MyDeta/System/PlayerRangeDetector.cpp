@@ -46,27 +46,27 @@ void PlayerRangeDetector::Init() {
 }
 
 //カプセルで範囲内にいるか判定する
-void PlayerRangeDetector::Update(Player player_, BossBullet& bossBullet_, Vector2<float>bossPos_) {
+void PlayerRangeDetector::Update(Player player_, BossBullet& bossBullet_) {
 	//bossとplayerの距離
-	b2pDis_.x = player_.GetPos().x - bossPos_.x;
-	b2pDis_.y = player_.GetPos().y - bossPos_.y;
+	b2pDis_.x = player_.GetPos().x - player_.GetRangePos().x;
+	b2pDis_.y = player_.GetPos().y - player_.GetRangePos().y;
 
 	//弾との距離
 	e2pDis_ = CalcVector(bossBullet_.GetPos(), player_.GetPos());
 
 	//bossとplayerの単位ベクトルを求める
-	unitB2pDis_ = ConversionNormalizeVector(player_.GetPos(), bossPos_);
+	unitB2pDis_ = ConversionNormalizeVector(player_.GetPos(), player_.GetRangePos());
 
 	//ボスとの距離
-	b2pLength_ = CheckLength(player_.GetPos(), bossPos_);
+	b2pLength_ = CheckLength(player_.GetPos(), player_.GetRangePos());
 
 	time_ = DotProduct(unitB2pDis_, e2pDis_) / b2pLength_;
 
 	time_ = Clamp(time_, 0, 1);
 
 	//線形補完
-	b2pLinearCompletion_.x = (1.0f - time_) * player_.GetPos().x + time_ * bossPos_.x;
-	b2pLinearCompletion_.y = (1.0f - time_) * player_.GetPos().y + time_ * bossPos_.y;
+	b2pLinearCompletion_.x = (1.0f - time_) * player_.GetPos().x + time_ * player_.GetRangePos().x;
+	b2pLinearCompletion_.y = (1.0f - time_) * player_.GetPos().y + time_ * player_.GetRangePos().y;
 
 	//敵との距離(最近傍点)
 	nearBulletPos_ = CalcVector(bossBullet_.GetPos(), b2pLinearCompletion_);
@@ -78,6 +78,7 @@ void PlayerRangeDetector::Update(Player player_, BossBullet& bossBullet_, Vector
 		if (nearLength_ < player_.GetRadius() + player_.GetRangeRadius()) {
 			if (bossBullet_.GetColor() == 0x0000ffff) {
 				bossBullet_.SetColor(0xff0000ff);
+				bossBullet_.SetIsPushBacked(true);
 			}
 		} else {
 			bossBullet_.SetColor(0x0000ffff);

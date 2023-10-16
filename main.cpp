@@ -140,11 +140,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓更新処理ここから
 			/// 
 
+
 			player_.Update(keys, stage_.GetPos(), stage_.GetRadius(), stage_.GetRangeRadius());
 
-
+			//========================================================================
+			//弾の更新
 			for (int i = 0; i < 20; i++) {
-				range_.Update(player_, bossBullet_[i], player_.GetRangePos());
+				range_.Update(player_, bossBullet_[i]);
 
 				if (bossBullet_[i].GetIsShot() == false) {
 					bossBullet_[i].IsShot(keys, preKeys, player_.GetPos());
@@ -154,6 +156,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				bossBullet_[i].Update(player_.GetPos());
 
 			}
+
+			//========================================================================
 
 			///
 			/// ↑更新処理ここまで

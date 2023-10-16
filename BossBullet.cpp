@@ -24,6 +24,7 @@ void BossBullet::Init() {
 	length_ = 0.0f;
 
 	isShot_ = false;
+	isPushBacked_ = false;
 
 	bullet2pDis_.x = 0.0f;
 	bullet2pDis_.y = 0.0f;
@@ -31,6 +32,7 @@ void BossBullet::Init() {
 }
 
 void BossBullet::IsShot(char* keys, char* preKeys, Vector2<float> playerPos) {
+	//弾を撃つ(実際はランダムだったりhpの状況で撃つ)
 	if (keys[DIK_Q] && preKeys[DIK_Q] == false) {
 		if (isShot_ == false) {
 			isShot_ = true;
@@ -47,10 +49,10 @@ void BossBullet::IsShot(char* keys, char* preKeys, Vector2<float> playerPos) {
 }
 
 void BossBullet::Update(Vector2<float> playerPos) {
+	//弾を進める
 	if (isShot_ == true) {
-		//==================================
 		//範囲内にある時
-		if (color_ == 0xff0000ff) {
+		if (isPushBacked_ == true) {
 			bullet2pDis_.x = pos_.x - playerPos.x;
 			bullet2pDis_.y = pos_.y - playerPos.y;
 
