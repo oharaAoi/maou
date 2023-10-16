@@ -9,12 +9,21 @@
 #include "MyDeta/Object/Orbit.h"
 
 #include "MyDeta/Object/Boss.h"
+#include "MyDeta/Object/BossBullet.h"
 
 class CollisionManager {
 private:
+
+	float b2bLength_;
+	float b2pLength_;
+
 public:
 
-	void CheckCollision(Player& player, Reflection& reflection);
-	void CheckCollision(Player& player, Orbit& orbit);
+	CollisionManager();
+
+	void Init();
+
+	void CheckCollision(Boss& boss_, BossBullet& bossBullet_);
+	void CheckCollision(Player& player, BossBullet& bossBullet_);
 
 };

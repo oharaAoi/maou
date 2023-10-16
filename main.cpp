@@ -48,6 +48,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	//========================================================
 	//System
+	CollisionManager collision;
+
 	Coordinate* cie_ = Coordinate::GetInstance();
 	cie_->Init();
 
@@ -153,9 +155,17 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 					bossBullet_[i].IsShot(keys, preKeys, player_.GetPos());
 					break;
 				}
+			}
 
+			for (int i = 0; i < 20; i++) {
 				//弾を進める
-				bossBullet_[i].Update(player_.GetPos());
+				bossBullet_[i].Update(boss_.GetPos());
+
+				//弾とプレイヤー
+				collision.CheckCollision(player_, bossBullet_[i]);
+
+				//弾と敵の当たり判定
+				collision.CheckCollision(boss_, bossBullet_[i]);
 
 			}
 
@@ -176,6 +186,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			for (int i = 0; i < 20; i++) {
 				bossBullet_[i].Draw();
+
+				Novice::ScreenPrintf(10, 10 + (i * 20), "isPushBack:%d", bossBullet_[i].GetIsPushBacked());
+				Novice::ScreenPrintf(150, 10 + (i * 20), "isShot:%d", bossBullet_[i].GetIsShot());
+
+				Novice::ScreenPrintf(800, 10 + (i * 20), "bulletVelocity.x:%f", bossBullet_[i].GetVelocity().x);
+				
 			}
 
 			///

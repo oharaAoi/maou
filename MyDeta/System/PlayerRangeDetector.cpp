@@ -76,12 +76,12 @@ void PlayerRangeDetector::Update(Player player_, BossBullet& bossBullet_) {
 	//最近傍点がカプセルの範囲内だったら
 	if (bossBullet_.GetIsShot() == true) {
 		if (nearLength_ < player_.GetRadius() + player_.GetRangeRadius()) {
-			if (bossBullet_.GetColor() == 0x0000ffff) {
-				bossBullet_.SetColor(0xff0000ff);
+			if (bossBullet_.GetIsRange() == false) {
 				bossBullet_.SetIsPushBacked(true);
+				bossBullet_.SetIsRange(true);
 			}
 		} else {
-			bossBullet_.SetColor(0x0000ffff);
+			bossBullet_.SetIsRange(false);
 		}
 	}
 
