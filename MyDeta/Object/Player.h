@@ -28,6 +28,7 @@ private:
 
 	Size <float>size_; // world座標基準
 
+	float radianSpeed_;
 	float theta_;
 
 	int hp_;

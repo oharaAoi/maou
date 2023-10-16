@@ -24,6 +24,7 @@ void Player::Init() { // 変数の初期化
 	radius_ = 20.0f;
 	rangeRadius_ = 35.0f;
 
+	radianSpeed_ = 0.0f;
 	theta_ = 3.0f / 4.0f * (float)M_PI;
 
 	hp_ = 15;
@@ -37,12 +38,25 @@ void Player::Init() { // 変数の初期化
 
 void Player::Update(char* keys, Vector2<float> stagePos, float stageRadius, float rangeRadius) { /// 更新処理
 	if (keys[DIK_A]) {
-		theta_ += 1.0f / 64.0f * (float)M_PI;
+		radianSpeed_ += 0.05f;
 	}
 
 	if (keys[DIK_D]) {
-		theta_ -= 1.0f / 64.0f * (float)M_PI;
+		radianSpeed_ -= 0.05f;
 	}
+
+	if (radianSpeed_ > 1.0f) {
+		radianSpeed_ = 1.0f;
+
+	} else if (radianSpeed_ < -1.0f) {
+		radianSpeed_ = -1.0f;
+	}
+
+	if (!keys[DIK_A] && !keys[DIK_D]) {
+		radianSpeed_ *= 0.92f;
+	}
+
+	theta_ += radianSpeed_ / 64.0f * (float)M_PI;
 
 	pos_.x = stagePos.x + (stageRadius * cosf(theta_));
 	pos_.y = stagePos.y + (stageRadius * sinf(theta_));
