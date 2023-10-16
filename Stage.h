@@ -10,6 +10,8 @@ private:
 	Vector2 <float> pos_;
 	float radius_;
 
+	float rangeRadius_;
+
 	//インスタンス
 	Coordinate* cie_ = Coordinate::GetInstance();
 
@@ -25,6 +27,8 @@ public:
 	Vector2 <float>GetPos() { return pos_; }
 
 	float GetRadius() { return radius_; }
+
+	float GetRangeRadius() { return rangeRadius_; }
 
 };
 

@@ -28,6 +28,8 @@ private:
 	Mode mode_;
 
 	Vector2 <float>pos_; // world座標基準
+	Vector2 <float>rangePos_;
+
 	Size <float>size_; // world座標基準
 
 	float speed_; // world座標基準
@@ -39,6 +41,7 @@ private:
 	float b2Length_;
 
 	float radius_;
+	float rangeRadius_;
 
 	ShotDirection shotDirection_;
 
@@ -56,12 +59,13 @@ public:
 
 	// default method
 	void Init();
-	void Update(char* keys, Vector2<float> stagePos, float radius);
+	void Update(char* keys, Vector2<float> stagePos, float radius, float rangeRadius);
 	void Draw();
 
 	// accessor
 	// center_
 	Vector2 <float>GetPos() { return pos_; }
+	Vector2 <float>GetRangePos() { return rangePos_; }
 
 	// size_
 	Size <float>GetSize() { return size_; }
@@ -77,7 +81,10 @@ public:
 	void SetDirection(ShotDirection shotDirection) { shotDirection_ = shotDirection; }
 
 	// radius_
+	float GetRadius() { return radius_; }
 	void SetRadius(float radius) { radius_ = radius; }
+
+	float GetRangeRadius() { return rangeRadius_; }
 
 	// rotateCenter_
 	void SetRotateCenter(Vector2 <float>center) { rotateCenter_ = center; }

@@ -138,9 +138,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓更新処理ここから
 			/// 
 
-			player_.Update(keys, stage_.GetPos(), stage_.GetRadius());
+			player_.Update(keys, stage_.GetPos(), stage_.GetRadius(), stage_.GetRangeRadius());
 
-			range_.Update(player_.GetPos(), boss_.GetPos(), bossBullet_.GetPos());
+			range_.Update(player_.GetPos(), bossBullet_.GetPos(), player_.GetRangePos(), 
+							player_.GetRadius(), player_.GetRangeRadius());
 
 			///
 			/// ↑更新処理ここまで

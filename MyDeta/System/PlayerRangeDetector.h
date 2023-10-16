@@ -50,7 +50,8 @@ public:
 
 	void Init();
 
-	void Update(Vector2<float>playerPos_, Vector2<float>bulletPos_, Vector2<float>bossPos_);
+	void Update(Vector2<float>playerPos_, Vector2<float>bulletPos_, Vector2<float>bossPos_,
+				float playerRadius, float rangeRadius);
 
 	void Draw();
 

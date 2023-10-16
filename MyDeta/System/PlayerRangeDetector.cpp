@@ -46,7 +46,8 @@ void PlayerRangeDetector::Init() {
 }
 
 //カプセルで範囲内にいるか判定する
-void PlayerRangeDetector::Update(Vector2<float>playerPos_, Vector2<float>bulletPos_, Vector2<float>bossPos_) {
+void PlayerRangeDetector::Update(Vector2<float>playerPos_, Vector2<float>bulletPos_, Vector2<float>bossPos_,
+								float playerRadius, float rangeRadius) {
 	//bossとplayerの距離
 	b2pDis_.x = playerPos_.x - bossPos_.x;
 	b2pDis_.y = playerPos_.y - bossPos_.y;
@@ -81,18 +82,19 @@ void PlayerRangeDetector::Update(Vector2<float>playerPos_, Vector2<float>bulletP
 	vertialTheta = atan2f(verticalLine.y, verticalLine.x);
 
 	//上のベクトル
-	topLineSt.x = 20.0f * cosf(vertialTheta) + playerPos_.x;
-	topLineSt.y = 20.0f * sinf(vertialTheta) + playerPos_.y;
+	//(20はplayerの半径)
+	topLineSt.x = playerRadius * cosf(vertialTheta) + playerPos_.x;
+	topLineSt.y = playerRadius * sinf(vertialTheta) + playerPos_.y;
 
-	topLineEnd.x = 50.0f * cosf(vertialTheta) + bossPos_.x;
-	topLineEnd.y = 50.0f * sinf(vertialTheta) + bossPos_.y;
+	topLineEnd.x = rangeRadius * cosf(vertialTheta) + bossPos_.x;
+	topLineEnd.y = rangeRadius * sinf(vertialTheta) + bossPos_.y;
 
 	//下のベクトル
-	bottomLineSt.x = -20.0f * cosf(vertialTheta) + playerPos_.x;
-	bottomLineSt.y = -20.0f * sinf(vertialTheta) + playerPos_.y;
+	bottomLineSt.x = -playerRadius * cosf(vertialTheta) + playerPos_.x;
+	bottomLineSt.y = -playerRadius * sinf(vertialTheta) + playerPos_.y;
 
-	bottomLineEnd.x = -50.0f * cosf(vertialTheta) + bossPos_.x;
-	bottomLineEnd.y = -50.0f * sinf(vertialTheta) + bossPos_.y;
+	bottomLineEnd.x = -rangeRadius * cosf(vertialTheta) + bossPos_.x;
+	bottomLineEnd.y = -rangeRadius * sinf(vertialTheta) + bossPos_.y;
 
 
 
