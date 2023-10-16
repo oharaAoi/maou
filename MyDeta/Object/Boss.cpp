@@ -28,4 +28,6 @@ void Boss::Draw() {
 		0.0f,
 		color_,
 		kFillModeSolid);
+
+	Novice::ScreenPrintf(600, 10, "Boss.hp:%f", hp_);
 }

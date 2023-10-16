@@ -12,11 +12,6 @@
 #include "MyDeta/System/Zoom.h"
 #include "MyDeta/Source/Coordinate.h"
 
-enum Mode {
-	SEARCH,
-	SHOOT,
-};
-
 enum ShotDirection {
 	TO_CENTER, // 中心方向
 	FROM_CENTER, // 中心と反対方向
@@ -25,23 +20,17 @@ enum ShotDirection {
 class Player {
 private:
 
-	Mode mode_;
-
 	Vector2 <float>pos_; // world座標基準
 	Vector2 <float>rangePos_;
 
-	Size <float>size_; // world座標基準
+	float radius_;
+	float rangeRadius_;
 
-	float speed_; // world座標基準
+	Size <float>size_; // world座標基準
 
 	float theta_;
 
-	/* --- totate --- */
-	Vector2 <float>rotateCenter_; // world座標基準
-	float b2Length_;
-
-	float radius_;
-	float rangeRadius_;
+	int hp_;
 
 	ShotDirection shotDirection_;
 
@@ -74,9 +63,6 @@ public:
 	Vector2 <float>GetVelocity() { return velocity_; }
 	void SetVelocity(Vector2 <float>velocity) { velocity_ = velocity; }
 
-	// mode_
-	void SetMode(Mode mode) { mode_ = mode; }
-
 	// shotDirection
 	void SetDirection(ShotDirection shotDirection) { shotDirection_ = shotDirection; }
 
@@ -86,7 +72,8 @@ public:
 
 	float GetRangeRadius() { return rangeRadius_; }
 
-	// rotateCenter_
-	void SetRotateCenter(Vector2 <float>center) { rotateCenter_ = center; }
+	void SetHp(int hp) { hp_ = hp; }
+	int GetHp() { return hp_; }
+
 };
 

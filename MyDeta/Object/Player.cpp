@@ -9,8 +9,6 @@ Player::~Player() {
 
 void Player::Init() { // 変数の初期化
 
-	mode_ = SEARCH;
-
 	pos_ = {
 		0.0f, // x
 		0.0f, // y
@@ -23,21 +21,12 @@ void Player::Init() { // 変数の初期化
 
 	size_.radius = 20.0f;
 
-	speed_ = 1.0f;
-
-	/* --- totate --- */
-	rotateCenter_ = {
-		0.0f, // x
-		0.0f, // y
-		/* boss.pos_ */
-	};
-
-	b2Length_ = 0.0f; // playerとbossの距離
-
 	radius_ = 20.0f;
 	rangeRadius_ = 35.0f;
 
 	theta_ = 3.0f / 4.0f * (float)M_PI;
+
+	hp_ = 15;
 
 	shotDirection_ = ShotDirection::TO_CENTER;
 
