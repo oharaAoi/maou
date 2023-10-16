@@ -148,11 +148,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			for (int i = 0; i < 20; i++) {
 				range_.Update(player_, bossBullet_[i]);
 
+				//弾を撃つかどうかと最初の方向の決定
 				if (bossBullet_[i].GetIsShot() == false) {
 					bossBullet_[i].IsShot(keys, preKeys, player_.GetPos());
 					break;
 				}
 
+				//弾を進める
 				bossBullet_[i].Update(player_.GetPos());
 
 			}
