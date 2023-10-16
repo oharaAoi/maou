@@ -15,8 +15,9 @@
 // MyObject //
 #include "MyDeta/Object/Player.h"
 #include "MyDeta/Object/Reflection.h"
-#include "Stage.h"
+#include "MyDeta/Object/Stage.h"
 #include "MyDeta/Object/Boss.h"
+#include "MyDeta/Object/BossBullet.h"
 
 // MyParticle //
 #include "Emitter.h"
@@ -58,6 +59,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	//boss
 	Boss boss_;
 	boss_.Init();
+
+	BossBullet bossBullet_[20];
+	for (int i = 0; i < 20; i++) {
+		bossBullet_[i].Init();
+	}
 
 	Stage stage_;
 	stage_.Init();
@@ -134,9 +140,26 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓更新処理ここから
 			/// 
 
-			player_.Update(keys, stage_.GetPos(), stage_.GetRadius());
 
-			/*range_.Update(player_.GetPos(), boss_.GetPos())*/
+			player_.Update(keys, stage_.GetPos(), stage_.GetRadius(), stage_.GetRangeRadius());
+
+			//========================================================================
+			//弾の更新
+			for (int i = 0; i < 20; i++) {
+				range_.Update(player_, bossBullet_[i]);
+
+				//弾を撃つかどうかと最初の方向の決定
+				if (bossBullet_[i].GetIsShot() == false) {
+					bossBullet_[i].IsShot(keys, preKeys, player_.GetPos());
+					break;
+				}
+
+				//弾を進める
+				bossBullet_[i].Update(player_.GetPos());
+
+			}
+
+			//========================================================================
 
 			///
 			/// ↑更新処理ここまで
@@ -149,6 +172,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			boss_.Draw();
 			stage_.Draw();
 			player_.Draw();
+			range_.Draw();
+
+			for (int i = 0; i < 20; i++) {
+				bossBullet_[i].Draw();
+			}
 
 			///
 			/// ↑描画処理ここまで

@@ -92,17 +92,17 @@
     <ClCompile Include="MyDeta\Particle\Util.cpp">
       <Filter>MyDeta\Particle</Filter>
     </ClCompile>
-    <ClCompile Include="BossBullet.cpp">
-      <Filter>MyDeta\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Stage.cpp">
-      <Filter>MyDeta\Object</Filter>
-    </ClCompile>
     <ClCompile Include="MyDeta\Source\Coordinate.cpp">
       <Filter>MyDeta\Source</Filter>
     </ClCompile>
     <ClCompile Include="MyDeta\System\PlayerRangeDetector.cpp">
       <Filter>MyDeta\System</Filter>
+    </ClCompile>
+    <ClCompile Include="MyDeta\Object\BossBullet.cpp">
+      <Filter>MyDeta\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="MyDeta\Object\Stage.cpp">
+      <Filter>MyDeta\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -222,17 +222,17 @@
     <ClInclude Include="MyDeta\Particle\Util.h">
       <Filter>MyDeta\Particle</Filter>
     </ClInclude>
-    <ClInclude Include="BossBullet.h">
-      <Filter>MyDeta\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage.h">
-      <Filter>MyDeta\Object</Filter>
-    </ClInclude>
     <ClInclude Include="MyDeta\Source\Coordinate.h">
       <Filter>MyDeta\Source</Filter>
     </ClInclude>
     <ClInclude Include="MyDeta\System\PlayerRangeDetector.h">
       <Filter>MyDeta\System</Filter>
+    </ClInclude>
+    <ClInclude Include="MyDeta\Object\BossBullet.h">
+      <Filter>MyDeta\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="MyDeta\Object\Stage.h">
+      <Filter>MyDeta\Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

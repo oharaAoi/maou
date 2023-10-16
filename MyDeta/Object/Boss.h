@@ -42,5 +42,13 @@ public:
 
 	float GetRadius() { return radius_; }
 
+	void SetColor(unsigned int color) { color_ = color; }
+	unsigned int GetColor() { return color_; }
+
+	//=====================================================--
+
+	void SetHp(float hp) { hp_ = hp; }
+	float GetHp() { return hp_; }
+
 };
 
