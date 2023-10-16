@@ -18,7 +18,7 @@ class BossBullet
 private:
 
 	//==============================
-	//
+	//描画で使う
 	Vector2<float> pos_;
 	float radius_;
 

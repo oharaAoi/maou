@@ -8,7 +8,40 @@ BossBullet::~BossBullet() {
 }
 
 void BossBullet::Init() {
+	//==============================
+	pos_.x = 0;
+	pos_.y = 0;
 
+	radius_ = 15.0f;
+
+	color_ = 0x0000ffff;
+
+	velocity_.x = 2.0f;
+	velocity_.y = 2.0f;
+
+	accleleration_.x = 0.04f;
+	accleleration_.y = 0.04f;
+
+	deceleration_.x = 0.1f;
+	deceleration_.y = 0.1f;
+
+	//==============================
+	//当たり判定で使う
+	bullet2pRadian_ = 0.0f;
+	boss2pRadian_ = 0.0f;
+
+	isShot_ = false;
+	isPushBacked_ = false;
+
+	bullet2pDis_.x = 0.0f;
+	bullet2pDis_.y = 0.0f;
+
+	boss2pDis_.x = 0.0f;
+	boss2pDis_.y = 0.0f;
+
+}
+
+void BossBullet::RandamInit() {
 	type_ = TypeRand(0, 3);
 
 	//弾の種類によって初期値を変える
@@ -92,7 +125,7 @@ void BossBullet::IsShot(char* keys, char* preKeys, Vector2<float> playerPos) {
 	//弾を撃つ(実際はランダムだったりhpの状況で撃つ)
 	if (keys[DIK_Q] && preKeys[DIK_Q] == false) {
 		if (isShot_ == false) {
-			Init();
+			RandamInit();
 			isShot_ = true;
 
 			//プレイヤーと弾のと距離から角度を求める

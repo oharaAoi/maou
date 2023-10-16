@@ -62,7 +62,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Boss boss_;
 	boss_.Init();
 
-	const int kBulletMax_ = 20;
+	const int kBulletMax_ = 30;
 	BossBullet bossBullet_[kBulletMax_];
 	for (int i = 0; i < kBulletMax_; i++) {
 		bossBullet_[i].Init();
