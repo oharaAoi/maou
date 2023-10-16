@@ -44,7 +44,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	char keys[256] = {0};
 	char preKeys[256] = {0};
 
-	GameScene scene = GAME;
+	GameScene scene = TITLE;
 
 	//========================================================
 	//System

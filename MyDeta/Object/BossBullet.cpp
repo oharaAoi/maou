@@ -11,6 +11,7 @@ void BossBullet::Init() {
 
 	type_ = TypeRand(0, 3);
 
+	//弾の種類によって初期値を変える
 	switch (type_) {
 	case SLOW:
 		radius_ = 15.0f;
@@ -73,8 +74,6 @@ void BossBullet::Init() {
 	pos_.x = 0;
 	pos_.y = 0;
 
-	length_ = 0.0f;
-
 	bullet2pRadian_ = 0.0f;
 	boss2pRadian_ = 0.0f;
 
@@ -94,14 +93,15 @@ void BossBullet::IsShot(char* keys, char* preKeys, Vector2<float> playerPos) {
 	if (keys[DIK_Q] && preKeys[DIK_Q] == false) {
 		if (isShot_ == false) {
 			Init();
-
 			isShot_ = true;
 
+			//プレイヤーと弾のと距離から角度を求める
 			bullet2pDis_.x = playerPos.x - pos_.x;
 			bullet2pDis_.y = playerPos.y - pos_.y;
 
 			bullet2pRadian_ = atan2f(bullet2pDis_.y, bullet2pDis_.x);
 
+			//速度に角度をかける
 			velocity_.x *= cosf(bullet2pRadian_);
 			velocity_.y *= sinf(bullet2pRadian_);
 		}
@@ -114,6 +114,7 @@ void BossBullet::Update(Vector2<float> bossPos) {
 		if (isPushBacked_ == true) {
 			if (isRange_) {
 				//範囲内にある時
+				//ボスに向かうようにする
 				bullet2pDis_.x = bossPos.x - pos_.x;
 				bullet2pDis_.y = bossPos.y - pos_.y;
 

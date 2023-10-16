@@ -41,8 +41,6 @@ private:
 
 	bool isPushBacked_;
 
-	float length_;
-
 	Vector2<float> bullet2pDis_;
 	Vector2<float> boss2pDis_;
 
