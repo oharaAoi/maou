@@ -6,6 +6,9 @@
 #include "MyDeta/Source/MyMath.h"
 #include "MyDeta/Source/Coordinate.h"
 
+#include "MyDeta/Object/Player.h"
+#include "BossBullet.h"
+
 class PlayerRangeDetector
 {
 private:
@@ -50,8 +53,7 @@ public:
 
 	void Init();
 
-	void Update(Vector2<float>playerPos_, Vector2<float>bulletPos_, Vector2<float>bossPos_,
-				float playerRadius, float rangeRadius);
+	void Update(Player player_, BossBullet& bossBullet_, Vector2<float>bossPos_);
 
 	void Draw();
 

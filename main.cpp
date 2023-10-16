@@ -60,8 +60,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Boss boss_;
 	boss_.Init();
 
-	BossBullet bossBullet_;
-	bossBullet_.Init();
+	BossBullet bossBullet_[20];
+	for (int i = 0; i < 20; i++) {
+		bossBullet_[i].Init();
+	}
 
 	Stage stage_;
 	stage_.Init();
@@ -140,8 +142,18 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			player_.Update(keys, stage_.GetPos(), stage_.GetRadius(), stage_.GetRangeRadius());
 
-			range_.Update(player_.GetPos(), bossBullet_.GetPos(), player_.GetRangePos(), 
-							player_.GetRadius(), player_.GetRangeRadius());
+
+			for (int i = 0; i < 20; i++) {
+				range_.Update(player_, bossBullet_[i], player_.GetRangePos());
+
+				if (bossBullet_[i].GetIsShot() == false) {
+					bossBullet_[i].IsShot(keys, preKeys, player_.GetPos());
+					break;
+				}
+
+				bossBullet_[i].Update(player_.GetPos());
+
+			}
 
 			///
 			/// ↑更新処理ここまで
@@ -155,6 +167,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			stage_.Draw();
 			player_.Draw();
 			range_.Draw();
+
+			for (int i = 0; i < 20; i++) {
+				bossBullet_[i].Draw();
+			}
 
 			///
 			/// ↑描画処理ここまで

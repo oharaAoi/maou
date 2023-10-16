@@ -46,34 +46,45 @@ void PlayerRangeDetector::Init() {
 }
 
 //カプセルで範囲内にいるか判定する
-void PlayerRangeDetector::Update(Vector2<float>playerPos_, Vector2<float>bulletPos_, Vector2<float>bossPos_,
-								float playerRadius, float rangeRadius) {
+void PlayerRangeDetector::Update(Player player_, BossBullet& bossBullet_, Vector2<float>bossPos_) {
 	//bossとplayerの距離
-	b2pDis_.x = playerPos_.x - bossPos_.x;
-	b2pDis_.y = playerPos_.y - bossPos_.y;
+	b2pDis_.x = player_.GetPos().x - bossPos_.x;
+	b2pDis_.y = player_.GetPos().y - bossPos_.y;
 
 	//弾との距離
-	e2pDis_ = CalcVector(bulletPos_, playerPos_);
+	e2pDis_ = CalcVector(bossBullet_.GetPos(), player_.GetPos());
 
 	//bossとplayerの単位ベクトルを求める
-	unitB2pDis_ = ConversionNormalizeVector(playerPos_, bossPos_);
+	unitB2pDis_ = ConversionNormalizeVector(player_.GetPos(), bossPos_);
 
 	//ボスとの距離
-	b2pLength_ = CheckLength(playerPos_, bossPos_);
+	b2pLength_ = CheckLength(player_.GetPos(), bossPos_);
 
 	time_ = DotProduct(unitB2pDis_, e2pDis_) / b2pLength_;
 
 	time_ = Clamp(time_, 0, 1);
 
 	//線形補完
-	b2pLinearCompletion_.x = (1.0f - time_) * playerPos_.x + time_ * bossPos_.x;
-	b2pLinearCompletion_.y = (1.0f - time_) * playerPos_.y + time_ * bossPos_.y;
+	b2pLinearCompletion_.x = (1.0f - time_) * player_.GetPos().x + time_ * bossPos_.x;
+	b2pLinearCompletion_.y = (1.0f - time_) * player_.GetPos().y + time_ * bossPos_.y;
 
 	//敵との距離(最近傍点)
-	nearBulletPos_ = CalcVector(bulletPos_, b2pLinearCompletion_);
+	nearBulletPos_ = CalcVector(bossBullet_.GetPos(), b2pLinearCompletion_);
 
-	nearLength_ = CheckLength(b2pLinearCompletion_, bulletPos_);
+	nearLength_ = CheckLength(b2pLinearCompletion_, bossBullet_.GetPos());
 
+	//最近傍点がカプセルの範囲内だったら
+	if (bossBullet_.GetIsShot() == true) {
+		if (nearLength_ < player_.GetRadius() + player_.GetRangeRadius()) {
+			if (bossBullet_.GetColor() == 0x0000ffff) {
+				bossBullet_.SetColor(0xff0000ff);
+			}
+		} else {
+			bossBullet_.SetColor(0x0000ffff);
+		}
+	}
+
+	//=========================================================
 	//デバック用(後で消す)
 	verticalLine.x = -b2pDis_.y;
 	verticalLine.y = b2pDis_.x;
@@ -83,18 +94,18 @@ void PlayerRangeDetector::Update(Vector2<float>playerPos_, Vector2<float>bulletP
 
 	//上のベクトル
 	//(20はplayerの半径)
-	topLineSt.x = playerRadius * cosf(vertialTheta) + playerPos_.x;
-	topLineSt.y = playerRadius * sinf(vertialTheta) + playerPos_.y;
+	topLineSt.x = player_.GetRadius() * cosf(vertialTheta) + player_.GetPos().x;
+	topLineSt.y = player_.GetRadius() * sinf(vertialTheta) + player_.GetPos().y;
 
-	topLineEnd.x = rangeRadius * cosf(vertialTheta) + bossPos_.x;
-	topLineEnd.y = rangeRadius * sinf(vertialTheta) + bossPos_.y;
+	topLineEnd.x = player_.GetRangeRadius() * cosf(vertialTheta) + player_.GetRangePos().x;
+	topLineEnd.y = player_.GetRangeRadius() * sinf(vertialTheta) + player_.GetRangePos().y;
 
 	//下のベクトル
-	bottomLineSt.x = -playerRadius * cosf(vertialTheta) + playerPos_.x;
-	bottomLineSt.y = -playerRadius * sinf(vertialTheta) + playerPos_.y;
+	bottomLineSt.x = -player_.GetRadius() * cosf(vertialTheta) + player_.GetPos().x;
+	bottomLineSt.y = -player_.GetRadius() * sinf(vertialTheta) + player_.GetPos().y;
 
-	bottomLineEnd.x = -rangeRadius * cosf(vertialTheta) + bossPos_.x;
-	bottomLineEnd.y = -rangeRadius * sinf(vertialTheta) + bossPos_.y;
+	bottomLineEnd.x = -player_.GetRangeRadius() * cosf(vertialTheta) + player_.GetRangePos().x;
+	bottomLineEnd.y = -player_.GetRangeRadius() * sinf(vertialTheta) + player_.GetRangePos().y;
 
 }
 
