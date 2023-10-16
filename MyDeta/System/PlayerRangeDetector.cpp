@@ -96,8 +96,6 @@ void PlayerRangeDetector::Update(Vector2<float>playerPos_, Vector2<float>bulletP
 	bottomLineEnd.x = -rangeRadius * cosf(vertialTheta) + bossPos_.x;
 	bottomLineEnd.y = -rangeRadius * sinf(vertialTheta) + bossPos_.y;
 
-
-
 }
 
 void PlayerRangeDetector::Draw() {
