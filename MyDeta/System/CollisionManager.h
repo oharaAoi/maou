@@ -25,8 +25,5 @@ public:
 	void Init();
 
 	void CheckCollision(Boss& boss_, BossBullet& bossBullet_);
-	void CheckCollision(Player& player, BossBullet& bossBullet_);
-
-	// sennpuuki
-	void CheckCollision(Player& player, BossBullet& bossBullet);
+	void CheckCollision(Player& player_, BossBullet& bossBullet_);
 };

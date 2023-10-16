@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <Novice.h>
 // MySource //
 #include "MyDeta/Source/MyStruct.h"
@@ -32,7 +32,7 @@ private:
 	int type_;
 
 	//==============================
-	//“–‚½‚è”»’è‚Åg‚¤
+	//å½“ãŸã‚Šåˆ¤å®šã§ä½¿ã†
 	bool isShot_;
 
 	bool isRange_;
@@ -49,7 +49,7 @@ private:
 		
 	};
 
-	//ƒCƒ“ƒXƒ^ƒ“ƒX
+	//ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 	Coordinate* cie_ = Coordinate::GetInstance();
 
 public:
@@ -66,7 +66,7 @@ public:
 	void IsShot(char* keys, char* preKeys, Vector2<float> playerPos);
 
 	//=================================================
-	/*ƒAƒNƒZƒbƒT*/
+	/*ã‚¢ã‚¯ã‚»ãƒƒã‚µ*/
 	void SetPos(Vector2<float> pos) { pos_ = pos; }
 	Vector2<float>GetPos() { return pos_; }
 
@@ -75,7 +75,7 @@ public:
 	void SetColor(unsigned int color) { color_ = color; }
 	unsigned int GetColor() { return color_; }
 
-	//ƒfƒoƒbƒN—p
+	//ãƒ‡ãƒãƒƒã‚¯ç”¨
 	Vector2 <float> GetVelocity() { return velocity_; }
 
 	//=================================================
