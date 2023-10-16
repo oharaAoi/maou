@@ -15,9 +15,9 @@
 // MyObject //
 #include "MyDeta/Object/Player.h"
 #include "MyDeta/Object/Reflection.h"
-#include "Stage.h"
+#include "MyDeta/Object/Stage.h"
 #include "MyDeta/Object/Boss.h"
-#include "BossBullet.h"
+#include "MyDeta/Object/BossBullet.h"
 
 // MyParticle //
 #include "Emitter.h"

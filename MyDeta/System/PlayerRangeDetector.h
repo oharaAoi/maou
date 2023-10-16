@@ -7,7 +7,7 @@
 #include "MyDeta/Source/Coordinate.h"
 
 #include "MyDeta/Object/Player.h"
-#include "BossBullet.h"
+#include "MyDeta/Object/BossBullet.h"
 
 class PlayerRangeDetector
 {

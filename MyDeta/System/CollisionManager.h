@@ -8,6 +8,8 @@
 #include "MyDeta/Object/Reflection.h"
 #include "MyDeta/Object/Orbit.h"
 
+#include "MyDeta/Object/Boss.h"
+
 class CollisionManager {
 private:
 public:
