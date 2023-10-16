@@ -24,7 +24,9 @@ private:
 
 	unsigned int color_;
 
-	float theta_;
+	float bullet2pRadian_;
+	float boss2pRadian_;
+
 	Vector2<float>velocity_;
 	Vector2<float>accleleration_;
 	Vector2<float>deceleration_;
@@ -42,12 +44,9 @@ private:
 	float length_;
 
 	Vector2<float> bullet2pDis_;
+	Vector2<float> boss2pDis_;
 
 	//==============================
-
-	struct Base {
-		
-	};
 
 	//インスタンス
 	Coordinate* cie_ = Coordinate::GetInstance();

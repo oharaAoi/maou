@@ -73,8 +73,10 @@ void BossBullet::Init() {
 	pos_.x = 0;
 	pos_.y = 0;
 
-
 	length_ = 0.0f;
+
+	bullet2pRadian_ = 0.0f;
+	boss2pRadian_ = 0.0f;
 
 	isShot_ = false;
 	isPushBacked_ = false;
@@ -82,24 +84,26 @@ void BossBullet::Init() {
 	bullet2pDis_.x = 0.0f;
 	bullet2pDis_.y = 0.0f;
 
+	boss2pDis_.x = 0.0f;
+	boss2pDis_.y = 0.0f;
+
 }
 
 void BossBullet::IsShot(char* keys, char* preKeys, Vector2<float> playerPos) {
 	//弾を撃つ(実際はランダムだったりhpの状況で撃つ)
 	if (keys[DIK_Q] && preKeys[DIK_Q] == false) {
 		if (isShot_ == false) {
-
 			Init();
 
 			isShot_ = true;
 
-			bullet2pDis_.x = pos_.x - playerPos.x;
-			bullet2pDis_.y = pos_.y - playerPos.y;
+			bullet2pDis_.x = playerPos.x - pos_.x;
+			bullet2pDis_.y = playerPos.y - pos_.y;
 
-			theta_ = atan2f(bullet2pDis_.y, bullet2pDis_.x);
+			bullet2pRadian_ = atan2f(bullet2pDis_.y, bullet2pDis_.x);
 
-			velocity_.x *= cosf(theta_);
-			velocity_.y *= sinf(theta_);
+			velocity_.x *= cosf(bullet2pRadian_);
+			velocity_.y *= sinf(bullet2pRadian_);
 		}
 	}
 }
@@ -110,24 +114,30 @@ void BossBullet::Update(Vector2<float> bossPos) {
 		if (isPushBacked_ == true) {
 			if (isRange_) {
 				//範囲内にある時
-				bullet2pDis_.x = pos_.x - bossPos.x;
-				bullet2pDis_.y = pos_.y - bossPos.y;
+				bullet2pDis_.x = bossPos.x - pos_.x;
+				bullet2pDis_.y = bossPos.y - pos_.y;
 
-				theta_ = atan2f(bullet2pDis_.y, bullet2pDis_.x);
+				boss2pRadian_ = atan2f(bullet2pDis_.y, bullet2pDis_.x);
 
-				velocity_.x += accleleration_.x * cosf(theta_);
-				velocity_.y += accleleration_.y * sinf(theta_);
+				velocity_.x += accleleration_.x * cosf(boss2pRadian_);
+				velocity_.y += accleleration_.y * sinf(boss2pRadian_);
 
 			} else {
-				if (velocity_.x != 0 && velocity_.y != 0) {
-					velocity_.x -= deceleration_.x * cosf(theta_);
-					velocity_.y -= deceleration_.y * sinf(theta_);
+				velocity_.x += deceleration_.x * cosf(boss2pRadian_);
+				velocity_.y += deceleration_.y * sinf(boss2pRadian_);
+
+				/*if (velocity_.x < -0.002f || velocity_.x > 0.002f) {
+					velocity_.x = 0.0f;
 				}
+
+				if (velocity_.y < -0.002f || velocity_.y > 0.002f) {
+					velocity_.y = 0.0f;
+				}*/
 			}
 		}
 
-		pos_.x -= velocity_.x;
-		pos_.y -= velocity_.y;
+		pos_.x += velocity_.x;
+		pos_.y += velocity_.y;
 
 	}
 }

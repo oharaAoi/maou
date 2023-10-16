@@ -44,7 +44,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	char keys[256] = {0};
 	char preKeys[256] = {0};
 
-	GameScene scene = TITLE;
+	GameScene scene = GAME;
 
 	//========================================================
 	//System
@@ -62,8 +62,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Boss boss_;
 	boss_.Init();
 
-	BossBullet bossBullet_[20];
-	for (int i = 0; i < 20; i++) {
+	const int kBulletMax_ = 20;
+	BossBullet bossBullet_[kBulletMax_];
+	for (int i = 0; i < kBulletMax_; i++) {
 		bossBullet_[i].Init();
 	}
 
@@ -147,7 +148,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			//========================================================================
 			//弾の更新
-			for (int i = 0; i < 20; i++) {
+			for (int i = 0; i < kBulletMax_; i++) {
 				range_.Update(player_, bossBullet_[i]);
 
 				//弾を撃つかどうかと最初の方向の決定
@@ -157,7 +158,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				}
 			}
 
-			for (int i = 0; i < 20; i++) {
+			for (int i = 0; i < kBulletMax_; i++) {
 				//弾を進める
 				bossBullet_[i].Update(boss_.GetPos());
 
@@ -184,7 +185,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			player_.Draw();
 			range_.Draw();
 
-			for (int i = 0; i < 20; i++) {
+			for (int i = 0; i < kBulletMax_; i++) {
 				bossBullet_[i].Draw();
 
 				Novice::ScreenPrintf(10, 10 + (i * 20), "isPushBack:%d", bossBullet_[i].GetIsPushBacked());
