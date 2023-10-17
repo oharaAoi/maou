@@ -24,7 +24,7 @@ void ValueRand(float* num, float* theta, int bossRadius, int stageRadius) {
 	}
 }
 
-int TypeRand(int min, int max) {
+int Rand(int min, int max) {
 	std::uniform_int_distribution<int> typeRand(min, max);
 
 	return typeRand(gen);

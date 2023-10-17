@@ -28,30 +28,38 @@ void BossBullet::Init() {
 		objet_[i].isShot = false;
 		objet_[i].isPushBacked = false;
 
-		bullet2pDis_.x = 0.0f;
-		bullet2pDis_.y = 0.0f;
-
-		boss2pDis_.x = 0.0f;
-		boss2pDis_.y = 0.0f;
-
 	}
 
+	//==============================
+	boss2pDis_.x = 0.0f;
+	boss2pDis_.y = 0.0f;
+
+	bullet2pDis_.x = 0.0f;
+	bullet2pDis_.y = 0.0f;
+
+	b2bLength = 0.0f;
+
+	//==============================
 	shotDire_ = 0.0f;
 	shotRadian_ = 0.0f;
 
+	bullet2pRadian_ = 0.0f;
+	boss2pRadian_ = 0.0f;
+
+	//==============================
 	freamCount_ = 0;
 	slowdownCount_ = 0;
 
+	//==============================
 	barrageType_ = NONE;
 
-	bullet2pRadian_ = 0.0f;
-	boss2pRadian_ = 0.0f;
+	explodeRadius = 60.0f;
 }
 
 //弾の種類をランダムにしたい時
 void BossBullet::RandamInit(int i) {
 
-	objet_[i].bulletType = TypeRand(0, 3);
+	objet_[i].bulletType = Rand(0, 3);
 
 	//弾の種類によって初期値を変える
 	switch (objet_[i].bulletType) {
@@ -91,6 +99,8 @@ void BossBullet::RandamInit(int i) {
 		objet_[i].accleleration.x = 0.04f;
 		objet_[i].accleleration.y = 0.04f;
 
+		objet_[i].explodeCount = 0;
+
 		break;
 
 	case VANISH:
@@ -103,6 +113,8 @@ void BossBullet::RandamInit(int i) {
 
 		objet_[i].accleleration.x = 0.04f;
 		objet_[i].accleleration.y = 0.04f;
+
+		objet_[i].vanishCount = 0;
 	}
 
 	objet_[i].pos.x = 0;
@@ -133,6 +145,8 @@ void BossBullet::OutOfScreenInit(int i) {
 	//当たり判定で使う
 	objet_[i].isShot = false;
 	objet_[i].isPushBacked = false;
+
+	objet_[i].explodeCount = 0;
 }
 
 //今はbulletをキーで設定
@@ -162,6 +176,19 @@ void BossBullet::BulletShotSelect(char* keys, char* preKeys) {
 		barrageType_ = RANDAM;
 	}
 }
+
+//爆発する弾の近くの弾を誘爆させる
+void BossBullet::ExplodeBullet() {
+	for (int i = 0; i < kBulletMax_ - 1; i++) {
+		b2bLength = CheckLength(objet_[i].pos, objet_[i + 1].pos);
+
+		//消す処理(エフェクトとかの処理もここでするかも)
+		if (explodeRadius > b2bLength) {
+			OutOfScreenInit(i);
+		}
+	}
+}
+
 
 //プレイヤーに向かって弾を撃つ
 void BossBullet::IsShot(Vector2<float> playerPos) {
@@ -229,6 +256,22 @@ void BossBullet::RotateDireShot() {
 }
 
 //弾をランダムな方向に撃つ
+void BossBullet::RandamDireShot() {
+	for (int i = 0; i < kBulletMax_; i++) {
+		if (objet_[i].isShot == false) {
+			RandamInit(i);
+
+			objet_[i].isShot = true;
+
+			shotDire_ = static_cast<float>(Rand(0, 360)) / 180.0f * float(M_PI);
+
+			objet_[i].velocity.x *= cosf(shotDire_);
+			objet_[i].velocity.y *= sinf(shotDire_);
+
+			break;
+		}
+	}
+}
 
 void BossBullet::Update(Vector2<float> bossPos, Player& player) {
 	freamCount_++;
@@ -258,6 +301,10 @@ void BossBullet::Update(Vector2<float> bossPos, Player& player) {
 			//回転する弾幕
 		} else if (barrageType_ == ROTATE) {
 			RotateDireShot();
+
+			//ランダムな方向の弾幕
+		} else if (barrageType_ == RANDAM) {
+			RandamDireShot();
 		}
 	}
 
@@ -266,9 +313,30 @@ void BossBullet::Update(Vector2<float> bossPos, Player& player) {
 	}
 
 	//==============================================
-	//弾を進める
 	for (int i = 0; i < kBulletMax_; i++) {
 		if (objet_[i].isShot == true) {
+			//消える弾の処理
+			if (objet_[i].bulletType == VANISH) {
+				objet_[i].vanishCount++;
+
+				if (objet_[i].vanishCount >= 500) {
+					OutOfScreenInit(i);
+					objet_[i].vanishCount = 0;
+				}
+			}
+
+			//周りを巻き込んで爆発する弾の処理
+			if (objet_[i].bulletType == EXPLODE) {
+				objet_[i].explodeCount++;
+
+				//爆発する範囲内のものをすべて初期化
+				if (objet_[i].explodeCount >= 100) {
+					ExplodeBullet();
+				}
+			}
+
+			//==============================================
+			//弾を進める
 			if (objet_[i].isPushBacked == true) {
 				if (objet_[i].isRange) {
 					//範囲内にある時
@@ -321,7 +389,20 @@ void BossBullet::Draw() {
 				0.0f,
 				objet_[i].color,
 				kFillModeSolid);
+
+			if (objet_[i].bulletType == EXPLODE) {
+				Novice::DrawEllipse(
+					static_cast<int>(objet_[i].pos.x + cie_->GetOrigine().x),
+					static_cast<int>(objet_[i].pos.y + cie_->GetOrigine().y),
+					static_cast<int>(60),
+					static_cast<int>(60),
+					0.0f,
+					objet_[i].color,
+					kFillModeWireFrame);
+			}
 		}
+
+		Novice::ScreenPrintf(1100, 20 + (i * 20), "explodeCount:%d", objet_[i].explodeCount);
 
 		/*Novice::ScreenPrintf(10, 10 + (i * 20), "isPushBack:%d", objet_[i].isPushBacked);
 		Novice::ScreenPrintf(150, 10 + (i * 20), "isShot:%d", objet_[i].isShot);*/

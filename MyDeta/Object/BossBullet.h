@@ -31,15 +31,13 @@ class BossBullet
 {
 public:
 
-	static const int kBulletMax_ = 30;
+	static const int kBulletMax_ = 40;
 
 private:
 
 	struct Base {
 		//==============================
 		//描画で使う
-		BulletType type;
-
 		Vector2f pos;
 		float radius;
 
@@ -56,8 +54,11 @@ private:
 		bool isRange;
 		bool isPushBacked;
 		//==============================
-
+		//タイプ
 		int bulletType;
+
+		int vanishCount;
+		int explodeCount;
 	};
 
 	Base objet_[kBulletMax_];
@@ -76,6 +77,8 @@ private:
 	Vector2<float> bullet2pDis_;
 	Vector2<float> boss2pDis_;
 
+	//誘爆のために弾と弾の距離を取る
+	float b2bLength;
 	//==============================
 	//フレームカウント
 	int freamCount_;
@@ -85,6 +88,9 @@ private:
 	static const int kRotateMax_ = 4;
 	
 	Barrage barrageType_;
+
+	//爆発する半径
+	float explodeRadius;
 
 	//インスタンス
 	Coordinate* cie_ = Coordinate::GetInstance();
@@ -115,6 +121,11 @@ public:
 	void AllDireShot();
 
 	void RotateDireShot();
+
+	void RandamDireShot();
+
+	//=================================================
+	void ExplodeBullet();
 
 	//=================================================
 	/*アクセッサ*/
