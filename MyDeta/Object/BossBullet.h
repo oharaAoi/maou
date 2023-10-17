@@ -20,10 +20,11 @@ enum BulletType {
 //弾幕の種類
 enum Barrage {
 	NONE,
-	RANDAM,
+	CHASE,
 	FOURS,
 	ALL,
-	ROTATE
+	ROTATE,
+	RANDAM
 };
 
 class BossBullet
@@ -48,7 +49,6 @@ private:
 		//速度
 		Vector2<float>velocity;
 		Vector2<float>accleleration;
-		Vector2<float>deceleration;
 
 		//==============================
 		//フラグ

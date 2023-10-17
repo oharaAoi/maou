@@ -90,7 +90,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓更新処理ここから
 			/// 
 
-			if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == false) {
+			if (keys[DIK_SPACE] && !preKeys[DIK_SPACE]) {
 				scene = TUTORIAL;
 			}
 
@@ -116,7 +116,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓更新処理ここから
 			/// 
 
-			if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == false) {
+			if (keys[DIK_SPACE] && !preKeys[DIK_SPACE]) {
 				scene = GAME;
 			}
 

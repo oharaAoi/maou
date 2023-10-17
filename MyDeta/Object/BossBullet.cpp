@@ -23,9 +23,6 @@ void BossBullet::Init() {
 		objet_[i].accleleration.x = 0.04f;
 		objet_[i].accleleration.y = 0.04f;
 
-		objet_[i].deceleration.x = 0.1f;
-		objet_[i].deceleration.y = 0.1f;
-
 		//==============================
 		//当たり判定で使う
 		objet_[i].isShot = false;
@@ -68,8 +65,6 @@ void BossBullet::RandamInit(int i) {
 
 		objet_[i].accleleration.x = 0.04f;
 		objet_[i].accleleration.y = 0.04f;
-		objet_[i].deceleration.x = 0.1f;
-		objet_[i].deceleration.y = 0.1f;
 
 		break;
 	case FAST:
@@ -82,8 +77,6 @@ void BossBullet::RandamInit(int i) {
 
 		objet_[i].accleleration.x = 0.04f;
 		objet_[i].accleleration.y = 0.04f;
-		objet_[i].deceleration.x = 0.1f;
-		objet_[i].deceleration.y = 0.1f;
 
 		break;
 
@@ -97,8 +90,6 @@ void BossBullet::RandamInit(int i) {
 
 		objet_[i].accleleration.x = 0.04f;
 		objet_[i].accleleration.y = 0.04f;
-		objet_[i].deceleration.x = 0.1f;
-		objet_[i].deceleration.y = 0.1f;
 
 		break;
 
@@ -112,8 +103,6 @@ void BossBullet::RandamInit(int i) {
 
 		objet_[i].accleleration.x = 0.04f;
 		objet_[i].accleleration.y = 0.04f;
-		objet_[i].deceleration.x = 0.1f;
-		objet_[i].deceleration.y = 0.1f;
 	}
 
 	objet_[i].pos.x = 0;
@@ -140,9 +129,6 @@ void BossBullet::OutOfScreenInit(int i) {
 	objet_[i].accleleration.x = 0.04f;
 	objet_[i].accleleration.y = 0.04f;
 
-	objet_[i].deceleration.x = 0.1f;
-	objet_[i].deceleration.y = 0.1f;
-
 	//==============================
 	//当たり判定で使う
 	objet_[i].isShot = false;
@@ -151,24 +137,29 @@ void BossBullet::OutOfScreenInit(int i) {
 
 //今はbulletをキーで設定
 void BossBullet::BulletShotSelect(char* keys, char* preKeys) {
-	if (keys[DIK_Q] && preKeys[DIK_Q] == false) {
+	if (keys[DIK_Q] && !preKeys[DIK_Q]) {
 		Init();
-		barrageType_ = RANDAM;
+		barrageType_ = CHASE;
 	}
 
-	if (keys[DIK_E] && preKeys[DIK_E] == false) {
+	if (keys[DIK_E] && !preKeys[DIK_E]) {
 		Init();
 		barrageType_ = FOURS;
 	}
 
-	if (keys[DIK_R] && preKeys[DIK_R] == false) {
+	if (keys[DIK_R] && !preKeys[DIK_R]) {
 		Init();
 		barrageType_ = ALL;
 	}
 
-	if (keys[DIK_T] && preKeys[DIK_T] == false) {
+	if (keys[DIK_T] && !preKeys[DIK_T]) {
 		Init();
 		barrageType_ = ROTATE;
+	}
+
+	if (keys[DIK_Y] && !preKeys[DIK_Y]) {
+		Init();
+		barrageType_ = RANDAM;
 	}
 }
 
@@ -237,6 +228,8 @@ void BossBullet::RotateDireShot() {
 	}
 }
 
+//弾をランダムな方向に撃つ
+
 void BossBullet::Update(Vector2<float> bossPos, Player& player) {
 	freamCount_++;
 
@@ -244,7 +237,7 @@ void BossBullet::Update(Vector2<float> bossPos, Player& player) {
 	// 弾の種類を決める //
 	if (freamCount_ >= 20) {
 		//プレイヤーを追う弾幕
-		if (barrageType_ == RANDAM) {
+		if (barrageType_ == CHASE) {
 			IsShot(player.GetPos());
 
 			//4方向の弾幕
