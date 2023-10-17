@@ -1,5 +1,6 @@
-#pragma once
+﻿#pragma once
 #include <MyDeta/Source/MyStruct.h>
+#include "MyDeta/Source/Coordinate.h"
 
 class Particle
 {
@@ -13,6 +14,9 @@ public:
 	bool GetDelFlag();
 
 private:
+	//インスタンス
+	Coordinate* cie_ = Coordinate::GetInstance();
+
 	Vector2<float> pos_;
 	float radius_;
 	Vector2<float> velocity_;

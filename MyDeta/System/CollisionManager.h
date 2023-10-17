@@ -12,6 +12,9 @@
 #include "MyDeta/Object/Boss.h"
 #include "MyDeta/Object/BossBullet.h"
 
+#include "Emitter.h"
+#include "Emitter2.h"
+
 class CollisionManager {
 private:
 
@@ -24,6 +27,6 @@ public:
 
 	void Init();
 
-	void CheckCollision(Boss& boss_, BossBullet& bossBullet_);
+	void CheckCollision(Boss& boss_, BossBullet& bossBullet_,Emitter& emit);
 	void CheckCollision(Player& player_, BossBullet& bossBullet_);
 };
