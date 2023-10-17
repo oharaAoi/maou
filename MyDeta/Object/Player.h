@@ -12,9 +12,18 @@
 #include "MyDeta/System/Zoom.h"
 #include "MyDeta/Source/Coordinate.h"
 
+// MyObject //
+#include "MyDeta/Object/Stage.h"
+
 enum ShotDirection {
 	TO_CENTER, // 中心方向
 	FROM_CENTER, // 中心と反対方向
+};
+
+enum WindowStrength {
+	OFF,
+	WEAK,
+	STRONG
 };
 
 class Player {
@@ -33,10 +42,12 @@ private:
 
 	int hp_;
 
-	ShotDirection shotDirection_;
+	WindowStrength windowStrength_;
 
 	Vector2 <float>velocity_;
 	Vector2 <float>acceleration_;
+
+	ShotDirection shotDirection_;
 
 	//インスタンス
 	Coordinate* cie_ = Coordinate::GetInstance();
@@ -49,7 +60,7 @@ public:
 
 	// default method
 	void Init();
-	void Update(char* keys, Vector2<float> stagePos, float radius, float rangeRadius);
+	void Update(char* keys, char* preKeys, Stage& stage_);
 	void Draw();
 
 	// accessor

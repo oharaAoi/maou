@@ -29,6 +29,7 @@ public:
 	float GetRadius() { return radius_; }
 
 	float GetRangeRadius() { return rangeRadius_; }
+	void SetRangeRadius(float radius) { rangeRadius_ = radius; }
 
 };
 
