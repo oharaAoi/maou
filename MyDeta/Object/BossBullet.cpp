@@ -4,7 +4,6 @@ BossBullet::BossBullet() {
 }
 
 BossBullet::~BossBullet() {
-
 }
 
 void BossBullet::Init() {
@@ -119,18 +118,34 @@ void BossBullet::RandamInit(int i) {
 	objet_[i].pos.x = 0;
 	objet_[i].pos.y = 0;
 
-	bullet2pRadian_ = 0.0f;
-	boss2pRadian_ = 0.0f;
-
 	objet_[i].isShot = false;
 	objet_[i].isPushBacked = false;
+}
 
-	bullet2pDis_.x = 0.0f;
-	bullet2pDis_.y = 0.0f;
+//画面外にいった時の初期化
+void BossBullet::OutOfScreenInit(int i) {
+	//==============================
+	objet_[i].pos.x = 0;
+	objet_[i].pos.y = 0;
 
-	boss2pDis_.x = 0.0f;
-	boss2pDis_.y = 0.0f;
+	objet_[i].radius = 15.0f;
 
+	objet_[i].color = 0x0000ffff;
+
+	//==============================
+	objet_[i].velocity.x = 2.0f;
+	objet_[i].velocity.y = 2.0f;
+
+	objet_[i].accleleration.x = 0.04f;
+	objet_[i].accleleration.y = 0.04f;
+
+	objet_[i].deceleration.x = 0.1f;
+	objet_[i].deceleration.y = 0.1f;
+
+	//==============================
+	//当たり判定で使う
+	objet_[i].isShot = false;
+	objet_[i].isPushBacked = false;
 }
 
 void BossBullet::BulletShotSelect(char* keys, char* preKeys) {
@@ -155,8 +170,8 @@ void BossBullet::BulletShotSelect(char* keys, char* preKeys) {
 	}
 }
 
+//プレイヤーに向かって弾を撃つ
 void BossBullet::IsShot(Vector2<float> playerPos) {
-	//弾を撃つ(実際はランダムだったりhpの状況で撃つ)
 	for (int i = 0; i < kBulletMax_; i++) {
 		if (objet_[i].isShot == false) {
 			RandamInit(i);
@@ -178,9 +193,9 @@ void BossBullet::IsShot(Vector2<float> playerPos) {
 	}
 }
 
+//4方向に弾を撃つ
 void BossBullet::FourDireIsShot(int num) {
 	if (objet_[num].isShot == false) {
-		//4方向に弾を撃つ
 		objet_[num].isShot = true;
 
 		shotDire_ = static_cast<float>(num) / 2.0f * float(M_PI);
@@ -204,6 +219,7 @@ void BossBullet::AllDireShot() {
 	}
 }
 
+//弾を撃つ方向が回転する
 void BossBullet::RotateDireShot() {
 	for (int i = 0; i < kBulletMax_; i++) {
 		if (objet_[i].isShot == false) {
@@ -220,12 +236,11 @@ void BossBullet::RotateDireShot() {
 }
 
 void BossBullet::Update(Vector2<float> bossPos, Vector2<float>playerPos) {
-
 	freamCount_++;
 
 	//==============================================
 	// 弾の種類を決める //
-	if (freamCount_ >= 20) {
+	if (freamCount_ >= 30) {
 		//プレイヤーを追う弾幕
 		if (barrageType_ == RANDAM) {
 			IsShot(playerPos);
@@ -249,6 +264,10 @@ void BossBullet::Update(Vector2<float> bossPos, Vector2<float>playerPos) {
 		}else if (barrageType_ == ROTATE) {
 			RotateDireShot();
 		}
+	}
+
+	if (freamCount_ >= 20) {
+		freamCount_ = 0;
 	}
 
 	//==============================================
@@ -289,16 +308,12 @@ void BossBullet::Update(Vector2<float> bossPos, Vector2<float>playerPos) {
 		//=====================================================
 		//弾が画面外に出た時の処理
 		if (objet_[i].pos.x < -kWindowWidth / 2 || objet_[i].pos.x > kWindowWidth / 2) {
-			objet_[i].isShot = 0.0f;
+			OutOfScreenInit(i);
 		}
 
 		if (objet_[i].pos.y < -kWindowHeight / 2 || objet_[i].pos.y > kWindowHeight / 2) {
-			objet_[i].isShot = 0.0f;
+			OutOfScreenInit(i);
 		}
-	}
-
-	if (freamCount_ >= 20) {
-		freamCount_ = 0;
 	}
 }
 

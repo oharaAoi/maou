@@ -29,13 +29,10 @@ void Player::Init() { // 変数の初期化
 
 	hp_ = 15;
 
+	windVolume_.x = 1.2f;
+	windVolume_.y = 1.2f;
+
 	windowStrength_ = WindowStrength::WEAK;
-
-	shotDirection_ = ShotDirection::TO_CENTER;
-
-	velocity_;
-	acceleration_;
-
 }
 
 void Player::Update(char* keys, char* preKeys, Stage& stage_) { /// 更新処理
@@ -77,12 +74,20 @@ void Player::Update(char* keys, char* preKeys, Stage& stage_) { /// 更新処理
  	if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == false) {
 		if (windowStrength_ == OFF) {
 			windowStrength_ = WEAK;
+			windVolume_.x = 1.2f;
+			windVolume_.y = 1.2f;
 			stage_.SetRangeRadius(150.0f);
+
 		} else if (windowStrength_ == WEAK) {
 			windowStrength_ = STRONG;
+			windVolume_.x = 1.5f;
+			windVolume_.y = 1.5f;
 			stage_.SetRangeRadius(100.0f);
+
 		} else {
 			windowStrength_ = OFF;
+			windVolume_.x = 0.0f;
+			windVolume_.y = 0.0f;
 			stage_.SetRangeRadius(300.0f);
 		}
 	}
