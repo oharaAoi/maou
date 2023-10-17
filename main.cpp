@@ -46,6 +46,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	GameScene scene = TITLE;
 
+	// エミッターのインスタンスを作成
+	Emitter emitter;
+
 	//========================================================
 	//System
 	CollisionManager collision;
@@ -144,7 +147,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			player_.Update(keys, preKeys, stage_);
 
+			player_.Update(keys, stage_.GetPos(), stage_.GetRadius(), stage_.GetRangeRadius());
+			emitter.Update(); //エミッターの更新処理
+
 			//========================================================================
+
 			//弾の更新
 			range_.Update(player_, bossBullet_);
 
@@ -157,8 +164,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			//弾とプレイヤー
 			collision.CheckCollision(player_, bossBullet_);
 
-			//弾と敵の当たり判定
-			collision.CheckCollision(boss_, bossBullet_);
+				//弾と敵の当たり判定
+
+				collision.CheckCollision(boss_, bossBullet_[i],emitter);
+
+			}
+
 
 			//========================================================================
 
@@ -174,6 +185,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			stage_.Draw();
 			player_.Draw();
 			range_.Draw();
+			emitter.Draw(); // エミッターの描画処理を呼ぶ
 
 
 			bossBullet_.Draw();

@@ -38,8 +38,8 @@ void Particle2::Draw()
 	);*/
 
 	Novice::DrawBox(
-		static_cast<int>(pos_.x) - static_cast<int>(length_) / static_cast <int>(2.0f),
-		static_cast<int>(pos_.y) - static_cast<int>(length_) / static_cast <int>(2.0f),
+		static_cast<int>(pos_.x) + static_cast<int>(cie_->GetOrigine().x) - (static_cast<int>(length_) / static_cast <int>(2.0f)),
+		static_cast<int>(pos_.y) + static_cast<int>(cie_->GetOrigine().y) - (static_cast<int>(length_) / static_cast <int>(2.0f)),
 		static_cast<int>(length_), static_cast<int>(length_),
 		0.0f,
 		WHITE, kFillModeWireFrame
