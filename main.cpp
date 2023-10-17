@@ -41,8 +41,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Novice::Initialize(kWindowTitle, kWindowWidth, kWindowHeight);
 
 	// キー入力結果を受け取る箱
-	char keys[256] = {0};
-	char preKeys[256] = {0};
+	char keys[256] = { 0 };
+	char preKeys[256] = { 0 };
 
 	GameScene scene = TITLE;
 
@@ -62,11 +62,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Boss boss_;
 	boss_.Init();
 
-	const int kBulletMax_ = 20;
-	BossBullet bossBullet_[kBulletMax_];
-	for (int i = 0; i < kBulletMax_; i++) {
-		bossBullet_[i].Init();
-	}
+
+	BossBullet bossBullet_;
+	bossBullet_.Init();
 
 	Stage stage_;
 	stage_.Init();
@@ -84,6 +82,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		Novice::GetHitKeyStateAll(keys);
 
 
+
 		switch (scene) {
 		case TITLE:
 
@@ -98,7 +97,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			///
 			/// ↑更新処理ここまで
 			/// 
-			
+
 			///
 			/// ↓描画処理ここから
 			/// 
@@ -143,32 +142,23 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓更新処理ここから
 			/// 
 
-
-			player_.Update(keys, stage_.GetPos(), stage_.GetRadius(), stage_.GetRangeRadius());
+			player_.Update(keys, preKeys, stage_);
 
 			//========================================================================
 			//弾の更新
-			for (int i = 0; i < kBulletMax_; i++) {
-				range_.Update(player_, bossBullet_[i]);
+			range_.Update(player_, bossBullet_);
 
-				//弾を撃つかどうかと最初の方向の決定
-				if (bossBullet_[i].GetIsShot() == false) {
-					bossBullet_[i].IsShot(keys, preKeys, player_.GetPos());
-					break;
-				}
-			}
+			//撃つ弾の種類を決める
+			bossBullet_.BulletShotSelect(keys, preKeys);
 
-			for (int i = 0; i < kBulletMax_; i++) {
-				//弾を進める
-				bossBullet_[i].Update(boss_.GetPos());
+			//弾を進める
+			bossBullet_.Update(boss_.GetPos(), player_.GetPos());
 
-				//弾とプレイヤー
-				collision.CheckCollision(player_, bossBullet_[i]);
+			//弾とプレイヤー
+			collision.CheckCollision(player_, bossBullet_);
 
-				//弾と敵の当たり判定
-				collision.CheckCollision(boss_, bossBullet_[i]);
-
-			}
+			//弾と敵の当たり判定
+			collision.CheckCollision(boss_, bossBullet_);
 
 			//========================================================================
 
@@ -185,19 +175,19 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			player_.Draw();
 			range_.Draw();
 
-			for (int i = 0; i < kBulletMax_; i++) {
-				bossBullet_[i].Draw();
 
-				Novice::ScreenPrintf(10, 10 + (i * 20), "isPushBack:%d", bossBullet_[i].GetIsPushBacked());
-				Novice::ScreenPrintf(150, 10 + (i * 20), "isShot:%d", bossBullet_[i].GetIsShot());
+			bossBullet_.Draw();
 
-				Novice::ScreenPrintf(800, 10 + (i * 20), "bulletVelocity.x:%f", bossBullet_[i].GetVelocity().x);
-				
-			}
+			/*Novice::ScreenPrintf(10, 10 + (i * 20), "isPushBack:%d", bossBullet_[i].GetIsPushBacked());
+			Novice::ScreenPrintf(150, 10 + (i * 20), "isShot:%d", bossBullet_[i].GetIsShot());*/
 
-			///
-			/// ↑描画処理ここまで
-			/// 
+			/*Novice::ScreenPrintf(800, 10 + (i * 20), "bulletVelocity.x:%f", bossBullet_[i].GetVelocity().x);*/
+
+
+
+		///
+		/// ↑描画処理ここまで
+		/// 
 
 			break;
 

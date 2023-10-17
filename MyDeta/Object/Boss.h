@@ -50,5 +50,7 @@ public:
 	void SetHp(float hp) { hp_ = hp; }
 	float GetHp() { return hp_; }
 
+	BossType GetType() { return type_; }
+
 };
 

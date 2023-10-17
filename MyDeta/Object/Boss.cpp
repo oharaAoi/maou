@@ -11,12 +11,18 @@ void Boss::Init() {
 
 	color_ = 0xffffffff;
 
-	hp_ = 50.0f;
+	hp_ = 60.0f;
+
+	type_ = wave1;
 }
 
 void Boss::UpDate() {
-	if (type_ == wave1) {
-		hp_ = 50.0f;
+	if (hp_ == 60.0f) {
+		type_ = wave1;
+	} else if (hp_ == 40.0f) {
+		type_ = wave2;
+	} else if (hp_ == 20.0f) {
+		type_ = wave3;
 	}
 }
 

@@ -21,6 +21,7 @@ public:
 
 	void Init();
 
+	//この関数を持ってきてworld1座標系からscereen座標系に変換
 	Vector2 <float>GetOrigine() { return origine_; }
 
 };

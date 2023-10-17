@@ -28,6 +28,8 @@ void Player::Init() { // 変数の初期化
 
 	hp_ = 15;
 
+	windowStrength_ = WindowStrength::WEAK;
+
 	shotDirection_ = ShotDirection::TO_CENTER;
 
 	velocity_;
@@ -35,7 +37,9 @@ void Player::Init() { // 変数の初期化
 
 }
 
-void Player::Update(char* keys, Vector2<float> stagePos, float stageRadius, float rangeRadius) { /// 更新処理
+void Player::Update(char* keys, char* preKeys, Stage& stage_) { /// 更新処理
+	//======================================================
+	//playerの移動
 	if (keys[DIK_A]) {
 		theta_ += 1.0f / 64.0f * (float)M_PI;
 	}
@@ -44,11 +48,32 @@ void Player::Update(char* keys, Vector2<float> stagePos, float stageRadius, floa
 		theta_ -= 1.0f / 64.0f * (float)M_PI;
 	}
 
-	pos_.x = stagePos.x + (stageRadius * cosf(theta_));
-	pos_.y = stagePos.y + (stageRadius * sinf(theta_));
+	if (!keys[DIK_A] && !keys[DIK_D]) {
+		radianSpeed_ *= 0.92f;
+	}
 
-	rangePos_.x = stagePos.x + (rangeRadius * cosf(theta_));
-	rangePos_.y = stagePos.y + (rangeRadius * sinf(theta_));
+	theta_ += radianSpeed_ / 64.0f * (float)M_PI;
+
+	pos_.x = stage_.GetPos().x + (stage_.GetRadius() * cosf(theta_));
+	pos_.y = stage_.GetPos().y + (stage_.GetRadius() * sinf(theta_));
+
+	rangePos_.x = stage_.GetPos().x + (stage_.GetRangeRadius() * cosf(theta_));
+	rangePos_.y = stage_.GetPos().y + (stage_.GetRangeRadius() * sinf(theta_));
+
+	//======================================================
+	//風の切り替え(OFF→弱→強OFF)
+ 	if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == false) {
+		if (windowStrength_ == OFF) {
+			windowStrength_ = WEAK;
+			stage_.SetRangeRadius(150.0f);
+		} else if (windowStrength_ == WEAK) {
+			windowStrength_ = STRONG;
+			stage_.SetRangeRadius(100.0f);
+		} else {
+			windowStrength_ = OFF;
+			stage_.SetRangeRadius(300.0f);
+		}
+	}
 }
 
 void Player::Draw() { /// 描画処理
