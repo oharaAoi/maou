@@ -29,6 +29,7 @@ enum WindowStrength {
 class Player {
 private:
 
+	//==========================================
 	Vector2 <float>pos_; // world座標基準
 	Vector2 <float>rangePos_;
 
@@ -37,17 +38,15 @@ private:
 
 	Size <float>size_; // world座標基準
 
+	//==========================================
 	float radianSpeed_;
 	float theta_;
 
 	int hp_;
 
+	Vector2<float> windVolume_;
+
 	WindowStrength windowStrength_;
-
-	Vector2 <float>velocity_;
-	Vector2 <float>acceleration_;
-
-	ShotDirection shotDirection_;
 
 	//インスタンス
 	Coordinate* cie_ = Coordinate::GetInstance();
@@ -71,21 +70,18 @@ public:
 	// size_
 	Size <float>GetSize() { return size_; }
 
-	// velocity_
-	Vector2 <float>GetVelocity() { return velocity_; }
-	void SetVelocity(Vector2 <float>velocity) { velocity_ = velocity; }
-
-	// shotDirection
-	void SetDirection(ShotDirection shotDirection) { shotDirection_ = shotDirection; }
-
 	// radius_
 	float GetRadius() { return radius_; }
 	void SetRadius(float radius) { radius_ = radius; }
-
 	float GetRangeRadius() { return rangeRadius_; }
 
+	// hp
 	void SetHp(int hp) { hp_ = hp; }
 	int GetHp() { return hp_; }
+
+	// windVolume
+	void SetWindVolume(Vector2<float> valume) { windVolume_ = valume; }
+	Vector2<float> GetWindVolume() { return windVolume_; }
 
 };
 

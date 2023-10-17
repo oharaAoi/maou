@@ -162,9 +162,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			collision.CheckCollision(player_, bossBullet_);
 
 			//弾と敵の当たり判定
-			collision.CheckCollision(boss_, bossBullet_,emitter);
+			collision.CheckCollision(boss_, bossBullet_, emitter);
 
-			
+
 
 
 			//========================================================================

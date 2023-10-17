@@ -95,6 +95,8 @@ public:
 
 	void RandamInit(int i);
 
+	void OutOfScreenInit(int i);
+
 	//=================================================
 	//弾幕の種類
 	void BulletShotSelect(char* keys, char* preKeys);
