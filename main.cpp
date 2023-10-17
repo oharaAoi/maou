@@ -22,6 +22,7 @@
 // MyParticle //
 #include "MyDeta/Particle/Emitter.h"
 #include "MyDeta/Particle/Emitter2.h"
+#include "BossDeadParticle.h"
 
 //シーン
 enum GameScene {
