@@ -104,6 +104,9 @@
     <ClCompile Include="MyDeta\Object\Stage.cpp">
       <Filter>MyDeta\Object</Filter>
     </ClCompile>
+    <ClCompile Include="BossDeadParticle.cpp">
+      <Filter>MyDeta\Particle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -233,6 +236,9 @@
     </ClInclude>
     <ClInclude Include="MyDeta\Object\Stage.h">
       <Filter>MyDeta\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="BossDeadParticle.h">
+      <Filter>MyDeta\Particle</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
