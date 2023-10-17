@@ -35,7 +35,7 @@ void Particle::Draw()
 		static_cast<int>(pos_.y) + static_cast<int>(cie_->GetOrigine().y),
 		static_cast<int>(radius_), static_cast<int>(radius_),
 		0.0f,
-		WHITE, kFillModeWireFrame
+		WHITE, kFillModeSolid
 	);
 }
 

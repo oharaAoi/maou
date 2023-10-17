@@ -62,7 +62,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Boss boss_;
 	boss_.Init();
 
-
 	BossBullet bossBullet_;
 	bossBullet_.Init();
 
@@ -155,16 +154,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			bossBullet_.BulletShotSelect(keys, preKeys);
 
 			//弾を進める
-			bossBullet_.Update(boss_.GetPos(), player_.GetPos());
+			bossBullet_.Update(boss_.GetPos(), player_);
 
 			//弾とプレイヤー
 			collision.CheckCollision(player_, bossBullet_);
 
 			//弾と敵の当たり判定
 			collision.CheckCollision(boss_, bossBullet_, emitter);
-
-
-
 
 			//========================================================================
 

@@ -65,7 +65,7 @@ void Player::Update(char* keys, char* preKeys, Stage& stage_) { /// 更新処理
 
 	pos_.x = stage_.GetPos().x + (stage_.GetRadius() * cosf(theta_));
 	pos_.y = stage_.GetPos().y + (stage_.GetRadius() * sinf(theta_));
-
+	  
 	rangePos_.x = stage_.GetPos().x + (stage_.GetRangeRadius() * cosf(theta_));
 	rangePos_.y = stage_.GetPos().y + (stage_.GetRangeRadius() * sinf(theta_));
 

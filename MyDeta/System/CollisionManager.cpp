@@ -10,7 +10,7 @@ void CollisionManager::Init() {
 }
 
 void CollisionManager::CheckCollision(Boss& boss_, BossBullet& bossBullet_,Emitter& emitter) {
-	for (int i = 0; i < 30; i++) {
+	for (int i = 0; i < BossBullet::kBulletMax_; i++) {
 		b2bLength_ = CheckLength(bossBullet_.GetPos(i), boss_.GetPos());
 
 		if (b2bLength_ < bossBullet_.GetRadius(i) + boss_.GetRadius()) {
@@ -39,7 +39,7 @@ void CollisionManager::CheckCollision(Boss& boss_, BossBullet& bossBullet_,Emitt
 }
 
 void CollisionManager::CheckCollision(Player& player_, BossBullet& bossBullet_) {
-	for (int i = 0; i < 30; i++) {
+	for (int i = 0; i < BossBullet::kBulletMax_; i++) {
 		b2pLength_ = CheckLength(bossBullet_.GetPos(i), player_.GetPos());
 
 		if (b2pLength_ < player_.GetRadius() + bossBullet_.GetRadius(i)) {

@@ -7,6 +7,9 @@
 #include "MyDeta/Source/Coordinate.h"
 #include <MyDeta/Source/Environment.h>
 
+// MyObject //
+#include "MyDeta/Object/Player.h"
+
 enum BulletType {
 	SLOW,
 	FAST,
@@ -25,15 +28,13 @@ enum Barrage {
 
 class BossBullet
 {
-private:
-
-	/*Vector2<float> pos_;
-	float radius_;*/
+public:
 
 	static const int kBulletMax_ = 30;
 
-	struct Base {
+private:
 
+	struct Base {
 		//==============================
 		//描画で使う
 		BulletType type;
@@ -43,40 +44,46 @@ private:
 
 		unsigned int color;
 
+		//==============================
+		//速度
 		Vector2<float>velocity;
 		Vector2<float>accleleration;
 		Vector2<float>deceleration;
 
 		//==============================
-		//当たり判定で使う
+		//フラグ
 		bool isShot;
-
 		bool isRange;
-
 		bool isPushBacked;
 		//==============================
 
 		int bulletType;
-
 	};
 
 	Base objet_[kBulletMax_];
 	
 	//==============================
-
+	//角度
 	float bullet2pRadian_;
 	float boss2pRadian_;
 
+	float shotRadian_;
+
+	float shotDire_;
+
+	//==============================
+	//2点間の距離
 	Vector2<float> bullet2pDis_;
 	Vector2<float> boss2pDis_;
 
+	//==============================
+	//フレームカウント
 	int freamCount_;
+	int slowdownCount_;
 
+	//==============================
 	static const int kRotateMax_ = 4;
-
-	float shotDire_;
-	float shotRadian_;
-
+	
 	Barrage barrageType_;
 
 	//インスタンス
@@ -89,7 +96,7 @@ public:
 
 	void Init();
 
-	void Update(Vector2<float> bossPos, Vector2<float>playerPos);
+	void Update(Vector2<float> bossPos, Player& player);
 
 	void Draw();
 

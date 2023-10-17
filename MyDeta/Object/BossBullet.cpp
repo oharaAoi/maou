@@ -43,6 +43,7 @@ void BossBullet::Init() {
 	shotRadian_ = 0.0f;
 
 	freamCount_ = 0;
+	slowdownCount_ = 0;
 
 	barrageType_ = NONE;
 
@@ -148,6 +149,7 @@ void BossBullet::OutOfScreenInit(int i) {
 	objet_[i].isPushBacked = false;
 }
 
+//今はbulletをキーで設定
 void BossBullet::BulletShotSelect(char* keys, char* preKeys) {
 	if (keys[DIK_Q] && preKeys[DIK_Q] == false) {
 		Init();
@@ -235,18 +237,18 @@ void BossBullet::RotateDireShot() {
 	}
 }
 
-void BossBullet::Update(Vector2<float> bossPos, Vector2<float>playerPos) {
+void BossBullet::Update(Vector2<float> bossPos, Player& player) {
 	freamCount_++;
 
 	//==============================================
 	// 弾の種類を決める //
-	if (freamCount_ >= 30) {
+	if (freamCount_ >= 20) {
 		//プレイヤーを追う弾幕
 		if (barrageType_ == RANDAM) {
-			IsShot(playerPos);
+			IsShot(player.GetPos());
 
 			//4方向の弾幕
-		}else if (barrageType_ == FOURS) {
+		} else if (barrageType_ == FOURS) {
 			for (int i = 0; i < kBulletMax_; i++) {
 				if (objet_[i].isShot == false) {
 					FourDireIsShot(i);
@@ -257,11 +259,11 @@ void BossBullet::Update(Vector2<float> bossPos, Vector2<float>playerPos) {
 			}
 
 			//全方向の弾幕
-		}else if (barrageType_ == ALL) {
+		} else if (barrageType_ == ALL) {
 			AllDireShot();
 
 			//回転する弾幕
-		}else if (barrageType_ == ROTATE) {
+		} else if (barrageType_ == ROTATE) {
 			RotateDireShot();
 		}
 	}
@@ -283,26 +285,24 @@ void BossBullet::Update(Vector2<float> bossPos, Vector2<float>playerPos) {
 
 					boss2pRadian_ = atan2f(bullet2pDis_.y, bullet2pDis_.x);
 
-					objet_[i].velocity.x += objet_[i].accleleration.x * cosf(boss2pRadian_);
-					objet_[i].velocity.y += objet_[i].accleleration.y * sinf(boss2pRadian_);
+					objet_[i].velocity.x += objet_[i].accleleration.x * player.GetWindVolume().x * cosf(boss2pRadian_);
+					objet_[i].velocity.y += objet_[i].accleleration.x * player.GetWindVolume().y * sinf(boss2pRadian_);
 
 				} else {
-					objet_[i].velocity.x += objet_[i].deceleration.x * cosf(boss2pRadian_);
-					objet_[i].velocity.y += objet_[i].deceleration.y * sinf(boss2pRadian_);
+					//範囲外にある時はゆっくり遅くしていく
+					slowdownCount_++;
 
-					/*if (velocity_.x < -0.002f || velocity_.x > 0.002f) {
-						velocity_.x = 0.0f;
+					if (slowdownCount_ >= 30) {
+						objet_[i].velocity.x *= 0.92f;
+						objet_[i].velocity.y *= 0.92f;
+
+						slowdownCount_ = 0;
 					}
-
-					if (velocity_.y < -0.002f || velocity_.y > 0.002f) {
-						velocity_.y = 0.0f;
-					}*/
 				}
 			}
 
 			objet_[i].pos.x += objet_[i].velocity.x;
 			objet_[i].pos.y += objet_[i].velocity.y;
-
 		}
 
 		//=====================================================
@@ -330,7 +330,7 @@ void BossBullet::Draw() {
 				kFillModeSolid);
 		}
 
-		Novice::ScreenPrintf(10, 10 + (i * 20), "isPushBack:%d", objet_[i].isPushBacked);
-		Novice::ScreenPrintf(150, 10 + (i * 20), "isShot:%d", objet_[i].isShot);
+		/*Novice::ScreenPrintf(10, 10 + (i * 20), "isPushBack:%d", objet_[i].isPushBacked);
+		Novice::ScreenPrintf(150, 10 + (i * 20), "isShot:%d", objet_[i].isShot);*/
 	}
 }
