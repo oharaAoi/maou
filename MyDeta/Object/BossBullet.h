@@ -30,7 +30,7 @@ private:
 	/*Vector2<float> pos_;
 	float radius_;*/
 
-	static const int kBulletMax_ = 20;
+	static const int kBulletMax_ = 30;
 
 	struct Base {
 
@@ -103,9 +103,9 @@ public:
 
 	void FourDireIsShot(int i);
 
-	void AllDireShot(int dire, const int bulletMax);
+	void AllDireShot();
 
-	void RotateDireShot(int dire, const int bulletMax);
+	void RotateDireShot();
 
 	//=================================================
 	/*アクセッサ*/

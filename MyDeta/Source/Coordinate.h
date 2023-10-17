@@ -2,14 +2,16 @@
 #include "MyDeta/Source/MyStruct.h"
 #include <MyDeta/Source/Environment.h>
 
-class Coordinate
+class Coordinate final
 {
 private:
 
-	Vector2 <float> origine_;
+	
 	Coordinate();
+	~Coordinate();
 
 public:
+	static const Vector2 <float> origine_;
 
 	//シングルトンで使う
 	//コピーコンストラクタの禁止
@@ -19,10 +21,10 @@ public:
 
 	static Coordinate* GetInstance();
 
-	void Init();
+	/*void Init();*/
 
 	//この関数を持ってきてworld1座標系からscereen座標系に変換
-	Vector2 <float>GetOrigine() { return origine_; }
+	const Vector2<float> GetOrigine()const { return origine_; }
 
 };
 

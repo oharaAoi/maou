@@ -12,8 +12,8 @@
 #include "MyDeta/Object/Boss.h"
 #include "MyDeta/Object/BossBullet.h"
 
-#include "Emitter.h"
-#include "Emitter2.h"
+#include "MyDeta/Particle/Emitter.h"
+#include "MyDeta/Particle/Emitter2.h"
 
 class CollisionManager {
 private:

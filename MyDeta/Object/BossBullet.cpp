@@ -135,21 +135,29 @@ void BossBullet::RandamInit(int i) {
 
 void BossBullet::BulletShotSelect(char* keys, char* preKeys) {
 	if (keys[DIK_Q] && preKeys[DIK_Q] == false) {
+		Init();
 		barrageType_ = RANDAM;
 	}
 
 	if (keys[DIK_E] && preKeys[DIK_E] == false) {
+		Init();
 		barrageType_ = FOURS;
 	}
 
 	if (keys[DIK_R] && preKeys[DIK_R] == false) {
+		Init();
 		barrageType_ = ALL;
+	}
+
+	if (keys[DIK_T] && preKeys[DIK_T] == false) {
+		Init();
+		barrageType_ = ROTATE;
 	}
 }
 
 void BossBullet::IsShot(Vector2<float> playerPos) {
+	//弾を撃つ(実際はランダムだったりhpの状況で撃つ)
 	for (int i = 0; i < kBulletMax_; i++) {
-		//弾を撃つ(実際はランダムだったりhpの状況で撃つ)
 		if (objet_[i].isShot == false) {
 			RandamInit(i);
 
@@ -171,7 +179,6 @@ void BossBullet::IsShot(Vector2<float> playerPos) {
 }
 
 void BossBullet::FourDireIsShot(int num) {
-
 	if (objet_[num].isShot == false) {
 		//4方向に弾を撃つ
 		objet_[num].isShot = true;
@@ -180,28 +187,37 @@ void BossBullet::FourDireIsShot(int num) {
 
 		objet_[num].velocity.x *= cosf(shotDire_);
 		objet_[num].velocity.y *= sinf(shotDire_);
-
 	}
-
-
 }
 
 //全方向に撃つ弾
-//void BossBullet::AllDireShot(int dire, const int bulletMax) {
-//	for (int i = 0; i < 40; i++) {
-//		objet_[i].isShot = true;
-//
-//		shotDire_ = static_cast<float>(dire) / (static_cast<float>(bulletMax) / 2) * float(M_PI);
-//
-//		objet_[i].velocity.x *= cosf(shotDire_);
-//		objet_[i].velocity.y *= sinf(shotDire_);
-//	}
-//}
-//
-//void RotateDireShot(char* keys, char* preKeys, int dire, const int bulletMax) {
-//	if (keys[DIK_R] && preKeys[DIK_R] == false) {
-//	}
-//}
+void BossBullet::AllDireShot() {
+	for (int i = 0; i < kBulletMax_; i++) {
+		if (objet_[i].isShot == false) {
+			objet_[i].isShot = true;
+
+			shotDire_ = static_cast<float>(i) / (static_cast<float>(kBulletMax_) / 2) * float(M_PI);
+
+			objet_[i].velocity.x *= cosf(shotDire_);
+			objet_[i].velocity.y *= sinf(shotDire_);
+		}
+	}
+}
+
+void BossBullet::RotateDireShot() {
+	for (int i = 0; i < kBulletMax_; i++) {
+		if (objet_[i].isShot == false) {
+			objet_[i].isShot = true;
+
+			shotDire_ = static_cast<float>(i) / (static_cast<float>(kBulletMax_) / 2) * float(M_PI);
+
+			objet_[i].velocity.x *= cosf(shotDire_);
+			objet_[i].velocity.y *= sinf(shotDire_);
+
+			break;
+		}
+	}
+}
 
 void BossBullet::Update(Vector2<float> bossPos, Vector2<float>playerPos) {
 
@@ -210,26 +226,30 @@ void BossBullet::Update(Vector2<float> bossPos, Vector2<float>playerPos) {
 	//==============================================
 	// 弾の種類を決める //
 	if (freamCount_ >= 20) {
-		//プレイヤーを追う弾
+		//プレイヤーを追う弾幕
 		if (barrageType_ == RANDAM) {
 			IsShot(playerPos);
-		}
 
-		//4方向の弾
-		if (barrageType_ == FOURS) {
+			//4方向の弾幕
+		}else if (barrageType_ == FOURS) {
 			for (int i = 0; i < kBulletMax_; i++) {
 				if (objet_[i].isShot == false) {
 					FourDireIsShot(i);
-
 					if (i % 4 == 0) {
 						break;
 					}
 				}
 			}
+
+			//全方向の弾幕
+		}else if (barrageType_ == ALL) {
+			AllDireShot();
+
+			//回転する弾幕
+		}else if (barrageType_ == ROTATE) {
+			RotateDireShot();
 		}
 	}
-
-
 
 	//==============================================
 	//弾を進める
@@ -280,13 +300,13 @@ void BossBullet::Update(Vector2<float> bossPos, Vector2<float>playerPos) {
 	if (freamCount_ >= 20) {
 		freamCount_ = 0;
 	}
-
 }
 
 void BossBullet::Draw() {
 	for (int i = 0; i < kBulletMax_; i++) {
 		if (objet_[i].isShot == true) {
-			Novice::DrawEllipse(static_cast<int>(objet_[i].pos.x + cie_->GetOrigine().x),
+			Novice::DrawEllipse(
+				static_cast<int>(objet_[i].pos.x + cie_->GetOrigine().x),
 				static_cast<int>(objet_[i].pos.y + cie_->GetOrigine().y),
 				static_cast<int>(objet_[i].radius),
 				static_cast<int>(objet_[i].radius),

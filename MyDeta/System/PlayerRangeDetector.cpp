@@ -47,7 +47,7 @@ void PlayerRangeDetector::Init() {
 
 //カプセルで範囲内にいるか判定する
 void PlayerRangeDetector::Update(Player player_, BossBullet& bossBullet_) {
-	for (int i = 0; i < 40; i++) {
+	for (int i = 0; i < 30; i++) {
 		//bossとplayerの距離
 		b2pDis_.x = player_.GetPos().x - player_.GetRangePos().x;
 		b2pDis_.y = player_.GetPos().y - player_.GetRangePos().y;
