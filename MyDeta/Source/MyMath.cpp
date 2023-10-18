@@ -11,7 +11,6 @@
 unsigned seed = static_cast<unsigned>(std::time(nullptr));
 std::mt19937 gen(seed); // Mersenne Twister 乱数生成器をシード値で初期化
 
-
 void ValueRand(float* num, float* theta, int bossRadius, int stageRadius) {
 	//最小値,最大値(ボスの半径,stageの半径)
 	//エネミーの座標をステージの半径内に決める
@@ -28,6 +27,15 @@ int Rand(int min, int max) {
 	std::uniform_int_distribution<int> typeRand(min, max);
 
 	return typeRand(gen);
+}
+
+/* --- blinking(点滅) --- */
+void Blinking(unsigned int& color) {
+	if ((color & 0x000000ff) == 0x000000ff) {
+		color -= 0x000000ff;
+	} else if ((color & 0x00000000) == 0x000000) {
+		color += 0x000000ff;
+	}
 }
 
 /* ---------------------------------

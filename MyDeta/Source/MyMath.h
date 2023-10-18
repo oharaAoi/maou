@@ -19,6 +19,9 @@ void ValueRand(float num, float theta, int bossRadius, int stageRadius);
 
 int Rand(int min, int max);
 
+/* --- blinking(点滅) --- */
+void Blinking(unsigned int& color);
+
 /* ---------------------------------
  Math Function
 ---------------------------------- */

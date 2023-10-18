@@ -31,7 +31,7 @@ class BossBullet
 {
 public:
 
-	static const int kBulletMax_ = 40;
+	static const int kBulletMax_ = 30;
 
 private:
 
@@ -59,6 +59,7 @@ private:
 
 		int vanishCount;
 		int explodeCount;
+
 	};
 
 	Base objet_[kBulletMax_];
@@ -79,10 +80,13 @@ private:
 
 	//誘爆のために弾と弾の距離を取る
 	float b2bLength;
+
 	//==============================
 	//フレームカウント
 	int freamCount_;
 	int slowdownCount_;
+
+	int coolTimeLimit_;
 
 	//==============================
 	static const int kRotateMax_ = 4;
@@ -125,7 +129,7 @@ public:
 	void RandamDireShot();
 
 	//=================================================
-	void ExplodeBullet();
+	void ExplodeBullet(int num);
 
 	//=================================================
 	/*アクセッサ*/

@@ -16,6 +16,8 @@ void BossBullet::Init() {
 
 		objet_[i].color = 0x0000ffff;
 
+		objet_[i].bulletType = SLOW;
+
 		//==============================
 		objet_[i].velocity.x = 2.0f;
 		objet_[i].velocity.y = 2.0f;
@@ -49,6 +51,8 @@ void BossBullet::Init() {
 	//==============================
 	freamCount_ = 0;
 	slowdownCount_ = 0;
+
+	coolTimeLimit_ = 20;
 
 	//==============================
 	barrageType_ = NONE;
@@ -145,8 +149,6 @@ void BossBullet::OutOfScreenInit(int i) {
 	//当たり判定で使う
 	objet_[i].isShot = false;
 	objet_[i].isPushBacked = false;
-
-	objet_[i].explodeCount = 0;
 }
 
 //今はbulletをキーで設定
@@ -154,39 +156,48 @@ void BossBullet::BulletShotSelect(char* keys, char* preKeys) {
 	if (keys[DIK_Q] && !preKeys[DIK_Q]) {
 		Init();
 		barrageType_ = CHASE;
+		coolTimeLimit_ = 15;
 	}
 
 	if (keys[DIK_E] && !preKeys[DIK_E]) {
 		Init();
 		barrageType_ = FOURS;
+		coolTimeLimit_ = 20;
 	}
 
 	if (keys[DIK_R] && !preKeys[DIK_R]) {
 		Init();
 		barrageType_ = ALL;
+		coolTimeLimit_ = 20;
 	}
 
 	if (keys[DIK_T] && !preKeys[DIK_T]) {
 		Init();
 		barrageType_ = ROTATE;
+		coolTimeLimit_ = 10;
 	}
 
 	if (keys[DIK_Y] && !preKeys[DIK_Y]) {
 		Init();
 		barrageType_ = RANDAM;
+		coolTimeLimit_ = 15;
 	}
 }
 
 //爆発する弾の近くの弾を誘爆させる
-void BossBullet::ExplodeBullet() {
-	for (int i = 0; i < kBulletMax_ - 1; i++) {
-		b2bLength = CheckLength(objet_[i].pos, objet_[i + 1].pos);
+void BossBullet::ExplodeBullet(int num) {
+	for (int i = 0; i < kBulletMax_; i++) {
+		if (objet_[i].isShot) {
+			b2bLength = CheckLength(objet_[i].pos, objet_[num].pos);
 
-		//消す処理(エフェクトとかの処理もここでするかも)
-		if (explodeRadius > b2bLength) {
-			OutOfScreenInit(i);
+			//消す処理(エフェクトとかの処理もここでするかも)
+			if (explodeRadius > b2bLength) {
+				OutOfScreenInit(i);
+			}
 		}
 	}
+
+	OutOfScreenInit(num);
 }
 
 
@@ -231,10 +242,20 @@ void BossBullet::AllDireShot() {
 		if (objet_[i].isShot == false) {
 			objet_[i].isShot = true;
 
-			shotDire_ = static_cast<float>(i) / (static_cast<float>(kBulletMax_) / 2) * float(M_PI);
+			shotDire_ = static_cast<float>(i * 3) / (static_cast<float>(kBulletMax_) / 2) * float(M_PI);
 
 			objet_[i].velocity.x *= cosf(shotDire_);
 			objet_[i].velocity.y *= sinf(shotDire_);
+
+			//maxまで撃ったらランダムに切り替える
+			if (i >= kBulletMax_ - 1) {
+				barrageType_ = RANDAM;
+			}
+
+			//10発ずつ撃つ
+			if (i % 10 == 0) {
+				break;
+			}
 		}
 	}
 }
@@ -278,13 +299,15 @@ void BossBullet::Update(Vector2<float> bossPos, Player& player) {
 
 	//==============================================
 	// 弾の種類を決める //
-	if (freamCount_ >= 20) {
-		//プレイヤーを追う弾幕
-		if (barrageType_ == CHASE) {
+	//プレイヤーを追う弾幕
+	if (barrageType_ == CHASE) {
+		if (freamCount_ >= coolTimeLimit_) {
 			IsShot(player.GetPos());
+		}
 
-			//4方向の弾幕
-		} else if (barrageType_ == FOURS) {
+		//4方向の弾幕
+	} else if (barrageType_ == FOURS) {
+		if (freamCount_ >= coolTimeLimit_) {
 			for (int i = 0; i < kBulletMax_; i++) {
 				if (objet_[i].isShot == false) {
 					FourDireIsShot(i);
@@ -293,22 +316,29 @@ void BossBullet::Update(Vector2<float> bossPos, Player& player) {
 					}
 				}
 			}
+		}
 
-			//全方向の弾幕
-		} else if (barrageType_ == ALL) {
+		//全方向の弾幕
+	} else if (barrageType_ == ALL) {
+		if (freamCount_ >= coolTimeLimit_) {
 			AllDireShot();
+		}
 
-			//回転する弾幕
-		} else if (barrageType_ == ROTATE) {
+		//回転する弾幕
+	} else if (barrageType_ == ROTATE) {
+		if (freamCount_ >= coolTimeLimit_) {
 			RotateDireShot();
+		}
 
-			//ランダムな方向の弾幕
-		} else if (barrageType_ == RANDAM) {
+		//ランダムな方向の弾幕
+	} else if (barrageType_ == RANDAM) {
+		if (freamCount_ >= coolTimeLimit_) {
 			RandamDireShot();
 		}
 	}
 
-	if (freamCount_ >= 20) {
+
+	if (freamCount_ >= coolTimeLimit_) {
 		freamCount_ = 0;
 	}
 
@@ -318,6 +348,10 @@ void BossBullet::Update(Vector2<float> bossPos, Player& player) {
 			//消える弾の処理
 			if (objet_[i].bulletType == VANISH) {
 				objet_[i].vanishCount++;
+
+				if (objet_[i].vanishCount >= 250) {
+					Blinking(objet_[i].color);
+				}
 
 				if (objet_[i].vanishCount >= 500) {
 					OutOfScreenInit(i);
@@ -329,9 +363,14 @@ void BossBullet::Update(Vector2<float> bossPos, Player& player) {
 			if (objet_[i].bulletType == EXPLODE) {
 				objet_[i].explodeCount++;
 
+				if (objet_[i].explodeCount >= 60) {
+					Blinking(objet_[i].color);
+				}
+
 				//爆発する範囲内のものをすべて初期化
-				if (objet_[i].explodeCount >= 100) {
-					ExplodeBullet();
+				if (objet_[i].explodeCount >= 500) {
+					ExplodeBullet(i);
+					objet_[i].explodeCount = 0;
 				}
 			}
 
@@ -353,7 +392,7 @@ void BossBullet::Update(Vector2<float> bossPos, Player& player) {
 					//範囲外にある時はゆっくり遅くしていく
 					slowdownCount_++;
 
-					if (slowdownCount_ >= 30) {
+					if (slowdownCount_ >= 20) {
 						objet_[i].velocity.x *= 0.92f;
 						objet_[i].velocity.y *= 0.92f;
 
@@ -394,17 +433,17 @@ void BossBullet::Draw() {
 				Novice::DrawEllipse(
 					static_cast<int>(objet_[i].pos.x + cie_->GetOrigine().x),
 					static_cast<int>(objet_[i].pos.y + cie_->GetOrigine().y),
-					static_cast<int>(60),
-					static_cast<int>(60),
+					static_cast<int>(explodeRadius),
+					static_cast<int>(explodeRadius),
 					0.0f,
 					objet_[i].color,
 					kFillModeWireFrame);
 			}
 		}
 
-		Novice::ScreenPrintf(1100, 20 + (i * 20), "explodeCount:%d", objet_[i].explodeCount);
+		/*Novice::ScreenPrintf(1100, 20 + (i * 20), "explodeCount:%d", objet_[i].explodeCount);*/
 
-		/*Novice::ScreenPrintf(10, 10 + (i * 20), "isPushBack:%d", objet_[i].isPushBacked);
-		Novice::ScreenPrintf(150, 10 + (i * 20), "isShot:%d", objet_[i].isShot);*/
+		/*Novice::ScreenPrintf(10, 10 + (i * 20), "isPushBack:%d", objet_[i].isPushBacked);*/
+		Novice::ScreenPrintf(150, 10 + (i * 20), "isShot:%d", objet_[i].isShot);
 	}
 }

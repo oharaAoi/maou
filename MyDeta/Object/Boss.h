@@ -22,6 +22,10 @@ private:
 
 	float hp_;
 
+	bool isAlive_;
+
+	int dethCount_;
+
 	BossType type_;
 
 	//インスタンス
@@ -45,10 +49,14 @@ public:
 	void SetColor(unsigned int color) { color_ = color; }
 	unsigned int GetColor() { return color_; }
 
-	//=====================================================--
-
 	void SetHp(float hp) { hp_ = hp; }
 	float GetHp() { return hp_; }
+
+	void SetIsAlive(bool isAlive) { isAlive_ = isAlive; }
+	bool GetIsAlive() { return isAlive_; }
+
+	void SetDethCount(int num) { dethCount_ = num; }
+	int GetDethCount() { return dethCount_; }
 
 	BossType GetType() { return type_; }
 

@@ -144,6 +144,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			player_.Update(keys, preKeys, stage_);
 
+			boss_.UpDate();
+
 			emitter.Update(); //エミッターの更新処理
 
 			//========================================================================
