@@ -110,6 +110,15 @@
     <ClCompile Include="BossDeadParticle.cpp">
       <Filter>MyDeta\Particle</Filter>
     </ClCompile>
+    <ClCompile Include="MyDeta\SceneChange\BoxTransition.cpp">
+      <Filter>KamataEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerDeadParticle.cpp">
+      <Filter>MyDeta\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerDeadEmitter.cpp">
+      <Filter>MyDeta\Particle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -241,6 +250,13 @@
       <Filter>MyDeta\Object</Filter>
     </ClInclude>
     <ClInclude Include="BossDeadParticle.h">
+      <Filter>MyDeta\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="MyDeta\SceneChange\BoxTransition.h" />
+    <ClInclude Include="PlayerDeadParticle.h">
+      <Filter>MyDeta\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerDeadEmitter.h">
       <Filter>MyDeta\Particle</Filter>
     </ClInclude>
   </ItemGroup>
