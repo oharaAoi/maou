@@ -128,6 +128,7 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClCompile Include="MyDeta\Particle\Particle.cpp" />
     <ClCompile Include="MyDeta\Particle\Particle2.cpp" />
     <ClCompile Include="MyDeta\Particle\Util.cpp" />
+    <ClCompile Include="MyDeta\SceneChange\BoxTransition.cpp" />
     <ClCompile Include="MyDeta\Source\Coordinate.cpp" />
     <ClCompile Include="MyDeta\Source\Easing.cpp" />
     <ClCompile Include="MyDeta\System\PlayerRangeDetector.cpp" />
@@ -175,6 +176,7 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClInclude Include="MyDeta\Particle\Particle.h" />
     <ClInclude Include="MyDeta\Particle\Particle2.h" />
     <ClInclude Include="MyDeta\Particle\Util.h" />
+    <ClInclude Include="MyDeta\SceneChange\BoxTransition.h" />
     <ClInclude Include="MyDeta\Source\Coordinate.h" />
     <ClInclude Include="MyDeta\Source\Easing.h" />
     <ClInclude Include="MyDeta\Source\Environment.h" />

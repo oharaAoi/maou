@@ -24,6 +24,9 @@
 #include "MyDeta/Particle/Emitter2.h"
 #include "BossDeadParticle.h"
 
+// MySceneChange //
+#include "MyDeta/SceneChange/BoxTransition.h"
+
 //シーン
 enum GameScene {
 	TITLE,
@@ -72,6 +75,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Player player_;
 	player_.Init();
 
+	BoxTransition boxTransition;
+
+	float sceneT = 0.0f;
+	bool isChangeScene = false;
+
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
 		// フレームの開始
@@ -90,9 +98,25 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓更新処理ここから
 			/// 
 
+
+
 			if (keys[DIK_SPACE] && !preKeys[DIK_SPACE]) {
-				scene = TUTORIAL;
+				isChangeScene = true;
 			}
+
+			if (isChangeScene) {
+				if (sceneT < 120.0f) { sceneT++; }
+
+				if (sceneT == 120.0f) {
+					scene = TUTORIAL;
+					isChangeScene = false;
+				}
+
+			} else {
+				if (sceneT > 0.0f) { sceneT--; }
+			}
+
+			boxTransition.Update(sceneT);
 
 			///
 			/// ↑更新処理ここまで
@@ -102,6 +126,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓描画処理ここから
 			/// 
 
+			boxTransition.Draw();
 			Novice::ScreenPrintf(10, 10, "scene:%d", scene);
 
 			///
@@ -117,8 +142,22 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// 
 
 			if (keys[DIK_SPACE] && !preKeys[DIK_SPACE]) {
-				scene = GAME;
+				isChangeScene = true;
 			}
+
+			if (isChangeScene) {
+				if (sceneT < 120.0f) { sceneT++; }
+
+				if (sceneT == 120.0f) {
+					scene = GAME;
+					isChangeScene = false;
+				}
+
+			} else {
+				if (sceneT > 0.0f) { sceneT--; }
+			}
+
+			boxTransition.Update(sceneT);
 
 			///
 			/// ↑更新処理ここまで
@@ -128,6 +167,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓描画処理ここから
 			/// 
 
+			boxTransition.Draw();
 			Novice::ScreenPrintf(10, 10, "scene:%d", scene);
 
 			///
@@ -141,6 +181,22 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			///
 			/// ↓更新処理ここから
 			/// 
+			
+			if (isChangeScene) {
+				if (sceneT < 120.0f) { sceneT++; }
+
+				if (sceneT == 120.0f) {
+					scene = GAME;
+					isChangeScene = false;
+				}
+
+			} else {
+				if (sceneT > 0.0f) { sceneT--; }
+			}
+
+			boxTransition.Update(sceneT);
+
+			// ==================================================
 
 			player_.Update(keys, preKeys, stage_);
 
@@ -194,11 +250,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			/*Novice::ScreenPrintf(800, 10 + (i * 20), "bulletVelocity.x:%f", bossBullet_[i].GetVelocity().x);*/
 
+			boxTransition.Draw();
 
-
-		///
-		/// ↑描画処理ここまで
-		/// 
+			///
+			/// ↑描画処理ここまで
+			/// 
 
 			break;
 

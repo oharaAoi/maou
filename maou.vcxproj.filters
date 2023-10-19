@@ -29,6 +29,9 @@
     <Filter Include="MyDeta\System">
       <UniqueIdentifier>{e636f5b6-b73c-4321-9a68-51719c1361d7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MyDeta\SceneChange">
+      <UniqueIdentifier>{d0c23af1-bafa-4043-b71e-3b4d5962f5d7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\DirectXCommon.cpp">

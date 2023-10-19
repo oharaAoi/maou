@@ -46,6 +46,8 @@ struct Size {
 	Mold radius;
 };
 
+using Sizef = Size <float>;
+
 template <typename Mold>
 struct Vertex4 {
 	Vector2 <Mold>leftTop;
