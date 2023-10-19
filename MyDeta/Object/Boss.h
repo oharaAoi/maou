@@ -45,8 +45,6 @@ public:
 
 	void Draw();
 
-	void BulletSpeedChange(BossBullet& bossBullet_);
-
 	//アクセッサ
 	//=================================================
 	Vector2 <float>GetPos() { return pos_; }
@@ -75,3 +73,4 @@ public:
 	BossType GetType() { return type_; }
 
 };
+

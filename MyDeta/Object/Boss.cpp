@@ -22,24 +22,6 @@ void Boss::Init() {
 	barrageChange_ = false;;
 }
 
-void Boss::BulletSpeedChange(BossBullet& bossBullet_) {
-	if (type_ == wave2) {
-		bossBullet_.SetSlowSpeed(2.5f);
-		bossBullet_.SetFastSpeed(3.5f);
-		bossBullet_.SetExplodeSpeed(3.0f);
-		bossBullet_.SetVanishSpeed(3.0f);
-
-	} else if (type_ == wave3) {
-		bossBullet_.SetSlowSpeed(3.5f);
-		bossBullet_.SetFastSpeed(4.5f);
-		bossBullet_.SetExplodeSpeed(4.0f);
-		bossBullet_.SetVanishSpeed(4.0f);
-	}
-
-}
-
-
-
 void Boss::UpDate(BossBullet& bossBullet_) {
 	//ボスのhpが一定量減った時
 	if (type_ == wave1) {
@@ -71,21 +53,17 @@ void Boss::UpDate(BossBullet& bossBullet_) {
 
 	} else if (dethCount_ == 1) {
 		type_ = wave2;
-		BulletSpeedChange(bossBullet_);
+		bossBullet_.SetRandTypeMax(3);
 
 	} else if (dethCount_ == 2) {
 		type_ = wave3;
-		bossBullet_.BulletShotChange(RANDAM);
-		BulletSpeedChange(bossBullet_);
 	}
 
 	//ボスが倒された時の処理
 	if (!isAlive_) {
-		if (type_ != wave3) {
-			hp_ = 60.0f;
-			color_ += 0x888888ff;
-			isAlive_ = true;
-		}
+		hp_ = 60.0f;
+		color_ += 0x888888ff;
+		isAlive_ = true;
 	}
 }
 

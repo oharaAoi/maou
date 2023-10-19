@@ -1,6 +1,5 @@
 ﻿#include "BossBullet.h"
 
-
 BossBullet::BossBullet() {
 }
 
@@ -231,6 +230,21 @@ void BossBullet::BulletShotChange(Barrage type) {
 		OutOfScreenInit(i);
 	}*/
 }
+
+//void BossBullet::BulletSpeedChange(BossType wave) {
+//	if (wave == wave2) {
+//		slowSpeed_ = 2.5f;
+//		fastSpeed_ = 3.5f;
+//		explodeSpeed_ = 3.0f;
+//		vanishSpeed_ = 3.0f;
+//
+//	} else if (wave == wave3) {
+//		slowSpeed_ = 3.5f;
+//		fastSpeed_ = 4.5f;
+//		explodeSpeed_ = 4.0f;
+//		vanishSpeed_ = 4.0f;
+//	}
+//}
 
 //爆発する弾の近くの弾を誘爆させる
 void BossBullet::ExplodeBullet(int num) {

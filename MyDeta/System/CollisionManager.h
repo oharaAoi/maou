@@ -8,6 +8,7 @@
 #include "MyDeta/Object/Player.h"
 #include "MyDeta/Object/Reflection.h"
 #include "MyDeta/Object/Orbit.h"
+#include "MyDeta/Object/BossBullet.h"
 
 #include "MyDeta/Object/Boss.h"
 #include "MyDeta/Object/BossBullet.h"
