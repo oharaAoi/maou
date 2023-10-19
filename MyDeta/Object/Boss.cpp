@@ -12,7 +12,7 @@ void Boss::Init() {
 
 	color_ = 0xffffffff;
 
-	hp_ = 40.0f;
+	hp_ = 25.0f;
 
 	isAlive_ = true;
 
@@ -125,7 +125,7 @@ void Boss::Draw() {
 	);
 
 	switch (type_) {
-		case WAVE1:
+		case wave1:
 			DrawRhombusAnimation(
 				hp_ / 40.0f,
 				{kWindowWidth / 2.0f, kWindowHeight / 2.0f},
@@ -135,7 +135,7 @@ void Boss::Draw() {
 			);
 			break;
 
-		case WAVE2:
+		case wave2:
 			DrawRhombusAnimation(
 				hp_ / 60.0f,
 				{ kWindowWidth / 2.0f, kWindowHeight / 2.0f },
@@ -145,7 +145,7 @@ void Boss::Draw() {
 			);
 			break;
 
-		case WAVE3:
+		case wave3:
 			DrawRhombusAnimation(
 				hp_ / 80.0f,
 				{ kWindowWidth / 2.0f, kWindowHeight / 2.0f },

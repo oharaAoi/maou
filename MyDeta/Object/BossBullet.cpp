@@ -63,8 +63,8 @@ void BossBullet::Init() {
 
 	coolTimeLimit_ = 40;
 
-	coolTimeRandamLimit_ = 40;
-	coolTimeChaseLimit_ = 40;
+	coolTimeRandamLimit_ = 30;
+	coolTimeChaseLimit_ = 30;
 
 	//==============================
 	barrageType_ = RANDAM;
@@ -489,14 +489,6 @@ void BossBullet::Update(Vector2<float> bossPos, Player& player, Stage stage, Emi
 		//弾がプレイヤーの円周の外に出た時の処理
 		object_[i].center2bLength = CheckLength(stage.GetPos(), object_[i].pos);
 
-		//弾が赤円周とプレイヤーの円周の間で止まった時の処理
-		if (object_[i].center2bLength > stage.GetRadius()) {
-			if (static_cast<int>(object_[i].velocity.x) == 0 && static_cast<int>(object_[i].velocity.y) == 0) {
-				OutOfScreenInit(i);
-			}
-		}
-
-		//赤い範囲を超えたら消す
 		if (object_[i].center2bLength > stage.GetBulletVanishRange()) {
 
 			if (barrageType_ == RANDAM || barrageType_ == CHASE) {
