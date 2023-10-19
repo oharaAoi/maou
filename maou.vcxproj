@@ -117,8 +117,6 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClCompile Include="C:\KamataEngine\DirectXGame\2d\ImGuiManager.cpp" />
     <ClCompile Include="C:\KamataEngine\Adapter\Novice.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MyDeta\Object\Boss.cpp" />
-    <ClCompile Include="MyDeta\Object\BossBullet.cpp" />
     <ClCompile Include="MyDeta\Object\Orbit.cpp" />
     <ClCompile Include="MyDeta\Object\Player.cpp" />
     <ClCompile Include="MyDeta\Object\Reflection.cpp" />
@@ -169,7 +167,6 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClInclude Include="C:\KamataEngine\DirectXGame\input\Input.h" />
     <ClInclude Include="C:\KamataEngine\DirectXGame\scene\GameScene.h" />
     <ClInclude Include="C:\KamataEngine\Adapter\Novice.h" />
-    <ClInclude Include="MyDeta\Object\Boss.h" />
     <ClInclude Include="MyDeta\Object\BossBullet.h" />
     <ClInclude Include="MyDeta\Object\Orbit.h" />
     <ClInclude Include="MyDeta\Object\Player.h" />
