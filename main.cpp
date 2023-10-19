@@ -232,9 +232,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			//弾と敵の当たり判定
 			collision.CheckCollision(boss_, bossBullet_, emitter);
 
-				//========================================================================
-				
-				timer.Update();
+			//========================================================================
+
+			timer.Update();
 
 				//========================================================================
 				//3WAVE目にボスを倒していたらresultに移行
@@ -265,10 +265,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			bossBullet_.Draw();
 
-				timer.Draw();
+			timer.Draw();
 
-				/*Novice::ScreenPrintf(10, 10 + (i * 20), "isPushBack:%d", bossBullet_[i].GetIsPushBacked());
-				Novice::ScreenPrintf(150, 10 + (i * 20), "isShot:%d", bossBullet_[i].GetIsShot());*/
+			/*Novice::ScreenPrintf(10, 10 + (i * 20), "isPushBack:%d", bossBullet_[i].GetIsPushBacked());
+			Novice::ScreenPrintf(150, 10 + (i * 20), "isShot:%d", bossBullet_[i].GetIsShot());*/
 
 			/*Novice::ScreenPrintf(800, 10 + (i * 20), "bulletVelocity.x:%f", bossBullet_[i].GetVelocity().x);*/
 
