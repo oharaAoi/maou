@@ -254,8 +254,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓描画処理ここから
 			/// 
 
-			Novice::DrawBox(0, 0, 1280, 720, 0.0f, 0xffffffff, kFillModeSolid);
-
 			boss_.Draw();
 			stage_.Draw();
 			player_.Draw();
