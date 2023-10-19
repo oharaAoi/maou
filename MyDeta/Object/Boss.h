@@ -35,7 +35,7 @@ private:
 	//インスタンス
 	Coordinate* cie_ = Coordinate::GetInstance();
 
-	int white1x1GH = Novice::LoadTexture
+	int white1x1GH;
 
 public:
 
