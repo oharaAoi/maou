@@ -305,3 +305,62 @@ void DrawRhombusAnimation(float t, Vector2f center, float radius, float length, 
 		);
 	}
 }
+
+void DrawWindow(const Vector2f& center, const Sizef& size, uint32_t color) {
+	Vertex4f vertex = {
+		{center.x - (size.width / 2.0f), center.y - (size.height / 2.0f)}, // leftTop
+		{center.x + (size.width / 2.0f), center.y - (size.height / 2.0f)}, // rightTop
+		{center.x - (size.width / 2.0f), center.y + (size.height / 2.0f)}, // leftBottom
+		{center.x + (size.width / 2.0f), center.y + (size.height / 2.0f)}, // rightBottom
+	};
+
+	/// Draw ///
+	Novice::DrawBox(
+		static_cast<int>(center.x - (size.width / 2.0f)), static_cast<int>(center.y - (size.height / 2.0f)),
+		static_cast<int>(size.width), static_cast<int>(size.height),
+		0.0f,
+		color,
+		kFillModeWireFrame
+	);
+
+	Novice::DrawBox(
+		static_cast<int>(center.x - ((size.width - 10.0f) / 2.0f)), static_cast<int>(center.y - ((size.height - 10.0f) / 2.0f)),
+		static_cast<int>((size.width - 10.0f)), static_cast<int>((size.height - 10.0f)),
+		0.0f,
+		0xF0F0F040,
+		kFillModeSolid
+	);
+
+	// vertex box //
+	Novice::DrawBox(
+		static_cast<int>(vertex.leftTop.x - (4.0f / 2.0f)), static_cast<int>(vertex.leftTop.y - (4.0f / 2.0f)),
+		4, 4,
+		0.0f,
+		color,
+		kFillModeSolid
+	);
+
+	Novice::DrawBox(
+		static_cast<int>(vertex.rightTop.x - (4.0f / 2.0f)), static_cast<int>(vertex.rightTop.y - (4.0f / 2.0f)),
+		4, 4,
+		0.0f,
+		color,
+		kFillModeSolid
+	);
+
+	Novice::DrawBox(
+		static_cast<int>(vertex.leftBottom.x - (4.0f / 2.0f)), static_cast<int>(vertex.leftBottom.y - (4.0f / 2.0f)),
+		4, 4,
+		0.0f,
+		color,
+		kFillModeSolid
+	);
+
+	Novice::DrawBox(
+		static_cast<int>(vertex.rightBottom.x - (4.0f / 2.0f)), static_cast<int>(vertex.rightBottom.y - (4.0f / 2.0f)),
+		4, 4,
+		0.0f,
+		color,
+		kFillModeSolid
+	);
+}

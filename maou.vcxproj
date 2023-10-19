@@ -125,6 +125,7 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClCompile Include="MyDeta\Object\Stage.cpp" />
     <ClCompile Include="MyDeta\Particle\Emitter.cpp" />
     <ClCompile Include="MyDeta\Particle\Emitter2.cpp" />
+    <ClCompile Include="MyDeta\Particle\MyOrbit.cpp" />
     <ClCompile Include="MyDeta\Particle\Particle.cpp" />
     <ClCompile Include="MyDeta\Particle\Particle2.cpp" />
     <ClCompile Include="MyDeta\Particle\Util.cpp" />
@@ -132,6 +133,7 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClCompile Include="MyDeta\Source\Coordinate.cpp" />
     <ClCompile Include="MyDeta\Source\Easing.cpp" />
     <ClCompile Include="MyDeta\System\PlayerRangeDetector.cpp" />
+    <ClCompile Include="MyDeta\System\Timer.cpp" />
     <ClCompile Include="MyDeta\System\Zoom.cpp" />
     <ClCompile Include="MyDeta\Source\MyMath.cpp" />
     <ClCompile Include="MyDeta\System\CollisionManager.cpp" />
@@ -173,6 +175,7 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClInclude Include="MyDeta\Object\Stage.h" />
     <ClInclude Include="MyDeta\Particle\Emitter.h" />
     <ClInclude Include="MyDeta\Particle\Emitter2.h" />
+    <ClInclude Include="MyDeta\Particle\MyOrbit.h" />
     <ClInclude Include="MyDeta\Particle\Particle.h" />
     <ClInclude Include="MyDeta\Particle\Particle2.h" />
     <ClInclude Include="MyDeta\Particle\Util.h" />
@@ -183,6 +186,7 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClInclude Include="MyDeta\Source\MyMath.h" />
     <ClInclude Include="MyDeta\Source\MyStruct.h" />
     <ClInclude Include="MyDeta\System\PlayerRangeDetector.h" />
+    <ClInclude Include="MyDeta\System\Timer.h" />
     <ClInclude Include="MyDeta\System\Zoom.h" />
     <ClInclude Include="MyDeta\System\CollisionManager.h" />
   </ItemGroup>

@@ -56,6 +56,8 @@ struct Vertex4 {
 	Vector2 <Mold>rightBottom;
 };
 
+using Vertex4f = Vertex4 <float>;
+
 struct Vector4 final {
 	float x, y, z, w;
 };

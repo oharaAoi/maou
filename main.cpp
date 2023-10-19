@@ -11,6 +11,7 @@
 // MySystem //
 #include "MyDeta/System/CollisionManager.h"
 #include "MyDeta/System/PlayerRangeDetector.h"
+#include "MyDeta/System/Timer.h"
 
 // MyObject //
 #include "MyDeta/Object/Player.h"
@@ -77,6 +78,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	player_.Init();
 
 	BoxTransition boxTransition;
+	Timer timer;
 
 	// scene change
 	float sceneT = 0.0f;
@@ -228,6 +230,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				collision.CheckCollision(boss_, bossBullet_, emitter);
 
 				//========================================================================
+				
+				timer.Update();
+
+				//========================================================================
 				//3wave目にボスを倒していたらresultに移行
 				if (boss_.GetType() == wave3 && boss_.GetIsAlive() == false) {
 					scene = RESULT;
@@ -253,6 +259,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 
 				bossBullet_.Draw();
+
+				timer.Draw();
 
 				/*Novice::ScreenPrintf(10, 10 + (i * 20), "isPushBack:%d", bossBullet_[i].GetIsPushBacked());
 				Novice::ScreenPrintf(150, 10 + (i * 20), "isShot:%d", bossBullet_[i].GetIsShot());*/

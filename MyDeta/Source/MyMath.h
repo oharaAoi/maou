@@ -68,3 +68,5 @@ bool CheckCollisionCircles(const Vector2 <float>& centerA, float radiusA, const 
 void DrawRhombus(Vector2f center, float radius, float length, unsigned int color, int graphHandle);
 
 void DrawRhombusAnimation(float t, Vector2f center, float radius, float length, unsigned int color, int graphHandle);
+
+void DrawWindow(const Vector2f& center, const Sizef& size, uint32_t color);
