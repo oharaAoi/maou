@@ -63,7 +63,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Boss boss_;
 	boss_.Init();
 
-
 	BossBullet bossBullet_;
 	bossBullet_.Init();
 
@@ -91,7 +90,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓更新処理ここから
 			/// 
 
-			if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == false) {
+			if (keys[DIK_SPACE] && !preKeys[DIK_SPACE]) {
 				scene = TUTORIAL;
 			}
 
@@ -117,7 +116,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓更新処理ここから
 			/// 
 
-			if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == false) {
+			if (keys[DIK_SPACE] && !preKeys[DIK_SPACE]) {
 				scene = GAME;
 			}
 
@@ -145,6 +144,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			player_.Update(keys, preKeys, stage_);
 
+			boss_.UpDate(bossBullet_);
+
 			emitter.Update(); //エミッターの更新処理
 
 			//========================================================================
@@ -152,20 +153,17 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			//弾の更新
 			range_.Update(player_, bossBullet_);
 
-			//撃つ弾の種類を決める
+			//撃つ弾の種類を決める(デバック用)
 			bossBullet_.BulletShotSelect(keys, preKeys);
 
 			//弾を進める
-			bossBullet_.Update(boss_.GetPos(), player_.GetPos());
+			bossBullet_.Update(boss_.GetPos(), player_);
 
 			//弾とプレイヤー
 			collision.CheckCollision(player_, bossBullet_);
 
 			//弾と敵の当たり判定
 			collision.CheckCollision(boss_, bossBullet_, emitter);
-
-
-
 
 			//========================================================================
 

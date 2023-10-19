@@ -9,7 +9,7 @@ void Stage::Init() {
 
 	radius_ = 300.0f;
 
-	rangeRadius_ = 150.0f;
+	rangeRadius_ = 180.0f;
 }
 
 void Stage::Draw() {

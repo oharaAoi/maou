@@ -61,11 +61,11 @@ void Player::Update(char* keys, char* preKeys, Stage& stage_) { /// 更新処理
 		radianSpeed_ *= 0.92f;
 	}
 
-	theta_ += radianSpeed_ / 64.0f * (float)M_PI;
+	theta_ += radianSpeed_ / 100.0f * (float)M_PI;
 
 	pos_.x = stage_.GetPos().x + (stage_.GetRadius() * cosf(theta_));
 	pos_.y = stage_.GetPos().y + (stage_.GetRadius() * sinf(theta_));
-
+	  
 	rangePos_.x = stage_.GetPos().x + (stage_.GetRangeRadius() * cosf(theta_));
 	rangePos_.y = stage_.GetPos().y + (stage_.GetRangeRadius() * sinf(theta_));
 
