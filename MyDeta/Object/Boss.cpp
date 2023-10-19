@@ -125,7 +125,7 @@ void Boss::Draw() {
 	);
 
 	switch (type_) {
-		case wave1:
+		case WAVE1:
 			DrawRhombusAnimation(
 				hp_ / 40.0f,
 				{kWindowWidth / 2.0f, kWindowHeight / 2.0f},
@@ -135,7 +135,7 @@ void Boss::Draw() {
 			);
 			break;
 
-		case wave2:
+		case WAVE2:
 			DrawRhombusAnimation(
 				hp_ / 60.0f,
 				{ kWindowWidth / 2.0f, kWindowHeight / 2.0f },
@@ -145,7 +145,7 @@ void Boss::Draw() {
 			);
 			break;
 
-		case wave3:
+		case WAVE3:
 			DrawRhombusAnimation(
 				hp_ / 80.0f,
 				{ kWindowWidth / 2.0f, kWindowHeight / 2.0f },

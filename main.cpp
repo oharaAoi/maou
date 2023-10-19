@@ -237,8 +237,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				timer.Update();
 
 				//========================================================================
-				//3wave目にボスを倒していたらresultに移行
-				if (boss_.GetType() == wave3 && boss_.GetIsAlive() == false) {
+				//3WAVE目にボスを倒していたらresultに移行
+				if (boss_.GetType() == WAVE3 && boss_.GetIsAlive() == false) {
 					scene = RESULT;
 				}
 
