@@ -16,8 +16,8 @@
 #include "MyDeta/Object/Player.h"
 #include "MyDeta/Object/Reflection.h"
 #include "MyDeta/Object/Stage.h"
-#include "MyDeta/Object/Boss.h"
 #include "MyDeta/Object/BossBullet.h"
+#include "MyDeta/Object/Boss.h"
 
 // MyParticle //
 #include "MyDeta/Particle/Emitter.h"
@@ -166,6 +166,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			collision.CheckCollision(boss_, bossBullet_, emitter);
 
 			//========================================================================
+			//3wave目にボスを倒していたらresultに移行
+			if (boss_.GetType() == wave3 && boss_.GetIsAlive() == false) {
+				scene = RESULT;
+			}
+
 
 			///
 			/// ↑更新処理ここまで
