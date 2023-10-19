@@ -35,6 +35,8 @@ private:
 	//インスタンス
 	Coordinate* cie_ = Coordinate::GetInstance();
 
+	int white1x1GH = Novice::LoadTexture
+
 public:
 
 	Boss();

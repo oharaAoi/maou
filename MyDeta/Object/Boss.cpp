@@ -86,6 +86,18 @@ void Boss::UpDate(BossBullet& bossBullet_) {
 }
 
 void Boss::Draw() {
+	switch (type_) {
+		case wave1:
+			DrawRhombusAnimation(
+				hp_ / 40.0f,
+				pos_,
+				50.0f, 10.0f,
+				0xFAFAFAFF
+
+			);
+			break;
+	}
+
 	if (isAlive_) {
 		Novice::DrawEllipse(static_cast<int>(pos_.x + cie_->GetOrigine().x),
 			static_cast<int>(pos_.y + cie_->GetOrigine().y),
