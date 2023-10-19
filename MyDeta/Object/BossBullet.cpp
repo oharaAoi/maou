@@ -448,7 +448,7 @@ void BossBullet::Update(Vector2<float> bossPos, Player& player, Stage stage, Emi
 				}
 
 				//爆発する範囲内のものをすべて初期化
-				if (object_[i].explodeCount >= 100) {
+				if (object_[i].explodeCount >= 50) {
 					ExplodeBullet(i, emitter);
 					object_[i].explodeCount = 0;
 				}
