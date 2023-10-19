@@ -79,9 +79,15 @@ void Boss::UpDate(BossBullet& bossBullet_) {
 
 	//ボスが倒された時の処理
 	if (!isAlive_) {
-		hp_ = 60.0f;
-		color_ += 0x888888ff;
-		isAlive_ = true;
+		if (type_ == wave2) {
+			hp_ = 60.0f;
+			color_ += 0x888888ff;
+			isAlive_ = true;
+		} else if (type_ == wave3) {
+			hp_ = 80.0f;
+			color_ += 0x888888ff;
+			isAlive_ = true;
+		}
 	}
 }
 
