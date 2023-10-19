@@ -53,6 +53,40 @@ float DivideParameter(float t, int subdivitionNum, int i) {
 	return (t - (static_cast<float>(i) / (subdivitionNum + 1))) * subdivitionNum;
 }
 
+unsigned int ShiftColor(float t, unsigned int beforeColor, unsigned int afterColor) {
+	unsigned int result = 0;
+	Vector4 resultVector;
+
+	Vector4 beforeColorVector = {
+		static_cast<float>(((beforeColor >> (8 * 3)) & 0xFF)),       // r
+		static_cast<float>(((beforeColor >> (8 * 2)) & 0x00FF)),     // g
+		static_cast<float>(((beforeColor >> (8 * 1)) & 0x0000FF)),   // b
+		static_cast<float>(((beforeColor >> (8 * 0)) & 0x000000FF)), // a
+	};
+
+	Vector4 afterColorVector = {
+		static_cast<float>(((afterColor >> (8 * 3)) & 0xFF)),       // r
+		static_cast<float>(((afterColor >> (8 * 2)) & 0x00FF)),     // g
+		static_cast<float>(((afterColor >> (8 * 1)) & 0x0000FF)),   // b
+		static_cast<float>(((afterColor >> (8 * 0)) & 0x000000FF)), // a
+	};
+
+	resultVector = {
+		Lerp(t, beforeColorVector.x, afterColorVector.x), // r
+		Lerp(t, beforeColorVector.y, afterColorVector.y), // g
+		Lerp(t, beforeColorVector.z, afterColorVector.z), // b
+		Lerp(t, beforeColorVector.w, afterColorVector.w), // a
+	};
+
+	result += static_cast<unsigned int>(resultVector.x) << (8 * 3); // r
+	result += static_cast<unsigned int>(resultVector.y) << (8 * 2); // g
+	result += static_cast<unsigned int>(resultVector.z) << (8 * 1); // b
+	result += static_cast<unsigned int>(resultVector.w) << (8 * 0); // a
+
+	return result;
+
+}
+
 /* ---------------------------------
  Math Function
 ---------------------------------- */

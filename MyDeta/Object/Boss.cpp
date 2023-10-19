@@ -1,6 +1,7 @@
 ﻿#include "Boss.h"
 
 Boss::Boss() {
+	white1x1GH = Novice::LoadTexture("./NoviceResources/white1x1.png");
 }
 
 void Boss::Init() {
@@ -79,13 +80,58 @@ void Boss::UpDate(BossBullet& bossBullet_) {
 
 	//ボスが倒された時の処理
 	if (!isAlive_) {
-		hp_ = 60.0f;
-		color_ += 0x888888ff;
-		isAlive_ = true;
+		if (type_ == wave2) {
+			hp_ = 60.0f;
+			color_ += 0x888888ff;
+			isAlive_ = true;
+		} else if (type_ == wave3) {
+			hp_ = 80.0f;
+			color_ += 0x888888ff;
+			isAlive_ = true;
+		}
 	}
 }
 
 void Boss::Draw() {
+	DrawRhombus(
+		{ kWindowWidth / 2.0f, kWindowHeight / 2.0f },
+		75.0f, 15.0f,
+		0x8a8a8aFF,
+		white1x1GH
+	);
+
+	switch (type_) {
+		case wave1:
+			DrawRhombusAnimation(
+				hp_ / 40.0f,
+				{kWindowWidth / 2.0f, kWindowHeight / 2.0f},
+				75.0f, 15.0f,
+				0xd84339FF,
+				white1x1GH
+			);
+			break;
+
+		case wave2:
+			DrawRhombusAnimation(
+				hp_ / 60.0f,
+				{ kWindowWidth / 2.0f, kWindowHeight / 2.0f },
+				75.0f, 15.0f,
+				0xd84339FF,
+				white1x1GH
+			);
+			break;
+
+		case wave3:
+			DrawRhombusAnimation(
+				hp_ / 80.0f,
+				{ kWindowWidth / 2.0f, kWindowHeight / 2.0f },
+				75.0f, 15.0f,
+				0xd84339FF,
+				white1x1GH
+			);
+			break;
+	}
+
 	if (isAlive_) {
 		Novice::DrawEllipse(static_cast<int>(pos_.x + cie_->GetOrigine().x),
 			static_cast<int>(pos_.y + cie_->GetOrigine().y),
