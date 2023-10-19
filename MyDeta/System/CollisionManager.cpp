@@ -31,11 +31,14 @@ void CollisionManager::CheckCollision(Boss& boss_, BossBullet& bossBullet_, Emit
 				//ボスの処理
 				boss_.SetHp(boss_.GetHp() - 1);
 
+				if (boss_.GetHp() == 40 || boss_.GetHp() == 20) {
+					boss_.SetBulletChange(true);
+				}
+				
 				if (boss_.GetHp() <= 0) {
 					boss_.SetIsAlive(false);
 					boss_.SetDethCount(boss_.GetDethCount() + 1);
 				}
-
 			}
 		}
 	}

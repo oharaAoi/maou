@@ -3,8 +3,10 @@
 // MySource //
 #include "MyDeta/Source/MyStruct.h"
 #include <MyDeta/Source/Environment.h>
-//System
+// System //
 #include "MyDeta/Source/Coordinate.h"
+// MyObject //
+#include "MyDeta/Object/BossBullet.h"
 
 enum BossType {
 	wave1,
@@ -28,6 +30,8 @@ private:
 
 	BossType type_;
 
+	bool barrageChange_;
+
 	//インスタンス
 	Coordinate* cie_ = Coordinate::GetInstance();
 
@@ -37,17 +41,20 @@ public:
 
 	void Init();
 
-	void UpDate();
+	void UpDate(BossBullet& bossBullet_);
 
 	void Draw();
 
 	//アクセッサ
+	//=================================================
 	Vector2 <float>GetPos() { return pos_; }
 
 	float GetRadius() { return radius_; }
 
 	void SetColor(unsigned int color) { color_ = color; }
 	unsigned int GetColor() { return color_; }
+
+	//=================================================
 
 	void SetHp(float hp) { hp_ = hp; }
 	float GetHp() { return hp_; }
@@ -57,6 +64,11 @@ public:
 
 	void SetDethCount(int num) { dethCount_ = num; }
 	int GetDethCount() { return dethCount_; }
+
+	void SetBulletChange(bool flag) { barrageChange_ = flag; }
+	bool GetBulletChange() { return barrageChange_; }
+
+	//=================================================
 
 	BossType GetType() { return type_; }
 

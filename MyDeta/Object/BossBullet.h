@@ -9,6 +9,7 @@
 
 // MyObject //
 #include "MyDeta/Object/Player.h"
+//#include "MyDeta/Object/Boss.h"
 
 enum BulletType {
 	SLOW,
@@ -20,18 +21,18 @@ enum BulletType {
 //弾幕の種類
 enum Barrage {
 	NONE,
+	RANDAM,
 	CHASE,
 	FOURS,
 	ALL,
 	ROTATE,
-	RANDAM
 };
 
 class BossBullet
 {
 public:
 
-	static const int kBulletMax_ = 30;
+	static const int kBulletMax_ = 40;
 
 private:
 
@@ -63,6 +64,13 @@ private:
 	};
 
 	Base objet_[kBulletMax_];
+
+	//==============================
+	//弾の速度(waveごとに速度を上げる)
+	float slowSpeed_;
+	float fastSpeed_;
+	float explodeSpeed_;
+	float vanishSpeed_;
 	
 	//==============================
 	//角度
@@ -90,7 +98,8 @@ private:
 
 	//==============================
 	static const int kRotateMax_ = 4;
-	
+	int randTypeMax_;
+
 	Barrage barrageType_;
 
 	//爆発する半径
@@ -117,6 +126,9 @@ public:
 	//=================================================
 	//弾幕の種類
 	void BulletShotSelect(char* keys, char* preKeys);
+	void BulletShotChange(Barrage type);
+
+	/*void BulletSpeedChange(BossType wave);*/
 
 	void IsShot(Vector2<float> playerPos);
 
@@ -156,6 +168,9 @@ public:
 	bool GetIsPushBacked(int i) { return objet_[i].isPushBacked; }
 
 	//=================================================
+
+	void SetRandTypeMax(int num) { randTypeMax_ = num; }
+	int GetRandTypeMax() { return randTypeMax_; }
 
 	Barrage GetBarrageType() { return barrageType_; }
 	void SetBarrageType(Barrage type) { barrageType_ = type; }

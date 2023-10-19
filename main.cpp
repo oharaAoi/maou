@@ -144,7 +144,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			player_.Update(keys, preKeys, stage_);
 
-			boss_.UpDate();
+			boss_.UpDate(bossBullet_);
 
 			emitter.Update(); //エミッターの更新処理
 
@@ -153,7 +153,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			//弾の更新
 			range_.Update(player_, bossBullet_);
 
-			//撃つ弾の種類を決める
+			//撃つ弾の種類を決める(デバック用)
 			bossBullet_.BulletShotSelect(keys, preKeys);
 
 			//弾を進める
