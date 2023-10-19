@@ -48,7 +48,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	char keys[256] = { 0 };
 	char preKeys[256] = { 0 };
 
-	GameScene scene = TITLE;
+	GameScene scene = GAME;
 
 	// エミッターのインスタンスを作成
 	Emitter emitter;
@@ -202,6 +202,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			boss_.UpDate(bossBullet_);
 
+			//デバック用
+			boss_.BossHpDecrece(keys, preKeys);
+
 			emitter.Update(); //エミッターの更新処理
 
 			//========================================================================
@@ -213,7 +216,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			bossBullet_.BulletShotSelect(keys, preKeys);
 
 			//弾を進める
-			bossBullet_.Update(boss_.GetPos(), player_);
+			bossBullet_.Update(boss_.GetPos(), player_, stage_);
 
 			//弾とプレイヤー
 			collision.CheckCollision(player_, bossBullet_);
@@ -223,7 +226,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			//========================================================================
 			//3wave目にボスを倒していたらresultに移行
-			if (boss_.GetType() == wave3 && boss_.GetIsAlive() == false) {
+			if (boss_.GetType() == WAVE3 && boss_.GetIsAlive() == false) {
 				scene = RESULT;
 			}
 

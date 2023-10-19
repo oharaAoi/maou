@@ -9,27 +9,30 @@
 #include "MyDeta/Object/BossBullet.h"
 
 enum BossType {
-	wave1,
-	wave2,
-	wave3
+	WAVE1,
+	WAVE2,
+	WAVE3
 };
 
 class Boss
 {
 private:
 
+	//==============================
 	Vector2 <float> pos_;
 	float radius_;
 	unsigned int color_;
 
+	//==============================
 	float hp_;
-
 	bool isAlive_;
 
-	int dethCount_;
+	//==============================
+	int deathCount_;
+	int frameCount_;
 
+	//==============================
 	BossType type_;
-
 	bool barrageChange_;
 
 	//インスタンス
@@ -46,6 +49,8 @@ public:
 	void Draw();
 
 	void BulletSpeedChange(BossBullet& bossBullet_);
+
+	void BossHpDecrece(char* keys, char* preKeys);
 
 	//アクセッサ
 	//=================================================
@@ -64,8 +69,8 @@ public:
 	void SetIsAlive(bool isAlive) { isAlive_ = isAlive; }
 	bool GetIsAlive() { return isAlive_; }
 
-	void SetDethCount(int num) { dethCount_ = num; }
-	int GetDethCount() { return dethCount_; }
+	void SetDeathCount(int num) { deathCount_ = num; }
+	int GetDeathCount() { return deathCount_; }
 
 	void SetBulletChange(bool flag) { barrageChange_ = flag; }
 	bool GetBulletChange() { return barrageChange_; }

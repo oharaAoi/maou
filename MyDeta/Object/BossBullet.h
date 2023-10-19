@@ -9,7 +9,7 @@
 
 // MyObject //
 #include "MyDeta/Object/Player.h"
-//#include "MyDeta/Object/Boss.h"
+#include "MyDeta/Object/Stage.h"
 
 enum BulletType {
 	SLOW,
@@ -32,7 +32,7 @@ class BossBullet
 {
 public:
 
-	static const int kBulletMax_ = 40;
+	static const int kBulletMax_ = 60;
 
 private:
 
@@ -61,9 +61,14 @@ private:
 		int vanishCount;
 		int explodeCount;
 
+		//==============================
+		// 距離
+		//ステージ外に出た時の処理のための距離
+		float center2bLength;
+
 	};
 
-	Base objet_[kBulletMax_];
+	Base object_[kBulletMax_];
 
 	//==============================
 	//弾の速度(waveごとに速度を上げる)
@@ -87,7 +92,7 @@ private:
 	Vector2<float> boss2pDis_;
 
 	//誘爆のために弾と弾の距離を取る
-	float b2bLength;
+	float b2bLength_;
 
 	//==============================
 	//フレームカウント
@@ -96,6 +101,9 @@ private:
 
 	int coolTimeLimit_;
 
+	int coolTimeRandamLimit_;
+	int coolTimeChaseLimit_ ;
+
 	//==============================
 	static const int kRotateMax_ = 4;
 	int randTypeMax_;
@@ -103,7 +111,7 @@ private:
 	Barrage barrageType_;
 
 	//爆発する半径
-	float explodeRadius;
+	float explodeRadius_;
 
 	//インスタンス
 	Coordinate* cie_ = Coordinate::GetInstance();
@@ -115,7 +123,7 @@ public:
 
 	void Init();
 
-	void Update(Vector2<float> bossPos, Player& player);
+	void Update(Vector2<float> bossPos, Player& player, Stage stage);
 
 	void Draw();
 
@@ -127,6 +135,8 @@ public:
 	//弾幕の種類
 	void BulletShotSelect(char* keys, char* preKeys);
 	void BulletShotChange(Barrage type);
+
+	void BarrageInit();
 
 	/*void BulletSpeedChange(BossType wave);*/
 
@@ -145,27 +155,27 @@ public:
 
 	//=================================================
 	/*アクセッサ*/
-	void SetPos(Vector2<float> pos_, int i) { objet_[i].pos = pos_; }
-	Vector2<float>GetPos(int i) { return objet_[i].pos; }
+	void SetPos(Vector2<float> pos_, int i) { object_[i].pos = pos_; }
+	Vector2<float>GetPos(int i) { return object_[i].pos; }
 
-	float GetRadius(int i) { return objet_[i].radius; }
+	float GetRadius(int i) { return object_[i].radius; }
 
-	void SetColor(unsigned int color, int i) { objet_[i].color = color; }
-	unsigned int GetColor(int i) { return objet_[i].color; }
+	void SetColor(unsigned int color, int i) { object_[i].color = color; }
+	unsigned int GetColor(int i) { return object_[i].color; }
 
 	//デバック用
-	Vector2 <float> GetVelocity(int i) { return objet_[i].velocity; }
+	Vector2 <float> GetVelocity(int i) { return object_[i].velocity; }
 
 	//=================================================
 
-	void SetIsShot(bool flag , int i) { objet_[i].isShot = flag; }
-	bool GetIsShot(int i) { return objet_[i].isShot; }
+	void SetIsShot(bool flag , int i) { object_[i].isShot = flag; }
+	bool GetIsShot(int i) { return object_[i].isShot; }
 
-	void SetIsRange(bool flag , int i) { objet_[i].isRange = flag; }
-	bool GetIsRange(int i) { return objet_[i].isRange; }
+	void SetIsRange(bool flag , int i) { object_[i].isRange = flag; }
+	bool GetIsRange(int i) { return object_[i].isRange; }
 
-	void SetIsPushBacked(bool flag, int i) { objet_[i].isPushBacked = flag; }
-	bool GetIsPushBacked(int i) { return objet_[i].isPushBacked; }
+	void SetIsPushBacked(bool flag, int i) { object_[i].isPushBacked = flag; }
+	bool GetIsPushBacked(int i) { return object_[i].isPushBacked; }
 
 	//=================================================
 
@@ -181,5 +191,7 @@ public:
 	void SetExplodeSpeed(float speed) { explodeSpeed_ = speed; }
 	void SetVanishSpeed(float speed) { vanishSpeed_ = speed; }
 
+	void SetRandamCoolTimeLimit(int limit) { coolTimeRandamLimit_ = limit; }
+	void SetChaseCoolTimeLimit(int limit) { coolTimeChaseLimit_ = limit; }
 };
 
