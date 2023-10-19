@@ -174,5 +174,12 @@ public:
 
 	Barrage GetBarrageType() { return barrageType_; }
 	void SetBarrageType(Barrage type) { barrageType_ = type; }
+
+	//=================================================
+	void SetSlowSpeed(float speed) { slowSpeed_ = speed; }
+	void SetFastSpeed(float speed) { fastSpeed_ = speed; }
+	void SetExplodeSpeed(float speed) { explodeSpeed_ = speed; }
+	void SetVanishSpeed(float speed) { vanishSpeed_ = speed; }
+
 };
 
