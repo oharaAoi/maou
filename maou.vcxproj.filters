@@ -74,6 +74,9 @@
     <ClCompile Include="MyDeta\System\Zoom.cpp">
       <Filter>MyDeta\System</Filter>
     </ClCompile>
+    <ClCompile Include="MyDeta\Object\Boss.cpp">
+      <Filter>MyDeta\Object</Filter>
+    </ClCompile>
     <ClCompile Include="MyDeta\Particle\Emitter.cpp">
       <Filter>MyDeta\Particle</Filter>
     </ClCompile>
@@ -95,6 +98,9 @@
     <ClCompile Include="MyDeta\System\PlayerRangeDetector.cpp">
       <Filter>MyDeta\System</Filter>
     </ClCompile>
+    <ClCompile Include="MyDeta\Object\BossBullet.cpp">
+      <Filter>MyDeta\Object</Filter>
+    </ClCompile>
     <ClCompile Include="MyDeta\Object\Stage.cpp">
       <Filter>MyDeta\Object</Filter>
     </ClCompile>
@@ -109,15 +115,6 @@
     </ClCompile>
     <ClCompile Include="PlayerDeadEmitter.cpp">
       <Filter>MyDeta\Particle</Filter>
-    </ClCompile>
-    <ClCompile Include="MyDeta\Particle\MyOrbit.cpp">
-      <Filter>KamataEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="MyDeta\System\Timer.cpp">
-      <Filter>KamataEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="MyDeta\System\CollisionManager.cpp">
-      <Filter>KamataEngine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -219,6 +216,9 @@
     <ClInclude Include="MyDeta\System\Zoom.h">
       <Filter>MyDeta\System</Filter>
     </ClInclude>
+    <ClInclude Include="MyDeta\Object\Boss.h">
+      <Filter>MyDeta\Object</Filter>
+    </ClInclude>
     <ClInclude Include="MyDeta\Particle\Emitter.h">
       <Filter>MyDeta\Particle</Filter>
     </ClInclude>
@@ -258,7 +258,5 @@
     <ClInclude Include="MyDeta\Particle\MyOrbit.h">
       <Filter>MyDeta\Particle</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerDeadEmitter.h" />
-    <ClInclude Include="PlayerDeadParticle.h" />
   </ItemGroup>
 </Project>
