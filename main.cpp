@@ -222,7 +222,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				bossBullet_.BulletShotSelect(keys, preKeys);
 
 			//弾を進める
-			bossBullet_.Update(boss_.GetPos(), player_, stage_);
+			bossBullet_.Update(boss_.GetPos(), player_, stage_, emitter);
 
 				//弾とプレイヤー
 				collision.CheckCollision(player_, bossBullet_);
@@ -247,6 +247,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				///
 				/// ↓描画処理ここから
 				/// 
+
+				Novice::DrawBox(0, 0, 1280, 720, 0.0f, 0xffffffff, kFillModeSolid);
 
 				boss_.Draw();
 				stage_.Draw();

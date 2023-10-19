@@ -61,7 +61,7 @@ void BossBullet::Init() {
 	freamCount_ = 0;
 	slowdownCount_ = 0;
 
-	coolTimeLimit_ = 20;
+	coolTimeLimit_ = 40;
 
 	coolTimeRandamLimit_ = 40;
 	coolTimeChaseLimit_ = 40;
@@ -191,7 +191,7 @@ void BossBullet::BulletShotSelect(char* keys, char* preKeys) {
 			OutOfScreenInit(i);
 		}
 		barrageType_ = CHASE;
-		coolTimeLimit_ = 35;
+		coolTimeLimit_ = 10;
 	}
 
 	if (keys[DIK_E] && !preKeys[DIK_E]) {
@@ -224,7 +224,7 @@ void BossBullet::BulletShotSelect(char* keys, char* preKeys) {
 		}
 
 		barrageType_ = RANDAM;
-		coolTimeLimit_ = 30;
+		coolTimeLimit_ = 10;
 	}
 }
 
@@ -254,13 +254,16 @@ void BossBullet::BulletShotChange(Barrage type) {
 }
 
 //爆発する弾の近くの弾を誘爆させる
-void BossBullet::ExplodeBullet(int num) {
+void BossBullet::ExplodeBullet(int num, Emitter& emitter) {
 	for (int i = 0; i < kBulletMax_; i++) {
 		if (object_[i].isShot) {
 			b2bLength_ = CheckLength(object_[i].pos, object_[num].pos);
 
 			//消す処理(エフェクトとかの処理もここでするかも)
 			if (explodeRadius_ > b2bLength_) {
+
+				emitter.Emit(static_cast<int>(object_[i].pos.x), static_cast<int>(object_[i].pos.y), 6);
+
 				OutOfScreenInit(i);
 			}
 		}
@@ -335,8 +338,7 @@ void BossBullet::AllDireShot() {
 
 			//maxまで撃ったらランダムに切り替える
 			if (i >= kBulletMax_ - 1) {
-				barrageType_ = RANDAM;
-
+				BulletShotChange(RANDAM);
 			}
 
 			//10発ずつ撃つ
@@ -360,7 +362,7 @@ void BossBullet::RotateDireShot() {
 
 			//全部撃ち終わったらランダムにする
 			if (i == kBulletMax_ - 1) {
-				barrageType_ = RANDAM;
+				BulletShotChange(RANDAM);
 			}
 
 			break;
@@ -368,7 +370,7 @@ void BossBullet::RotateDireShot() {
 	}
 }
 
-void BossBullet::Update(Vector2<float> bossPos, Player& player, Stage stage) {
+void BossBullet::Update(Vector2<float> bossPos, Player& player, Stage stage, Emitter& emitter) {
 	freamCount_++;
 
 	//==============================================
@@ -390,7 +392,7 @@ void BossBullet::Update(Vector2<float> bossPos, Player& player, Stage stage) {
 					}
 
 					if (i == kBulletMax_ - 1) {
-						barrageType_ = RANDAM;
+						BulletShotChange(RANDAM);
 					}
 				}
 			}
@@ -447,7 +449,7 @@ void BossBullet::Update(Vector2<float> bossPos, Player& player, Stage stage) {
 
 				//爆発する範囲内のものをすべて初期化
 				if (object_[i].explodeCount >= 50) {
-					ExplodeBullet(i);
+					ExplodeBullet(i, emitter);
 					object_[i].explodeCount = 0;
 				}
 			}
@@ -546,7 +548,13 @@ void BossBullet::Draw() {
 
 		Novice::ScreenPrintf(10, 40, "randTypeMax_:%d", randTypeMax_);
 
-		Novice::ScreenPrintf(200 + ((i / 10) * 75), 10 + ((i % 10) * 20), "isShot:%d", object_[i].isShot);
+		/*Novice::ScreenPrintf(200 + ((i / 10) * 75), 10 + ((i % 10) * 20), ":%d", object_[i].isShot);*/
+
+		Novice::ScreenPrintf(10, 60, "coolTimeRandamLimit_ :%d", coolTimeRandamLimit_);
+		Novice::ScreenPrintf(10, 80, "coolTimeChaseLimit_ :%d", coolTimeChaseLimit_);
+		Novice::ScreenPrintf(10, 100, "freamCount_ :%d", freamCount_);
+		Novice::ScreenPrintf(10, 120, "coolTimeLimit_ :%d", coolTimeLimit_);
+
 
 		/*Novice::ScreenPrintf(1100, 20 + (i * 20), "explodeCount:%d", object_[i].explodeCount);*/
 	}

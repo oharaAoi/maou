@@ -11,6 +11,10 @@
 #include "MyDeta/Object/Player.h"
 #include "MyDeta/Object/Stage.h"
 
+// Particle //
+#include "MyDeta/Particle/Emitter.h"
+#include "MyDeta/Particle/Emitter2.h"
+
 enum BulletType {
 	SLOW,
 	FAST,
@@ -123,7 +127,7 @@ public:
 
 	void Init();
 
-	void Update(Vector2<float> bossPos, Player& player, Stage stage);
+	void Update(Vector2<float> bossPos, Player& player, Stage stage, Emitter& emitter);
 
 	void Draw();
 
@@ -151,7 +155,7 @@ public:
 	void RandamDireShot();
 
 	//=================================================
-	void ExplodeBullet(int num);
+	void ExplodeBullet(int num, Emitter& emitter);
 
 	//=================================================
 	/*アクセッサ*/
