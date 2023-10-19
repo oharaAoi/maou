@@ -108,7 +108,7 @@ void Player::Update(char* keys, char* preKeys, Stage& stage_) { /// 更新処理
 				stage_.SetRangeRadius(300.0f);
 			}
 
-			if (overHeat_ > 0.0f) { overHeat_ -= 0.5f; }
+			if (overHeat_ > 0.0f) { overHeat_ -= 0.4f; }
 
 			break;
 	}

@@ -37,7 +37,7 @@ void CollisionManager::CheckCollision(Boss& boss_, BossBullet& bossBullet_, Emit
 				
 				if (boss_.GetHp() <= 0) {
 					boss_.SetIsAlive(false);
-					boss_.SetDethCount(boss_.GetDethCount() + 1);
+					boss_.SetDeathCount(boss_.GetDeathCount() + 1);
 				}
 			}
 		}

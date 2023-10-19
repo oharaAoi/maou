@@ -65,9 +65,6 @@
     <ClCompile Include="MyDeta\Object\Reflection.cpp">
       <Filter>MyDeta\Object</Filter>
     </ClCompile>
-    <ClCompile Include="MyDeta\System\CollisionManager.cpp">
-      <Filter>MyDeta\System</Filter>
-    </ClCompile>
     <ClCompile Include="MyDeta\Source\MyMath.cpp">
       <Filter>MyDeta\Source</Filter>
     </ClCompile>
@@ -111,12 +108,12 @@
       <Filter>MyDeta\Particle</Filter>
     </ClCompile>
     <ClCompile Include="MyDeta\SceneChange\BoxTransition.cpp">
-      <Filter>MyDeta\SceneChange</Filter>
+      <Filter>KamataEngine</Filter>
     </ClCompile>
-    <ClCompile Include="MyDeta\System\Timer.cpp">
-      <Filter>MyDeta\System</Filter>
+    <ClCompile Include="PlayerDeadParticle.cpp">
+      <Filter>MyDeta\Particle</Filter>
     </ClCompile>
-    <ClCompile Include="MyDeta\Particle\MyOrbit.cpp">
+    <ClCompile Include="PlayerDeadEmitter.cpp">
       <Filter>MyDeta\Particle</Filter>
     </ClCompile>
   </ItemGroup>

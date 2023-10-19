@@ -137,6 +137,8 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClCompile Include="MyDeta\System\Zoom.cpp" />
     <ClCompile Include="MyDeta\Source\MyMath.cpp" />
     <ClCompile Include="MyDeta\System\CollisionManager.cpp" />
+    <ClCompile Include="PlayerDeadEmitter.cpp" />
+    <ClCompile Include="PlayerDeadParticle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BossDeadParticle.h" />
@@ -189,6 +191,8 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClInclude Include="MyDeta\System\Timer.h" />
     <ClInclude Include="MyDeta\System\Zoom.h" />
     <ClInclude Include="MyDeta\System\CollisionManager.h" />
+    <ClInclude Include="PlayerDeadEmitter.h" />
+    <ClInclude Include="PlayerDeadParticle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

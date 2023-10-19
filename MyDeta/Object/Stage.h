@@ -12,6 +12,8 @@ private:
 
 	float rangeRadius_;
 
+	float bulletVanishRange_;
+
 	//インスタンス
 	Coordinate* cie_ = Coordinate::GetInstance();
 
@@ -30,6 +32,8 @@ public:
 
 	float GetRangeRadius() { return rangeRadius_; }
 	void SetRangeRadius(float radius) { rangeRadius_ = radius; }
+
+	float GetBulletVanishRange() { return bulletVanishRange_; }
 
 };
 
