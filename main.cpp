@@ -98,137 +98,137 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 
 		switch (scene) {
-			case TITLE:
+		case TITLE:
 
-				///
-				/// ↓更新処理ここから
-				/// 
+			///
+			/// ↓更新処理ここから
+			/// 
 
 
 
-				if (keys[DIK_SPACE] && !preKeys[DIK_SPACE]) {
-					isChangeScene = true;
+			if (keys[DIK_SPACE] && !preKeys[DIK_SPACE]) {
+				isChangeScene = true;
+			}
+
+			if (isChangeScene) {
+				if (sceneT < 120.0f) { sceneT++; }
+
+				if (sceneT == 120.0f) {
+					scene = TUTORIAL;
+					isChangeScene = false;
 				}
 
-				if (isChangeScene) {
-					if (sceneT < 120.0f) { sceneT++; }
+			} else {
+				if (sceneT > 0.0f) { sceneT--; }
+			}
 
-					if (sceneT == 120.0f) {
-						scene = TUTORIAL;
-						isChangeScene = false;
-					}
+			boxTransition.Update(sceneT);
 
-				} else {
-					if (sceneT > 0.0f) { sceneT--; }
+			///
+			/// ↑更新処理ここまで
+			/// 
+
+			///
+			/// ↓描画処理ここから
+			/// 
+
+			boxTransition.Draw();
+			Novice::ScreenPrintf(10, 10, "scene:%d", scene);
+
+			///
+			/// ↑描画処理ここまで
+			/// 
+
+			break;
+
+		case TUTORIAL:
+
+			///
+			/// ↓更新処理ここから
+			/// 
+
+			if (keys[DIK_SPACE] && !preKeys[DIK_SPACE]) {
+				isChangeScene = true;
+			}
+
+			if (isChangeScene) {
+				if (sceneT < 120.0f) { sceneT++; }
+
+				if (sceneT == 120.0f) {
+					scene = GAME;
+					isChangeScene = false;
 				}
 
-				boxTransition.Update(sceneT);
+			} else {
+				if (sceneT > 0.0f) { sceneT--; }
+			}
 
-				///
-				/// ↑更新処理ここまで
-				/// 
+			boxTransition.Update(sceneT);
 
-				///
-				/// ↓描画処理ここから
-				/// 
+			///
+			/// ↑更新処理ここまで
+			///
 
-				boxTransition.Draw();
-				Novice::ScreenPrintf(10, 10, "scene:%d", scene);
+			///
+			/// ↓描画処理ここから
+			/// 
 
-				///
-				/// ↑描画処理ここまで
-				/// 
+			boxTransition.Draw();
+			Novice::ScreenPrintf(10, 10, "scene:%d", scene);
 
-				break;
+			///
+			/// ↑描画処理ここまで
+			/// 
 
-			case TUTORIAL:
+			break;
 
-				///
-				/// ↓更新処理ここから
-				/// 
+		case GAME:
 
-				if (keys[DIK_SPACE] && !preKeys[DIK_SPACE]) {
-					isChangeScene = true;
+			///
+			/// ↓更新処理ここから
+			/// 
+
+			if (isChangeScene) {
+				if (sceneT < 120.0f) { sceneT++; }
+
+				if (sceneT == 120.0f) {
+					scene = GAME;
+					isChangeScene = false;
 				}
 
-				if (isChangeScene) {
-					if (sceneT < 120.0f) { sceneT++; }
+			} else {
+				if (sceneT > 0.0f) { sceneT--; }
+			}
 
-					if (sceneT == 120.0f) {
-						scene = GAME;
-						isChangeScene = false;
-					}
+			boxTransition.Update(sceneT);
 
-				} else {
-					if (sceneT > 0.0f) { sceneT--; }
-				}
+			// ==================================================
 
-				boxTransition.Update(sceneT);
+			player_.Update(keys, preKeys, stage_);
 
-				///
-				/// ↑更新処理ここまで
-				///
-
-				///
-				/// ↓描画処理ここから
-				/// 
-
-				boxTransition.Draw();
-				Novice::ScreenPrintf(10, 10, "scene:%d", scene);
-
-				///
-				/// ↑描画処理ここまで
-				/// 
-
-				break;
-
-			case GAME:
-
-				///
-				/// ↓更新処理ここから
-				/// 
-
-				if (isChangeScene) {
-					if (sceneT < 120.0f) { sceneT++; }
-
-					if (sceneT == 120.0f) {
-						scene = GAME;
-						isChangeScene = false;
-					}
-
-				} else {
-					if (sceneT > 0.0f) { sceneT--; }
-				}
-
-				boxTransition.Update(sceneT);
-
-				// ==================================================
-
-				player_.Update(keys, preKeys, stage_);
-
-				boss_.UpDate(bossBullet_);
+			boss_.UpDate(bossBullet_);
 
 			//デバック用
 			boss_.BossHpDecrece(keys, preKeys);
 
 			emitter.Update(); //エミッターの更新処理
 
-				//========================================================================
+			//========================================================================
 
-				//弾の更新
-				range_.Update(player_, bossBullet_);
+			//弾の更新
+			range_.Update(player_, bossBullet_);
 
-				//撃つ弾の種類を決める(デバック用)
-				bossBullet_.BulletShotSelect(keys, preKeys);
+			//撃つ弾の種類を決める(デバック用)
+			bossBullet_.BulletShotSelect(keys, preKeys);
 
 			//弾を進める
 			bossBullet_.Update(boss_.GetPos(), player_, stage_, emitter);
 
-				//弾とプレイヤー
-				collision.CheckCollision(player_, bossBullet_);
+			//弾とプレイヤー
+			collision.CheckCollision(player_, bossBullet_);
 
-				//弾と敵の当たり判定
-				collision.CheckCollision(boss_, bossBullet_, emitter);
+			//弾と敵の当たり判定
+			collision.CheckCollision(boss_, bossBullet_, emitter);
 
 			//========================================================================
 			//3wave目にボスを倒していたらresultに移行
@@ -236,90 +236,90 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				scene = RESULT;
 			}
 
-				if (keys[DIK_G]) {
-					scene = GAME_OVER;
-				}
+			if (keys[DIK_G]) {
+				scene = GAME_OVER;
+			}
 
-				///
-				/// ↑更新処理ここまで
-				/// 
+			///
+			/// ↑更新処理ここまで
+			/// 
 
-				///
-				/// ↓描画処理ここから
-				/// 
+			///
+			/// ↓描画処理ここから
+			/// 
 
-				Novice::DrawBox(0, 0, 1280, 720, 0.0f, 0xffffffff, kFillModeSolid);
+			Novice::DrawBox(0, 0, 1280, 720, 0.0f, 0xffffffff, kFillModeSolid);
 
-				boss_.Draw();
-				stage_.Draw();
-				player_.Draw();
-				range_.Draw();
-				emitter.Draw(); // エミッターの描画処理を呼ぶ
-
-
-				bossBullet_.Draw();
-
-				/*Novice::ScreenPrintf(10, 10 + (i * 20), "isPushBack:%d", bossBullet_[i].GetIsPushBacked());
-				Novice::ScreenPrintf(150, 10 + (i * 20), "isShot:%d", bossBullet_[i].GetIsShot());*/
-
-				/*Novice::ScreenPrintf(800, 10 + (i * 20), "bulletVelocity.x:%f", bossBullet_[i].GetVelocity().x);*/
-
-				boxTransition.Draw();
-
-				///
-				/// ↑描画処理ここまで
-				/// 
-
-				break;
-
-			case GAME_OVER:
-
-				///
-				/// ↓更新処理ここから
-				/// 
-
-				if (!isContinue) {
-					if (gameoverT < 120.0f) { gameoverT++; }
-
-				} else {
-					if (gameoverT > 0.0f) { gameoverT--; }
-				}
+			boss_.Draw();
+			stage_.Draw();
+			player_.Draw();
+			range_.Draw();
+			emitter.Draw(); // エミッターの描画処理を呼ぶ
 
 
+			bossBullet_.Draw();
 
-				///
-				/// ↑更新処理ここまで
-				/// 
+			/*Novice::ScreenPrintf(10, 10 + (i * 20), "isPushBack:%d", bossBullet_[i].GetIsPushBacked());
+			Novice::ScreenPrintf(150, 10 + (i * 20), "isShot:%d", bossBullet_[i].GetIsShot());*/
 
-				///
-				/// ↓描画処理ここから
-				/// 
+			/*Novice::ScreenPrintf(800, 10 + (i * 20), "bulletVelocity.x:%f", bossBullet_[i].GetVelocity().x);*/
 
-				///
-				/// ↑描画処理ここまで
-				/// 
+			boxTransition.Draw();
 
-				break;
+			///
+			/// ↑描画処理ここまで
+			/// 
 
-			case RESULT:
+			break;
 
-				///
-				/// ↓更新処理ここから
-				/// 
+		case GAME_OVER:
 
-				///
-				/// ↑更新処理ここまで
-				/// 
+			///
+			/// ↓更新処理ここから
+			/// 
 
-				///
-				/// ↓描画処理ここから
-				/// 
+			if (!isContinue) {
+				if (gameoverT < 120.0f) { gameoverT++; }
 
-				///
-				/// ↑描画処理ここまで
-				/// 
+			} else {
+				if (gameoverT > 0.0f) { gameoverT--; }
+			}
 
-				break;
+
+
+			///
+			/// ↑更新処理ここまで
+			/// 
+
+			///
+			/// ↓描画処理ここから
+			/// 
+
+			///
+			/// ↑描画処理ここまで
+			/// 
+
+			break;
+
+		case RESULT:
+
+			///
+			/// ↓更新処理ここから
+			/// 
+
+			///
+			/// ↑更新処理ここまで
+			/// 
+
+			///
+			/// ↓描画処理ここから
+			/// 
+
+			///
+			/// ↑描画処理ここまで
+			/// 
+
+			break;
 		}
 
 		// フレームの終了
