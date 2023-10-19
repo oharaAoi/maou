@@ -119,3 +119,155 @@ bool CheckCollisionCircles(const Vector2 <float>& centerA, float radiusA, const 
 	else return false;
 
 }
+
+
+/* ---------------------------------
+ DrawFunction
+---------------------------------- */
+void DrawRhombus(Vector2f center, float radius, float length, unsigned int color, int graphHandle) {
+	/// --- 更新処理 --- ///
+
+	/// --- 描画処理 --- ///
+	// leftTop
+	Novice::DrawQuad(
+		static_cast<int>(center.x), static_cast<int>(center.y - radius),          // p1
+		static_cast<int>(center.x), static_cast<int>(center.y - radius - length), // p2
+		static_cast<int>(center.x - radius), static_cast<int>(center.y),          // p3
+		static_cast<int>(center.x - radius - length), static_cast<int>(center.y), // p4
+		0, 0,
+		1, 1,
+		graphHandle,
+		color
+	);
+
+	// leftBottom
+	Novice::DrawQuad(
+		static_cast<int>(center.x - radius), static_cast<int>(center.y),          // p3
+		static_cast<int>(center.x - radius - length), static_cast<int>(center.y), // p4
+		static_cast<int>(center.x), static_cast<int>(center.y + radius),          // p5
+		static_cast<int>(center.x), static_cast<int>(center.y + radius + length), // p6
+		0, 0,
+		1, 1,
+		graphHandle,
+		color
+	);
+
+	// rightBottom
+	Novice::DrawQuad(
+		static_cast<int>(center.x), static_cast<int>(center.y + radius),          // p5
+		static_cast<int>(center.x), static_cast<int>(center.y + radius + length), // p6
+		static_cast<int>(center.x + radius), static_cast<int>(center.y),          // p7
+		static_cast<int>(center.x + radius + length), static_cast<int>(center.y), // p8
+		0, 0,
+		1, 1,
+		graphHandle,
+		color
+	);
+
+	// rightTop
+	Novice::DrawQuad(
+		static_cast<int>(center.x + radius), static_cast<int>(center.y),          // p7
+		static_cast<int>(center.x + radius + length), static_cast<int>(center.y), // p8
+		static_cast<int>(center.x), static_cast<int>(center.y - radius),          // p1
+		static_cast<int>(center.x), static_cast<int>(center.y - radius - length), // p2
+		0, 0,
+		1, 1,
+		graphHandle,
+		color
+	);
+}
+
+void DrawRhombusAnimation(float t, Vector2f center, float radius, float length, unsigned int color, int graphHandle) {
+	const int pointNum = 10;
+	Vector2f point[pointNum] = { 0.0f };
+
+	point[0] = { center.x, center.y - radius };
+	point[1] = { center.x, center.y - radius - length };
+
+	const int rangeNum = 4;
+	float range[rangeNum] = { 0.0f };
+
+	for (int i = 0; i < rangeNum; i++) {
+		range[i] = (t * 4) - i;
+	}
+
+	/// --- 更新処理 --- ///
+	for (int i = 0; i < rangeNum; i++) {
+		if (range[i] >= 1.0f) {
+			range[i] = 1.0f;
+		}
+	}
+
+	if (range[0] >= 0.0f) {
+		point[2] = { (1.0f - range[0]) * point[0].x + range[0] * (center.x - radius), (1.0f - range[0]) * point[0].y + range[0] * (center.y) }; // p3
+		point[3] = { (1.0f - range[0]) * point[1].x + range[0] * (center.x - radius - length), (1.0f - range[0]) * point[1].y + range[0] * (center.y) }; // p4
+	}
+
+	if (range[1] >= 0.0f) {
+		point[4] = { (1.0f - range[1]) * point[2].x + range[1] * (center.x), (1.0f - range[1]) * point[2].y + range[1] * (center.y + radius) }; // p5
+		point[5] = { (1.0f - range[1]) * point[3].x + range[1] * (center.x), (1.0f - range[1]) * point[3].y + range[1] * (center.y + radius + length) }; // p6
+	}
+
+	if (range[2] >= 0.0f) {
+		point[6] = { (1.0f - range[2]) * point[4].x + range[2] * (center.x + radius), (1.0f - range[2]) * point[4].y + range[2] * (center.y) }; // p7
+		point[7] = { (1.0f - range[2]) * point[5].x + range[2] * (center.x + radius + length), (1.0f - range[2]) * point[5].y + range[2] * (center.y) }; // p8
+	}
+
+	if (range[3] >= 0.0f) {
+		point[8] = { (1.0f - range[3]) * point[6].x + range[3] * (center.x), (1.0f - range[3]) * point[6].y + range[3] * (center.y - radius) }; // p1
+		point[9] = { (1.0f - range[3]) * point[7].x + range[3] * (center.x), (1.0f - range[3]) * point[7].y + range[3] * (center.y - radius - length) }; // p2
+	}
+
+	/// --- 描画処理 --- ///
+	if (range[0] >= 0.0f) {
+		Novice::DrawQuad(
+			static_cast<int>(point[0].x), static_cast<int>(point[0].y),
+			static_cast<int>(point[1].x), static_cast<int>(point[1].y),
+			static_cast<int>(point[2].x), static_cast<int>(point[2].y),
+			static_cast<int>(point[3].x), static_cast<int>(point[3].y),
+			0, 0,
+			1, 1,
+			graphHandle,
+			color
+		);
+	}
+
+	if (range[1] >= 0.0f) {
+		Novice::DrawQuad(
+			static_cast<int>(point[2].x), static_cast<int>(point[2].y),
+			static_cast<int>(point[3].x), static_cast<int>(point[3].y),
+			static_cast<int>(point[4].x), static_cast<int>(point[4].y),
+			static_cast<int>(point[5].x), static_cast<int>(point[5].y),
+			0, 0,
+			1, 1,
+			graphHandle,
+			color
+		);
+	}
+
+	if (range[2] >= 0.0f) {
+		Novice::DrawQuad(
+			static_cast<int>(point[4].x), static_cast<int>(point[4].y),
+			static_cast<int>(point[5].x), static_cast<int>(point[5].y),
+			static_cast<int>(point[6].x), static_cast<int>(point[6].y),
+			static_cast<int>(point[7].x), static_cast<int>(point[7].y),
+			0, 0,
+			1, 1,
+			graphHandle,
+			color
+		);
+	}
+
+	if (range[3] >= 0.0f) {
+		Novice::DrawQuad(
+			static_cast<int>(point[6].x), static_cast<int>(point[6].y),
+			static_cast<int>(point[7].x), static_cast<int>(point[7].y),
+			static_cast<int>(point[8].x), static_cast<int>(point[8].y),
+			static_cast<int>(point[9].x), static_cast<int>(point[9].y),
+			0, 0,
+			1, 1,
+			graphHandle,
+			color
+		);
+	}
+}

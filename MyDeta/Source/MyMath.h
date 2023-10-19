@@ -1,4 +1,6 @@
 ﻿#pragma once
+#include <Novice.h>
+/*==================================*/
 #define _USE_MATH_DEFINES
 #include <math.h>
 /*==================================*/
@@ -58,3 +60,9 @@ float Clamp(float t, float start, float end);
 /// <returns></returns>
 bool CheckCollisionCircles(const Vector2 <float>& centerA, float radiusA, const Vector2 <float>& centerB, float radiusB);
 
+/* ---------------------------------
+ DrawFunction
+---------------------------------- */
+void DrawRhombus(Vector2f center, float radius, float length, unsigned int color, int graphHandle);
+
+void DrawRhombusAnimation(float t, Vector2f center, float radius, float length, unsigned int color, int graphHandle);
