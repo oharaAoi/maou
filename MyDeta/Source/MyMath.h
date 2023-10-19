@@ -22,6 +22,10 @@ int Rand(int min, int max);
 /* --- blinking(点滅) --- */
 void Blinking(unsigned int& color);
 
+float Lerp(float t, float start, float end);
+
+float DivideParameter(float t, int subdivitionNum, int i);
+
 /* ---------------------------------
  Math Function
 ---------------------------------- */

@@ -38,6 +38,21 @@ void Blinking(unsigned int& color) {
 	}
 }
 
+float Lerp(float t, float start, float end) {
+	if (t < 0.0f) {
+		t = 0.0f;
+
+	} else if (t > 1.0f) {
+		t = 1.0f;
+	}
+
+	return (1.0f - t) * start + t * end;
+}
+
+float DivideParameter(float t, int subdivitionNum, int i) {
+	return (t - (static_cast<float>(i) / (subdivitionNum + 1))) * subdivitionNum;
+}
+
 /* ---------------------------------
  Math Function
 ---------------------------------- */
