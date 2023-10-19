@@ -28,6 +28,8 @@ float Lerp(float t, float start, float end);
 
 float DivideParameter(float t, int subdivitionNum, int i);
 
+unsigned int ShiftColor(float t, unsigned int beforeColor, unsigned int afterColor);
+
 /* ---------------------------------
  Math Function
 ---------------------------------- */
