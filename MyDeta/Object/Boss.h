@@ -38,6 +38,8 @@ private:
 	//インスタンス
 	Coordinate* cie_ = Coordinate::GetInstance();
 
+	int white1x1GH;
+
 public:
 
 	Boss();

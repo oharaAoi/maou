@@ -29,6 +29,8 @@ enum WindowStrength {
 class Player {
 private:
 
+	int white1x1GH;
+
 	//==========================================
 	Vector2 <float>pos_; // world座標基準
 	Vector2 <float>rangePos_;
@@ -43,6 +45,7 @@ private:
 	float theta_;
 
 	int hp_;
+	float overHeat_;
 
 	Vector2<float> windVolume_;
 

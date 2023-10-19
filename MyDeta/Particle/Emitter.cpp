@@ -46,7 +46,7 @@ void Emitter::Draw()
 
 void Emitter::Emit(int centerX, int centerY, int count)
 {
-	// パーティクルを生成する処理を1フレームで12回行う
+	// パーティクルを生成する処理を1フレームで指定回数行う
 
 	for (int i = 0; i < count; i++) {
 		float particleX = static_cast<float>(Random(centerX - rangeX_, centerX + rangeX_));

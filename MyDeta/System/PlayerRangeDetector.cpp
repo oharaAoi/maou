@@ -1,7 +1,7 @@
 ﻿#include "PlayerRangeDetector.h"
 
 PlayerRangeDetector::PlayerRangeDetector() {
-
+	Init();
 }
 
 void PlayerRangeDetector::Init() {

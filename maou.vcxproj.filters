@@ -110,8 +110,11 @@
     <ClCompile Include="MyDeta\SceneChange\BoxTransition.cpp">
       <Filter>KamataEngine</Filter>
     </ClCompile>
-    <ClCompile Include="MyDeta\System\CollisionManager.cpp">
-      <Filter>MyDeta\System</Filter>
+    <ClCompile Include="PlayerDeadParticle.cpp">
+      <Filter>MyDeta\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerDeadEmitter.cpp">
+      <Filter>MyDeta\Particle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -247,5 +250,11 @@
       <Filter>MyDeta\Particle</Filter>
     </ClInclude>
     <ClInclude Include="MyDeta\SceneChange\BoxTransition.h" />
+    <ClInclude Include="PlayerDeadParticle.h">
+      <Filter>MyDeta\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerDeadEmitter.h">
+      <Filter>MyDeta\Particle</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
