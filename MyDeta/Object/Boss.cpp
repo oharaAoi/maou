@@ -12,7 +12,7 @@ void Boss::Init() {
 
 	color_ = 0xffffffff;
 
-	hp_ = 25.0f;
+	hp_ = 40.0f;
 
 	isAlive_ = true;
 

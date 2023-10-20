@@ -255,16 +255,18 @@ void BossBullet::BulletShotChange(Barrage type) {
 
 //爆発する弾の近くの弾を誘爆させる
 void BossBullet::ExplodeBullet(int num, Emitter& emitter) {
-	for (int i = 0; i < kBulletMax_; i++) {
-		if (object_[i].isShot) {
-			b2bLength_ = CheckLength(object_[i].pos, object_[num].pos);
+	for (int i = 0; i < kBulletMax_ / 2; i++) {
+		if (i != num) {
+			if (object_[i].isShot) {
+				b2bLength_ = CheckLength(object_[i].pos, object_[num].pos);
 
-			//消す処理(エフェクトとかの処理もここでするかも)
-			if (explodeRadius_ > b2bLength_) {
+				//消す処理(エフェクトとかの処理もここでするかも)
+				if (explodeRadius_ > b2bLength_) {
 
-				emitter.Emit(static_cast<int>(object_[i].pos.x), static_cast<int>(object_[i].pos.y), 6);
+					emitter.Emit(static_cast<int>(object_[i].pos.x), static_cast<int>(object_[i].pos.y), 6);
 
-				OutOfScreenInit(i);
+					OutOfScreenInit(i);
+				}
 			}
 		}
 	}
@@ -429,11 +431,11 @@ void BossBullet::Update(Vector2<float> bossPos, Player& player, Stage stage, Emi
 				object_[i].vanishCount++;
 
 				//点滅の処理
-				if (object_[i].vanishCount >= 450) {
+				if (object_[i].vanishCount >= 350) {
 					Blinking(object_[i].color);
 				}
 
-				if (object_[i].vanishCount >= 500) {
+				if (object_[i].vanishCount >= 400) {
 					OutOfScreenInit(i);
 					object_[i].vanishCount = 0;
 				}
@@ -443,12 +445,12 @@ void BossBullet::Update(Vector2<float> bossPos, Player& player, Stage stage, Emi
 			if (object_[i].bulletType == EXPLODE) {
 				object_[i].explodeCount++;
 
-				if (object_[i].explodeCount >= 45) {
+				if (object_[i].explodeCount >= 350) {
 					Blinking(object_[i].color);
 				}
 
 				//爆発する範囲内のものをすべて初期化
-				if (object_[i].explodeCount >= 50) {
+				if (object_[i].explodeCount >= 400) {
 					ExplodeBullet(i, emitter);
 					object_[i].explodeCount = 0;
 				}
@@ -540,7 +542,7 @@ void BossBullet::Draw() {
 
 		Novice::ScreenPrintf(10, 40, "randTypeMax_:%d", randTypeMax_);
 
-		/*Novice::ScreenPrintf(200 + ((i / 10) * 75), 10 + ((i % 10) * 20), ":%d", object_[i].isShot);*/
+		Novice::ScreenPrintf(200 + ((i / 10) * 75), 10 + ((i % 10) * 20), ":%d", object_[i].isShot);
 
 		Novice::ScreenPrintf(10, 60, "coolTimeRandamLimit_ :%d", coolTimeRandamLimit_);
 		Novice::ScreenPrintf(10, 80, "coolTimeChaseLimit_ :%d", coolTimeChaseLimit_);
