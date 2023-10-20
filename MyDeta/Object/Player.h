@@ -49,17 +49,6 @@ private:
 	int hp_;
 	float overHeat_;
 
-	//==========================================
-	//風の量など
-	static const int kMaxWind = 24;
-
-	struct Base {
-		Vector2f stLinePos;
-		Vector2f endLinePos;
-	};
-
-	Base wind[kMaxWind];
-
 	Vector2<float> windVolume_;
 
 	WindowStrength windowStrength_;
