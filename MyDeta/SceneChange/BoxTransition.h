@@ -24,8 +24,6 @@ private:
 	Sizef maxSize_;
 	Base object_[kSubdivisionHeight_ + 1][kSubdivisionWidth_ + 1];
 
-
-
 public:
 
 	// constructor & destructor

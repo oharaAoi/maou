@@ -13,6 +13,7 @@ class Timer {
 private:
 
 	int font_;
+	Sizef fontSize_;
 
 	float timer_;
 
