@@ -126,20 +126,43 @@ void Boss::Draw() {
 
 	switch (type_) {
 		case WAVE1:
+				DrawRhombus(
+					{ kWindowWidth / 2.0f, kWindowHeight / 2.0f },
+					74.0f + 30.0f, 10.0f,
+					0xd8433940,
+					white1x1GH
+				);
+
+				DrawRhombus(
+					{ kWindowWidth / 2.0f, kWindowHeight / 2.0f },
+					74.0f + 30.0f + 20.0f, 10.0f,
+					0xd8433920,
+					white1x1GH
+				);
+
+			// main HP
 			DrawRhombusAnimation(
 				hp_ / 40.0f,
 				{kWindowWidth / 2.0f, kWindowHeight / 2.0f},
-				75.0f, 15.0f,
+				74.0f, 20.0f,
 				0xd84339FF,
 				white1x1GH
 			);
 			break;
 
 		case WAVE2:
+			DrawRhombus(
+				{ kWindowWidth / 2.0f, kWindowHeight / 2.0f },
+				74.0f + 30.0f * 1, 10.0f,
+				0xd8433940,
+				white1x1GH
+			);
+
+			// main HP
 			DrawRhombusAnimation(
 				hp_ / 60.0f,
 				{ kWindowWidth / 2.0f, kWindowHeight / 2.0f },
-				75.0f, 15.0f,
+				74.0f, 20.0f,
 				0xd84339FF,
 				white1x1GH
 			);
@@ -149,7 +172,7 @@ void Boss::Draw() {
 			DrawRhombusAnimation(
 				hp_ / 80.0f,
 				{ kWindowWidth / 2.0f, kWindowHeight / 2.0f },
-				75.0f, 15.0f,
+				74.0f, 20.0f,
 				0xd84339FF,
 				white1x1GH
 			);
