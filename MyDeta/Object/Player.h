@@ -32,6 +32,7 @@ private:
 	int white1x1GH;
 
 	//==========================================
+	//プレイヤーの座標や半径
 	Vector2 <float>pos_; // world座標基準
 	Vector2 <float>rangePos_;
 
@@ -41,11 +42,23 @@ private:
 	Size <float>size_; // world座標基準
 
 	//==========================================
+	//角度やhpなどのステータス
 	float radianSpeed_;
 	float theta_;
 
 	int hp_;
 	float overHeat_;
+
+	//==========================================
+	//風の量など
+	static const int kMaxWind = 24;
+
+	struct Base {
+		Vector2f stLinePos;
+		Vector2f endLinePos;
+	};
+
+	Base wind[kMaxWind];
 
 	Vector2<float> windVolume_;
 

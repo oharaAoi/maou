@@ -67,7 +67,7 @@ void BossBullet::Init() {
 	coolTimeChaseLimit_ = 30;
 
 	//==============================
-	barrageType_ = RANDAM;
+	barrageType_ = NONE;
 
 	explodeRadius_ = 60.0f;
 
