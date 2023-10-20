@@ -41,5 +41,7 @@ void Timer::DrawTimer(float time) {
 		second %= static_cast<int>((std::pow(10.0f, 2.0f) / std::pow(10.0f, static_cast<int>(di))));
 	}
 
-	
+	for (int di = 0; di < 3; di++) {
+
+	}
 }
