@@ -125,6 +125,12 @@
     <ClCompile Include="MyDeta\System\Timer.cpp">
       <Filter>MyDeta\System</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerWindParticle.cpp">
+      <Filter>MyDeta\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerWindEmitter.cpp">
+      <Filter>MyDeta\Particle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -269,5 +275,11 @@
     </ClInclude>
     <ClInclude Include="PlayerDeadEmitter.h" />
     <ClInclude Include="PlayerDeadParticle.h" />
+    <ClInclude Include="PlayerWindParticle.h">
+      <Filter>MyDeta\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerWindEmitter.h">
+      <Filter>MyDeta\Particle</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

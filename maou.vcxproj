@@ -139,6 +139,8 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClCompile Include="MyDeta\System\CollisionManager.cpp" />
     <ClCompile Include="PlayerDeadEmitter.cpp" />
     <ClCompile Include="PlayerDeadParticle.cpp" />
+    <ClCompile Include="PlayerWindEmitter.cpp" />
+    <ClCompile Include="PlayerWindParticle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BossDeadParticle.h" />
@@ -193,6 +195,8 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClInclude Include="MyDeta\System\CollisionManager.h" />
     <ClInclude Include="PlayerDeadEmitter.h" />
     <ClInclude Include="PlayerDeadParticle.h" />
+    <ClInclude Include="PlayerWindEmitter.h" />
+    <ClInclude Include="PlayerWindParticle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

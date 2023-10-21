@@ -24,6 +24,7 @@
 #include "MyDeta/Particle/Emitter.h"
 #include "MyDeta/Particle/Emitter2.h"
 #include "BossDeadParticle.h"
+#include "PlayerWindEmitter.h"
 
 // MySceneChange //
 #include "MyDeta/SceneChange/BoxTransition.h"
@@ -54,6 +55,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	// エミッターのインスタンスを作成
 	Emitter emitter;
+
+	PlayerWindEmitter playerWindEmitter;
 
 	//========================================================
 	//System
@@ -215,6 +218,24 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			emitter.Update(); //エミッターの更新処理
 
+			// プレイヤーの状態によって風エフェクトの消滅までの時間、速さ、発生間隔を変更
+			switch(player_.GetWindowStrength()){
+			case OFF:
+				playerWindEmitter.Update(player_.GetPos(), boss_.GetPos(), 0,0,1000);
+
+				break;
+
+			case WEAK:
+				playerWindEmitter.Update(player_.GetPos(), boss_.GetPos(), 20,6,7);
+
+				break;
+
+			case STRONG:
+				playerWindEmitter.Update(player_.GetPos(), boss_.GetPos(), 20,12,4);
+
+				break;
+			}
+
 			//========================================================================
 
 			//弾の更新
@@ -259,6 +280,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			player_.Draw();
 			range_.Draw();
 			emitter.Draw(); // エミッターの描画処理を呼ぶ
+			playerWindEmitter.Draw(); // プレイヤーの風の描画処理
 
 
 			bossBullet_.Draw();

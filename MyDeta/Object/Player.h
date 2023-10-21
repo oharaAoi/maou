@@ -88,5 +88,7 @@ public:
 	void SetWindVolume(Vector2<float> valume) { windVolume_ = valume; }
 	Vector2<float> GetWindVolume() { return windVolume_; }
 
+	// windwStrength
+	WindowStrength GetWindowStrength() { return windowStrength_; }
 };
 
