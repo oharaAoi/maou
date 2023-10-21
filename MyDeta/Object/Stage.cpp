@@ -1,6 +1,7 @@
 ﻿#include "Stage.h"
 
 Stage::Stage() {
+	Init();
 }
 
 void Stage::Init() {

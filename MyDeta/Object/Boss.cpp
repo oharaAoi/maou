@@ -2,6 +2,8 @@
 
 Boss::Boss() {
 	white1x1GH = Novice::LoadTexture("./NoviceResources/white1x1.png");
+
+	Init();
 }
 
 void Boss::Init() {

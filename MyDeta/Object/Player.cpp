@@ -2,6 +2,8 @@
 
 Player::Player() {
 	white1x1GH = Novice::LoadTexture("./NoviceResources/white1x1.png");
+
+	Init();
 }
 
 Player::~Player() {

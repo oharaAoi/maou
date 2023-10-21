@@ -3,6 +3,7 @@
 Coordinate::Coordinate() {
 	/*Init();*/
 }
+
 const Vector2 <float> Coordinate::origine_ = { kWindowWidth / 2, kWindowHeight / 2 };
 
 Coordinate::~Coordinate() {

@@ -1,6 +1,7 @@
 ﻿#include "BossBullet.h"
 
 BossBullet::BossBullet() {
+	Init();
 }
 
 BossBullet::~BossBullet() {

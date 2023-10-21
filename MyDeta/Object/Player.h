@@ -32,6 +32,7 @@ private:
 	int white1x1GH;
 
 	//==========================================
+	//プレイヤーの座標や半径
 	Vector2 <float>pos_; // world座標基準
 	Vector2 <float>rangePos_;
 
@@ -41,6 +42,7 @@ private:
 	Size <float>size_; // world座標基準
 
 	//==========================================
+	//角度やhpなどのステータス
 	float radianSpeed_;
 	float theta_;
 
@@ -65,6 +67,10 @@ public:
 	void Update(char* keys, char* preKeys, Stage& stage_);
 	void Draw();
 
+
+	// default method - overload
+	void Draw(Vector2f scroll, float zoom); // -> use tutorial
+
 	// accessor
 	// center_
 	Vector2 <float>GetPos() { return pos_; }
@@ -86,5 +92,7 @@ public:
 	void SetWindVolume(Vector2<float> valume) { windVolume_ = valume; }
 	Vector2<float> GetWindVolume() { return windVolume_; }
 
+	// windwStrength
+	WindowStrength GetWindowStrength() { return windowStrength_; }
 };
 

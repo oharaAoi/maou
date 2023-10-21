@@ -24,6 +24,7 @@
 #include "MyDeta/Particle/Emitter.h"
 #include "MyDeta/Particle/Emitter2.h"
 #include "BossDeadParticle.h"
+#include "PlayerWindEmitter.h"
 
 // MySceneChange //
 #include "MyDeta/SceneChange/BoxTransition.h"
@@ -57,6 +58,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	// エミッターのインスタンスを作成
 	Emitter emitter;
+
+	PlayerWindEmitter playerWindEmitter;
 
 	//========================================================
 	//System
@@ -154,7 +157,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓更新処理ここから
 			/// 
 
-			if (keys[DIK_SPACE] && !preKeys[DIK_SPACE]) {
+			if (tutorial.GetIsEndTutorial()) {
 				isChangeScene = true;
 			}
 
@@ -164,13 +167,19 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				if (sceneT == 120.0f) {
 					scene = GAME;
 					isChangeScene = false;
+
+					// -> GAME
+					player_.Init();
+					boss_.Init();
+					bossBullet_.Init();
+					collision.Init();
 				}
 
 			} else {
 				if (sceneT > 0.0f) { sceneT--; }
 			}
 
-			tutorial.Update();
+			tutorial.Update(keys, preKeys, player_, stage_, boss_, bossBullet_, emitter, collision);
 			boxTransition.Update(sceneT);
 
 			///
@@ -181,7 +190,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓描画処理ここから
 			/// 
 
-			tutorial.Draw();
+			tutorial.Draw(player_, stage_, boss_, bossBullet_);
 			boxTransition.Draw();
 			Novice::ScreenPrintf(10, 10, "scene:%d", scene);
 
@@ -221,6 +230,24 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			boss_.BossHpDecrece(keys, preKeys);
 
 			emitter.Update(); //エミッターの更新処理
+
+			// プレイヤーの状態によって風エフェクトの消滅までの時間、速さ、発生間隔を変更
+			switch(player_.GetWindowStrength()){
+			case OFF:
+				playerWindEmitter.Update(player_.GetPos(), boss_.GetPos(), 0,0,1000);
+
+				break;
+
+			case WEAK:
+				playerWindEmitter.Update(player_.GetPos(), boss_.GetPos(), 20,6,7);
+
+				break;
+
+			case STRONG:
+				playerWindEmitter.Update(player_.GetPos(), boss_.GetPos(), 20,12,4);
+
+				break;
+			}
 
 			//========================================================================
 
@@ -266,6 +293,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			player_.Draw();
 			range_.Draw();
 			emitter.Draw(); // エミッターの描画処理を呼ぶ
+			playerWindEmitter.Draw(); // プレイヤーの風の描画処理
 
 
 			bossBullet_.Draw();
