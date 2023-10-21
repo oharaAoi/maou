@@ -32,6 +32,9 @@
     <Filter Include="MyDeta\SceneChange">
       <UniqueIdentifier>{d0c23af1-bafa-4043-b71e-3b4d5962f5d7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MyDeta\Scene">
+      <UniqueIdentifier>{bf09262e-e378-4466-82d8-7c9ac6b4fe51}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\DirectXCommon.cpp">
@@ -124,6 +127,9 @@
     </ClCompile>
     <ClCompile Include="MyDeta\System\Timer.cpp">
       <Filter>MyDeta\System</Filter>
+    </ClCompile>
+    <ClCompile Include="MyDeta\Scene\Tutorial.cpp">
+      <Filter>MyDeta\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -269,5 +275,8 @@
     </ClInclude>
     <ClInclude Include="PlayerDeadEmitter.h" />
     <ClInclude Include="PlayerDeadParticle.h" />
+    <ClInclude Include="MyDeta\Scene\Tutorial.h">
+      <Filter>MyDeta\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -28,6 +28,9 @@
 // MySceneChange //
 #include "MyDeta/SceneChange/BoxTransition.h"
 
+// MyScene //
+#include "MyDeta/Scene/Tutorial.h"
+
 //シーン
 enum GameScene {
 	TITLE,
@@ -87,6 +90,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	// game over
 	bool isContinue = false;
 	float gameoverT = 0.0f;
+
+	Tutorial tutorial;
 
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
@@ -165,6 +170,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				if (sceneT > 0.0f) { sceneT--; }
 			}
 
+			tutorial.Update();
 			boxTransition.Update(sceneT);
 
 			///
@@ -175,6 +181,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓描画処理ここから
 			/// 
 
+			tutorial.Draw();
 			boxTransition.Draw();
 			Novice::ScreenPrintf(10, 10, "scene:%d", scene);
 
