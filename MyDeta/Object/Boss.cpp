@@ -10,7 +10,7 @@ void Boss::Init() {
 	pos_.x = 0;
 	pos_.y = 0;
 
-	radius_ = 50.0f;
+	radius_ = 64.0f;
 
 	color_ = 0xffffffff;
 
@@ -24,7 +24,24 @@ void Boss::Init() {
 
 	type_ = WAVE1;
 
-	barrageChange_ = false;;
+	barrageChange_ = false;
+
+	//==============================
+	//描画に使う
+	gh_ = Novice::LoadTexture("./images/Resource/Boss/boss.png");
+
+	drawWidth_ = 128.0f;
+	drawHeight_ = 128.0f;
+
+	drawLt_.x = 0.0f;
+	drawLt_.y = 0.0f;
+
+	spriteSize_.x = 640.0f;
+	spriteSize_.y = 128.0f;
+
+	drawCount_ = 0;
+	drawCountLimit_ = 10;
+
 }
 
 void Boss::BulletSpeedChange(BossBullet& bossBullet_) {
@@ -116,6 +133,16 @@ void Boss::UpDate(BossBullet& bossBullet_) {
 			BulletSpeedChange(bossBullet_);
 		}
 	}
+
+	frameCount_++;
+	if (frameCount_ > drawCountLimit_) {
+		drawLt_.x += 128.0f;
+		frameCount_ = 0;
+
+		if (drawLt_.x >= spriteSize_.x) {
+			drawLt_.x = 0;
+		}
+	}
 }
 
 void Boss::Draw() {
@@ -182,14 +209,30 @@ void Boss::Draw() {
 	}
 
 	if (isAlive_) {
-		Novice::DrawEllipse(static_cast<int>(pos_.x + cie_->GetOrigine().x),
+		/*Novice::DrawEllipse(static_cast<int>(pos_.x + cie_->GetOrigine().x),
 			static_cast<int>(pos_.y + cie_->GetOrigine().y),
 			static_cast<int>(radius_),
 			static_cast<int>(radius_),
 			0.0f,
 			color_,
-			kFillModeSolid);
+			kFillModeSolid);*/
+
+		Novice::DrawSpriteRect(
+			static_cast<int>(pos_.x - radius_ + cie_->GetOrigine().x),
+			static_cast<int>(pos_.y - radius_ + cie_->GetOrigine().y),
+			static_cast<int>(drawLt_.x),
+			static_cast<int>(drawLt_.y),
+			static_cast<int>(drawWidth_),
+			static_cast<int>(drawHeight_),
+			gh_,
+			spriteSize_.y / spriteSize_.x,
+			1.0f,
+			0.0f,
+			0xffffffff
+		);
 	}
+
+
 
 	Novice::ScreenPrintf(600, 10, "Boss.type:%d", type_);
 	Novice::ScreenPrintf(600, 40, "Boss.hp:%f", hp_);

@@ -35,6 +35,20 @@ private:
 	BossType type_;
 	bool barrageChange_;
 
+	//==============================
+	//描画に使う
+	int gh_;
+
+	float drawWidth_;
+	float drawHeight_;
+
+	Vector2f spriteSize_;
+
+	Vector2f drawLt_;
+
+	int drawCount_;
+	int drawCountLimit_;
+
 	//インスタンス
 	Coordinate* cie_ = Coordinate::GetInstance();
 

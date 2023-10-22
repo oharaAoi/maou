@@ -287,6 +287,4 @@ void Player::Draw() { /// 描画処理
 
 		break;
 	}
-
-
 }
