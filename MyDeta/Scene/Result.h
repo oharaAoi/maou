@@ -5,6 +5,7 @@
 #include "MyDeta/Source/Environment.h"
 #include "MyDeta/Source/MyStruct.h"
 #include "MyDeta/Source/MyMath.h"
+#include "MyDeta/Source/Easing.h"
 
 class Result {
 private:
