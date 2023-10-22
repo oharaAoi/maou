@@ -1,14 +1,33 @@
-#pragma once
+﻿#pragma once
 #include <Novice.h>
+
+#include "MyDeta/Source/MyMath.h"
+#include "MyDeta/Source/Environment.h"
 
 class GameOver
 {
 private:
 
-	int bgGh_;
+	static const int kSelectMax = 2;
 
-	int bgWidth_;
-	int bgHeight_;
+	struct Base {
+		Vector2f pos;
+		float width;
+		float height;
+		Vector2f size;
+		int gh;
+	};
+
+	Base object_[kSelectMax];
+
+	bool goToGame_;
+
+	bool changeToGame_;
+	bool changeToTitle_;
+
+	//==========================================
+	//背景
+	int bgGh_;
 
 public:
 
@@ -16,9 +35,13 @@ public:
 
 	void Init();
 
-	void Update();
+	void Update(char* keys, char* preKeys);
 
 	void Draw();
+
+	//アクセッサ
+	bool GetChangeToGame() { return changeToGame_; }
+	bool GetChangeToTitle() { return changeToTitle_; }
 
 };
 

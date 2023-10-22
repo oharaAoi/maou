@@ -56,7 +56,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	char keys[256] = { 0 };
 	char preKeys[256] = { 0 };
 
-	GameScene scene = TITLE;
+	GameScene scene = GAME_OVER;
 
 	// エミッターのインスタンスを作成
 	Emitter emitter;
@@ -95,8 +95,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	// game over
 	GameOver gameOver_;
 	gameOver_.Init();
-	bool isContinue = false;
-	float gameoverT = 0.0f;
+	/*bool isContinue = false;
+	float gameoverT = 0.0f;*/
 
 	Tutorial tutorial;
 
@@ -333,14 +333,29 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓更新処理ここから
 			/// 
 
-			if (!isContinue) {
-				if (gameoverT < 120.0f) { gameoverT++; }
-
-			} else {
-				if (gameoverT > 0.0f) { gameoverT--; }
-			}
+			gameOver_.Update(keys, preKeys);
 
 			gameOver_.Draw();
+
+			if (gameOver_.GetChangeToGame() == true) {
+				scene = GAME;
+				range_.Init();
+				boss_.Init();
+				bossBullet_.Init();
+				stage_.Init();
+				player_.Init();
+				gameOver_.Init();
+
+
+			} else if(gameOver_.GetChangeToTitle() == true){
+				scene = TITLE;
+				range_.Init();
+				boss_.Init();
+				bossBullet_.Init();
+				stage_.Init();
+				player_.Init();
+				gameOver_.Init();
+			}
 
 			///
 			/// ↑更新処理ここまで

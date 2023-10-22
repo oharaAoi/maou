@@ -131,9 +131,6 @@
     <ClCompile Include="MyDeta\Scene\Tutorial.cpp">
       <Filter>MyDeta\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="LoadFile.cpp">
-      <Filter>KamataEngine</Filter>
-    </ClCompile>
     <ClCompile Include="Matrix.cpp">
       <Filter>KamataEngine</Filter>
     </ClCompile>
@@ -142,6 +139,9 @@
     </ClCompile>
     <ClCompile Include="PlayerWindParticle.cpp">
       <Filter>KamataEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadFile.cpp">
+      <Filter>MyDeta\System</Filter>
     </ClCompile>
     <ClCompile Include="MyDeta\Scene\GameOver.cpp">
       <Filter>MyDeta\Scene</Filter>
@@ -293,10 +293,12 @@
     <ClInclude Include="MyDeta\Scene\Tutorial.h">
       <Filter>MyDeta\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="LoadFile.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="PlayerWindEmitter.h" />
     <ClInclude Include="PlayerWindParticle.h" />
+    <ClInclude Include="LoadFile.h">
+      <Filter>MyDeta\System</Filter>
+    </ClInclude>
     <ClInclude Include="MyDeta\Scene\GameOver.h">
       <Filter>MyDeta\Scene</Filter>
     </ClInclude>
