@@ -353,7 +353,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓更新処理ここから
 			/// 
 
-
+			if (keys[DIK_SPACE], !preKeys[DIK_SPACE]) {
+				scene = GameScene::TITLE;
+			}
 
 			///
 			/// ↑更新処理ここまで
