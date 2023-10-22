@@ -38,6 +38,7 @@ void LoadFile::Init() {
 	}
 }
 
+//自分のタイムをcountに入れる
 void LoadFile::WriteFile(int count) {
 	json scoreData;
 
@@ -65,4 +66,22 @@ void LoadFile::WriteFile(int count) {
 	} else {
 		std::cerr << "ファイルを開けませんでした。" << std::endl;
 	}
+}
+
+//過去のタイムを読み込み配列に入れる
+void LoadFile::LoadJsonFile(int* time) {
+	json scoreData;
+
+	std::ifstream inputFile(filePath);
+	if (inputFile.is_open()) {
+		inputFile >> scoreData;
+		inputFile.close();
+	}
+
+	time[0] = scoreData[hiScore]["time"];
+
+	time[1] = scoreData[secondScore]["time"];
+
+	time[2] = scoreData[thirdScore]["time"];
+
 }

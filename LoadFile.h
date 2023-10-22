@@ -23,5 +23,7 @@ public:
 
 	void WriteFile(int count);
 
+	void LoadJsonFile(int* time);
+
 };
 
