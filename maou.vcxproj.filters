@@ -137,6 +137,15 @@
     <ClCompile Include="PlayerWindParticle.cpp">
       <Filter>KamataEngine</Filter>
     </ClCompile>
+    <ClCompile Include="LoadFile.cpp">
+      <Filter>KamataEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix.cpp">
+      <Filter>KamataEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="MyDeta\Scene\Result.cpp">
+      <Filter>MyDeta\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -288,6 +297,11 @@
     <ClInclude Include="PlayerWindParticle.h" />
     <ClInclude Include="MyDeta\Source\JapaneseAscii.h">
       <Filter>MyDeta\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadFile.h" />
+    <ClInclude Include="Matrix.h" />
+    <ClInclude Include="MyDeta\Scene\Result.h">
+      <Filter>MyDeta\Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
