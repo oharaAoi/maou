@@ -27,6 +27,10 @@ enum WindowStrength {
 	STRONG
 };
 
+enum Restrictions {
+	MOVE_ONLY,
+};
+
 class Player {
 private:
 
@@ -111,7 +115,7 @@ public:
 
 
 	// default method - overload
-	void Draw(Vector2f scroll, float zoom); // -> use tutorial
+	void Update(char* keys, Stage& stage_, Restrictions restriction); // -> use tutorial
 
 	// accessor
 	// center_

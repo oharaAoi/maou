@@ -364,3 +364,23 @@ void DrawWindow(const Vector2f& center, const Sizef& size, uint32_t color) {
 		kFillModeSolid
 	);
 }
+
+void DrawJapanese(const Vector2<int>& pos, const Sizef& size, int wordNum, short int* word, uint32_t color, int font) {
+	// Setting //
+	Size <int> fontSize = {24, 24};
+
+	// Draw //
+	for (int wi = 0; wi < wordNum; wi++) {
+		if (word[wi] < 0) { break; }
+
+		Novice::DrawSpriteRect(
+			pos.x + wi * static_cast<int>(size.width), pos.y,
+			(word[wi] & 0x0F) * fontSize.width, (word[wi] >> 4) * fontSize.height,
+			fontSize.width, fontSize.height,
+			font,
+			size.width / 120.0f, size.height / 264.0f,
+			0.0f,
+			color
+		);
+	}
+}

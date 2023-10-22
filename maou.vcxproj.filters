@@ -131,9 +131,6 @@
     <ClCompile Include="MyDeta\Scene\Tutorial.cpp">
       <Filter>MyDeta\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Matrix.cpp">
-      <Filter>KamataEngine</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerWindEmitter.cpp">
       <Filter>KamataEngine</Filter>
     </ClCompile>
@@ -141,9 +138,12 @@
       <Filter>KamataEngine</Filter>
     </ClCompile>
     <ClCompile Include="LoadFile.cpp">
-      <Filter>MyDeta\System</Filter>
+      <Filter>KamataEngine</Filter>
     </ClCompile>
-    <ClCompile Include="MyDeta\Scene\GameOver.cpp">
+    <ClCompile Include="Matrix.cpp">
+      <Filter>KamataEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="MyDeta\Scene\Result.cpp">
       <Filter>MyDeta\Scene</Filter>
     </ClCompile>
   </ItemGroup>
@@ -293,13 +293,14 @@
     <ClInclude Include="MyDeta\Scene\Tutorial.h">
       <Filter>MyDeta\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Matrix.h" />
     <ClInclude Include="PlayerWindEmitter.h" />
     <ClInclude Include="PlayerWindParticle.h" />
-    <ClInclude Include="LoadFile.h">
-      <Filter>MyDeta\System</Filter>
+    <ClInclude Include="MyDeta\Source\JapaneseAscii.h">
+      <Filter>MyDeta\Source</Filter>
     </ClInclude>
-    <ClInclude Include="MyDeta\Scene\GameOver.h">
+    <ClInclude Include="LoadFile.h" />
+    <ClInclude Include="Matrix.h" />
+    <ClInclude Include="MyDeta\Scene\Result.h">
       <Filter>MyDeta\Scene</Filter>
     </ClInclude>
   </ItemGroup>

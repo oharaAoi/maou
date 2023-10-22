@@ -3,7 +3,8 @@
 Timer::Timer() {
 	Init();
 
-	font_;
+	font_ = Novice::LoadTexture("./images/Resource/Font/numberFont.png");
+	fontSize_ = { 210.0f / 10.0f, 36.0f };
 }
 
 Timer::~Timer() {
@@ -25,10 +26,10 @@ void Timer::Draw() {
 		0xFAFAFAFF
 	);
 
-	DrawTimer(timer_);
+	DrawTimer({ 65.0f, 35.0f }, timer_);
 }
 
-void Timer::DrawTimer(float time) {
+void Timer::DrawTimer(Vector2f pos, float time) {
 	int timeArr[3] = { 0 };
 	int second = static_cast<int>(time) / 60;
 
@@ -42,6 +43,14 @@ void Timer::DrawTimer(float time) {
 	}
 
 	for (int di = 0; di < 3; di++) {
-
+		Novice::DrawSpriteRect(
+			static_cast<int>(pos.x + (di * fontSize_.width)), static_cast<int>(pos.y),
+			static_cast<int>(fontSize_.width * timeArr[di]), 0,
+			static_cast<int>(fontSize_.width), static_cast<int>(fontSize_.height),
+			font_,
+			fontSize_.width / (fontSize_.width * 10), 1.0f,
+			0.0f,
+			0xFAFAFAFF
+		);
 	}
 }

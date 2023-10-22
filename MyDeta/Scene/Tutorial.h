@@ -3,10 +3,12 @@
 
 // source //
 #include "MyDeta/Source/MyMath.h"
+#include "MyDeta/Source/JapaneseAscii.h"
 
 // system //
 #include "MyDeta/Object/Stage.h"
 #include "MyDeta/System/CollisionManager.h"
+#include "MyDeta/System/PlayerRangeDetector.h"
 
 // object //
 #include "MyDeta/Object/Player.h"
@@ -14,6 +16,7 @@
 
 // particle //
 #include "MyDeta/Particle/Emitter.h"
+#include "PlayerWindEmitter.h"
 
 enum Progress {
 	MOVE,
@@ -25,15 +28,16 @@ enum Progress {
 class Tutorial {
 private:
 
+	int japaneseFontGH_;
 	int white1x1GH_;
 
 	bool isEndTutorial_;
-	float pressFream_;
+	float pressFrame_;
 
 	Progress progress_;
-	float progressFream_;
+	float progressFrame_;
 
-	
+	int tutorialGH_[3];
 
 public:
 	
@@ -44,8 +48,8 @@ public:
 	// default method
 	void Init();
 	void Update(char* keys, char* preKeys, 
-		Player& player, Stage& stage, Boss& boss, BossBullet& bossBullet, Emitter& emitter, CollisionManager& collisionManager);
-	void Draw(Player player, Stage stage, Boss boss, BossBullet bossBullet);
+		Player& player, Stage& stage, Boss& boss, BossBullet& bossBullet, Emitter& emitter, CollisionManager& collisionManager, PlayerRangeDetector& playerRangeDetector, PlayerWindEmitter& playerWindEmitter);
+	void Draw(Player player, Stage stage, Boss boss, BossBullet bossBullet, PlayerWindEmitter playerWindEmitter);
 
 	// user method
 

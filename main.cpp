@@ -180,13 +180,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 					boss_.Init();
 					bossBullet_.Init();
 					collision.Init();
+					stage_.Init();
 				}
 
 			} else {
 				if (sceneT > 0.0f) { sceneT--; }
 			}
 
-			tutorial.Update(keys, preKeys, player_, stage_, boss_, bossBullet_, emitter, collision);
+			tutorial.Update(keys, preKeys, player_, stage_, boss_, bossBullet_, emitter, collision, range_, playerWindEmitter);
 			boxTransition.Update(sceneT);
 
 			///
@@ -197,7 +198,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓描画処理ここから
 			/// 
 
-			tutorial.Draw(player_, stage_, boss_, bossBullet_);
+			tutorial.Draw(player_, stage_, boss_, bossBullet_, playerWindEmitter);
 			boxTransition.Draw();
 			Novice::ScreenPrintf(10, 10, "scene:%d", scene);
 
@@ -258,14 +259,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			//========================================================================
 
-			//弾の更新
-			range_.Update(player_, bossBullet_);
 
 			//撃つ弾の種類を決める(デバック用)
 			bossBullet_.BulletShotSelect(keys, preKeys);
 
 			//弾を進める
 			bossBullet_.Update(boss_.GetPos(), player_, stage_, emitter);
+
+			//弾の更新
+			range_.Update(player_, bossBullet_);
 
 			//弾とプレイヤー
 			collision.CheckCollision(player_, bossBullet_);
@@ -377,6 +379,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓更新処理ここから
 			/// 
 
+			if (keys[DIK_SPACE] && !preKeys[DIK_SPACE]) {
+				scene = GameScene::TITLE;
+			}
+
 			///
 			/// ↑更新処理ここまで
 			/// 
@@ -384,6 +390,27 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			///
 			/// ↓描画処理ここから
 			/// 
+
+			boss_.Draw();
+			stage_.Draw();
+			player_.Draw();
+			range_.Draw();
+			emitter.Draw(); // エミッターの描画処理を呼ぶ
+			playerWindEmitter.Draw(); // プレイヤーの風の描画処理
+
+			Novice::DrawBox(
+				0, 0,
+				1280, 720,
+				0.0f,
+				0x00000080,
+				kFillModeSolid
+			);
+
+			DrawWindow(
+				{ kWindowWidth / 2.0f, kWindowHeight / 2.0f },
+				{ kWindowWidth - 100.0f, kWindowHeight - 100.0f },
+				0xFFFFFFFF
+			);
 
 			///
 			/// ↑描画処理ここまで
