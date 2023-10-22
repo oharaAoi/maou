@@ -31,6 +31,7 @@
 
 // MyScene //
 #include "MyDeta/Scene/Tutorial.h"
+#include "MyDeta/Scene/GameOver.h"
 #include "LoadFile.h"
 
 //シーン
@@ -92,6 +93,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	bool isChangeScene = false;
 
 	// game over
+	GameOver gameOver_;
+	gameOver_.Init();
 	bool isContinue = false;
 	float gameoverT = 0.0f;
 
@@ -236,19 +239,19 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			emitter.Update(); //エミッターの更新処理
 
 			// プレイヤーの状態によって風エフェクトの消滅までの時間、速さ、発生間隔を変更
-			switch(player_.GetWindowStrength()){
+			switch (player_.GetWindowStrength()) {
 			case OFF:
-				playerWindEmitter.Update(player_.GetPos(), boss_.GetPos(), 0,0,1000);
+				playerWindEmitter.Update(player_.GetPos(), boss_.GetPos(), 0, 0, 1000);
 
 				break;
 
 			case WEAK:
-				playerWindEmitter.Update(player_.GetPos(), boss_.GetPos(), 20,6,7);
+				playerWindEmitter.Update(player_.GetPos(), boss_.GetPos(), 20, 6, 7);
 
 				break;
 
 			case STRONG:
-				playerWindEmitter.Update(player_.GetPos(), boss_.GetPos(), 20,12,4);
+				playerWindEmitter.Update(player_.GetPos(), boss_.GetPos(), 20, 12, 4);
 
 				break;
 			}
@@ -274,11 +277,18 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			timer.Update();
 
-				//========================================================================
-				//3WAVE目にボスを倒していたらresultに移行
-				if (boss_.GetType() == WAVE3 && boss_.GetIsAlive() == false) {
-					scene = RESULT;
-				}
+			//========================================================================
+			//3WAVE目にボスを倒していたらresultに移行
+			if (boss_.GetType() == WAVE3 && boss_.GetIsAlive() == false) {
+				scene = RESULT;
+			}
+
+			//========================================================================
+			//playerが死んだらgameOverへ
+			if (player_.GetIsAlive() == false) {
+				scene = GAME_OVER;
+			}
+
 
 			if (keys[DIK_G]) {
 				scene = GAME_OVER;
@@ -330,7 +340,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				if (gameoverT > 0.0f) { gameoverT--; }
 			}
 
-
+			gameOver_.Draw();
 
 			///
 			/// ↑更新処理ここまで

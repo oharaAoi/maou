@@ -86,6 +86,10 @@ private:
 
 	int hp_;
 	float overHeat_;
+	bool isAlive_;
+
+	float blackOutCount_;
+	unsigned int blackOutColor_;
 
 	Vector2<float> windVolume_;
 
@@ -125,6 +129,10 @@ public:
 	// hp
 	void SetHp(int hp) { hp_ = hp; }
 	int GetHp() { return hp_; }
+
+	// isAlive
+	void SetIsAlive(bool flag) { isAlive_ = flag; }
+	bool GetIsAlive() { return isAlive_; }
 
 	// windVolume
 	void SetWindVolume(Vector2<float> valume) { windVolume_ = valume; }

@@ -143,7 +143,7 @@
     <ClCompile Include="PlayerWindParticle.cpp">
       <Filter>KamataEngine</Filter>
     </ClCompile>
-    <ClCompile Include="GameOver.cpp">
+    <ClCompile Include="MyDeta\Scene\GameOver.cpp">
       <Filter>MyDeta\Scene</Filter>
     </ClCompile>
   </ItemGroup>
@@ -297,7 +297,7 @@
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="PlayerWindEmitter.h" />
     <ClInclude Include="PlayerWindParticle.h" />
-    <ClInclude Include="GameOver.h">
+    <ClInclude Include="MyDeta\Scene\GameOver.h">
       <Filter>MyDeta\Scene</Filter>
     </ClInclude>
   </ItemGroup>

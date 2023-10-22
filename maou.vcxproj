@@ -116,7 +116,6 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\TextureManager.cpp" />
     <ClCompile Include="C:\KamataEngine\DirectXGame\2d\ImGuiManager.cpp" />
     <ClCompile Include="C:\KamataEngine\Adapter\Novice.cpp" />
-    <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="LoadFile.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Matrix.cpp" />
@@ -133,6 +132,7 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClCompile Include="MyDeta\Particle\Particle2.cpp" />
     <ClCompile Include="MyDeta\Particle\Util.cpp" />
     <ClCompile Include="MyDeta\SceneChange\BoxTransition.cpp" />
+    <ClCompile Include="MyDeta\Scene\GameOver.cpp" />
     <ClCompile Include="MyDeta\Scene\Tutorial.cpp" />
     <ClCompile Include="MyDeta\Source\Coordinate.cpp" />
     <ClCompile Include="MyDeta\Source\Easing.cpp" />
@@ -175,7 +175,6 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClInclude Include="C:\KamataEngine\DirectXGame\input\Input.h" />
     <ClInclude Include="C:\KamataEngine\DirectXGame\scene\GameScene.h" />
     <ClInclude Include="C:\KamataEngine\Adapter\Novice.h" />
-    <ClInclude Include="GameOver.h" />
     <ClInclude Include="LoadFile.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="MyDeta\Object\Boss.h" />
@@ -191,6 +190,7 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClInclude Include="MyDeta\Particle\Particle2.h" />
     <ClInclude Include="MyDeta\Particle\Util.h" />
     <ClInclude Include="MyDeta\SceneChange\BoxTransition.h" />
+    <ClInclude Include="MyDeta\Scene\GameOver.h" />
     <ClInclude Include="MyDeta\Scene\Tutorial.h" />
     <ClInclude Include="MyDeta\Source\Coordinate.h" />
     <ClInclude Include="MyDeta\Source\Easing.h" />
