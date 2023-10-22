@@ -29,7 +29,7 @@ public:
 	void Draw();
 
 	// user method
-	void DrawTimer(float time);
+	void DrawTimer(Vector2f pos, float time);
 
 	// accessor
 
