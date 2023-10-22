@@ -7,6 +7,7 @@
 #include "MyDeta/Source/Environment.h"
 #include "MyDeta/Source/MyStruct.h"
 #include "MyDeta/Source/MyMath.h"
+#include "Matrix.h"
 
 // MySystem //
 #include "MyDeta/System/Zoom.h"
@@ -40,6 +41,43 @@ private:
 	float rangeRadius_;
 
 	Size <float>size_; // world座標基準
+
+	//==========================================
+	//描画に使う
+	int frameCount_;
+	int frameCountLimit_;
+
+	int gh_;
+	float drawTheta_;
+
+	float drawWidth_;
+	float drawHeight_;
+
+	Vector2f spriteSize;
+
+	Vector2f drawLt_;
+
+	Vector2f p2bDis_;
+	Vector2f p2bVertical_;
+
+	Vector2f originLt_;
+	Vector2f originRt_;
+	Vector2f originLb_;
+	Vector2f originRb_;
+
+	Vector2f lt_;
+	Vector2f rt_;
+	Vector2f lb_;
+	Vector2f rb_;
+
+	//回転行列
+	Matrix3x3 rotateMatrix{};
+
+	//平行移動行列
+	Matrix3x3 translateMatrix{};
+
+	//結合した行列
+	Matrix3x3 worldMatrix{};
 
 	//==========================================
 	//角度やhpなどのステータス
