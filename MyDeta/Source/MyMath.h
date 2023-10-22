@@ -70,3 +70,5 @@ void DrawRhombus(Vector2f center, float radius, float length, unsigned int color
 void DrawRhombusAnimation(float t, Vector2f center, float radius, float length, unsigned int color, int graphHandle);
 
 void DrawWindow(const Vector2f& center, const Sizef& size, uint32_t color);
+
+void DrawJapanese(const Vector2 <int>& pos, const Sizef& size, int wordNum, short int* word, uint32_t color, int font);

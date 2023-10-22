@@ -3,6 +3,7 @@
 
 // source //
 #include "MyDeta/Source/MyMath.h"
+#include "MyDeta/Source/JapaneseAscii.h"
 
 // system //
 #include "MyDeta/Object/Stage.h"
@@ -25,15 +26,14 @@ enum Progress {
 class Tutorial {
 private:
 
+	int japaneseFontGH_;
 	int white1x1GH_;
 
 	bool isEndTutorial_;
-	float pressFream_;
+	float pressFrame_;
 
 	Progress progress_;
-	float progressFream_;
-
-	
+	float progressFrame_;
 
 public:
 	

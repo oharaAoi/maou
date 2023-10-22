@@ -5,6 +5,7 @@ Tutorial::Tutorial() {
 	Init();
 
 	white1x1GH_ = Novice::LoadTexture("./NoviceResources/white1x1.png");
+	japaneseFontGH_ = Novice::LoadTexture("./Resources/images/japaneseFont.png");
 }
 
 Tutorial::~Tutorial() {
@@ -12,28 +13,35 @@ Tutorial::~Tutorial() {
 
 void Tutorial::Init() {
 	isEndTutorial_ = false;
-	pressFream_ = 60.0f * 4/*s*/;
+	pressFrame_ = 60.0f * 4/*s*/;
 
 	progress_ = MOVE;
-	progressFream_ = 0.0f;
+	progressFrame_ = 0.0f;
+
 }
 
 void Tutorial::Update(char* keys, char* preKeys,
 	Player& player, Stage& stage, Boss& boss, BossBullet& bossBullet, Emitter& emitter, CollisionManager& collisionManager) {
-	if (keys[DIK_SPACE]) {
-		if (pressFream_ > 0.0f) { pressFream_--; }
 
-		if (pressFream_ == 0.0f) {
+	if (keys[DIK_SPACE]) {
+		if (pressFrame_ > 0.0f) { pressFrame_--; }
+
+		if (pressFrame_ == 0.0f) {
 			isEndTutorial_ = true;
 		}
 
 	} else {
-		if (pressFream_ > 0.0f) {
-			pressFream_ = 60.0f * 4/*s*/;
+		if (pressFrame_ > 0.0f) {
+			pressFrame_ = 60.0f * 4/*s*/;
 		}
 	}
 
-	player.Update(keys, preKeys, stage);
+	if (progress_ == Progress::MOVE) {
+		player.Update(keys, stage, MOVE_ONLY);
+
+	} else {
+		player.Update(keys, preKeys, stage);
+	}
 
 	switch (progress_) {
 		case Progress::MOVE:
@@ -54,12 +62,12 @@ void Tutorial::Update(char* keys, char* preKeys,
 
 		case Progress::ENEMY:
 
-			if (progressFream_ < 60.0f * 10/*s*/) {
-				progressFream_++;
+			if (progressFrame_ < 60.0f * 10/*s*/) {
+				progressFrame_++;
 			
 			} else {
 				progress_ = Progress::BULLET;
-				progressFream_ = 0.0f;
+				progressFrame_ = 0.0f;
 			}
 		
 
@@ -70,8 +78,8 @@ void Tutorial::Update(char* keys, char* preKeys,
 			boss.UpDate(bossBullet);
 			bossBullet.Update(boss.GetPos(), player, stage, emitter);
 
-			if (progressFream_ < 60.0f * 10/*s*/) {
-				progressFream_++;
+			if (progressFrame_ < 60.0f * 10/*s*/) {
+				progressFrame_++;
 
 			} else {
 				isEndTutorial_ = true;
@@ -87,13 +95,13 @@ void Tutorial::Update(char* keys, char* preKeys,
 void Tutorial::Draw(Player player, Stage stage, Boss boss, BossBullet bossBullet) {
 	// skip
 	DrawRhombusAnimation(
-		pressFream_ / 240.0f,
-		{100.0f, 100.0f,},
+		pressFrame_ / 240.0f,
+		{ 100.0f, 100.0f, },
 		30.0f, 10.0f,
 		0xFAFAFAFF,
 		white1x1GH_
 	);
-	
+
 	stage.Draw();
 	player.Draw();
 
@@ -101,4 +109,35 @@ void Tutorial::Draw(Player player, Stage stage, Boss boss, BossBullet bossBullet
 		boss.Draw();
 		bossBullet.Draw();
 	}
+
+	// window
+	DrawWindow(
+		{ kWindowWidth / 2.0f, kWindowHeight - 60.0f },
+		{ kWindowWidth - 200.0f, 100.0f },
+		0xFAFAFAFF
+	);
+
+	// word
+	switch (progress_) {
+		case Progress::MOVE:
+
+			break;
+
+		case Progress::WINDOW:
+
+
+			break;
+
+		case Progress::ENEMY:
+
+
+			break;
+
+		case Progress::BULLET:
+
+
+			break;
+
+	}
+
 }

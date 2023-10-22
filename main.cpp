@@ -173,6 +173,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 					boss_.Init();
 					bossBullet_.Init();
 					collision.Init();
+					stage_.Init();
 				}
 
 			} else {
@@ -348,6 +349,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓更新処理ここから
 			/// 
 
+
+
 			///
 			/// ↑更新処理ここまで
 			/// 
@@ -355,6 +358,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			///
 			/// ↓描画処理ここから
 			/// 
+
+			DrawWindow(
+				{ kWindowWidth / 2.0f, kWindowHeight / 2.0f },
+				{ kWindowWidth - 100.0f, kWindowHeight - 100.0f },
+				0xFAFAFAFF
+			);
 
 			///
 			/// ↑描画処理ここまで

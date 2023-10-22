@@ -192,3 +192,48 @@ void Player::Draw() { /// 描画処理
 	
 	
 }
+
+// user method overload
+void Player::Update(char* keys, Stage& stage_, Restrictions restriction) {
+	switch (restriction) {
+		case MOVE_ONLY:
+
+			//playerの移動
+			if (keys[DIK_A]) {
+				radianSpeed_ += 0.05f;
+			}
+
+			if (keys[DIK_D]) {
+				radianSpeed_ -= 0.05f;
+			}
+
+			if (radianSpeed_ > 1.0f) {
+				radianSpeed_ = 1.0f;
+
+			} else if (radianSpeed_ < -1.0f) {
+				radianSpeed_ = -1.0f;
+			}
+
+			if (!keys[DIK_A] && !keys[DIK_D]) {
+				radianSpeed_ *= 0.92f;
+			}
+
+			if (!keys[DIK_A] && !keys[DIK_D]) {
+				radianSpeed_ *= 0.92f;
+			}
+
+			theta_ += radianSpeed_ / 100.0f * (float)M_PI;
+
+			pos_.x = stage_.GetPos().x + (stage_.GetRadius() * cosf(theta_));
+			pos_.y = stage_.GetPos().y + (stage_.GetRadius() * sinf(theta_));
+
+			windowStrength_ = OFF;
+			windVolume_.x = 0.0f;
+			windVolume_.y = 0.0f;
+			stage_.SetRangeRadius(300.0f);
+
+			break;
+	}
+}
+
+
