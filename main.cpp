@@ -31,6 +31,9 @@
 
 // MyScene //
 #include "MyDeta/Scene/Tutorial.h"
+#include "MyDeta/Scene/Result.h"
+
+
 #include "LoadFile.h"
 
 //シーン
@@ -96,6 +99,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	float gameoverT = 0.0f;
 
 	Tutorial tutorial;
+
+	Result result;
 
 	LoadFile loadFile_;
 	loadFile_.Init();
@@ -354,7 +359,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓更新処理ここから
 			/// 
 
-			if (keys[DIK_SPACE] && !preKeys[DIK_SPACE]) {
+			result.Update(keys, preKeys);
+
+			if (result.GetIsEndResult()) {
 				scene = GameScene::TITLE;
 			}
 
@@ -373,19 +380,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			emitter.Draw(); // エミッターの描画処理を呼ぶ
 			playerWindEmitter.Draw(); // プレイヤーの風の描画処理
 
-			Novice::DrawBox(
-				0, 0,
-				1280, 720,
-				0.0f,
-				0x00000080,
-				kFillModeSolid
-			);
-
-			DrawWindow(
-				{ kWindowWidth / 2.0f, kWindowHeight / 2.0f },
-				{ kWindowWidth - 100.0f, kWindowHeight - 100.0f },
-				0xFFFFFFFF
-			);
+			result.Draw();
 
 			///
 			/// ↑描画処理ここまで

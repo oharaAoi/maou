@@ -1,4 +1,5 @@
 #pragma once
+#include <Novice.h>
 
 // MySource //
 #include "MyDeta/Source/Environment.h"
@@ -8,7 +9,10 @@
 class Result {
 private:
 
+	bool isPressSpace_;
+	bool isEndResult_;
 
+	float resultFream_;
 
 public:
 
@@ -18,12 +22,12 @@ public:
 
 	// default method
 	void Init();
-	void Update();
+	void Update(char* keys, char* preKeys);
 	void Draw();
 
 	// user method
 
 	// accessor
-
+	bool GetIsEndResult() { return isEndResult_; }
 };
 
