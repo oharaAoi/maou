@@ -184,7 +184,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				if (sceneT > 0.0f) { sceneT--; }
 			}
 
-			tutorial.Update(keys, preKeys, player_, stage_, boss_, bossBullet_, emitter, collision);
+			tutorial.Update(keys, preKeys, player_, stage_, boss_, bossBullet_, emitter, collision, range_, playerWindEmitter);
 			boxTransition.Update(sceneT);
 
 			///
@@ -195,7 +195,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓描画処理ここから
 			/// 
 
-			tutorial.Draw(player_, stage_, boss_, bossBullet_);
+			tutorial.Draw(player_, stage_, boss_, bossBullet_, playerWindEmitter);
 			boxTransition.Draw();
 			Novice::ScreenPrintf(10, 10, "scene:%d", scene);
 
@@ -256,14 +256,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			//========================================================================
 
-			//弾の更新
-			range_.Update(player_, bossBullet_);
 
 			//撃つ弾の種類を決める(デバック用)
 			bossBullet_.BulletShotSelect(keys, preKeys);
 
 			//弾を進める
 			bossBullet_.Update(boss_.GetPos(), player_, stage_, emitter);
+
+			//弾の更新
+			range_.Update(player_, bossBullet_);
 
 			//弾とプレイヤー
 			collision.CheckCollision(player_, bossBullet_);

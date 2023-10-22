@@ -5,7 +5,10 @@ Tutorial::Tutorial() {
 	Init();
 
 	white1x1GH_ = Novice::LoadTexture("./NoviceResources/white1x1.png");
-	japaneseFontGH_ = Novice::LoadTexture("./Resources/images/japaneseFont.png");
+
+	tutorialGH_[0] = Novice::LoadTexture("./Images/Resource/Tutorial/tutorial1.png");
+	tutorialGH_[1] = Novice::LoadTexture("./Images/Resource/Tutorial/tutorial2.png");
+	tutorialGH_[2] = Novice::LoadTexture("./Images/Resource/Tutorial/tutorial3.png");
 }
 
 Tutorial::~Tutorial() {
@@ -21,7 +24,7 @@ void Tutorial::Init() {
 }
 
 void Tutorial::Update(char* keys, char* preKeys,
-	Player& player, Stage& stage, Boss& boss, BossBullet& bossBullet, Emitter& emitter, CollisionManager& collisionManager) {
+	Player& player, Stage& stage, Boss& boss, BossBullet& bossBullet, Emitter& emitter, CollisionManager& collisionManager, PlayerRangeDetector& playerRangeDetector, PlayerWindEmitter& playerWindEmitter) {
 
 	if (keys[DIK_SPACE]) {
 		if (pressFrame_ > 0.0f) { pressFrame_--; }
@@ -62,7 +65,7 @@ void Tutorial::Update(char* keys, char* preKeys,
 
 		case Progress::ENEMY:
 
-			if (progressFrame_ < 60.0f * 10/*s*/) {
+			if (progressFrame_ < 60.0f * 5/*s*/) {
 				progressFrame_++;
 			
 			} else {
@@ -88,11 +91,29 @@ void Tutorial::Update(char* keys, char* preKeys,
 			break;
 	}
 
+	switch (player.GetWindowStrength()) {
+		case OFF:
+			playerWindEmitter.Update(player.GetPos(), boss.GetPos(), 0, 0, 1000);
+
+			break;
+
+		case WEAK:
+			playerWindEmitter.Update(player.GetPos(), boss.GetPos(), 20, 6, 7);
+
+			break;
+
+		case STRONG:
+			playerWindEmitter.Update(player.GetPos(), boss.GetPos(), 20, 12, 4);
+
+			break;
+	}
+
+	playerRangeDetector.Update(player, bossBullet);
 	collisionManager.CheckCollision(player, bossBullet);
 	collisionManager.CheckCollision(boss, bossBullet, emitter);
 }
 
-void Tutorial::Draw(Player player, Stage stage, Boss boss, BossBullet bossBullet) {
+void Tutorial::Draw(Player player, Stage stage, Boss boss, BossBullet bossBullet, PlayerWindEmitter playerWindEmitter) {
 	// skip
 	DrawRhombusAnimation(
 		pressFrame_ / 240.0f,
@@ -104,6 +125,8 @@ void Tutorial::Draw(Player player, Stage stage, Boss boss, BossBullet bossBullet
 
 	stage.Draw();
 	player.Draw();
+
+	playerWindEmitter.Draw();
 
 	if (progress_ >= Progress::ENEMY) {
 		boss.Draw();
@@ -121,20 +144,38 @@ void Tutorial::Draw(Player player, Stage stage, Boss boss, BossBullet bossBullet
 	switch (progress_) {
 		case Progress::MOVE:
 
+			Novice::DrawSprite(
+				100, 610,
+				tutorialGH_[0],
+				1.0f, 1.0f,
+				0.0f,
+				0xFFFFFFFF
+			);
+
 			break;
 
 		case Progress::WINDOW:
 
+			Novice::DrawSprite(
+				100, 610,
+				tutorialGH_[1],
+				1.0f, 1.0f,
+				0.0f,
+				0xFFFFFFFF
+			);
 
 			break;
 
 		case Progress::ENEMY:
-
-
-			break;
-
 		case Progress::BULLET:
 
+			Novice::DrawSprite(
+				100, 610,
+				tutorialGH_[2],
+				1.0f, 1.0f,
+				0.0f,
+				0xFFFFFFFF
+			);
 
 			break;
 
