@@ -12,6 +12,8 @@
 #include "MyDeta/System/CollisionManager.h"
 #include "MyDeta/System/PlayerRangeDetector.h"
 #include "MyDeta/System/Timer.h"
+#include "MyDeta/System/LoadFile.h"
+
 
 // MyObject //
 #include "MyDeta/Object/Player.h"
@@ -58,7 +60,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	char keys[256] = { 0 };
 	char preKeys[256] = { 0 };
 
-	GameScene scene = RESULT;
+	GameScene scene = GAME;
 
 	// エミッターのインスタンスを作成
 	Emitter emitter;
@@ -95,8 +97,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	bool isChangeScene = false;
 
 	// game over
-	bool isContinue = false;
-	float gameoverT = 0.0f;
+	GameOver gameOver_;
+	gameOver_.Init();
+	/*bool isContinue = false;
+	float gameoverT = 0.0f;*/
 
 	Tutorial tutorial;
 
@@ -242,19 +246,19 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			emitter.Update(); //エミッターの更新処理
 
 			// プレイヤーの状態によって風エフェクトの消滅までの時間、速さ、発生間隔を変更
-			switch(player_.GetWindowStrength()){
+			switch (player_.GetWindowStrength()) {
 			case OFF:
-				playerWindEmitter.Update(player_.GetPos(), boss_.GetPos(), 0,0,1000);
+				playerWindEmitter.Update(player_.GetPos(), boss_.GetPos(), 0, 0, 1000);
 
 				break;
 
 			case WEAK:
-				playerWindEmitter.Update(player_.GetPos(), boss_.GetPos(), 20,6,7);
+				playerWindEmitter.Update(player_.GetPos(), boss_.GetPos(), 20, 6, 7);
 
 				break;
 
 			case STRONG:
-				playerWindEmitter.Update(player_.GetPos(), boss_.GetPos(), 20,12,4);
+				playerWindEmitter.Update(player_.GetPos(), boss_.GetPos(), 20, 12, 4);
 
 				break;
 			}
@@ -286,6 +290,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			if (boss_.GetType() == WAVE3 && boss_.GetIsAlive() == false) {
 				scene = RESULT;
 			}
+
+			//========================================================================
+			//playerが死んだらgameOverへ
+			if (player_.GetIsAlive() == false) {
+				scene = GAME_OVER;
+			}
+
 
 			if (keys[DIK_G]) {
 				scene = GAME_OVER;
@@ -330,14 +341,29 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓更新処理ここから
 			/// 
 
-			if (!isContinue) {
-				if (gameoverT < 120.0f) { gameoverT++; }
+			gameOver_.Update(keys, preKeys);
 
-			} else {
-				if (gameoverT > 0.0f) { gameoverT--; }
+			gameOver_.Draw();
+
+			if (gameOver_.GetChangeToGame() == true) {
+				scene = GAME;
+				range_.Init();
+				boss_.Init();
+				bossBullet_.Init();
+				stage_.Init();
+				player_.Init();
+				gameOver_.Init();
+
+
+			} else if(gameOver_.GetChangeToTitle() == true){
+				scene = TITLE;
+				range_.Init();
+				boss_.Init();
+				bossBullet_.Init();
+				stage_.Init();
+				player_.Init();
+				gameOver_.Init();
 			}
-
-
 
 			///
 			/// ↑更新処理ここまで

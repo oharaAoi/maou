@@ -72,6 +72,10 @@ void Player::Init() { // 変数の初期化
 	//==========================================
 	hp_ = 15;
 	overHeat_ = 100.0f;
+	isAlive_ = true;
+
+	blackOutCount_ = 0.0f;
+	blackOutColor_ = 0x00000000;
 
 	windVolume_.x = 1.2f;
 	windVolume_.y = 1.2f;
@@ -80,79 +84,80 @@ void Player::Init() { // 変数の初期化
 }
 
 void Player::Update(char* keys, char* preKeys, Stage& stage_) { /// 更新処理
-	//======================================================
-	//playerの移動
-	if (keys[DIK_A]) {
-		radianSpeed_ += 0.05f;
-	}
+	if (isAlive_) {
+		//======================================================
+		//playerの移動
+		if (keys[DIK_A]) {
+			radianSpeed_ += 0.05f;
+		}
 
-	if (keys[DIK_D]) {
-		radianSpeed_ -= 0.05f;
-	}
+		if (keys[DIK_D]) {
+			radianSpeed_ -= 0.05f;
+		}
 
-	if (radianSpeed_ > 1.0f) {
-		radianSpeed_ = 1.0f;
+		if (radianSpeed_ > 1.0f) {
+			radianSpeed_ = 1.0f;
 
-	} else if (radianSpeed_ < -1.0f) {
-		radianSpeed_ = -1.0f;
-	}
+		} else if (radianSpeed_ < -1.0f) {
+			radianSpeed_ = -1.0f;
+		}
 
-	if (!keys[DIK_A] && !keys[DIK_D]) {
-		radianSpeed_ *= 0.92f;
-	}
+		if (!keys[DIK_A] && !keys[DIK_D]) {
+			radianSpeed_ *= 0.92f;
+		}
 
-	if (!keys[DIK_A] && !keys[DIK_D]) {
-		radianSpeed_ *= 0.92f;
-	}
+		if (!keys[DIK_A] && !keys[DIK_D]) {
+			radianSpeed_ *= 0.92f;
+		}
 
-	theta_ += radianSpeed_ / 100.0f * (float)M_PI;
+		theta_ += radianSpeed_ / 100.0f * (float)M_PI;
 
-	pos_.x = stage_.GetPos().x + (stage_.GetRadius() * cosf(theta_));
-	pos_.y = stage_.GetPos().y + (stage_.GetRadius() * sinf(theta_));
+		pos_.x = stage_.GetPos().x + (stage_.GetRadius() * cosf(theta_));
+		pos_.y = stage_.GetPos().y + (stage_.GetRadius() * sinf(theta_));
 
-	rangePos_.x = stage_.GetPos().x + (stage_.GetRangeRadius() * cosf(theta_));
-	rangePos_.y = stage_.GetPos().y + (stage_.GetRangeRadius() * sinf(theta_));
+		rangePos_.x = stage_.GetPos().x + (stage_.GetRangeRadius() * cosf(theta_));
+		rangePos_.y = stage_.GetPos().y + (stage_.GetRangeRadius() * sinf(theta_));
 
-	//======================================================
-	//描画のための処理
-	p2bDis_ = ConversionNormalizeVector(pos_, stage_.GetPos());
+		//======================================================
+		//描画のための処理
+		p2bDis_ = ConversionNormalizeVector(pos_, stage_.GetPos());
 
-	p2bVertical_.x = -p2bDis_.y;
-	p2bVertical_.y = p2bDis_.x;
+		p2bVertical_.x = -p2bDis_.y;
+		p2bVertical_.y = p2bDis_.x;
 
-	drawTheta_ = atan2f(p2bVertical_.y, p2bVertical_.x);
+		drawTheta_ = atan2f(p2bVertical_.y, p2bVertical_.x);
 
-	//回転行列
-	rotateMatrix = MakeRotateMatrix(drawTheta_);
+		//回転行列
+		rotateMatrix = MakeRotateMatrix(drawTheta_);
 
-	//平行移動
-	translateMatrix = MakeTranslateMatrix(pos_);
+		//平行移動
+		translateMatrix = MakeTranslateMatrix(pos_);
 
-	//行列の積
-	worldMatrix = Multiply(rotateMatrix, translateMatrix);
+		//行列の積
+		worldMatrix = Multiply(rotateMatrix, translateMatrix);
 
-	lt_ = Transform(originLt_, worldMatrix);
-	rt_ = Transform(originRt_, worldMatrix);
-	lb_ = Transform(originLb_, worldMatrix);
-	rb_ = Transform(originRb_, worldMatrix);
+		lt_ = Transform(originLt_, worldMatrix);
+		rt_ = Transform(originRt_, worldMatrix);
+		lb_ = Transform(originLb_, worldMatrix);
+		rb_ = Transform(originRb_, worldMatrix);
 
 
-	//画像の切り替え
-	if (windowStrength_ != OFF) {
-		frameCount_++;
-		if (frameCount_ > frameCountLimit_) {
-			drawLt_.x += 64.0f;
-			frameCount_ = 0;
+		//画像の切り替え
+		if (windowStrength_ != OFF) {
+			frameCount_++;
+			if (frameCount_ > frameCountLimit_) {
+				drawLt_.x += 64.0f;
+				frameCount_ = 0;
 
-			if (drawLt_.x >= spriteSize.x) {
-				drawLt_.x = 0;
+				if (drawLt_.x >= spriteSize.x) {
+					drawLt_.x = 0;
+				}
 			}
 		}
-	}
 
-	//======================================================
-	//風の切り替え(OFF→弱→強 OFF)
-	switch (windowStrength_) {
+		//======================================================
+		//風の切り替え(OFF→弱→強 OFF)
+		switch (windowStrength_) {
 		case WindowStrength::OFF:
 
 			if (keys[DIK_SPACE] && !preKeys[DIK_SPACE]) {
@@ -194,14 +199,26 @@ void Player::Update(char* keys, char* preKeys, Stage& stage_) { /// 更新処理
 			if (overHeat_ > 0.0f) { overHeat_ -= 0.4f; }
 
 			break;
+		}
+
+		if (overHeat_ < 0.0f) {
+			windowStrength_ = OFF;
+			windVolume_.x = 0.0f;
+			windVolume_.y = 0.0f;
+			stage_.SetRangeRadius(300.0f);
+		}
 	}
 
-	if (overHeat_ < 0.0f) {
-		windowStrength_ = OFF;
-		windVolume_.x = 0.0f;
-		windVolume_.y = 0.0f;
-		stage_.SetRangeRadius(300.0f);
+	//playerの生存確認
+	if (hp_ <= 0) {
+		blackOutCount_+= 0.01f;
+		blackOutColor_ = ShiftColor(blackOutCount_, 0x00000000, 0x000000FF);
+		
+		if (blackOutCount_ >= 1) {
+			isAlive_ = false;
+		}
 	}
+
 }
 
 void Player::Draw() { /// 描画処理
@@ -239,6 +256,17 @@ void Player::Draw() { /// 描画処理
 		static_cast<int>(drawHeight_),
 		gh_,
 		0xffffffff
+	);
+
+	//暗くするためのbox
+	Novice::DrawBox(
+		0,
+		0,
+		1280,
+		720,
+		0.0f,
+		blackOutColor_,
+		kFillModeSolid
 	);
 
 	/*Novice::DrawEllipse(
