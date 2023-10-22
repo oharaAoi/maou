@@ -31,6 +31,7 @@
 
 // MyScene //
 #include "MyDeta/Scene/Tutorial.h"
+#include "LoadFile.h"
 
 //シーン
 enum GameScene {
@@ -54,7 +55,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	char keys[256] = { 0 };
 	char preKeys[256] = { 0 };
 
-	GameScene scene = TITLE;
+	GameScene scene = GAME;
 
 	// エミッターのインスタンスを作成
 	Emitter emitter;
@@ -95,6 +96,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	float gameoverT = 0.0f;
 
 	Tutorial tutorial;
+
+	LoadFile loadFile_;
+	loadFile_.Init();
 
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {

@@ -113,7 +113,7 @@ void PlayerRangeDetector::Update(Player player_, BossBullet& bossBullet_) {
 }
 
 void PlayerRangeDetector::Draw() {
-	Novice::DrawLine(static_cast<int>(topLineSt.x + cie_->GetOrigine().x),
+	/*Novice::DrawLine(static_cast<int>(topLineSt.x + cie_->GetOrigine().x),
 		static_cast<int>(topLineSt.y + cie_->GetOrigine().y),
 		static_cast<int>(topLineEnd.x + cie_->GetOrigine().x),
 		static_cast<int>(topLineEnd.y + cie_->GetOrigine().y),
@@ -123,5 +123,5 @@ void PlayerRangeDetector::Draw() {
 		static_cast<int>(bottomLineSt.y + cie_->GetOrigine().y),
 		static_cast<int>(bottomLineEnd.x + cie_->GetOrigine().x),
 		static_cast<int>(bottomLineEnd.y + cie_->GetOrigine().y),
-		0xffffffff);
+		0xffffffff);*/
 }
