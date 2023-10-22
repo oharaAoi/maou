@@ -1,6 +1,6 @@
 ﻿#include <Novice.h>
 #include "PlayerWindEmitter.h"
-#include "Util.h"
+#include "MyDeta/Particle/Util.h"
 
 PlayerWindEmitter::PlayerWindEmitter()
 {
