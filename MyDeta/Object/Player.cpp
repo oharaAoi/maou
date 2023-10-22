@@ -258,6 +258,7 @@ void Player::Draw() { /// 描画処理
 		0xffffffff
 	);
 
+	//暗くするためのbox
 	Novice::DrawBox(
 		0,
 		0,
