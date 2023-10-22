@@ -55,7 +55,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	char keys[256] = { 0 };
 	char preKeys[256] = { 0 };
 
-	GameScene scene = GAME;
+	GameScene scene = RESULT;
 
 	// エミッターのインスタンスを作成
 	Emitter emitter;
@@ -275,11 +275,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			timer.Update();
 
-				//========================================================================
-				//3WAVE目にボスを倒していたらresultに移行
-				if (boss_.GetType() == WAVE3 && boss_.GetIsAlive() == false) {
-					scene = RESULT;
-				}
+			//========================================================================
+			//3WAVE目にボスを倒していたらresultに移行
+			if (boss_.GetType() == WAVE3 && boss_.GetIsAlive() == false) {
+				scene = RESULT;
+			}
 
 			if (keys[DIK_G]) {
 				scene = GAME_OVER;
@@ -363,10 +363,25 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓描画処理ここから
 			/// 
 
+			boss_.Draw();
+			stage_.Draw();
+			player_.Draw();
+			range_.Draw();
+			emitter.Draw(); // エミッターの描画処理を呼ぶ
+			playerWindEmitter.Draw(); // プレイヤーの風の描画処理
+
+			Novice::DrawBox(
+				0, 0,
+				1280, 720,
+				0.0f,
+				0x00000080,
+				kFillModeSolid
+			);
+
 			DrawWindow(
 				{ kWindowWidth / 2.0f, kWindowHeight / 2.0f },
 				{ kWindowWidth - 100.0f, kWindowHeight - 100.0f },
-				0xFAFAFAFF
+				0xFFFFFFFF
 			);
 
 			///
