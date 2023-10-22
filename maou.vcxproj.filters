@@ -143,11 +143,11 @@
     <ClCompile Include="MyDeta\Scene\Result.cpp">
       <Filter>MyDeta\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="MyDeta\Scene\GameOver.cpp">
-      <Filter>KamataEngine</Filter>
-    </ClCompile>
     <ClCompile Include="MyDeta\System\LoadFile.cpp">
       <Filter>MyDeta\System</Filter>
+    </ClCompile>
+    <ClCompile Include="MyDeta\Scene\GameOver.cpp">
+      <Filter>MyDeta\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -305,9 +305,11 @@
     <ClInclude Include="MyDeta\Scene\Result.h">
       <Filter>MyDeta\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="MyDeta\Scene\GameOver.h" />
     <ClInclude Include="MyDeta\System\LoadFile.h">
       <Filter>MyDeta\System</Filter>
+    </ClInclude>
+    <ClInclude Include="MyDeta\Scene\GameOver.h">
+      <Filter>MyDeta\Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
