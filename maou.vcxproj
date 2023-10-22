@@ -116,7 +116,6 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\TextureManager.cpp" />
     <ClCompile Include="C:\KamataEngine\DirectXGame\2d\ImGuiManager.cpp" />
     <ClCompile Include="C:\KamataEngine\Adapter\Novice.cpp" />
-    <ClCompile Include="LoadFile.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="MyDeta\Object\Boss.cpp" />
@@ -137,6 +136,7 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClCompile Include="MyDeta\Scene\Tutorial.cpp" />
     <ClCompile Include="MyDeta\Source\Coordinate.cpp" />
     <ClCompile Include="MyDeta\Source\Easing.cpp" />
+    <ClCompile Include="MyDeta\System\LoadFile.cpp" />
     <ClCompile Include="MyDeta\System\PlayerRangeDetector.cpp" />
     <ClCompile Include="MyDeta\System\Timer.cpp" />
     <ClCompile Include="MyDeta\System\Zoom.cpp" />
@@ -176,7 +176,6 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClInclude Include="C:\KamataEngine\DirectXGame\input\Input.h" />
     <ClInclude Include="C:\KamataEngine\DirectXGame\scene\GameScene.h" />
     <ClInclude Include="C:\KamataEngine\Adapter\Novice.h" />
-    <ClInclude Include="LoadFile.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="MyDeta\Object\Boss.h" />
     <ClInclude Include="MyDeta\Object\BossBullet.h" />
@@ -200,6 +199,7 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClInclude Include="MyDeta\Source\JapaneseAscii.h" />
     <ClInclude Include="MyDeta\Source\MyMath.h" />
     <ClInclude Include="MyDeta\Source\MyStruct.h" />
+    <ClInclude Include="MyDeta\System\LoadFile.h" />
     <ClInclude Include="MyDeta\System\PlayerRangeDetector.h" />
     <ClInclude Include="MyDeta\System\Timer.h" />
     <ClInclude Include="MyDeta\System\Zoom.h" />

@@ -12,6 +12,8 @@
 #include "MyDeta/System/CollisionManager.h"
 #include "MyDeta/System/PlayerRangeDetector.h"
 #include "MyDeta/System/Timer.h"
+#include "MyDeta/System/LoadFile.h"
+
 
 // MyObject //
 #include "MyDeta/Object/Player.h"
@@ -32,7 +34,6 @@
 // MyScene //
 #include "MyDeta/Scene/Tutorial.h"
 #include "MyDeta/Scene/GameOver.h"
-#include "LoadFile.h"
 
 //シーン
 enum GameScene {
@@ -56,7 +57,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	char keys[256] = { 0 };
 	char preKeys[256] = { 0 };
 
-	GameScene scene = GAME_OVER;
+	GameScene scene = GAME;
 
 	// エミッターのインスタンスを作成
 	Emitter emitter;
