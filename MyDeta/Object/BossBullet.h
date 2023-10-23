@@ -48,8 +48,6 @@ private:
 
 		unsigned int color;
 
-		int gh;
-
 		float drawTheta;
 
 		float drawWidth;
@@ -108,6 +106,8 @@ private:
 	};
 
 	Base object_[kBulletMax_];
+
+	int bulletGh_[4];
 
 	//==============================
 	//弾の速度(waveごとに速度を上げる)

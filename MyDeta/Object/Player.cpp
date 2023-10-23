@@ -81,6 +81,20 @@ void Player::Init() { // 変数の初期化
 	windVolume_.y = 1.2f;
 
 	windowStrength_ = WindowStrength::WEAK;
+
+	//==========================================
+	//リソース
+	weakWindSe_ = Novice::LoadAudio("./images/Sounds/PlayerSe/weakFan.mp3");
+	strongWindSe_ = Novice::LoadAudio("./images/Sounds/PlayerSe/strongFan.mp3");
+
+	//フラグ
+	weakWindHandle_ = -1;
+	strongWindHandle_ = -1;
+
+	//音量
+	windSoundVolume_ = 0.3f;
+
+
 }
 
 void Player::Update(char* keys, char* preKeys, Stage& stage_) { /// 更新処理
@@ -269,25 +283,8 @@ void Player::Draw() { /// 描画処理
 		kFillModeSolid
 	);
 
-	/*Novice::DrawEllipse(
-		static_cast<int>(pos_.x + cie_->GetOrigine().x),
-		static_cast<int>(pos_.y + cie_->GetOrigine().y),
-		static_cast<int>(radius_),
-		static_cast<int>(radius_),
-		0.0f,
-		0xffffffff,
-		kFillModeSolid);
-
-	Novice::DrawEllipse(static_cast<int>(rangePos_.x + cie_->GetOrigine().x),
-		static_cast<int>(rangePos_.y + cie_->GetOrigine().y),
-		static_cast<int>(rangeRadius_),
-		static_cast<int>(rangeRadius_),
-		0.0f,
-		0xffffffff,
-		kFillModeSolid);*/
-
-		/// test guage
-		// over
+	/// test guage
+	// over
 	switch (windowStrength_) {
 		case WindowStrength::OFF:
 
@@ -315,6 +312,23 @@ void Player::Draw() { /// 描画処理
 
 			break;
 	}
+
+	//sounds
+	switch (windowStrength_) {
+	case WindowStrength::OFF:
+		Novice::StopAudio(strongWindHandle_);
+		break;
+
+	case WindowStrength::WEAK:
+		PlayAudio(weakWindHandle_, weakWindSe_, windSoundVolume_);
+		break;
+
+	case WindowStrength::STRONG:
+		Novice::StopAudio(weakWindHandle_);
+		PlayAudio(strongWindHandle_, strongWindSe_, windSoundVolume_);
+		break;
+	}
+
 }
 
 // user method overload

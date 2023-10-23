@@ -99,6 +99,20 @@ private:
 
 	WindowStrength windowStrength_;
 
+	//==========================================
+	//サウンド
+	//リソース
+	int weakWindSe_;
+	int strongWindSe_;
+
+	//フラグ
+	int weakWindHandle_;
+	int strongWindHandle_;
+
+	//音量
+	float windSoundVolume_;
+
+
 	//インスタンス
 	Coordinate* cie_ = Coordinate::GetInstance();
 

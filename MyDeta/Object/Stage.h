@@ -2,6 +2,7 @@
 #include <Novice.h>
 #include "MyDeta/Source/MyStruct.h"
 #include "MyDeta/Source/Coordinate.h"
+#include "MyDeta/Source/MyMath.h"
 
 class Stage
 {
@@ -17,6 +18,18 @@ private:
 	int gh_;
 
 	unsigned int color_;
+
+	//==========================================
+	//bgm
+	//リソース
+	int gameBgm_;
+
+	//フラグ
+	int gemeBgmHandle_;
+
+	//音量
+	float gameBgmVolume_;
+
 
 	//インスタンス
 	Coordinate* cie_ = Coordinate::GetInstance();

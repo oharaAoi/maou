@@ -16,6 +16,14 @@ void Stage::Init() {
 
 	color_ = 0xffffffff;
 
+	//==========================================
+	gameBgm_ = Novice::LoadAudio("./images/Sounds/bgm/souldrive.mp3");
+
+	gemeBgmHandle_ = -1;
+
+	gameBgmVolume_ = 0.3f;
+
+
 	//デバック用
 	bulletVanishRange_ = 500.0f;
 }
@@ -55,4 +63,8 @@ void Stage::Draw() {
 		0.0f,
 		0xff0000ff,
 		kFillModeWireFrame);
+
+	//==========================================
+	//sound
+	PlayAudio(gemeBgmHandle_, gameBgm_, gameBgmVolume_);
 }

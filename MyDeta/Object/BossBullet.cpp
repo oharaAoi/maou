@@ -106,6 +106,12 @@ void BossBullet::Init() {
 	explodeRadius_ = 60.0f;
 
 	randTypeMax_ = 1;
+
+	//==============================
+	bulletGh_[0] = Novice::LoadTexture("./images/Resource/BossBullet/slowBullet.png");
+	bulletGh_[1] = Novice::LoadTexture("./images/Resource/BossBullet/fastBullet.png");
+	bulletGh_[2] = Novice::LoadTexture("./images/Resource/BossBullet/explodeBullet.png");
+	bulletGh_[3] = Novice::LoadTexture("./images/Resource/BossBullet/vanishBullet.png");;
 }
 
 //弾の種類をランダムにしたい時
@@ -126,8 +132,6 @@ void BossBullet::RandamInit(int i) {
 		object_[i].accleleration.x = 0.04f;
 		object_[i].accleleration.y = 0.04f;
 
-		object_[i].gh = Novice::LoadTexture("./images/Resource/BossBullet/slowBullet.png");
-
 		break;
 	case FAST:
 		object_[i].radius = 10.0f;
@@ -139,8 +143,6 @@ void BossBullet::RandamInit(int i) {
 
 		object_[i].accleleration.x = 0.06f;
 		object_[i].accleleration.y = 0.06f;
-
-		object_[i].gh = Novice::LoadTexture("./images/Resource/BossBullet/fastBullet.png");
 
 		break;
 
@@ -157,8 +159,6 @@ void BossBullet::RandamInit(int i) {
 
 		object_[i].explodeCount = 0;
 
-		object_[i].gh = Novice::LoadTexture("./images/Resource/BossBullet/explodeBullet.png");
-
 		break;
 
 	case VANISH:
@@ -174,7 +174,6 @@ void BossBullet::RandamInit(int i) {
 
 		object_[i].vanishCount = 0;
 
-		object_[i].gh = Novice::LoadTexture("./images/Resource/BossBullet/vanishBullet.png");
 	}
 
 	object_[i].pos.x = 0;
@@ -205,8 +204,6 @@ void BossBullet::OutOfScreenInit(int i) {
 	//当たり判定で使う
 	object_[i].isShot = false;
 	object_[i].isPushBacked = false;
-
-	object_[i].gh = Novice::LoadTexture("./images/Resource/BossBullet/slowBullet.png");
 
 	/*object_[i].bulletType = SLOW;*/
 }
@@ -588,23 +585,81 @@ void BossBullet::Update(Vector2<float> bossPos, Player& player, Stage stage, Emi
 void BossBullet::Draw() {
 	for (int i = 0; i < kBulletMax_; i++) {
 		if (object_[i].isShot == true) {
-			Novice::DrawQuad(
-				static_cast<int>(object_[i].lt.x + cie_->GetOrigine().x),
-				static_cast<int>(object_[i].lt.y + cie_->GetOrigine().y),
-				static_cast<int>(object_[i].rt.x + cie_->GetOrigine().x),
-				static_cast<int>(object_[i].rt.y + cie_->GetOrigine().y),
-				static_cast<int>(object_[i].lb.x + cie_->GetOrigine().x),
-				static_cast<int>(object_[i].lb.y + cie_->GetOrigine().y),
-				static_cast<int>(object_[i].rb.x + cie_->GetOrigine().x),
-				static_cast<int>(object_[i].rb.y + cie_->GetOrigine().y),
-				static_cast<int>(object_[i].drawLt.x),
-				static_cast<int>(object_[i].drawLt.y),
-				static_cast<int>(object_[i].drawWidth),
-				static_cast<int>(object_[i].drawHeight),
-				object_[i].gh,
-				0xffffffff
-			);
+			switch (object_[i].bulletType) {
+			case SLOW:
+				Novice::DrawQuad(
+					static_cast<int>(object_[i].lt.x + cie_->GetOrigine().x),
+					static_cast<int>(object_[i].lt.y + cie_->GetOrigine().y),
+					static_cast<int>(object_[i].rt.x + cie_->GetOrigine().x),
+					static_cast<int>(object_[i].rt.y + cie_->GetOrigine().y),
+					static_cast<int>(object_[i].lb.x + cie_->GetOrigine().x),
+					static_cast<int>(object_[i].lb.y + cie_->GetOrigine().y),
+					static_cast<int>(object_[i].rb.x + cie_->GetOrigine().x),
+					static_cast<int>(object_[i].rb.y + cie_->GetOrigine().y),
+					static_cast<int>(object_[i].drawLt.x),
+					static_cast<int>(object_[i].drawLt.y),
+					static_cast<int>(object_[i].drawWidth),
+					static_cast<int>(object_[i].drawHeight),
+					bulletGh_[0],
+					0xffffffff
+				);
+				break;
 
+			case FAST:
+				Novice::DrawQuad(
+					static_cast<int>(object_[i].lt.x + cie_->GetOrigine().x),
+					static_cast<int>(object_[i].lt.y + cie_->GetOrigine().y),
+					static_cast<int>(object_[i].rt.x + cie_->GetOrigine().x),
+					static_cast<int>(object_[i].rt.y + cie_->GetOrigine().y),
+					static_cast<int>(object_[i].lb.x + cie_->GetOrigine().x),
+					static_cast<int>(object_[i].lb.y + cie_->GetOrigine().y),
+					static_cast<int>(object_[i].rb.x + cie_->GetOrigine().x),
+					static_cast<int>(object_[i].rb.y + cie_->GetOrigine().y),
+					static_cast<int>(object_[i].drawLt.x),
+					static_cast<int>(object_[i].drawLt.y),
+					static_cast<int>(object_[i].drawWidth),
+					static_cast<int>(object_[i].drawHeight),
+					bulletGh_[1],
+					0xffffffff
+				);
+				break;
+			case EXPLODE:
+				Novice::DrawQuad(
+					static_cast<int>(object_[i].lt.x + cie_->GetOrigine().x),
+					static_cast<int>(object_[i].lt.y + cie_->GetOrigine().y),
+					static_cast<int>(object_[i].rt.x + cie_->GetOrigine().x),
+					static_cast<int>(object_[i].rt.y + cie_->GetOrigine().y),
+					static_cast<int>(object_[i].lb.x + cie_->GetOrigine().x),
+					static_cast<int>(object_[i].lb.y + cie_->GetOrigine().y),
+					static_cast<int>(object_[i].rb.x + cie_->GetOrigine().x),
+					static_cast<int>(object_[i].rb.y + cie_->GetOrigine().y),
+					static_cast<int>(object_[i].drawLt.x),
+					static_cast<int>(object_[i].drawLt.y),
+					static_cast<int>(object_[i].drawWidth),
+					static_cast<int>(object_[i].drawHeight),
+					bulletGh_[2],
+					0xffffffff
+				);
+				break;
+			case VANISH:
+				Novice::DrawQuad(
+					static_cast<int>(object_[i].lt.x + cie_->GetOrigine().x),
+					static_cast<int>(object_[i].lt.y + cie_->GetOrigine().y),
+					static_cast<int>(object_[i].rt.x + cie_->GetOrigine().x),
+					static_cast<int>(object_[i].rt.y + cie_->GetOrigine().y),
+					static_cast<int>(object_[i].lb.x + cie_->GetOrigine().x),
+					static_cast<int>(object_[i].lb.y + cie_->GetOrigine().y),
+					static_cast<int>(object_[i].rb.x + cie_->GetOrigine().x),
+					static_cast<int>(object_[i].rb.y + cie_->GetOrigine().y),
+					static_cast<int>(object_[i].drawLt.x),
+					static_cast<int>(object_[i].drawLt.y),
+					static_cast<int>(object_[i].drawWidth),
+					static_cast<int>(object_[i].drawHeight),
+					bulletGh_[3],
+					0xffffffff
+				);
+				break;
+			}
 
 			if (object_[i].bulletType == EXPLODE) {
 				Novice::DrawEllipse(

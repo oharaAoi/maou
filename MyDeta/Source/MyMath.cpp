@@ -384,3 +384,13 @@ void DrawJapanese(const Vector2<int>& pos, const Sizef& size, int wordNum, short
 		);
 	}
 }
+
+/* ---------------------------------
+ AudioFunction
+---------------------------------- */
+
+void PlayAudio(int& voiceHandle, int soundHandle, float soundVolume) {
+	if (Novice::IsPlayingAudio(voiceHandle) == 0 || voiceHandle == -1) {
+		voiceHandle = Novice::PlayAudio(soundHandle, true, soundVolume);
+	}
+}
