@@ -87,6 +87,11 @@ private:
 		bool isShot;
 		bool isRange;
 		bool isPushBacked;
+		bool isHit;
+
+		//se
+		int bossHitSeHandle_;
+
 		//==============================
 		//タイプ
 		int bulletType;
@@ -142,6 +147,14 @@ private:
 
 	//爆発する半径
 	float explodeRadius_;
+
+	//==============================
+	//サウンド
+	int bossHitSe_;
+
+	//音量
+	float bossHitSeVolume_;
+
 
 	//インスタンス
 	Coordinate* cie_ = Coordinate::GetInstance();
@@ -202,6 +215,9 @@ public:
 
 	void SetIsShot(bool flag , int i) { object_[i].isShot = flag; }
 	bool GetIsShot(int i) { return object_[i].isShot; }
+
+	void SetIsHit(bool flag, int i) { object_[i].isHit = flag; }
+	bool GetISHit(int i) { return object_[i].isHit; }
 
 	void SetIsRange(bool flag , int i) { object_[i].isRange = flag; }
 	bool GetIsRange(int i) { return object_[i].isRange; }

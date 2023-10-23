@@ -23,6 +23,7 @@ void CollisionManager::CheckCollision(Boss& boss_, BossBullet& bossBullet_, Emit
 					bossBullet_.SetIsShot(false, i);
 					bossBullet_.SetPos({ static_cast<int>(kWindowWidth), static_cast<int>(kWindowHeight) }, i);
 					bossBullet_.SetIsPushBacked(false, i);
+					bossBullet_.SetIsHit(true, i);
 				} else {
 					bossBullet_.SetPos({ static_cast<int>(kWindowWidth), static_cast<int>(kWindowHeight) }, i);
 					bossBullet_.SetIsPushBacked(false, i);

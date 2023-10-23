@@ -317,6 +317,7 @@ void Player::Draw() { /// 描画処理
 	switch (windowStrength_) {
 	case WindowStrength::OFF:
 		Novice::StopAudio(strongWindHandle_);
+		Novice::StopAudio(weakWindHandle_);
 		break;
 
 	case WindowStrength::WEAK:
