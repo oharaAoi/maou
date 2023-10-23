@@ -10,14 +10,16 @@ BossBullet::~BossBullet() {
 void BossBullet::Init() {
 	for (int i = 0; i < kBulletMax_; i++) {
 		//==============================
-		object_[i].pos.x = 0;
-		object_[i].pos.y = 0;
+		object_[i].pos.x = 0.0f;
+		object_[i].pos.y = 0.0f;
 
-		object_[i].radius = 15.0f;
+		object_[i].radius = 16.0f;
 
 		object_[i].color = 0x0000ffff;
 
 		object_[i].bulletType = SLOW;
+
+		object_[i].shotDire = 0.0f;
 
 		//==============================
 		object_[i].velocity.x = 1.5f;
@@ -32,6 +34,44 @@ void BossBullet::Init() {
 		object_[i].isPushBacked = false;
 
 		object_[i].center2bLength = 0.0f;
+
+		//==============================
+		//描画で使う
+		object_[i].drawTheta = 0.0f;
+
+		object_[i].drawWidth = 32.0f;
+		object_[i].drawHeight = 32.0f;
+
+		object_[i].drawLt.x = 0.0f;
+		object_[i].drawLt.y = 0.0f;
+
+		object_[i].p2bDis.x = 0.0f;
+		object_[i].p2bDis.y = 0.0f;
+
+		object_[i].p2bVertical.x = 0.0f;
+		object_[i].p2bVertical.y = 0.0f;
+
+		object_[i].originLt.x = -object_[i].radius;
+		object_[i].originLt.y = -object_[i].radius;
+		object_[i].originRt.x = object_[i].radius;
+		object_[i].originRt.y = -object_[i].radius;
+		object_[i].originLb.x = -object_[i].radius;
+		object_[i].originLb.y = object_[i].radius;
+		object_[i].originRb.x = object_[i].radius;
+		object_[i].originRb.y = object_[i].radius;
+
+		object_[i].lt.x = 0.0f;
+		object_[i].lt.y = 0.0f;
+		object_[i].rt.x = 0.0f;
+		object_[i].rt.y = 0.0f;
+		object_[i].lb.x = 0.0f;
+		object_[i].lb.y = 0.0f;
+		object_[i].rb.x = 0.0f;
+		object_[i].rb.y = 0.0f;
+
+		object_[i].rotateMatrix;
+		object_[i].translateMatrix;
+		object_[i].worldMatrix;
 
 	}
 
@@ -50,13 +90,6 @@ void BossBullet::Init() {
 	bullet2pDis_.y = 0.0f;
 
 	b2bLength_ = 0.0f;
-
-	//==============================
-	shotDire_ = 0.0f;
-	shotRadian_ = 0.0f;
-
-	bullet2pRadian_ = 0.0f;
-	boss2pRadian_ = 0.0f;
 
 	//==============================
 	freamCount_ = 0;
@@ -93,6 +126,8 @@ void BossBullet::RandamInit(int i) {
 		object_[i].accleleration.x = 0.04f;
 		object_[i].accleleration.y = 0.04f;
 
+		object_[i].gh = Novice::LoadTexture("./images/Resource/BossBullet/slowBullet.png");
+
 		break;
 	case FAST:
 		object_[i].radius = 10.0f;
@@ -104,6 +139,8 @@ void BossBullet::RandamInit(int i) {
 
 		object_[i].accleleration.x = 0.06f;
 		object_[i].accleleration.y = 0.06f;
+
+		object_[i].gh = Novice::LoadTexture("./images/Resource/BossBullet/fastBullet.png");
 
 		break;
 
@@ -120,6 +157,8 @@ void BossBullet::RandamInit(int i) {
 
 		object_[i].explodeCount = 0;
 
+		object_[i].gh = Novice::LoadTexture("./images/Resource/BossBullet/explodeBullet.png");
+
 		break;
 
 	case VANISH:
@@ -134,6 +173,8 @@ void BossBullet::RandamInit(int i) {
 		object_[i].accleleration.y = 0.04f;
 
 		object_[i].vanishCount = 0;
+
+		object_[i].gh = Novice::LoadTexture("./images/Resource/BossBullet/vanishBullet.png");
 	}
 
 	object_[i].pos.x = 0;
@@ -164,6 +205,8 @@ void BossBullet::OutOfScreenInit(int i) {
 	//当たり判定で使う
 	object_[i].isShot = false;
 	object_[i].isPushBacked = false;
+
+	object_[i].gh = Novice::LoadTexture("./images/Resource/BossBullet/slowBullet.png");
 
 	/*object_[i].bulletType = SLOW;*/
 }
@@ -254,6 +297,25 @@ void BossBullet::BulletShotChange(Barrage type) {
 	}*/
 }
 
+//絵を進行方向に回転させる
+void BossBullet::RotateBullet(int num, float theta) {
+	//回転行列
+	object_[num].rotateMatrix = MakeRotateMatrix(theta + float(M_PI) / 2.0f);
+
+	//平行移動
+	object_[num].translateMatrix = MakeTranslateMatrix(object_[num].pos);
+
+	//行列の積
+	object_[num].worldMatrix = Multiply(object_[num].rotateMatrix, object_[num].translateMatrix);
+
+	//各頂点の移動
+	object_[num].lt = Transform(object_[num].originLt, object_[num].worldMatrix);
+	object_[num].rt = Transform(object_[num].originRt, object_[num].worldMatrix);
+	object_[num].lb = Transform(object_[num].originLb, object_[num].worldMatrix);
+	object_[num].rb = Transform(object_[num].originRb, object_[num].worldMatrix);
+}
+
+
 //爆発する弾の近くの弾を誘爆させる
 void BossBullet::ExplodeBullet(int num, Emitter& emitter) {
 	for (int i = 0; i < kBulletMax_ / 2; i++) {
@@ -287,11 +349,14 @@ void BossBullet::IsShot(Vector2<float> playerPos) {
 			bullet2pDis_.x = playerPos.x - object_[i].pos.x;
 			bullet2pDis_.y = playerPos.y - object_[i].pos.y;
 
-			bullet2pRadian_ = atan2f(bullet2pDis_.y, bullet2pDis_.x);
+			object_[i].shotDire = atan2f(bullet2pDis_.y, bullet2pDis_.x);
 
 			//速度に角度をかける
-			object_[i].velocity.x *= cosf(bullet2pRadian_);
-			object_[i].velocity.y *= sinf(bullet2pRadian_);
+			object_[i].velocity.x *= cosf(object_[i].shotDire);
+			object_[i].velocity.y *= sinf(object_[i].shotDire);
+
+			////リソースの回転
+			//RotateBullet(i, object_[i].shotDire);
 
 			break;
 		}
@@ -306,10 +371,13 @@ void BossBullet::RandamDireShot() {
 
 			object_[i].isShot = true;
 
-			shotDire_ = static_cast<float>(Rand(0, 360)) / 180.0f * float(M_PI);
+			object_[i].shotDire = static_cast<float>(Rand(0, 360)) / 180.0f * float(M_PI);
 
-			object_[i].velocity.x *= cosf(shotDire_);
-			object_[i].velocity.y *= sinf(shotDire_);
+			object_[i].velocity.x *= cosf(object_[i].shotDire);
+			object_[i].velocity.y *= sinf(object_[i].shotDire);
+
+			////リソースの回転
+			//RotateBullet(i, object_[i].shotDire);
 
 			break;
 		}
@@ -321,10 +389,13 @@ void BossBullet::FourDireIsShot(int num) {
 	if (object_[num].isShot == false) {
 		object_[num].isShot = true;
 
-		shotDire_ = static_cast<float>(num) / 2.0f * float(M_PI);
+		object_[num].shotDire = static_cast<float>(num) / 2.0f * float(M_PI);
 
-		object_[num].velocity.x *= cosf(shotDire_);
-		object_[num].velocity.y *= sinf(shotDire_);
+		object_[num].velocity.x *= cosf(object_[num].shotDire);
+		object_[num].velocity.y *= sinf(object_[num].shotDire);
+
+		//リソースの回転
+		/*RotateBullet(num,object_[num].shotDire);*/
 	}
 }
 
@@ -334,10 +405,13 @@ void BossBullet::AllDireShot() {
 		if (object_[i].isShot == false) {
 			object_[i].isShot = true;
 
-			shotDire_ = static_cast<float>(i) / (static_cast<float>(kBulletMax_) / 4) * float(M_PI);
+			object_[i].shotDire = static_cast<float>(i) / (static_cast<float>(kBulletMax_) / 4) * float(M_PI);
 
-			object_[i].velocity.x *= cosf(shotDire_);
-			object_[i].velocity.y *= sinf(shotDire_);
+			object_[i].velocity.x *= cosf(object_[i].shotDire);
+			object_[i].velocity.y *= sinf(object_[i].shotDire);
+
+			//リソースの回転
+			/*RotateBullet(i, object_[i].shotDire);*/
 
 			//maxまで撃ったらランダムに切り替える
 			if (i >= kBulletMax_ - 1) {
@@ -358,10 +432,13 @@ void BossBullet::RotateDireShot() {
 		if (object_[i].isShot == false) {
 			object_[i].isShot = true;
 
-			shotDire_ = static_cast<float>(i) / (static_cast<float>(kBulletMax_) / 4) * float(M_PI);
+			object_[i].shotDire = static_cast<float>(i) / (static_cast<float>(kBulletMax_) / 4) * float(M_PI);
 
-			object_[i].velocity.x *= cosf(shotDire_);
-			object_[i].velocity.y *= sinf(shotDire_);
+			object_[i].velocity.x *= cosf(object_[i].shotDire);
+			object_[i].velocity.y *= sinf(object_[i].shotDire);
+
+			//リソースの回転
+			/*RotateBullet(i, object_[i].shotDire);*/
 
 			//全部撃ち終わったらランダムにする
 			if (i == kBulletMax_ - 1) {
@@ -466,10 +543,10 @@ void BossBullet::Update(Vector2<float> bossPos, Player& player, Stage stage, Emi
 					bullet2pDis_.x = bossPos.x - object_[i].pos.x;
 					bullet2pDis_.y = bossPos.y - object_[i].pos.y;
 
-					boss2pRadian_ = atan2f(bullet2pDis_.y, bullet2pDis_.x);
+					object_[i].shotDire = atan2f(bullet2pDis_.y, bullet2pDis_.x);
 
-					object_[i].velocity.x += object_[i].accleleration.x * player.GetWindVolume().x * cosf(boss2pRadian_);
-					object_[i].velocity.y += object_[i].accleleration.x * player.GetWindVolume().y * sinf(boss2pRadian_);
+					object_[i].velocity.x += object_[i].accleleration.x * player.GetWindVolume().x * cosf(object_[i].shotDire);
+					object_[i].velocity.y += object_[i].accleleration.x * player.GetWindVolume().y * sinf(object_[i].shotDire);
 
 				} else {
 					//範囲外にある時はゆっくり遅くしていく
@@ -486,6 +563,9 @@ void BossBullet::Update(Vector2<float> bossPos, Player& player, Stage stage, Emi
 
 			object_[i].pos.x += object_[i].velocity.x;
 			object_[i].pos.y += object_[i].velocity.y;
+
+			//リソースの移動と回転
+			RotateBullet(i, object_[i].shotDire);
 		}
 
 		//=====================================================
@@ -508,23 +588,22 @@ void BossBullet::Update(Vector2<float> bossPos, Player& player, Stage stage, Emi
 void BossBullet::Draw() {
 	for (int i = 0; i < kBulletMax_; i++) {
 		if (object_[i].isShot == true) {
-			/*Novice::DrawEllipse(
-				static_cast<int>(object_[i].pos.x + cie_->GetOrigine().x),
-				static_cast<int>(object_[i].pos.y + cie_->GetOrigine().y),
-				static_cast<int>(object_[i].radius),
-				static_cast<int>(object_[i].radius),
-				0.0f,
-				object_[i].color,
-				kFillModeSolid);*/
-
-			Novice::DrawBox(
-				static_cast<int>((object_[i].pos.x - object_[i].radius) + cie_->GetOrigine().x),
-				static_cast<int>((object_[i].pos.y - object_[i].radius) + cie_->GetOrigine().y),
-				static_cast<int>(object_[i].radius * 2),
-				static_cast<int>(object_[i].radius * 2),
-				0.0f,
-				object_[i].color,
-				kFillModeSolid);
+			Novice::DrawQuad(
+				static_cast<int>(object_[i].lt.x + cie_->GetOrigine().x),
+				static_cast<int>(object_[i].lt.y + cie_->GetOrigine().y),
+				static_cast<int>(object_[i].rt.x + cie_->GetOrigine().x),
+				static_cast<int>(object_[i].rt.y + cie_->GetOrigine().y),
+				static_cast<int>(object_[i].lb.x + cie_->GetOrigine().x),
+				static_cast<int>(object_[i].lb.y + cie_->GetOrigine().y),
+				static_cast<int>(object_[i].rb.x + cie_->GetOrigine().x),
+				static_cast<int>(object_[i].rb.y + cie_->GetOrigine().y),
+				static_cast<int>(object_[i].drawLt.x),
+				static_cast<int>(object_[i].drawLt.y),
+				static_cast<int>(object_[i].drawWidth),
+				static_cast<int>(object_[i].drawHeight),
+				object_[i].gh,
+				0xffffffff
+			);
 
 
 			if (object_[i].bulletType == EXPLODE) {
@@ -538,19 +617,5 @@ void BossBullet::Draw() {
 					kFillModeWireFrame);
 			}
 		}
-
-		Novice::ScreenPrintf(10, 20, "barrageType_:%d", barrageType_);
-
-		Novice::ScreenPrintf(10, 40, "randTypeMax_:%d", randTypeMax_);
-
-		Novice::ScreenPrintf(200 + ((i / 10) * 75), 10 + ((i % 10) * 20), ":%d", object_[i].isShot);
-
-		Novice::ScreenPrintf(10, 60, "coolTimeRandamLimit_ :%d", coolTimeRandamLimit_);
-		Novice::ScreenPrintf(10, 80, "coolTimeChaseLimit_ :%d", coolTimeChaseLimit_);
-		Novice::ScreenPrintf(10, 100, "freamCount_ :%d", freamCount_);
-		Novice::ScreenPrintf(10, 120, "coolTimeLimit_ :%d", coolTimeLimit_);
-
-
-		/*Novice::ScreenPrintf(1100, 20 + (i * 20), "explodeCount:%d", object_[i].explodeCount);*/
 	}
 }
