@@ -48,6 +48,37 @@ private:
 
 		unsigned int color;
 
+		int gh;
+
+		float drawTheta;
+
+		float drawWidth;
+		float drawHeight;
+
+		Vector2f drawLt;
+
+		Vector2f p2bDis;
+		Vector2f p2bVertical;
+
+		Vector2f originLt;
+		Vector2f originRt;
+		Vector2f originLb;
+		Vector2f originRb;
+
+		Vector2f lt;
+		Vector2f rt;
+		Vector2f lb;
+		Vector2f rb;
+
+		//回転行列
+		Matrix3x3 rotateMatrix{};
+
+		//平行移動行列
+		Matrix3x3 translateMatrix{};
+
+		//結合した行列
+		Matrix3x3 worldMatrix{};
+
 		//==============================
 		//速度
 		Vector2<float>velocity;
@@ -70,6 +101,10 @@ private:
 		//ステージ外に出た時の処理のための距離
 		float center2bLength;
 
+		//==============================
+		//撃つ角度
+		float shotDire;
+
 	};
 
 	Base object_[kBulletMax_];
@@ -80,15 +115,6 @@ private:
 	float fastSpeed_;
 	float explodeSpeed_;
 	float vanishSpeed_;
-	
-	//==============================
-	//角度
-	float bullet2pRadian_;
-	float boss2pRadian_;
-
-	float shotRadian_;
-
-	float shotDire_;
 
 	//==============================
 	//2点間の距離
@@ -134,6 +160,8 @@ public:
 	void RandamInit(int i);
 
 	void OutOfScreenInit(int i);
+
+	void RotateBullet(int num, float theta);
 
 	//=================================================
 	//弾幕の種類
