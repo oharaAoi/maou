@@ -300,9 +300,9 @@ void BossBullet::BulletShotChange(Barrage type) {
 //絵を進行方向に回転させる
 void BossBullet::RotateBullet(int num, float theta) {
 	//回転行列
-	object_[num].rotateMatrix = MakeRotateMatrix(theta);
+	object_[num].rotateMatrix = MakeRotateMatrix(theta + float(M_PI) / 2.0f);
 
-	/*object_[num].rotateMatrix = MakeRotateMatrix(float(M_PI) / 2);*/
+	/*object_[num].rotateMatrix = MakeRotateMatrix(-float(M_PI) / 2);*/
 
 	//平行移動
 	object_[num].translateMatrix = MakeTranslateMatrix(object_[num].pos);
@@ -397,7 +397,7 @@ void BossBullet::FourDireIsShot(int num) {
 		object_[num].velocity.y *= sinf(object_[num].shotDire);
 
 		//リソースの回転
-		RotateBullet(num,object_[num].shotDire);
+		/*RotateBullet(num,object_[num].shotDire);*/
 	}
 }
 
@@ -413,7 +413,7 @@ void BossBullet::AllDireShot() {
 			object_[i].velocity.y *= sinf(object_[i].shotDire);
 
 			//リソースの回転
-			RotateBullet(i, object_[i].shotDire);
+			/*RotateBullet(i, object_[i].shotDire);*/
 
 			//maxまで撃ったらランダムに切り替える
 			if (i >= kBulletMax_ - 1) {
@@ -440,7 +440,7 @@ void BossBullet::RotateDireShot() {
 			object_[i].velocity.y *= sinf(object_[i].shotDire);
 
 			//リソースの回転
-			RotateBullet(i, object_[i].shotDire);
+			/*RotateBullet(i, object_[i].shotDire);*/
 
 			//全部撃ち終わったらランダムにする
 			if (i == kBulletMax_ - 1) {
