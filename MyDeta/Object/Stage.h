@@ -14,6 +14,10 @@ private:
 
 	float bulletVanishRange_;
 
+	int gh_;
+
+	unsigned int color_;
+
 	//インスタンス
 	Coordinate* cie_ = Coordinate::GetInstance();
 

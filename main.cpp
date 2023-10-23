@@ -61,7 +61,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	char keys[256] = { 0 };
 	char preKeys[256] = { 0 };
 
-	GameScene scene = RESULT;
+	GameScene scene = GAME;
 
 	// エミッターのインスタンスを作成
 	Emitter emitter;
@@ -311,8 +311,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				/// ↓描画処理ここから
 				/// 
 
-				boss_.Draw();
 				stage_.Draw();
+				boss_.Draw();
 				player_.Draw();
 				range_.Draw();
 				emitter.Draw(); // エミッターの描画処理を呼ぶ

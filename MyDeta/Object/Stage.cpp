@@ -12,11 +12,26 @@ void Stage::Init() {
 
 	rangeRadius_ = 180.0f;
 
+	gh_ = Novice::LoadTexture("./images/Resource/Stage/bgWave1.png");
+
+	color_ = 0xffffffff;
+
 	//デバック用
 	bulletVanishRange_ = 500.0f;
 }
 
 void Stage::Draw() {
+	Novice::DrawSprite(
+		0,
+		0,
+		gh_,
+		1.0f,
+		1.0f,
+		0.0f,
+		color_
+	);
+
+
 	Novice::DrawEllipse(static_cast<int>(pos_.x + cie_->GetOrigine().x),
 		static_cast<int>(pos_.y + cie_->GetOrigine().y),
 		static_cast<int>(radius_),
@@ -40,5 +55,4 @@ void Stage::Draw() {
 		0.0f,
 		0xff0000ff,
 		kFillModeWireFrame);
-
 }
