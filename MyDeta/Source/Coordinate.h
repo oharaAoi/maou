@@ -6,6 +6,7 @@ class Coordinate final
 {
 private:
 
+	Vector2f scroll_;
 	
 	Coordinate();
 	~Coordinate();
@@ -21,10 +22,12 @@ public:
 
 	static Coordinate* GetInstance();
 
-	/*void Init();*/
+	void Init();
 
 	//この関数を持ってきてworld1座標系からscereen座標系に変換
 	const Vector2<float> GetOrigine()const { return origine_; }
 
+	Vector2f GetScroll() { return scroll_; }
+	void SetScroll(Vector2f value) { scroll_ = value; }
 };
 

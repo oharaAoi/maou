@@ -15,9 +15,13 @@ private:
 
 	float bulletVanishRange_;
 
-	int gh_;
+	struct BackGround {
+		Vector2f pos;
+		int gh;
+		unsigned int color;
+	};
 
-	unsigned int color_;
+	BackGround backGround_[4];
 
 	//==========================================
 
@@ -28,6 +32,7 @@ private:
 		Vector2f size;
 		Vector2f velocity;
 		int gh_;
+		unsigned int color;
 	};
 
 	Base cloud[kCloudMax];

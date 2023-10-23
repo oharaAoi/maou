@@ -11,10 +11,27 @@ void Stage::Init() {
 	radius_ = 300.0f;
 
 	rangeRadius_ = 180.0f;
+	
+	backGround_[0].pos.x = 0;
+	backGround_[0].pos.y = 720;
+	backGround_[0].gh = Novice::LoadTexture("./images/Resource/Stage/backGround/bgWave1.png");
+	backGround_[0].color = 0xffffffff;
 
-	gh_ = Novice::LoadTexture("./images/Resource/Stage/backGround/bgWave1.png");
+	backGround_[1].pos.x = 0;
+	backGround_[1].pos.y = 0;
+	backGround_[1].gh = Novice::LoadTexture("./images/Resource/Stage/backGround/bgWave1.png");
+	backGround_[1].color = 0xffffffff;
 
-	color_ = 0xffffffff;
+	backGround_[2].pos.x = 0;
+	backGround_[2].pos.y = -720;
+	backGround_[2].gh = Novice::LoadTexture("./images/Resource/Stage/backGround/bgWave2.png");
+	backGround_[2].color = 0xffffffff;
+
+	backGround_[3].pos.x = 0;
+	backGround_[3].pos.y = -1440;
+	backGround_[3].gh = Novice::LoadTexture("./images/Resource/Stage/backGround/bgWave3.png");
+	backGround_[3].color = 0xffffffff;
+	
 
 	//==========================================
 	//雲
@@ -27,6 +44,8 @@ void Stage::Init() {
 
 		cloud[i].size.x = 64.0f;
 		cloud[i].size.y = 64.0f;
+
+		cloud[i].color = 0xffffffff;
 	}
 
 	cloud[0].gh_ = Novice::LoadTexture("./images/Resource/Stage/cloud/cloud1.png");
@@ -57,15 +76,17 @@ void Stage::Update() {
 }
 
 void Stage::Draw() {
-	Novice::DrawSprite(
-		0,
-		0,
-		gh_,
-		1.0f,
-		1.0f,
-		0.0f,
-		color_
-	);
+	for (int i = 0; i < 2; i++) {
+		Novice::DrawSprite(
+			static_cast<int>(backGround_[i].pos.x),
+			static_cast<int>(backGround_[i].pos.y),
+			backGround_[i].gh,
+			1.0f,
+			1.0f,
+			0.0f,
+			backGround_[i].color
+		);
+	}
 
 	for (int i = 0; i < kCloudMax; i++) {
 		Novice::DrawSprite(
@@ -75,7 +96,7 @@ void Stage::Draw() {
 			1.0f,
 			1.0f,
 			0.0f,
-			color_
+			cloud[i].color
 		);
 	}
 

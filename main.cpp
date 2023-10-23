@@ -61,12 +61,17 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	char keys[256] = { 0 };
 	char preKeys[256] = { 0 };
 
-	GameScene scene = GAME;
+	GameScene scene = TITLE;
 
 	// エミッターのインスタンスを作成
 	Emitter emitter;
 
 	PlayerWindEmitter playerWindEmitter;
+
+
+	//========================================================
+	// Source
+	/*Coordinate* cie_ = Coordinate::GetInstance();*/
 
 	//========================================================
 	//System
@@ -128,8 +133,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				/// ↓更新処理ここから
 				/// 
 
-
-
 				if (keys[DIK_SPACE] && !preKeys[DIK_SPACE]) {
 					isChangeScene = true;
 				}
@@ -189,6 +192,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 						collision.Init();
 						stage_.Init();
 					}
+
 
 				} else {
 					if (sceneT > 0.0f) { sceneT--; }

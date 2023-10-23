@@ -1,7 +1,7 @@
 ﻿#include "Coordinate.h"
 
 Coordinate::Coordinate() {
-	/*Init();*/
+	Init();
 }
 
 const Vector2 <float> Coordinate::origine_ = { kWindowWidth / 2, kWindowHeight / 2 };
@@ -15,7 +15,10 @@ Coordinate* Coordinate::GetInstance() {
 	return &instance;
 }
 
-//void Coordinate::Init() {
-//	origine_.x = kWindowWidth / 2;
-//	origine_.y = kWindowHeight / 2;
-//}
+void Coordinate::Init() {
+	/*origine_.x = kWindowWidth / 2;
+	origine_.y = kWindowHeight / 2;*/
+
+	scroll_.x = 0.0f;
+	scroll_.y = -720.0f;
+}
