@@ -302,8 +302,6 @@ void BossBullet::RotateBullet(int num, float theta) {
 	//回転行列
 	object_[num].rotateMatrix = MakeRotateMatrix(theta + float(M_PI) / 2.0f);
 
-	/*object_[num].rotateMatrix = MakeRotateMatrix(-float(M_PI) / 2);*/
-
 	//平行移動
 	object_[num].translateMatrix = MakeTranslateMatrix(object_[num].pos);
 
