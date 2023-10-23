@@ -5,6 +5,10 @@ Timer::Timer() {
 
 	font_ = Novice::LoadTexture("./images/Resource/Font/numberFont.png");
 	fontSize_ = { 210.0f / 10.0f, 36.0f };
+
+	for (int i = 0; i < 3; i++) {
+		bestTime_[i] = 0.0f;
+	}
 }
 
 Timer::~Timer() {
