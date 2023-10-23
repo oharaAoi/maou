@@ -4,7 +4,7 @@ Tutorial::Tutorial() {
 
 	Init();
 
-	white1x1GH_ = Novice::LoadTexture("./NoviceResources/white1x1.png");
+	
 
 	tutorialGH_[0] = Novice::LoadTexture("./Images/Resource/Tutorial/tutorial1.png");
 	tutorialGH_[1] = Novice::LoadTexture("./Images/Resource/Tutorial/tutorial2.png");
@@ -15,6 +15,8 @@ Tutorial::~Tutorial() {
 }
 
 void Tutorial::Init() {
+
+	white1x1GH_ = Novice::LoadTexture("./NoviceResources/white1x1.png");
 	isEndTutorial_ = false;
 	pressFrame_ = 60.0f * 4/*s*/;
 
