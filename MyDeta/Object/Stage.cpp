@@ -40,13 +40,13 @@ void Stage::Draw() {
 		0xffffffff,
 		kFillModeWireFrame);
 
-	Novice::DrawEllipse(static_cast<int>(pos_.x + cie_->GetOrigine().x),
+	/*Novice::DrawEllipse(static_cast<int>(pos_.x + cie_->GetOrigine().x),
 		static_cast<int>(pos_.y + cie_->GetOrigine().y),
 		static_cast<int>(rangeRadius_),
 		static_cast<int>(rangeRadius_),
 		0.0f,
 		0xffffffff,
-		kFillModeWireFrame);
+		kFillModeWireFrame);*/
 
 	Novice::DrawEllipse(static_cast<int>(pos_.x + cie_->GetOrigine().x),
 		static_cast<int>(pos_.y + cie_->GetOrigine().y),
