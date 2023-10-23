@@ -237,6 +237,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 				// ==================================================
 
+				stage_.Update();
+
 				player_.Update(keys, preKeys, stage_);
 
 				boss_.UpDate(bossBullet_);

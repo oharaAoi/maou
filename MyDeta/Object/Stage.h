@@ -20,6 +20,19 @@ private:
 	unsigned int color_;
 
 	//==========================================
+
+	static const int kCloudMax = 4;
+
+	struct Base {
+		Vector2f pos;
+		Vector2f size;
+		Vector2f velocity;
+		int gh_;
+	};
+
+	Base cloud[kCloudMax];
+
+	//==========================================
 	//bgm
 	//リソース
 	int gameBgm_;
@@ -39,6 +52,8 @@ public:
 	Stage();
 
 	void Init();
+
+	void Update();
 
 	void Draw();
 
