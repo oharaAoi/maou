@@ -32,6 +32,8 @@ void BossBullet::Init() {
 		//当たり判定で使う
 		object_[i].isShot = false;
 		object_[i].isPushBacked = false;
+		object_[i].isHit = false;
+		object_[i].bossHitSeHandle_ = -1;
 
 		object_[i].center2bLength = 0.0f;
 
@@ -73,6 +75,8 @@ void BossBullet::Init() {
 		object_[i].translateMatrix;
 		object_[i].worldMatrix;
 
+
+
 	}
 
 	//==============================
@@ -111,7 +115,11 @@ void BossBullet::Init() {
 	bulletGh_[0] = Novice::LoadTexture("./images/Resource/BossBullet/slowBullet.png");
 	bulletGh_[1] = Novice::LoadTexture("./images/Resource/BossBullet/fastBullet.png");
 	bulletGh_[2] = Novice::LoadTexture("./images/Resource/BossBullet/explodeBullet.png");
-	bulletGh_[3] = Novice::LoadTexture("./images/Resource/BossBullet/vanishBullet.png");;
+	bulletGh_[3] = Novice::LoadTexture("./images/Resource/BossBullet/vanishBullet.png");
+
+	bossHitSe_ = Novice::LoadAudio("./images/Sounds/HitSe/HitSe1.mp3");
+
+	bossHitSeVolume_ = 0.3f;
 }
 
 //弾の種類をランダムにしたい時
@@ -579,6 +587,14 @@ void BossBullet::Update(Vector2<float> bossPos, Player& player, Stage stage, Emi
 				}
 			}
 		}
+
+		//=====================================================
+		//音を鳴らす処理
+		if (object_[i].isHit) {
+			Novice::StopAudio(object_[i].bossHitSeHandle_);
+			object_[i].isHit = false;
+		}
+
 	}
 }
 
@@ -670,6 +686,12 @@ void BossBullet::Draw() {
 					0.0f,
 					object_[i].color,
 					kFillModeWireFrame);
+			}
+
+			if (object_[i].isHit) {
+				PlayAudio(object_[i].bossHitSeHandle_, bossHitSe_, bossHitSeVolume_);
+				Novice::StopAudio(object_[i].bossHitSeHandle_);
+				object_[i].isHit = false;
 			}
 		}
 	}
