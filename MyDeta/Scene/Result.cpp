@@ -2,6 +2,8 @@
 
 Result::Result() {
 	Init();
+
+	resultGH_[0] = Novice::LoadTexture("./images/resource/result/result.png");
 }
 
 Result::~Result() {
@@ -28,7 +30,7 @@ void Result::Update(char* keys, char* preKeys) {
 	}
 }
 
-void Result::Draw() {
+void Result::Draw(Timer timer) {
 
 	Novice::DrawBox(
 		0, 0,
@@ -43,4 +45,19 @@ void Result::Draw() {
 		{ Lerp(EaseInOutExpo(resultFream_ / 60.0f), 0.0f, kWindowWidth - 100.0f), Lerp(EaseInOutExpo(resultFream_ / 60.0f), 0.0f, kWindowHeight - 100.0f) },
 		0xFFFFFFFF
 	);
+
+	// result word
+	DrawSprite(
+		{ kWindowWidth / 2.0f, kWindowHeight / 2.0f },
+		{ Lerp(EaseInOutExpo(resultFream_ / 60.0f), 0.0f, kWindowWidth - 100.0f), Lerp(EaseInOutExpo(resultFream_ / 60.0f), 0.0f, kWindowHeight - 100.0f) },
+		resultGH_[0],
+		{ kWindowWidth - 100.0f , kWindowHeight - 100.0f },
+		ShiftColor(EaseInOutExpo(resultFream_ / 60.0f), 0xFFFFFF00, 0xFFFFFFFF)
+	);
+
+	// time
+	timer.DrawTimer(
+		{ (kWindowWidth / 2.0f) - (((21.0f * 2.5f) * 3.0f) / 2.0f) + 10.0f, 240.0f},
+		{21.0f * 2.5f, 32.0f * 2.5f},
+		timer.GetTimer(), ShiftColor(EaseInOutExpo(resultFream_ / 60.0f), 0xFAFAFA00, 0xFAFAFAFF));
 }

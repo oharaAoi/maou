@@ -73,6 +73,9 @@ void DrawWindow(const Vector2f& center, const Sizef& size, uint32_t color);
 
 void DrawJapanese(const Vector2 <int>& pos, const Sizef& size, int wordNum, short int* word, uint32_t color, int font);
 
+void DrawSprite(const Vector2f& center, const Sizef& size, int textureHandle, const Sizef& textureSize, uint32_t color);
+void DrawJapanese(const Vector2 <int>& pos, const Sizef& size, int wordNum, short int* word, uint32_t color, int font);
+
 /* ---------------------------------
  AudioFunction
 ---------------------------------- */
