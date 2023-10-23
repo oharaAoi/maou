@@ -231,11 +231,4 @@ void Boss::Draw() {
 			0xffffffff
 		);
 	}
-
-
-
-	Novice::ScreenPrintf(600, 10, "Boss.type:%d", type_);
-	Novice::ScreenPrintf(600, 40, "Boss.hp:%f", hp_);
-	Novice::ScreenPrintf(600, 60, "Boss.frameCount:%d", frameCount_);
-	Novice::ScreenPrintf(600, 80, "Boss.dethCount_:%d", deathCount_);
 }

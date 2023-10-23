@@ -300,7 +300,9 @@ void BossBullet::BulletShotChange(Barrage type) {
 //絵を進行方向に回転させる
 void BossBullet::RotateBullet(int num, float theta) {
 	//回転行列
-	object_[num].rotateMatrix = MakeRotateMatrix(-theta);
+	object_[num].rotateMatrix = MakeRotateMatrix(theta);
+
+	/*object_[num].rotateMatrix = MakeRotateMatrix(float(M_PI) / 2);*/
 
 	//平行移動
 	object_[num].translateMatrix = MakeTranslateMatrix(object_[num].pos);
@@ -355,8 +357,8 @@ void BossBullet::IsShot(Vector2<float> playerPos) {
 			object_[i].velocity.x *= cosf(object_[i].shotDire);
 			object_[i].velocity.y *= sinf(object_[i].shotDire);
 
-			//リソースの回転
-			RotateBullet(i, object_[i].shotDire);
+			////リソースの回転
+			//RotateBullet(i, object_[i].shotDire);
 
 			break;
 		}
@@ -376,8 +378,8 @@ void BossBullet::RandamDireShot() {
 			object_[i].velocity.x *= cosf(object_[i].shotDire);
 			object_[i].velocity.y *= sinf(object_[i].shotDire);
 
-			//リソースの回転
-			RotateBullet(i, object_[i].shotDire);
+			////リソースの回転
+			//RotateBullet(i, object_[i].shotDire);
 
 			break;
 		}
@@ -617,17 +619,5 @@ void BossBullet::Draw() {
 					kFillModeWireFrame);
 			}
 		}
-
-		Novice::ScreenPrintf(10, 20, "barrageType_:%d", barrageType_);
-
-		Novice::ScreenPrintf(10, 40, "randTypeMax_:%d", randTypeMax_);
-
-		Novice::ScreenPrintf(200 + ((i / 10) * 75), 10 + ((i % 10) * 20), ":%d", object_[i].isShot);
-
-		Novice::ScreenPrintf(10, 60, "coolTimeRandamLimit_ :%d", coolTimeRandamLimit_);
-		Novice::ScreenPrintf(10, 80, "coolTimeChaseLimit_ :%d", coolTimeChaseLimit_);
-		Novice::ScreenPrintf(10, 100, "freamCount_ :%d", freamCount_);
-		Novice::ScreenPrintf(10, 120, "coolTimeLimit_ :%d", coolTimeLimit_);
-		/*Novice::ScreenPrintf(1100, 20 + (i * 20), "explodeCount:%d", object_[i].explodeCount);*/
 	}
 }
