@@ -29,9 +29,9 @@ public:
 	void Draw();
 
 	// user method
-	void DrawTimer(Vector2f pos, float time);
+	void DrawTimer(Vector2f pos, Sizef size, float time, unsigned int color);
 
 	// accessor
-
+	float GetTimer() { return timer_; }
 };
 

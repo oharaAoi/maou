@@ -408,7 +408,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				emitter.Draw(); // エミッターの描画処理を呼ぶ
 				playerWindEmitter.Draw(); // プレイヤーの風の描画処理
 
-				result.Draw();
+				result.Draw(timer);
 
 				///
 				/// ↑描画処理ここまで

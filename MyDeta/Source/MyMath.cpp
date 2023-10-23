@@ -384,3 +384,15 @@ void DrawJapanese(const Vector2<int>& pos, const Sizef& size, int wordNum, short
 		);
 	}
 }
+
+void DrawSprite(
+	const Vector2f& center, const Sizef& size, int textureHandle, const Sizef& textureSize, uint32_t color) {
+
+	Novice::DrawSprite(
+		static_cast<int>(center.x - (size.width / 2.0f)), static_cast<int>(center.y - (size.height / 2.0f)),
+		textureHandle,
+		size.width / textureSize.width , size.height / textureSize.height,
+		0.0f,
+		color
+	);
+}

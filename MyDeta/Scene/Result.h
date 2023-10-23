@@ -7,8 +7,13 @@
 #include "MyDeta/Source/MyMath.h"
 #include "MyDeta/Source/Easing.h"
 
+// System //
+#include "MyDeta/System/Timer.h"
+
 class Result {
 private:
+
+	int resultGH_[1];
 
 	bool isPressSpace_;
 	bool isEndResult_;
@@ -24,7 +29,7 @@ public:
 	// default method
 	void Init();
 	void Update(char* keys, char* preKeys);
-	void Draw();
+	void Draw(Timer timer);
 
 	// user method
 
