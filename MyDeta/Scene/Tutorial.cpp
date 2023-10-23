@@ -115,7 +115,7 @@ void Tutorial::Update(char* keys, char* preKeys,
 	collisionManager.CheckCollision(boss, bossBullet, emitter);
 }
 
-void Tutorial::Draw(Player player, Stage stage, Boss boss, BossBullet bossBullet, PlayerWindEmitter playerWindEmitter) {
+void Tutorial::Draw(Player& player, Stage& stage, Boss boss, BossBullet bossBullet, PlayerWindEmitter playerWindEmitter) {
 	// skip
 	DrawRhombusAnimation(
 		pressFrame_ / 240.0f,

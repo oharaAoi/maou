@@ -49,7 +49,7 @@ public:
 	void Init();
 	void Update(char* keys, char* preKeys, 
 		Player& player, Stage& stage, Boss& boss, BossBullet& bossBullet, Emitter& emitter, CollisionManager& collisionManager, PlayerRangeDetector& playerRangeDetector, PlayerWindEmitter& playerWindEmitter);
-	void Draw(Player player, Stage stage, Boss boss, BossBullet bossBullet, PlayerWindEmitter playerWindEmitter);
+	void Draw(Player& player, Stage& stage, Boss boss, BossBullet bossBullet, PlayerWindEmitter playerWindEmitter);
 
 	// user method
 

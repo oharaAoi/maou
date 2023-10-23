@@ -148,7 +148,7 @@ void Boss::UpDate(BossBullet& bossBullet_) {
 void Boss::Draw() {
 	DrawRhombus(
 		{ kWindowWidth / 2.0f, kWindowHeight / 2.0f },
-		75.0f, 15.0f,
+		76.0f, 15.0f,
 		0x8a8a8aFF,
 		white1x1GH
 	);

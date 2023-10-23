@@ -4,7 +4,7 @@ Timer::Timer() {
 	Init();
 
 	font_ = Novice::LoadTexture("./images/Resource/Font/numberFont.png");
-	fontSize_ = { 210.0f / 10.0f, 36.0f };
+	fontSize_ = { 420.0f / 10.0f, 72.0f };
 
 	for (int i = 0; i < 3; i++) {
 		bestTime_[i] = 0.0f;
@@ -28,7 +28,7 @@ void Timer::Draw() {
 		0xFAFAFAFF
 	);
 
-	DrawTimer({ 65.0f, 35.0f }, fontSize_, timer_, 0xFAFAFAFF);
+	DrawTimer({ 65.0f, 35.0f }, { 21.0f, 32.0f }, timer_, 0xFAFAFAFF);
 }
 
 void Timer::DrawTimer(Vector2f pos, Sizef size, float time, unsigned int color) {
