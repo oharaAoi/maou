@@ -690,8 +690,6 @@ void BossBullet::Draw() {
 
 			if (object_[i].isHit) {
 				PlayAudio(object_[i].bossHitSeHandle_, bossHitSe_, bossHitSeVolume_);
-				Novice::StopAudio(object_[i].bossHitSeHandle_);
-				object_[i].isHit = false;
 			}
 		}
 	}
