@@ -39,7 +39,7 @@ void LoadFile::Init() {
 }
 
 //自分のタイムをcountに入れる
-void LoadFile::WriteFile(int count) {
+void LoadFile::WriteFile(float count) {
 	json scoreData;
 
 	std::ifstream inputFile(filePath);
@@ -48,6 +48,7 @@ void LoadFile::WriteFile(int count) {
 		inputFile.close();
 	}
 
+	///タイムの比較
 	if (scoreData[hiScore]["time"] > count) {
 		scoreData[hiScore]["time"] = count;
 
@@ -69,7 +70,7 @@ void LoadFile::WriteFile(int count) {
 }
 
 //過去のタイムを読み込み配列に入れる
-void LoadFile::LoadJsonFile(int* time) {
+void LoadFile::LoadJsonFile(float* time) {
 	json scoreData;
 
 	std::ifstream inputFile(filePath);

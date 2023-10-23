@@ -12,8 +12,6 @@ Timer::~Timer() {
 
 void Timer::Init() {
 	timer_ = 0.0f;
-
-	
 }
 
 void Timer::Update() {

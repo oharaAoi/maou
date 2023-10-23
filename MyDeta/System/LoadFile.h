@@ -21,9 +21,9 @@ public:
 
 	void Init();
 
-	void WriteFile(int count);
+	void WriteFile(float count);
 
-	void LoadJsonFile(int* time);
+	void LoadJsonFile(float* time);
 
 };
 

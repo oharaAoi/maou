@@ -9,6 +9,8 @@
 #include "MyDeta/Source/MyMath.h"
 #include "MyDeta/Source/Coordinate.h"
 
+#include "MyDeta/System/LoadFile.h"
+
 class Timer {
 private:
 
@@ -16,6 +18,8 @@ private:
 	Sizef fontSize_;
 
 	float timer_;
+
+	float bestTime_[3];
 
 public:
 
@@ -33,5 +37,7 @@ public:
 
 	// accessor
 	float GetTimer() { return timer_; }
+
+	float* GetBestTimer() { return bestTime_; }
 };
 
