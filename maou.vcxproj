@@ -133,6 +133,7 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClCompile Include="MyDeta\SceneChange\BoxTransition.cpp" />
     <ClCompile Include="MyDeta\Scene\Result.cpp" />
     <ClCompile Include="MyDeta\Scene\GameOver.cpp" />
+    <ClCompile Include="MyDeta\Scene\Title.cpp" />
     <ClCompile Include="MyDeta\Scene\Tutorial.cpp" />
     <ClCompile Include="MyDeta\Source\Coordinate.cpp" />
     <ClCompile Include="MyDeta\Source\Easing.cpp" />
@@ -192,6 +193,7 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClInclude Include="MyDeta\SceneChange\BoxTransition.h" />
     <ClInclude Include="MyDeta\Scene\Result.h" />
     <ClInclude Include="MyDeta\Scene\GameOver.h" />
+    <ClInclude Include="MyDeta\Scene\Title.h" />
     <ClInclude Include="MyDeta\Scene\Tutorial.h" />
     <ClInclude Include="MyDeta\Source\Coordinate.h" />
     <ClInclude Include="MyDeta\Source\Easing.h" />
