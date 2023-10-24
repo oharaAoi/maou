@@ -224,7 +224,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 					bossBullet_.Init();
 					collision.Init();
 					stage_.Init();
-
+					result.Init();
 				}
 
 
@@ -418,6 +418,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓更新処理ここから
 			/// 
 
+			//プレイヤーの音を止めてしまう(余裕があったら変えたい)
+			player_.AllSoundStop();
+
 			gameOver_.Update(keys, preKeys);
 
 			if (gameOver_.GetChangeToGame() == true) {
@@ -463,6 +466,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓更新処理ここから
 			/// 
 
+			//プレイヤーの音を止めてしまう(余裕があったら変えたい)
+			player_.AllSoundStop();
+
 			result.Update(keys, preKeys);
 
 			if (result.GetIsEndResult()) {
@@ -474,7 +480,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				player_.Init();
 				gameOver_.Init();
 				timer.Init();
-				result.Init();
 				tutorial.Init();
 			}
 

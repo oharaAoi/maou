@@ -20,6 +20,13 @@ private:
 
 	float resultFream_;
 
+	//sound
+	int gameClearSE_;
+
+	int gameClearSEHandle_;
+
+	float gameClearSEVolume_;
+
 public:
 
 	// constructor & destructor

@@ -110,11 +110,14 @@ private:
 
 	//オーバーヒート
 	int overHeatRecoverSE_;
+	int overHeatWarnigSE_;
 
 	int overHeatRecoverHandle_;
+	int overHeatWarningHandle_;
 	bool isOverHeatRecover_;
 
 	float overHeatRecoverVolume_;
+	float overHeatWarningVolume_;
 
 	//ヒット時
 	int hitSe_;
@@ -140,6 +143,7 @@ public:
 	void Update(char* keys, char* preKeys, Stage& stage_);
 	void Draw();
 
+	void AllSoundStop();
 
 	// default method - overload
 	void Update(char* keys, Stage& stage_, Restrictions restriction); // -> use tutorial
