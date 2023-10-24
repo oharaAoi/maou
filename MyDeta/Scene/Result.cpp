@@ -1,4 +1,4 @@
-#include "Result.h"
+﻿#include "Result.h"
 
 Result::Result() {
 	Init();
@@ -14,6 +14,12 @@ void Result::Init() {
 
 	isEndResult_ = false;
 	resultFream_ = 0.0f;
+
+	gameClearSE_ = Novice::LoadAudio("./images/Sounds/gameClear/gameClearSE.mp3");
+
+	gameClearSEHandle_ = -1;
+
+	gameClearSEVolume_ = 0.2f;
 }
 
 void Result::Update(char* keys, char* preKeys) {
@@ -72,5 +78,10 @@ void Result::Draw(Timer timer) {
 			{ 21.0f * 2.0f, 32.0f * 2.0f },
 			*(bestTime + bi), ShiftColor(EaseInOutExpo(resultFream_ / 60.0f), 0xFAFA0000, 0xFAFA00FF)
 		);
+	}
+
+	//音を鳴らす
+	if (gameClearSEHandle_ == -1) {
+		PlayAudio(gameClearSEHandle_, gameClearSE_, gameClearSEVolume_, false);
 	}
 }

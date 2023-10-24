@@ -220,7 +220,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 					bossBullet_.Init();
 					collision.Init();
 					stage_.Init();
-
+					result.Init();
 				}
 
 
@@ -476,7 +476,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				player_.Init();
 				gameOver_.Init();
 				timer.Init();
-				result.Init();
 				tutorial.Init();
 			}
 
