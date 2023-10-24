@@ -32,6 +32,7 @@ private:
 	//==========================================
 	//sound
 	int gameOverBgm_;
+	int gameOverBgmHandle_;
 	float gameOverBgmVolume_;
 
 	bool playSound_;

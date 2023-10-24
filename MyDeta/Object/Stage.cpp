@@ -62,6 +62,7 @@ void Stage::Init() {
 	gameBgm_ = Novice::LoadAudio("./images/Sounds/bgm/souldrive.mp3");
 
 	gemeBgmHandle_ = -1;
+	isStopSound_ = false;
 
 	gameBgmVolume_ = 0.3f;
 
@@ -101,7 +102,6 @@ void Stage::Update(int waveNum) {
 			isBlackOutFinish_ = true;
 		}
 	}
-
 }
 
 void Stage::Draw() {
@@ -156,5 +156,9 @@ void Stage::Draw() {
 
 	//==========================================
 	//sound
-	PlayAudio(gemeBgmHandle_, gameBgm_, gameBgmVolume_);
+	if (!isStopSound_) {
+		PlayAudio(gemeBgmHandle_, gameBgm_, gameBgmVolume_, true);
+	}else {
+		Novice::StopAudio(gemeBgmHandle_);
+	}
 }

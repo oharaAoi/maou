@@ -463,9 +463,9 @@ void DrawSprite(
  AudioFunction
 ---------------------------------- */
 
-void PlayAudio(int& voiceHandle, int soundHandle, float soundVolume) {
+void PlayAudio(int& voiceHandle, int soundHandle, float soundVolume, bool isLoop) {
 	if (Novice::IsPlayingAudio(voiceHandle) == 0 || voiceHandle == -1) {
-		voiceHandle = Novice::PlayAudio(soundHandle, true, soundVolume);
+		voiceHandle = Novice::PlayAudio(soundHandle, isLoop, soundVolume);
 	}
 }
 

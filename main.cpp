@@ -64,7 +64,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	
 
-	GameScene scene = TITLE;
+	GameScene scene = GAME;
 
 	// エミッターのインスタンスを作成
 	Emitter emitter;
@@ -333,7 +333,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				//playerが死んだらgameOverへ
 				if (player_.GetIsAlive() == false) {
 					scene = GAME_OVER;
-					gameOver_.SetPlaySound(true);
 				}
 
 

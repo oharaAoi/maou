@@ -43,7 +43,9 @@ void GameOver::Init() {
 	//==========================================
 	gameOverBgm_ = Novice::LoadAudio("./images/Sounds/bgm/gameOver.mp3");
 
-	gameOverBgmVolume_ = 0.1f;
+	gameOverBgmVolume_ = 0.2f;
+
+	gameOverBgmHandle_ = -1;
 
 	playSound_ = false;
 
@@ -60,7 +62,7 @@ void GameOver::Update(char* keys, char* preKeys) {
 		}
 	}
 
-	if (keys[DIK_S] && !preKeys[DIK_S]){
+	if (keys[DIK_S] && !preKeys[DIK_S]) {
 		if (goToGame_) {
 			goToGame_ = false;
 		} else {
@@ -90,7 +92,7 @@ void GameOver::Update(char* keys, char* preKeys) {
 		object_[1].size.x = 1.2f;
 		object_[1].size.y = 1.2f;
 	}
-	
+
 }
 
 void GameOver::Draw() {
@@ -145,9 +147,7 @@ void GameOver::Draw() {
 
 	//==========================================
 
-	if (playSound_) {
-		Novice::PlayAudio(gameOverBgm_, false, gameOverBgmVolume_);
-	}
+	PlayAudio(gameOverBgmHandle_, gameOverBgm_, gameOverBgmVolume_, false);
 
 	Novice::ScreenPrintf(1000, 100, "obj[0].pos.x:%f", object_[0].pos.x);
 }

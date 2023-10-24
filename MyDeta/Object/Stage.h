@@ -55,6 +55,7 @@ private:
 
 	//フラグ
 	int gemeBgmHandle_;
+	bool isStopSound_;
 
 	//音量
 	float gameBgmVolume_;
@@ -95,6 +96,8 @@ public:
 	bool GetIsBlackOutFinish() { return isBlackOutFinish_; }
 
 	unsigned int GetBlackOutColor() { return blackOutColor_; }
+
+	void SetIsStopSound(bool isStopSound) { isStopSound_ = isStopSound; }
 
 };
 

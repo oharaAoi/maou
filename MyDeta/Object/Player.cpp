@@ -227,6 +227,7 @@ void Player::Update(char* keys, char* preKeys, Stage& stage_) { /// 更新処理
 	//playerの生存確認
 	if (hp_ <= 0) {
 		stage_.SetIsBlackOut(true);
+		stage_.SetIsStopSound(true);
 
 		if (stage_.GetIsBlackOutFinish() == true) {
 			isAlive_ = false;
@@ -321,12 +322,12 @@ void Player::Draw() { /// 描画処理
 		break;
 
 	case WindowStrength::WEAK:
-		PlayAudio(weakWindHandle_, weakWindSe_, windSoundVolume_);
+		PlayAudio(weakWindHandle_, weakWindSe_, windSoundVolume_, true);
 		break;
 
 	case WindowStrength::STRONG:
 		Novice::StopAudio(weakWindHandle_);
-		PlayAudio(strongWindHandle_, strongWindSe_, windSoundVolume_);
+		PlayAudio(strongWindHandle_, strongWindSe_, windSoundVolume_, true);
 		break;
 	}
 
