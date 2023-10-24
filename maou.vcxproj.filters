@@ -149,6 +149,9 @@
     <ClCompile Include="MyDeta\Source\Coordinate.cpp">
       <Filter>MyDeta\Source</Filter>
     </ClCompile>
+    <ClCompile Include="MyDeta\Scene\Title.cpp">
+      <Filter>MyDeta\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -309,6 +312,9 @@
       <Filter>MyDeta\System</Filter>
     </ClInclude>
     <ClInclude Include="MyDeta\Scene\GameOver.h">
+      <Filter>MyDeta\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="MyDeta\Scene\Title.h">
       <Filter>MyDeta\Scene</Filter>
     </ClInclude>
   </ItemGroup>

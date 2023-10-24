@@ -36,6 +36,7 @@
 #include "MyDeta/Scene/Tutorial.h"
 #include "MyDeta/Scene/Result.h"
 #include "MyDeta/Scene/GameOver.h"
+#include "MyDeta/Scene/title.h"
 
 
 #include "MyDeta/System/LoadFile.h"
