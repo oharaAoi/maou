@@ -29,6 +29,14 @@ private:
 	//背景
 	int bgGh_;
 
+	//==========================================
+	//sound
+	int gameOverBgm_;
+	float gameOverBgmVolume_;
+
+	bool playSound_;
+
+
 public:
 
 	GameOver();
@@ -43,5 +51,7 @@ public:
 	bool GetChangeToGame() { return changeToGame_; }
 	bool GetChangeToTitle() { return changeToTitle_; }
 
+	void SetPlaySound(bool playSound) { playSound_ = playSound; }
+	bool GetPlaySound() { return  playSound_; }
 };
 

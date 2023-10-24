@@ -333,6 +333,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				//playerが死んだらgameOverへ
 				if (player_.GetIsAlive() == false) {
 					scene = GAME_OVER;
+					gameOver_.SetPlaySound(true);
 				}
 
 
