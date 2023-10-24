@@ -38,6 +38,9 @@ void BossBullet::Init() {
 		object_[i].center2bLength = 0.0f;
 
 		//==============================
+		object_[i].rangeOutCount = 0;
+
+		//==============================
 		//描画で使う
 		object_[i].drawTheta = 0.0f;
 
@@ -338,7 +341,7 @@ void BossBullet::ExplodeBullet(int num, Emitter& emitter) {
 			}
 		}
 	}
-
+	emitter.Emit(static_cast<int>(object_[num].pos.x), static_cast<int>(object_[num].pos.y), 6);
 	OutOfScreenInit(num);
 }
 
@@ -528,12 +531,12 @@ void BossBullet::Update(Vector2<float> bossPos, Player& player, Stage stage, Emi
 			if (object_[i].bulletType == EXPLODE) {
 				object_[i].explodeCount++;
 
-				if (object_[i].explodeCount >= 350) {
+				if (object_[i].explodeCount >= 250) {
 					Blinking(object_[i].color);
 				}
 
 				//爆発する範囲内のものをすべて初期化
-				if (object_[i].explodeCount >= 400) {
+				if (object_[i].explodeCount >= 300) {
 					ExplodeBullet(i, emitter);
 					object_[i].explodeCount = 0;
 				}
@@ -577,6 +580,11 @@ void BossBullet::Update(Vector2<float> bossPos, Player& player, Stage stage, Emi
 		//弾がプレイヤーの円周の外に出た時の処理
 		object_[i].center2bLength = CheckLength(stage.GetPos(), object_[i].pos);
 
+		if (object_[i].center2bLength > stage.GetRadius()) {
+
+		}
+		
+		//弾がプレイヤーの赤円周の外に出た時の処理
 		if (object_[i].center2bLength > stage.GetBulletVanishRange()) {
 
 			if (barrageType_ == RANDAM || barrageType_ == CHASE) {

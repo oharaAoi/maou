@@ -15,8 +15,37 @@ void CollisionManager::CheckCollision(Boss& boss_, BossBullet& bossBullet_, Emit
 
 		if (b2bLength_ < bossBullet_.GetRadius(i) + boss_.GetRadius()) {
 			if (bossBullet_.GetIsPushBacked(i) == true) {
-				//エフェクトの生成処理
-				emitter.Emit(static_cast<int>(bossBullet_.GetPos(i).x), static_cast<int>(bossBullet_.GetPos(i).y), 12);
+				//弾がボスに当たった時の処理
+				switch (bossBullet_.GetBulletType(i)) {
+				case SLOW:
+					boss_.SetHp(boss_.GetHp() - 1);
+					//エフェクトの生成処理
+					emitter.Emit(static_cast<int>(bossBullet_.GetPos(i).x), static_cast<int>(bossBullet_.GetPos(i).y), 6);
+
+					break;
+
+				case FAST:
+					boss_.SetHp(boss_.GetHp() - 2);
+
+					//エフェクトの生成処理
+					emitter.Emit(static_cast<int>(bossBullet_.GetPos(i).x), static_cast<int>(bossBullet_.GetPos(i).y), 12);
+
+					break;
+
+				case EXPLODE:
+					boss_.SetHp(boss_.GetHp() - 2);
+
+					//エフェクトの生成処理
+					emitter.Emit(static_cast<int>(bossBullet_.GetPos(i).x), static_cast<int>(bossBullet_.GetPos(i).y), 12);
+					break;
+
+				case VANISH:
+					boss_.SetHp(boss_.GetHp() - 1);
+
+					//エフェクトの生成処理
+					emitter.Emit(static_cast<int>(bossBullet_.GetPos(i).x), static_cast<int>(bossBullet_.GetPos(i).y), 6);
+					break;
+				}
 
 				//弾の処理
 				if (bossBullet_.GetBarrageType() == CHASE || bossBullet_.GetBarrageType() == RANDAM) {
@@ -28,8 +57,7 @@ void CollisionManager::CheckCollision(Boss& boss_, BossBullet& bossBullet_, Emit
 					bossBullet_.SetPos({ static_cast<int>(kWindowWidth), static_cast<int>(kWindowHeight) }, i);
 					bossBullet_.SetIsPushBacked(false, i);
 				}
-
-				//ボスの処理
+				
 				if (bossBullet_.GetBulletType(i) == SLOW || bossBullet_.GetBulletType(i) == VANISH) {
 					boss_.SetHp(boss_.GetHp() - 1);
 				} else {
