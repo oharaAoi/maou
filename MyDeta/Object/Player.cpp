@@ -235,6 +235,45 @@ void Player::Update(char* keys, char* preKeys, Stage& stage_) { /// 更新処理
 }
 
 void Player::Draw() { /// 描画処理
+	// over
+	switch (windowStrength_) {
+		case WindowStrength::OFF: // koko
+
+			DrawCircleAnimation(
+				overHeat_ / 100.0f,
+				{kWindowWidth / 2.0f, kWindowHeight / 2.0f},
+				260.0f, 10.0f,
+				white1x1GH,
+				0x808080D0
+			);
+
+			break;
+
+		default:
+
+			if (overHeat_ > 30.0f) {
+				DrawCircleAnimation(
+					overHeat_ / 100.0f,
+					{ kWindowWidth / 2.0f, kWindowHeight / 2.0f },
+					260.0f, 10.0f,
+					white1x1GH,
+					0x0000faD0
+				);
+
+			} else {
+
+				DrawCircleAnimation(
+					overHeat_ / 100.0f,
+					{ kWindowWidth / 2.0f, kWindowHeight / 2.0f },
+					260.0f, 10.0f,
+					white1x1GH,
+					0xfafa00D0
+				);
+			}
+
+			break;
+	}
+
 	if (hp_ > 0) {
 		// HP
 		DrawRhombus(
@@ -271,35 +310,7 @@ void Player::Draw() { /// 描画処理
 			0xffffffff
 		);
 
-		/// test guage
-		// over
-		switch (windowStrength_) {
-		case WindowStrength::OFF: // koko
-
-			DrawRhombusAnimation(
-				overHeat_ / 100.0f,
-				{ pos_.x + cie_->GetOrigine().x, pos_.y + cie_->GetOrigine().y },
-				rangeRadius_ + 5.0f,
-				10.0f,
-				0x707070ff,
-				white1x1GH
-			);
-
-			break;
-
-		default:
-
-			DrawRhombusAnimation(
-				overHeat_ / 100.0f,
-				{ pos_.x + cie_->GetOrigine().x, pos_.y + cie_->GetOrigine().y },
-				rangeRadius_ + 5.0f,
-				10.0f,
-				ShiftColor(overHeat_ / 100.0f, 0xFAFA00FF, 0x5f9ff7FF),
-				white1x1GH
-			);
-
-			break;
-		}
+		
 	}
 
 	//sounds
