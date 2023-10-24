@@ -509,6 +509,11 @@ void BossBullet::Update(Vector2<float> bossPos, Player& player, Stage stage, Emi
 
 	//==============================================
 	for (int i = 0; i < kBulletMax_; i++) {
+		//前フレームで音がなっていたら音を消す
+		if (object_[i].isHit) {
+			object_[i].isHit = false;
+		}
+
 		if (object_[i].isShot == true) {
 			//消える弾の処理
 			if (object_[i].bulletType == VANISH) {
@@ -690,7 +695,6 @@ void BossBullet::Draw() {
 		//ヒット音を鳴らす
 		if (object_[i].isHit) {
 			Novice::PlayAudio(bossHitSe_, false, bossHitSeVolume_);
-			object_[i].isHit = false;
 		}
 	}
 }
