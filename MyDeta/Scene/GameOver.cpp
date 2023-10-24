@@ -40,6 +40,15 @@ void GameOver::Init() {
 	//==========================================
 	bgGh_ = Novice::LoadTexture("./images/Resource/GameOver/GameOver.png");
 
+	//==========================================
+	gameOverBgm_ = Novice::LoadAudio("./images/Sounds/bgm/gameOver.mp3");
+
+	gameOverBgmVolume_ = 0.1f;
+
+	playSound_ = false;
+
+	/*Novice::StopAudio(gameOverBgm_)*/
+
 }
 
 void GameOver::Update(char* keys, char* preKeys) {
@@ -81,6 +90,7 @@ void GameOver::Update(char* keys, char* preKeys) {
 		object_[1].size.x = 1.2f;
 		object_[1].size.y = 1.2f;
 	}
+	
 }
 
 void GameOver::Draw() {
@@ -97,16 +107,6 @@ void GameOver::Draw() {
 
 	//==========================================
 	//ゲームへ
-	/*Novice::DrawSprite(
-		static_cast<int>(object_[0].pos.x),
-		static_cast<int>(object_[0].pos.y),
-		object_[0].gh,
-		object_[0].size.x,
-		object_[0].size.y,
-		0.0f,
-		0xFFFFFFFF
-	);*/
-
 	Novice::DrawQuad(
 		static_cast<int>(object_[0].pos.x - (object_[0].width / 2) * object_[0].size.x),
 		static_cast<int>(object_[0].pos.y - (object_[0].height / 2) * object_[0].size.y),
@@ -126,16 +126,6 @@ void GameOver::Draw() {
 
 	//==========================================
 	//タイトルへ
-	/*Novice::DrawSprite(
-		static_cast<int>(object_[1].pos.x),
-		static_cast<int>(object_[1].pos.y),
-		object_[1].gh,
-		object_[1].size.x,
-		object_[1].size.y,
-		0.0f,
-		0xFFFFFFFF
-	);*/
-
 	Novice::DrawQuad(
 		static_cast<int>(object_[1].pos.x - (object_[1].width / 2) * object_[1].size.x),
 		static_cast<int>(object_[1].pos.y - (object_[1].height / 2) * object_[1].size.y),
@@ -153,6 +143,11 @@ void GameOver::Draw() {
 		0xFFFFFFFF
 	);
 
+	//==========================================
+
+	if (playSound_) {
+		Novice::PlayAudio(gameOverBgm_, false, gameOverBgmVolume_);
+	}
 
 	Novice::ScreenPrintf(1000, 100, "obj[0].pos.x:%f", object_[0].pos.x);
 }
