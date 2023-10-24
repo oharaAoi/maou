@@ -81,3 +81,5 @@ void DrawJapanese(const Vector2 <int>& pos, const Sizef& size, int wordNum, shor
 ---------------------------------- */
 
 void PlayAudio(int& voiceHandle, int soundHandle, float soundVolume);
+
+void PlaySe(int& voiceHandle, int soundHandle, float soundVolume);

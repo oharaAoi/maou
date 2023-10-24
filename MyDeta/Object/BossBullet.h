@@ -89,9 +89,6 @@ private:
 		bool isPushBacked;
 		bool isHit;
 
-		//se
-		int bossHitSeHandle_;
-
 		//==============================
 		//タイプ
 		int bulletType;

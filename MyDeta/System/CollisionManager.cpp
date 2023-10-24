@@ -48,16 +48,12 @@ void CollisionManager::CheckCollision(Boss& boss_, BossBullet& bossBullet_, Emit
 				}
 
 				//弾の処理
-				if (bossBullet_.GetBarrageType() == CHASE || bossBullet_.GetBarrageType() == RANDAM) {
-					bossBullet_.SetIsShot(false, i);
-					bossBullet_.SetPos({ static_cast<int>(kWindowWidth), static_cast<int>(kWindowHeight) }, i);
-					bossBullet_.SetIsPushBacked(false, i);
-					bossBullet_.SetIsHit(true, i);
-				} else {
-					bossBullet_.SetPos({ static_cast<int>(kWindowWidth), static_cast<int>(kWindowHeight) }, i);
-					bossBullet_.SetIsPushBacked(false, i);
-				}
-				
+				bossBullet_.SetIsShot(false, i);
+				bossBullet_.SetPos({ static_cast<int>(kWindowWidth), static_cast<int>(kWindowHeight) }, i);
+				bossBullet_.SetIsPushBacked(false, i);
+				bossBullet_.SetIsHit(true, i);
+
+
 				if (bossBullet_.GetBulletType(i) == SLOW || bossBullet_.GetBulletType(i) == VANISH) {
 					boss_.SetHp(boss_.GetHp() - 1);
 				} else {
@@ -67,7 +63,7 @@ void CollisionManager::CheckCollision(Boss& boss_, BossBullet& bossBullet_, Emit
 				if (boss_.GetHp() == 40 || boss_.GetHp() == 20) {
 					boss_.SetBulletChange(true);
 				}
-				
+
 				if (boss_.GetHp() <= 0) {
 					boss_.SetIsAlive(false);
 					boss_.SetDeathCount(boss_.GetDeathCount() + 1);
