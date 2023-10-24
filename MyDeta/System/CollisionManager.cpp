@@ -12,7 +12,6 @@ void CollisionManager::Init() {
 void CollisionManager::CheckCollision(Boss& boss_, BossBullet& bossBullet_, Emitter& emitter) {
 	for (int i = 0; i < BossBullet::kBulletMax_; i++) {
 		b2bLength_ = CheckLength(bossBullet_.GetPos(i), boss_.GetPos());
-
 		if (b2bLength_ < bossBullet_.GetRadius(i) + boss_.GetRadius()) {
 			if (bossBullet_.GetIsPushBacked(i) == true) {
 				//弾がボスに当たった時の処理
@@ -55,13 +54,15 @@ void CollisionManager::CheckCollision(Boss& boss_, BossBullet& bossBullet_, Emit
 				bossBullet_.SetIsShot(false, i);
 				bossBullet_.SetPos({ static_cast<int>(kWindowWidth), static_cast<int>(kWindowHeight) }, i);
 				bossBullet_.SetIsPushBacked(false, i);
-				bossBullet_.SetIsHit(true, i);
 
+				if (bossBullet_.GetBulletType(i) != RECOVER) {
+					bossBullet_.SetIsHit(true, i);
 
-				if (bossBullet_.GetBulletType(i) == SLOW || bossBullet_.GetBulletType(i) == VANISH) {
-					boss_.SetHp(boss_.GetHp() - 1);
-				} else {
-					boss_.SetHp(boss_.GetHp() - 2);
+					if (bossBullet_.GetBulletType(i) == SLOW || bossBullet_.GetBulletType(i) == VANISH) {
+						boss_.SetHp(boss_.GetHp() - 1);
+					} else {
+						boss_.SetHp(boss_.GetHp() - 2);
+					}
 				}
 
 				if (boss_.GetHp() == 40 || boss_.GetHp() == 20) {
