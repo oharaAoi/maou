@@ -61,4 +61,9 @@ void Result::Draw(Timer timer) {
 		{21.0f * 2.0f, 32.0f * 2.0f},
 		timer.GetTimer(), ShiftColor(EaseInOutExpo(resultFream_ / 60.0f), 0xFAFAFA00, 0xFAFAFAFF)
 	);
+	
+	// best time
+	for (int bi = 0; bi < 3; bi++) {
+
+	}
 }
