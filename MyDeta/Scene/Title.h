@@ -1,20 +1,26 @@
 #pragma once
 #include <Novice.h>
+#include <ImGui.h>
 
 // sorce //
 #include "MyDeta/Source/Environment.h"
 #include "MyDeta/Source/MyStruct.h"
+#include "MyDeta/Source/MyMath.h"
+#include "MyDeta/Source/Easing.h"
 
 class Title {
 private:
 
+	int whiteGH_;
+
 	int backgroundGH_;
 	int titleGH_;
 
-	static const int cloudNum = 3;
+	float frame_;
 
-	int cloudGH_[cloudNum];
-	Vector2f pos_[cloudNum];
+	// animations
+	static const int animationNum_ = 3;
+	float animationFrame_[animationNum_];
 
 public:
 

@@ -3,51 +3,123 @@
 Title::Title() {
 	Init();
 
+	whiteGH_ = Novice::Novice::LoadTexture("./images/resource/sceneChange/sceneChange.png");
+	
 	backgroundGH_ = Novice::LoadTexture("./images/resource/stage/background/bgWave1.png");
 	titleGH_ = Novice::LoadTexture("./images/resource/title/title.png");
-
-	cloudGH_[0] = Novice::LoadTexture("./images/resource/stage/cloud/cloud1.png");
 }
 
 Title::~Title() {
 }
 
 void Title::Init() {
-	for (int ci = 0; ci < cloudNum; ci) {
-		pos_[ci] = { kWindowWidth / 2.0f, kWindowHeight / 2.0f };
+	frame_ = 0.0f;
+
+	for (int ai = 0; ai < animationNum_; ai++) {
+		animationFrame_[ai] = 0.0f;
 	}
 }
 
 void Title::Update() {
+	/// ImGui ...
+	ImGui::Begin("TITLE");
+	ImGui::DragFloat("frame", &frame_, 1.0f);
+
+	ImGui::End();
+
+	frame_++;
+
+	for (int ai = 0; ai < animationNum_; ai++) {
+		animationFrame_[ai] = frame_ - (60.0f * ai);
+	}
+
 }
 
 void Title::Draw() {
-	// background
+	// title
+	// pos = 270, 280; size = 730, 150;
+
+	Novice::DrawSprite(
+		0, 0,
+		whiteGH_,
+		1.0f, 1.0f,
+		0.0f,
+		0xFFFFFFFF
+	);
+
+	// animation 0x000000FF
+	// line
+	Novice::DrawLine(
+		0,
+		280,
+		static_cast<int>(Lerp(EaseInExpo(animationFrame_[0] / 60.0f), 0.0f, kWindowWidth)),
+		280,
+		0x000000FF
+	);
+
+	Novice::DrawLine(
+		kWindowWidth,
+		280 + 150,
+		static_cast<int>(Lerp(EaseInExpo(animationFrame_[0] / 60.0f), kWindowWidth, 0.0f)),
+		280 + 150,
+		0x000000FF
+	);
+
+	Novice::DrawLine(
+		270,
+		0,
+		270,
+		static_cast<int>(Lerp(EaseOutExpo(animationFrame_[0] / 60.0f), 0.0f, kWindowHeight)),
+		0x000000FF
+	);
+
+	Novice::DrawLine(
+		270 + 730,
+		kWindowHeight,
+		270 + 730,
+		static_cast<int>(Lerp(EaseOutExpo(animationFrame_[0] / 60.0f), kWindowHeight, 0.0f)),
+		0x000000FF
+	);
+
+	// box
+	Novice::DrawBox(
+		270, 280,
+		static_cast<int>(Lerp(EaseOutExpo(animationFrame_[1] / 60.0f), 0.0f, 730.0f)),
+		150,
+		0.0f,
+		0x000000FF,
+		kFillModeSolid
+	);
+
+	// allBox
+	Novice::DrawBox(
+		1280, 0,
+		static_cast<int>(Lerp(EaseOutQuint(animationFrame_[2] / 60.0f), 0.0f, -kWindowWidth)), 720,
+		0.0f,
+		0x000000FF,
+		kFillModeSolid
+	);
+
+	Novice::SetBlendMode(kBlendModeScreen);
+
 	Novice::DrawSprite(
 		0, 0,
 		backgroundGH_,
 		1.0f, 1.0f,
 		0.0f,
-		0xFAFAFAFF
+		0xFFFFFFFF
 	);
 
-	for (int ci = 0; ci < cloudNum; ci++) {
-		Novice::DrawSprite(
-			static_cast<int>(pos_[ci].x - (64.0f)), static_cast<int>(pos_[ci].y - (64.0f)),
-			cloudGH_[0],
-			2.0f, 2.0f,
-			0.0f,
-			0xFFFFFFFF
-		);
-	}
+	Novice::SetBlendMode(kBlendModeNormal);
 
-	// titleGH
+	//titleGH
 	Novice::DrawSprite(
 		0, 2,
 		titleGH_,
 		1.0f, 1.0f,
 		0.0f,
-		0x40404070
+		ShiftColor(animationFrame_[2] / 60.0f, 0x40404000, 0x40404060)
+		/*0x40404070*/
 	); // 30
 
 	Novice::DrawSprite(

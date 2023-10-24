@@ -160,6 +160,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				gameStartSE.isSound = true;
 			}
 
+			title.Update();
+
 			if (isChangeScene) {
 				if (sceneT < 120.0f) { sceneT++; }
 
