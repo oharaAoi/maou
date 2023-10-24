@@ -7,6 +7,7 @@ Player::Player() {
 	strongWindHandle_ = -1;
 	overHeatRecoverHandle_ = -1;
 	overHeatWarningHandle_ = -1;
+	recoverSEHandle_ = -1;
 }
 
 Player::~Player() {
@@ -88,8 +89,10 @@ void Player::Init() { // 変数の初期化
 	strongWindSe_ = Novice::LoadAudio("./images/Sounds/PlayerSe/strongFan.mp3");
 	hitSe_ = Novice::LoadAudio("./images/Sounds/PlayerSe/playerHited.mp3");
 	playerDeathSe_ = Novice::LoadAudio("./images/Sounds/PlayerSe/playerDeath.mp3");
+	recoverSE_ = Novice::LoadAudio("./images/Sounds/PlayerSe/recoverSE.mp3");
 	overHeatRecoverSE_ = Novice::LoadAudio("./images/Sounds/PlayerSe/overHeatRecoverSE.mp3");
 	overHeatWarnigSE_ = Novice::LoadAudio("./images/Sounds/PlayerSe/overHeatWarningSE.mp3");
+
 
 	//フラグ
 	isWindSeStop_ = false;
@@ -102,7 +105,7 @@ void Player::Init() { // 変数の初期化
 	playerDeathSeVolume_ = 0.2f;
 	overHeatRecoverVolume_ = 0.2f;
 	overHeatWarningVolume_ = 0.1f;
-
+	recoverSEVolume_ = 0.2f;
 }
 
 void Player::Update(char* keys, char* preKeys, Stage& stage_) { /// 更新処理
@@ -251,6 +254,11 @@ void Player::Update(char* keys, char* preKeys, Stage& stage_) { /// 更新処理
 			isAlive_ = false;
 		}
 	}
+
+	//soundを消す処理
+	if (isRecover_) {
+		isRecover_ = false;
+	}
 }
 
 void Player::Draw() { /// 描画処理
@@ -376,6 +384,13 @@ void Player::Draw() { /// 描画処理
 			Novice::PlayAudio(hitSe_, false, hitSeVolume_);
 			isHit_ = false;
 		}
+	}
+
+	//playerの回復音
+	if (isRecover_) {
+		Novice::PlayAudio(recoverSE_, false, recoverSEVolume_);
+	} else {
+		Novice::StopAudio(recoverSE_);
 	}
 
 	//playerの死亡時の音

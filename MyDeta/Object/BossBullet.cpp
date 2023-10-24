@@ -85,6 +85,7 @@ void BossBullet::Init() {
 	fastSpeed_ = 2.5f;
 	explodeSpeed_ = 2.0f;
 	vanishSpeed_ = 2.0f;
+	recoverSpeed_ = 1.5f;
 
 	//==============================
 	boss2pDis_.x = 0.0f;
@@ -116,6 +117,7 @@ void BossBullet::Init() {
 	bulletGh_[1] = Novice::LoadTexture("./images/Resource/BossBullet/fastBullet.png");
 	bulletGh_[2] = Novice::LoadTexture("./images/Resource/BossBullet/explodeBullet.png");
 	bulletGh_[3] = Novice::LoadTexture("./images/Resource/BossBullet/vanishBullet.png");
+	bulletGh_[4] = Novice::LoadTexture("./images/Resource/BossBullet/recoverBullet.png");
 
 	bossHitSeVolume_ = 0.2f;
 
@@ -181,6 +183,19 @@ void BossBullet::RandamInit(int i) {
 		object_[i].accleleration.y = 0.04f;
 
 		object_[i].vanishCount = 0;
+
+		break;
+
+	case RECOVER:
+		object_[i].radius = 15.0f;
+
+		object_[i].color = 0xFFFFFFFF;
+
+		object_[i].velocity.x = recoverSpeed_;
+		object_[i].velocity.y = recoverSpeed_;
+
+		object_[i].accleleration.x = 0.04f;
+		object_[i].accleleration.y = 0.04f;
 
 	}
 
@@ -678,6 +693,26 @@ void BossBullet::Draw() {
 					0xffffffff
 				);
 				break;
+
+			case RECOVER:
+				Novice::DrawQuad(
+					static_cast<int>(object_[i].lt.x + cie_->GetOrigine().x),
+					static_cast<int>(object_[i].lt.y + cie_->GetOrigine().y),
+					static_cast<int>(object_[i].rt.x + cie_->GetOrigine().x),
+					static_cast<int>(object_[i].rt.y + cie_->GetOrigine().y),
+					static_cast<int>(object_[i].lb.x + cie_->GetOrigine().x),
+					static_cast<int>(object_[i].lb.y + cie_->GetOrigine().y),
+					static_cast<int>(object_[i].rb.x + cie_->GetOrigine().x),
+					static_cast<int>(object_[i].rb.y + cie_->GetOrigine().y),
+					static_cast<int>(object_[i].drawLt.x),
+					static_cast<int>(object_[i].drawLt.y),
+					static_cast<int>(object_[i].drawWidth),
+					static_cast<int>(object_[i].drawHeight),
+					bulletGh_[4],
+					0xffffffff
+				);
+				break;
+
 			}
 
 			if (object_[i].bulletType == EXPLODE) {

@@ -45,6 +45,10 @@ void CollisionManager::CheckCollision(Boss& boss_, BossBullet& bossBullet_, Emit
 					//エフェクトの生成処理
 					emitter.Emit(static_cast<int>(bossBullet_.GetPos(i).x), static_cast<int>(bossBullet_.GetPos(i).y), 4, 0xFFC96BFF);
 					break;
+
+				case RECOVER:
+					
+					break;
 				}
 
 				//弾の処理
@@ -88,8 +92,16 @@ void CollisionManager::CheckCollision(Player& player_, BossBullet& bossBullet_, 
 				bossBullet_.SetIsPushBacked(false, i);
 
 				//プレイヤーの処理
-				player_.SetHp(player_.GetHp() - 1);
-				player_.SetIsHit(true);
+				if (bossBullet_.GetBulletType(i) != RECOVER) {
+					player_.SetHp(player_.GetHp() - 1);
+					player_.SetIsHit(true);
+				} else {
+					if (player_.GetHp() < 15) {
+						//パーティクル相談したい
+						player_.SetHp(player_.GetHp() + 1);
+						player_.SetIsRecover(true);
+					}
+				}
 
 				if (player_.GetHp() <= 0) {
 					player_.SetDeathSeHandle(true);
