@@ -331,7 +331,7 @@ void BossBullet::ExplodeBullet(int num, Emitter& emitter) {
 				//消す処理(エフェクトとかの処理もここでするかも)
 				if (explodeRadius_ > b2bLength_) {
 
-					emitter.Emit(static_cast<int>(object_[i].pos.x), static_cast<int>(object_[i].pos.y), 6,0xFFFFFFFF);
+					emitter.Emit(static_cast<int>(object_[i].pos.x), static_cast<int>(object_[i].pos.y), 6, 0x696969FF);
 
 					OutOfScreenInit(i);
 				}
@@ -339,7 +339,7 @@ void BossBullet::ExplodeBullet(int num, Emitter& emitter) {
 		}
 	}
 
-	emitter.Emit(static_cast<int>(object_[num].pos.x), static_cast<int>(object_[num].pos.y), 6,0xFFFFFFFF);
+	emitter.Emit(static_cast<int>(object_[num].pos.x), static_cast<int>(object_[num].pos.y), 6, 0x696969FF);
 	OutOfScreenInit(num);
 }
 

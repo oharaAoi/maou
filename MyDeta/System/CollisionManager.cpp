@@ -20,7 +20,7 @@ void CollisionManager::CheckCollision(Boss& boss_, BossBullet& bossBullet_, Emit
 				case SLOW:
 					boss_.SetHp(boss_.GetHp() - 1);
 					//エフェクトの生成処理
-					emitter.Emit(static_cast<int>(bossBullet_.GetPos(i).x), static_cast<int>(bossBullet_.GetPos(i).y), 6,0xFFFF00FF);
+					emitter.Emit(static_cast<int>(bossBullet_.GetPos(i).x), static_cast<int>(bossBullet_.GetPos(i).y), 4, 0xFFC96BFF);
 
 					break;
 
@@ -28,7 +28,7 @@ void CollisionManager::CheckCollision(Boss& boss_, BossBullet& bossBullet_, Emit
 					boss_.SetHp(boss_.GetHp() - 2);
 
 					//エフェクトの生成処理
-					emitter.Emit(static_cast<int>(bossBullet_.GetPos(i).x), static_cast<int>(bossBullet_.GetPos(i).y), 12,0xFF0000FF);
+					emitter.Emit(static_cast<int>(bossBullet_.GetPos(i).x), static_cast<int>(bossBullet_.GetPos(i).y), 10, 0xFF4500FF);
 
 					break;
 
@@ -36,14 +36,14 @@ void CollisionManager::CheckCollision(Boss& boss_, BossBullet& bossBullet_, Emit
 					boss_.SetHp(boss_.GetHp() - 2);
 
 					//エフェクトの生成処理
-					emitter.Emit(static_cast<int>(bossBullet_.GetPos(i).x), static_cast<int>(bossBullet_.GetPos(i).y), 12, 0x00FF00FF);
+					emitter.Emit(static_cast<int>(bossBullet_.GetPos(i).x), static_cast<int>(bossBullet_.GetPos(i).y), 10, 0xFF4500FF);
 					break;
 
 				case VANISH:
 					boss_.SetHp(boss_.GetHp() - 1);
 
 					//エフェクトの生成処理
-					emitter.Emit(static_cast<int>(bossBullet_.GetPos(i).x), static_cast<int>(bossBullet_.GetPos(i).y), 6, 0x0000ffFF);
+					emitter.Emit(static_cast<int>(bossBullet_.GetPos(i).x), static_cast<int>(bossBullet_.GetPos(i).y), 4, 0xFFC96BFF);
 					break;
 				}
 
