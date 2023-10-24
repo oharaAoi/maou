@@ -99,20 +99,30 @@ private:
 
 	//==========================================
 	//サウンド
-	//リソース
+	//風
 	int weakWindSe_;
 	int strongWindSe_;
+
+	bool isWindSeStop_;
+	int weakWindHandle_;
+
+	float windSoundVolume_;
+
+	//オーバーヒート
+	int overHeatRecoverSE_;
+
+	int overHeatRecoverHandle_;
+	bool isOverHeatRecover_;
+
+	float overHeatRecoverVolume_;
+
+	//ヒット時
 	int hitSe_;
 	int playerDeathSe_;
 
-	//フラグ
-	bool isWindSeStop_;
-	int weakWindHandle_;
 	int strongWindHandle_;
 	bool deathSeHandle_;
 
-	//音量
-	float windSoundVolume_;
 	float hitSeVolume_;
 	float playerDeathSeVolume_;
 
