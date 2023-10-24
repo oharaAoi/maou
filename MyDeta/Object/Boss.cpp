@@ -4,6 +4,8 @@ Boss::Boss() {
 	white1x1GH = Novice::LoadTexture("./NoviceResources/white1x1.png");
 
 	Init();
+
+	gaugeBreakSEHandle_ = -1;
 }
 
 void Boss::Init() {
@@ -42,6 +44,10 @@ void Boss::Init() {
 	drawCount_ = 0;
 	drawCountLimit_ = 10;
 
+	//==============================
+	gaugeBreakSE_ = Novice::LoadAudio("./images/Sounds/gaugeBreakSE/gaugeBreakSE.mp3");
+	gaugeBreakSEVolume_ = 0.2f;
+
 }
 
 void Boss::BulletSpeedChange(BossBullet& bossBullet_) {
@@ -66,9 +72,11 @@ void Boss::BossHpDecrece(char* keys, char* preKeys) {
 	}
 }
 
-
-
 void Boss::UpDate(BossBullet& bossBullet_) {
+	if (isGaugeBreakSE_) {
+		isGaugeBreakSE_ = false;
+	}
+
 	//ボスのhpが一定量減った時
 	if (type_ == WAVE1) {
 		if (barrageChange_) {
@@ -119,6 +127,9 @@ void Boss::UpDate(BossBullet& bossBullet_) {
 			bossBullet_.SetChaseCoolTimeLimit(20);
 			BulletSpeedChange(bossBullet_);
 
+			//==============================
+			isGaugeBreakSE_ = true;
+
 		} else if (type_ == WAVE2) {
 			//==============================
 			//ボスのステータスを変える
@@ -133,6 +144,9 @@ void Boss::UpDate(BossBullet& bossBullet_) {
 			bossBullet_.SetRandamCoolTimeLimit(15);
 			bossBullet_.SetChaseCoolTimeLimit(15);
 			BulletSpeedChange(bossBullet_);
+
+			//==============================
+			isGaugeBreakSE_ = true;
 		}
 	}
 
@@ -233,6 +247,10 @@ void Boss::Draw() {
 			0xffffffff
 		);
 	}
+
+	if (isGaugeBreakSE_) {
+		Novice::PlayAudio(gaugeBreakSE_, false, gaugeBreakSEVolume_);
+	} 
 }
 
 // default method overload

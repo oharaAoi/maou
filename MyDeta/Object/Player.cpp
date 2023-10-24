@@ -93,7 +93,6 @@ void Player::Init() { // 変数の初期化
 	overHeatRecoverSE_ = Novice::LoadAudio("./images/Sounds/PlayerSe/overHeatRecoverSE.mp3");
 	overHeatWarnigSE_ = Novice::LoadAudio("./images/Sounds/PlayerSe/overHeatWarningSE.mp3");
 
-
 	//フラグ
 	isWindSeStop_ = false;
 	deathSeHandle_ = false;
