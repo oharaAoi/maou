@@ -74,20 +74,27 @@ void CollisionManager::CheckCollision(Boss& boss_, BossBullet& bossBullet_, Emit
 }
 
 void CollisionManager::CheckCollision(Player& player_, BossBullet& bossBullet_, Emitter& emitter) {
-	for (int i = 0; i < BossBullet::kBulletMax_; i++) {
-		b2pLength_ = CheckLength(bossBullet_.GetPos(i), player_.GetPos());
+	if (player_.GetHp() > 0) {
+		for (int i = 0; i < BossBullet::kBulletMax_; i++) {
+			b2pLength_ = CheckLength(bossBullet_.GetPos(i), player_.GetPos());
 
-		if (b2pLength_ < player_.GetRadius() + bossBullet_.GetRadius(i)) {
-			//エフェクトの生成処理
-			emitter.Emit(static_cast<int>(bossBullet_.GetPos(i).x), static_cast<int>(bossBullet_.GetPos(i).y), 12,0xFFFFFFFF);
+			if (b2pLength_ < player_.GetRadius() + bossBullet_.GetRadius(i)) {
+				//エフェクトの生成処理
+				emitter.Emit(static_cast<int>(bossBullet_.GetPos(i).x), static_cast<int>(bossBullet_.GetPos(i).y), 12, 0xFFFFFFFF);
 
-			//弾の処理
-			bossBullet_.SetIsShot(false, i);
-			bossBullet_.SetPos({ 0.0f,0.0f }, i);
-			bossBullet_.SetIsPushBacked(false, i);
+				//弾の処理
+				bossBullet_.SetIsShot(false, i);
+				bossBullet_.SetPos({ 0.0f,0.0f }, i);
+				bossBullet_.SetIsPushBacked(false, i);
 
-			//プレイヤーの処理
-			player_.SetHp(player_.GetHp() - 1);
+				//プレイヤーの処理
+				player_.SetHp(player_.GetHp() - 1);
+				player_.SetIsHit(true);
+
+				if (player_.GetHp() <= 0) {
+					player_.SetDeathSeHandle(true);
+				}
+			}
 		}
 	}
 }

@@ -338,6 +338,7 @@ void BossBullet::ExplodeBullet(int num, Emitter& emitter) {
 			}
 		}
 	}
+
 	emitter.Emit(static_cast<int>(object_[num].pos.x), static_cast<int>(object_[num].pos.y), 6,0xFFFFFFFF);
 	OutOfScreenInit(num);
 }

@@ -86,14 +86,18 @@ void Player::Init() { // 変数の初期化
 	//リソース
 	weakWindSe_ = Novice::LoadAudio("./images/Sounds/PlayerSe/weakFan.mp3");
 	strongWindSe_ = Novice::LoadAudio("./images/Sounds/PlayerSe/strongFan.mp3");
+	hitSe_ = Novice::LoadAudio("./images/Sounds/PlayerSe/playerHited.mp3");
+	playerDeathSe_ = Novice::LoadAudio("./images/Sounds/PlayerSe/playerDeath.mp3");
 
 	//フラグ
 	weakWindHandle_ = -1;
 	strongWindHandle_ = -1;
+	deathSeHandle_ = false;
 
 	//音量
-	windSoundVolume_ = 0.3f;
-
+	windSoundVolume_ = 0.2f;
+	hitSeVolume_ = 0.1f;
+	playerDeathSeVolume_ = 0.2f;
 
 }
 
@@ -225,73 +229,61 @@ void Player::Update(char* keys, char* preKeys, Stage& stage_) { /// 更新処理
 
 	//playerの生存確認
 	if (hp_ <= 0) {
-		blackOutCount_+= 0.01f;
+		blackOutCount_ += 0.01f;
 		blackOutColor_ = ShiftColor(blackOutCount_, 0x00000000, 0x000000FF);
-		
+
 		if (blackOutCount_ >= 1) {
 			isAlive_ = false;
 		}
 	}
-
 }
 
 void Player::Draw() { /// 描画処理
+	if (hp_ > 0) {
+		// HP
+		DrawRhombus(
+			{ pos_.x + cie_->GetOrigine().x, pos_.y + cie_->GetOrigine().y },
+			rangeRadius_ - 10.0f,
+			10.0f,
+			0x505050FF,
+			white1x1GH
+		);
 
-	// HP
-	DrawRhombus(
-		{ pos_.x + cie_->GetOrigine().x, pos_.y + cie_->GetOrigine().y },
-		rangeRadius_ - 10.0f,
-		10.0f,
-		0x505050FF,
-		white1x1GH
-	);
+		DrawRhombusAnimation(
+			hp_ / 15.0f,
+			{ pos_.x + cie_->GetOrigine().x, pos_.y + cie_->GetOrigine().y },
+			rangeRadius_ - 10.0f,
+			10.0f,
+			ShiftColor(hp_ / 15.0f, 0xFA0000FF, 0x00FA00FF),
+			white1x1GH
+		);
 
-	DrawRhombusAnimation(
-		hp_ / 15.0f,
-		{ pos_.x + cie_->GetOrigine().x, pos_.y + cie_->GetOrigine().y },
-		rangeRadius_ - 10.0f,
-		10.0f,
-		ShiftColor(hp_ / 15.0f, 0xFA0000FF, 0x00FA00FF),
-		white1x1GH
-	);
+		Novice::DrawQuad(
+			static_cast<int>(lt_.x + cie_->GetOrigine().x),
+			static_cast<int>(lt_.y + cie_->GetOrigine().y),
+			static_cast<int>(rt_.x + cie_->GetOrigine().x),
+			static_cast<int>(rt_.y + cie_->GetOrigine().y),
+			static_cast<int>(lb_.x + cie_->GetOrigine().x),
+			static_cast<int>(lb_.y + cie_->GetOrigine().y),
+			static_cast<int>(rb_.x + cie_->GetOrigine().x),
+			static_cast<int>(rb_.y + cie_->GetOrigine().y),
+			static_cast<int>(drawLt_.x),
+			static_cast<int>(drawLt_.y),
+			static_cast<int>(drawWidth_),
+			static_cast<int>(drawHeight_),
+			gh_,
+			0xffffffff
+		);
 
-	Novice::DrawQuad(
-		static_cast<int>(lt_.x + cie_->GetOrigine().x),
-		static_cast<int>(lt_.y + cie_->GetOrigine().y),
-		static_cast<int>(rt_.x + cie_->GetOrigine().x),
-		static_cast<int>(rt_.y + cie_->GetOrigine().y),
-		static_cast<int>(lb_.x + cie_->GetOrigine().x),
-		static_cast<int>(lb_.y + cie_->GetOrigine().y),
-		static_cast<int>(rb_.x + cie_->GetOrigine().x),
-		static_cast<int>(rb_.y + cie_->GetOrigine().y),
-		static_cast<int>(drawLt_.x),
-		static_cast<int>(drawLt_.y),
-		static_cast<int>(drawWidth_),
-		static_cast<int>(drawHeight_),
-		gh_,
-		0xffffffff
-	);
-
-	//暗くするためのbox
-	Novice::DrawBox(
-		0,
-		0,
-		1280,
-		720,
-		0.0f,
-		blackOutColor_,
-		kFillModeSolid
-	);
-
-	/// test guage
-	// over
-	switch (windowStrength_) {
+		/// test guage
+		// over
+		switch (windowStrength_) {
 		case WindowStrength::OFF:
 
 			DrawRhombusAnimation(
 				overHeat_ / 100.0f,
 				{ pos_.x + cie_->GetOrigine().x, pos_.y + cie_->GetOrigine().y },
-				rangeRadius_+ 5.0f,
+				rangeRadius_ + 5.0f,
 				10.0f,
 				0x707070ff,
 				white1x1GH
@@ -311,6 +303,18 @@ void Player::Draw() { /// 描画処理
 			);
 
 			break;
+		}
+	} else {
+		//暗くするためのbox
+		Novice::DrawBox(
+			0,
+			0,
+			1280,
+			720,
+			0.0f,
+			blackOutColor_,
+			kFillModeSolid
+		);
 	}
 
 	//sounds
@@ -330,83 +334,96 @@ void Player::Draw() { /// 描画処理
 		break;
 	}
 
+	//playerのhit時の音
+	if (isHit_) {
+		if (hp_ > 1) {
+			Novice::PlayAudio(hitSe_, false, hitSeVolume_);
+			isHit_ = false;
+		}
+	}
+
+	//playerの死亡時の音
+	if (deathSeHandle_) {
+		Novice::PlayAudio(playerDeathSe_, false, hitSeVolume_);
+		deathSeHandle_ = false;
+	}
 }
 
 // user method overload
 void Player::Update(char* keys, Stage& stage_, Restrictions restriction) {
 	switch (restriction) {
-		case MOVE_ONLY:
+	case MOVE_ONLY:
 
-			//playerの移動
-			if (keys[DIK_A]) {
-				radianSpeed_ += 0.05f;
-			}
+		//playerの移動
+		if (keys[DIK_A]) {
+			radianSpeed_ += 0.05f;
+		}
 
-			if (keys[DIK_D]) {
-				radianSpeed_ -= 0.05f;
-			}
+		if (keys[DIK_D]) {
+			radianSpeed_ -= 0.05f;
+		}
 
-			if (radianSpeed_ > 1.0f) {
-				radianSpeed_ = 1.0f;
+		if (radianSpeed_ > 1.0f) {
+			radianSpeed_ = 1.0f;
 
-			} else if (radianSpeed_ < -1.0f) {
-				radianSpeed_ = -1.0f;
-			}
+		} else if (radianSpeed_ < -1.0f) {
+			radianSpeed_ = -1.0f;
+		}
 
-			if (!keys[DIK_A] && !keys[DIK_D]) {
-				radianSpeed_ *= 0.92f;
-			}
+		if (!keys[DIK_A] && !keys[DIK_D]) {
+			radianSpeed_ *= 0.92f;
+		}
 
-			if (!keys[DIK_A] && !keys[DIK_D]) {
-				radianSpeed_ *= 0.92f;
-			}
+		if (!keys[DIK_A] && !keys[DIK_D]) {
+			radianSpeed_ *= 0.92f;
+		}
 
-			theta_ += radianSpeed_ / 100.0f * (float)M_PI;
+		theta_ += radianSpeed_ / 100.0f * (float)M_PI;
 
-			pos_.x = stage_.GetPos().x + (stage_.GetRadius() * cosf(theta_));
-			pos_.y = stage_.GetPos().y + (stage_.GetRadius() * sinf(theta_));
+		pos_.x = stage_.GetPos().x + (stage_.GetRadius() * cosf(theta_));
+		pos_.y = stage_.GetPos().y + (stage_.GetRadius() * sinf(theta_));
 
-			windowStrength_ = OFF;
-			windVolume_.x = 0.0f;
-			windVolume_.y = 0.0f;
-			stage_.SetRangeRadius(300.0f);
-			//描画のための処理
-			p2bDis_ = ConversionNormalizeVector(pos_, stage_.GetPos());
+		windowStrength_ = OFF;
+		windVolume_.x = 0.0f;
+		windVolume_.y = 0.0f;
+		stage_.SetRangeRadius(300.0f);
+		//描画のための処理
+		p2bDis_ = ConversionNormalizeVector(pos_, stage_.GetPos());
 
-			p2bVertical_.x = -p2bDis_.y;
-			p2bVertical_.y = p2bDis_.x;
+		p2bVertical_.x = -p2bDis_.y;
+		p2bVertical_.y = p2bDis_.x;
 
-			drawTheta_ = atan2f(p2bVertical_.y, p2bVertical_.x);
+		drawTheta_ = atan2f(p2bVertical_.y, p2bVertical_.x);
 
-			//回転行列
-			rotateMatrix = MakeRotateMatrix(drawTheta_);
+		//回転行列
+		rotateMatrix = MakeRotateMatrix(drawTheta_);
 
-			//平行移動
-			translateMatrix = MakeTranslateMatrix(pos_);
+		//平行移動
+		translateMatrix = MakeTranslateMatrix(pos_);
 
-			//行列の積
-			worldMatrix = Multiply(rotateMatrix, translateMatrix);
+		//行列の積
+		worldMatrix = Multiply(rotateMatrix, translateMatrix);
 
-			lt_ = Transform(originLt_, worldMatrix);
-			rt_ = Transform(originRt_, worldMatrix);
-			lb_ = Transform(originLb_, worldMatrix);
-			rb_ = Transform(originRb_, worldMatrix);
+		lt_ = Transform(originLt_, worldMatrix);
+		rt_ = Transform(originRt_, worldMatrix);
+		lb_ = Transform(originLb_, worldMatrix);
+		rb_ = Transform(originRb_, worldMatrix);
 
 
-			//画像の切り替え
-			if (windowStrength_ != OFF) {
-				frameCount_++;
-				if (frameCount_ > frameCountLimit_) {
-					drawLt_.x += 64.0f;
-					frameCount_ = 0;
+		//画像の切り替え
+		if (windowStrength_ != OFF) {
+			frameCount_++;
+			if (frameCount_ > frameCountLimit_) {
+				drawLt_.x += 64.0f;
+				frameCount_ = 0;
 
-					if (drawLt_.x >= spriteSize.x) {
-						drawLt_.x = 0;
-					}
+				if (drawLt_.x >= spriteSize.x) {
+					drawLt_.x = 0;
 				}
 			}
+		}
 
-			break;
+		break;
 	}
 }
 
