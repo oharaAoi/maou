@@ -65,7 +65,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	
 
 	GameScene scene = TITLE;
-	// aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 
 	// エミッターのインスタンスを作成
 	Emitter emitter;
@@ -249,94 +248,97 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			// ==================================================
 
-			stage_.Update(waveNum);
+			if (!isChangeScene) {
 
-			player_.Update(keys, preKeys, stage_);
+				stage_.Update(waveNum);
 
-			// ==================================================
-			boss_.UpDate(bossBullet_);
+				player_.Update(keys, preKeys, stage_);
 
-			/* bossのwaveを保存 */
-			waveNum = boss_.GetType();
+				// ==================================================
+				boss_.UpDate(bossBullet_);
 
-			// ==================================================
+				/* bossのwaveを保存 */
+				waveNum = boss_.GetType();
 
-
-			playerDeadEmitter.Update(); //プレイヤー死亡時のエミッターの更新処理
-
-			if (player_.GetHp() <= 0 && playerDeadEmitter.GetIsGenerate() == false) { //プレイヤー死亡時にプレイヤーの位置にパーティクルを生成
-				playerDeadEmitter.PlayerDeadEmit(static_cast<int>(player_.GetPos().x), static_cast<int>(player_.GetPos().y), 16);
-			}
-			if (player_.GetHp() > 0) {
-				playerDeadEmitter.SetIsGenerate(false);
-			}
-
-			//デバック用
-			boss_.BossHpDecrece(keys, preKeys);
+				// ==================================================
 
 
-			emitter.Update(); //エミッターの更新処理
+				playerDeadEmitter.Update(); //プレイヤー死亡時のエミッターの更新処理
 
-			// プレイヤーの状態によって風エフェクトの消滅までの時間、速さ、発生間隔を変更
-			switch (player_.GetWindowStrength()) {
-			case OFF:
-				playerWindEmitter.Update(player_.GetPos(), boss_.GetPos(), 0, 0, 1000);
+				if (player_.GetHp() <= 0 && playerDeadEmitter.GetIsGenerate() == false) { //プレイヤー死亡時にプレイヤーの位置にパーティクルを生成
+					playerDeadEmitter.PlayerDeadEmit(static_cast<int>(player_.GetPos().x), static_cast<int>(player_.GetPos().y), 16);
+				}
+				if (player_.GetHp() > 0) {
+					playerDeadEmitter.SetIsGenerate(false);
+				}
 
-				break;
-
-			case WEAK:
-				playerWindEmitter.Update(player_.GetPos(), boss_.GetPos(), 20, 6, 7);
-
-				break;
-
-			case STRONG:
-				playerWindEmitter.Update(player_.GetPos(), boss_.GetPos(), 20, 12, 4);
-
-				break;
-			}
-
-			//========================================================================
-			/* 弾の処理 */
-			//撃つ弾の種類を決める(デバック用)
-			bossBullet_.BulletShotSelect(keys, preKeys);
-
-			//弾を進める
-			bossBullet_.Update(boss_.GetPos(), player_, stage_, emitter);
-
-			//弾の更新
-			range_.Update(player_, bossBullet_);
+				//デバック用
+				boss_.BossHpDecrece(keys, preKeys);
 
 
-			//弾とプレイヤー
-			collision.CheckCollision(player_, bossBullet_, emitter);
+				emitter.Update(); //エミッターの更新処理
+
+				// プレイヤーの状態によって風エフェクトの消滅までの時間、速さ、発生間隔を変更
+				switch (player_.GetWindowStrength()) {
+				case OFF:
+					playerWindEmitter.Update(player_.GetPos(), boss_.GetPos(), 0, 0, 1000);
+
+					break;
+
+				case WEAK:
+					playerWindEmitter.Update(player_.GetPos(), boss_.GetPos(), 20, 6, 7);
+
+					break;
+
+				case STRONG:
+					playerWindEmitter.Update(player_.GetPos(), boss_.GetPos(), 20, 12, 4);
+
+					break;
+				}
+
+				//========================================================================
+				/* 弾の処理 */
+				//撃つ弾の種類を決める(デバック用)
+				bossBullet_.BulletShotSelect(keys, preKeys);
+
+				//弾を進める
+				bossBullet_.Update(boss_.GetPos(), player_, stage_, emitter);
+
+				//弾の更新
+				range_.Update(player_, bossBullet_);
 
 
-			//弾と敵の当たり判定
-			collision.CheckCollision(boss_, bossBullet_, emitter);
-
-			//========================================================================
-
-			timer.Update();
-
-			//========================================================================
-			//3WAVE目にボスを倒していたらresultに移行
-			if (boss_.GetType() == WAVE3 && boss_.GetIsAlive() == false) {
-				scene = RESULT;
-
-				loadFile_.WriteFile(timer.GetTimer());
-
-				loadFile_.LoadJsonFile(timer.GetBestTimer());
-			}
-
-			//========================================================================
-			//playerが死んだらgameOverへ
-			if (player_.GetIsAlive() == false) {
-				scene = GAME_OVER;
-			}
+				//弾とプレイヤー
+				collision.CheckCollision(player_, bossBullet_, emitter);
 
 
-			if (keys[DIK_G]) {
-				scene = GAME_OVER;
+				//弾と敵の当たり判定
+				collision.CheckCollision(boss_, bossBullet_, emitter);
+
+				//========================================================================
+
+				timer.Update();
+
+				//========================================================================
+				//3WAVE目にボスを倒していたらresultに移行
+				if (boss_.GetType() == WAVE3 && boss_.GetIsAlive() == false) {
+					scene = RESULT;
+
+					loadFile_.WriteFile(timer.GetTimer());
+
+					loadFile_.LoadJsonFile(timer.GetBestTimer());
+				}
+
+				//========================================================================
+				//playerが死んだらgameOverへ
+				if (player_.GetIsAlive() == false) {
+					scene = GAME_OVER;
+				}
+
+
+				if (keys[DIK_G]) {
+					scene = GAME_OVER;
+				}
 			}
 
 			///
