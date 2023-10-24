@@ -61,4 +61,16 @@ void Result::Draw(Timer timer) {
 		{21.0f * 2.0f, 32.0f * 2.0f},
 		timer.GetTimer(), ShiftColor(EaseInOutExpo(resultFream_ / 60.0f), 0xFAFAFA00, 0xFAFAFAFF)
 	);
+	
+	// best time
+	float *bestTime = timer.GetBestTimer();
+
+	for (int bi = 0; bi < 3; bi++) {
+
+		timer.DrawTimer(
+			{ (kWindowWidth / 2.0f) - (((21.0f * 2.0f) * 3.0f) / 2.0f), 420.0f + (bi * 60.0f)},
+			{ 21.0f * 2.0f, 32.0f * 2.0f },
+			*(bestTime + bi), ShiftColor(EaseInOutExpo(resultFream_ / 60.0f), 0xFAFA0000, 0xFAFA00FF)
+		);
+	}
 }
