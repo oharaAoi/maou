@@ -434,6 +434,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				gameOver_.Init();
 				timer.Init();
 				stage_.Init();
+				tutorial.Init();
 
 			} else if (gameOver_.GetChangeToTitle() == true) {
 				scene = TITLE;
@@ -444,6 +445,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				gameOver_.Init();
 				timer.Init();
 				stage_.Init();
+				tutorial.Init();
 			}
 
 			///
