@@ -5,7 +5,7 @@
 class Particle
 {
 public:
-	Particle(Vector2<float> pos,Vector2<float> velocity,int maxTime);
+	Particle(Vector2<float> pos,Vector2<float> velocity,int maxTime, int color);
 	~Particle();
 
 	void Update();
@@ -23,5 +23,6 @@ private:
 	int timer_ = 0;
 	int maxTime_;
 	bool del_ = false;
+	int color_;
 };
 

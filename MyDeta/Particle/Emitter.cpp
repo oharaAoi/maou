@@ -44,7 +44,7 @@ void Emitter::Draw()
 
 }
 
-void Emitter::Emit(int centerX, int centerY, int count)
+void Emitter::Emit(int centerX, int centerY, int count,int color)
 {
 	// パーティクルを生成する処理を1フレームで指定回数行う
 
@@ -55,7 +55,7 @@ void Emitter::Emit(int centerX, int centerY, int count)
 		float velocityX = static_cast<float>(Random(-8, 8));
 		float velocityY = static_cast<float>(Random(-8, 8));
 
-		Particle newParticle = Particle({ particleX,particleY }, { velocityX,velocityY }, 30);
+		Particle newParticle = Particle({ particleX,particleY }, { velocityX,velocityY }, 30,color);
 		particleList.push_back(newParticle);
 	}
 }
