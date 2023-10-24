@@ -126,6 +126,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	Result result;
 
+	Title title;
+
 	//========================================================
 	//sound
 	Sounds gameStartSE{};
@@ -182,6 +184,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			///
 			/// ↓描画処理ここから
 			/// 
+
+			title.Draw();
 
 			boxTransition.Draw();
 			Novice::ScreenPrintf(10, 10, "scene:%d", scene);
