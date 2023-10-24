@@ -140,6 +140,13 @@ float Clamp(float t, float start, float end) {
 	return t;
 }
 
+float ClampLerp(float t, float start, float end) {
+	if (t < 0.0f) { t = 0.0f; }
+	else if (t > 1.0f) { t = 1.0f; }
+
+	return (1.0f - t) * start + t * end;
+}
+
 /* ==================================
  collision Function
 ================================== */
@@ -306,6 +313,61 @@ void DrawRhombusAnimation(float t, Vector2f center, float radius, float length, 
 	}
 }
 
+void DrawCircleAnimation(float t, const Vector2f& center, float radius, float width, int textureHandle, uint32_t color) {
+	const uint32_t kSubdivision = 64;
+	const float kThetaEvery = (static_cast<float>(M_PI) * 2.0f) / static_cast<float>(kSubdivision);
+	Vector2f vertex[4];
+
+	enum VertexName {
+		LEFTBOTTOM,
+		LEFTTOP,
+		RIGHTBOTTOM,
+		RIGHTTOP,
+	};
+
+	for (uint32_t thetaIndex = 0; thetaIndex < kSubdivision; ++thetaIndex) {
+		float time = t * static_cast<float>(kSubdivision) - thetaIndex;
+
+		if (time < 0.0f) { break; }
+
+		float theta = kThetaEvery * thetaIndex - static_cast<float>(M_PI) / 2.0f;
+
+		// left
+		vertex[LEFTBOTTOM] = {
+			std::cos(theta) * radius, // x
+			std::sin(theta) * radius, // y
+		};
+
+		vertex[LEFTTOP] = {
+			std::cos(theta) * (radius + width), // x
+			std::sin(theta) * (radius + width), // y
+		};
+
+		// right
+		vertex[RIGHTBOTTOM] = {
+			std::cos(theta + ClampLerp(time, 0.0f, kThetaEvery)) * radius, // x
+			std::sin(theta + ClampLerp(time, 0.0f, kThetaEvery)) * radius, // y
+		};
+
+		vertex[RIGHTTOP] = {
+			std::cos(theta + ClampLerp(time, 0.0f, kThetaEvery)) * (radius + width), // x
+			std::sin(theta + ClampLerp(time, 0.0f, kThetaEvery)) * (radius + width), // y
+		};
+
+		Novice::DrawQuad(
+			static_cast<int>(vertex[LEFTTOP].x + center.x), static_cast<int>(vertex[LEFTTOP].y + center.y),
+			static_cast<int>(vertex[RIGHTTOP].x + center.x), static_cast<int>(vertex[RIGHTTOP].y + center.y),
+			static_cast<int>(vertex[LEFTBOTTOM].x + center.x), static_cast<int>(vertex[LEFTBOTTOM].y + center.y),
+			static_cast<int>(vertex[RIGHTBOTTOM].x + center.x), static_cast<int>(vertex[RIGHTBOTTOM].y + center.y),
+			0, 0,
+			1, 1,
+			textureHandle,
+			color
+		);
+	}
+}
+
+
 void DrawWindow(const Vector2f& center, const Sizef& size, uint32_t color) {
 	Vertex4f vertex = {
 		{center.x - (size.width / 2.0f), center.y - (size.height / 2.0f)}, // leftTop
@@ -367,7 +429,7 @@ void DrawWindow(const Vector2f& center, const Sizef& size, uint32_t color) {
 
 void DrawJapanese(const Vector2<int>& pos, const Sizef& size, int wordNum, short int* word, uint32_t color, int font) {
 	// Setting //
-	Size <int> fontSize = {24, 24};
+	Size <int> fontSize = { 24, 24 };
 
 	// Draw //
 	for (int wi = 0; wi < wordNum; wi++) {
@@ -391,7 +453,7 @@ void DrawSprite(
 	Novice::DrawSprite(
 		static_cast<int>(center.x - (size.width / 2.0f)), static_cast<int>(center.y - (size.height / 2.0f)),
 		textureHandle,
-		size.width / textureSize.width , size.height / textureSize.height,
+		size.width / textureSize.width, size.height / textureSize.height,
 		0.0f,
 		color
 	);

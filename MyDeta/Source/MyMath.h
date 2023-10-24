@@ -48,6 +48,9 @@ float DotProduct(Vector2<float> v1, Vector2<float> v2);
 /* --- Clamp --- */
 float Clamp(float t, float start, float end);
 
+/* --- ClampLerp --- */
+float ClampLerp(float t, float start, float end);
+
 /* ==================================
  collision Function
 ================================== */
@@ -69,11 +72,14 @@ void DrawRhombus(Vector2f center, float radius, float length, unsigned int color
 
 void DrawRhombusAnimation(float t, Vector2f center, float radius, float length, unsigned int color, int graphHandle);
 
+void DrawCircleAnimation(float t, const Vector2f& center, float radius, float width, int textureHandle, uint32_t color);
+
 void DrawWindow(const Vector2f& center, const Sizef& size, uint32_t color);
 
 void DrawJapanese(const Vector2 <int>& pos, const Sizef& size, int wordNum, short int* word, uint32_t color, int font);
 
 void DrawSprite(const Vector2f& center, const Sizef& size, int textureHandle, const Sizef& textureSize, uint32_t color);
+
 void DrawJapanese(const Vector2 <int>& pos, const Sizef& size, int wordNum, short int* word, uint32_t color, int font);
 
 /* ---------------------------------
