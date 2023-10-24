@@ -327,6 +327,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 					loadFile_.WriteFile(timer.GetTimer());
 
 					loadFile_.LoadJsonFile(timer.GetBestTimer());
+
+					player_.SetIsWindSeStop(true);
 				}
 
 				//========================================================================

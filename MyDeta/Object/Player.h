@@ -106,6 +106,7 @@ private:
 	int playerDeathSe_;
 
 	//フラグ
+	bool isWindSeStop_;
 	int weakWindHandle_;
 	int strongWindHandle_;
 	bool deathSeHandle_;
@@ -156,6 +157,9 @@ public:
 
 	void SetIsHit(bool flag) { isHit_ = flag; }
 	bool GetIsHit() { return isHit_; }
+
+	// isWindSeStop
+	void SetIsWindSeStop(bool isWindSeStop) { isWindSeStop_ = isWindSeStop; }
 
 	// windVolume
 	void SetWindVolume(Vector2<float> valume) { windVolume_ = valume; }

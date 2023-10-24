@@ -87,6 +87,7 @@ void Player::Init() { // 変数の初期化
 	playerDeathSe_ = Novice::LoadAudio("./images/Sounds/PlayerSe/playerDeath.mp3");
 
 	//フラグ
+	isWindSeStop_ = false;
 	weakWindHandle_ = -1;
 	strongWindHandle_ = -1;
 	deathSeHandle_ = false;
@@ -228,6 +229,7 @@ void Player::Update(char* keys, char* preKeys, Stage& stage_) { /// 更新処理
 	if (hp_ <= 0) {
 		stage_.SetIsBlackOut(true);
 		stage_.SetIsStopSound(true);
+		isWindSeStop_ = true;
 
 		if (stage_.GetIsBlackOutFinish() == true) {
 			isAlive_ = false;
@@ -329,6 +331,11 @@ void Player::Draw() { /// 描画処理
 		Novice::StopAudio(weakWindHandle_);
 		PlayAudio(strongWindHandle_, strongWindSe_, windSoundVolume_, true);
 		break;
+	}
+
+	if (isWindSeStop_) {
+		Novice::StopAudio(strongWindHandle_);
+		Novice::StopAudio(weakWindHandle_);
 	}
 
 	//playerのhit時の音
