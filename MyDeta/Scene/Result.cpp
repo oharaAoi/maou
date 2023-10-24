@@ -59,5 +59,6 @@ void Result::Draw(Timer timer) {
 	timer.DrawTimer(
 		{ (kWindowWidth / 2.0f) - (((21.0f * 2.0f) * 3.0f) / 2.0f) + 10.0f, 240.0f},
 		{21.0f * 2.0f, 32.0f * 2.0f},
-		timer.GetTimer(), ShiftColor(EaseInOutExpo(resultFream_ / 60.0f), 0xFAFAFA00, 0xFAFAFAFF));
+		timer.GetTimer(), ShiftColor(EaseInOutExpo(resultFream_ / 60.0f), 0xFAFAFA00, 0xFAFAFAFF)
+	);
 }

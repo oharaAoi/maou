@@ -1,10 +1,12 @@
 #include "Timer.h"
 
+
+Sizef Timer::fontSize_ = fontSize_ = { 420.0f / 10.0f, 72.0f };
+
 Timer::Timer() {
 	Init();
 
-	font_ = Novice::LoadTexture("./images/Resource/Font/numberFont.png");
-	fontSize_ = { 420.0f / 10.0f, 72.0f };
+	fontHandle_ = Novice::LoadTexture("./images/Resource/Font/numberFont.png");
 
 	for (int i = 0; i < 3; i++) {
 		bestTime_[i] = 0.0f;
@@ -49,7 +51,7 @@ void Timer::DrawTimer(Vector2f pos, Sizef size, float time, unsigned int color) 
 			static_cast<int>(pos.x + (di * size.width)), static_cast<int>(pos.y),
 			static_cast<int>(fontSize_.width * timeArr[di]), 0,
 			static_cast<int>(fontSize_.width), static_cast<int>(fontSize_.height),
-			font_,
+			fontHandle_,
 			size.width / (fontSize_.width * 10), size.height / fontSize_.height,
 			0.0f,
 			color
