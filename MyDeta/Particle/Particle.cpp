@@ -1,12 +1,13 @@
 #include "Particle.h"
 #include <Novice.h>
 
-Particle::Particle(Vector2<float> pos,Vector2<float> velocity,int maxTime)
+Particle::Particle(Vector2<float> pos,Vector2<float> velocity,int maxTime,int color)
 {
 	pos_ = pos;
 	radius_ = 12.0f;
 	velocity_ = velocity;
 	maxTime_ = maxTime;
+	color_ = color;
 }
 
 Particle::~Particle()
@@ -35,7 +36,7 @@ void Particle::Draw()
 		static_cast<int>(pos_.y) + static_cast<int>(cie_->GetOrigine().y),
 		static_cast<int>(radius_), static_cast<int>(radius_),
 		0.0f,
-		WHITE, kFillModeSolid
+		color_, kFillModeSolid
 	);
 }
 

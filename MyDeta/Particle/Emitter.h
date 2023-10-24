@@ -11,7 +11,7 @@ public:
 	void Update();
 	void Draw();
 
-	void Emit(int centerX,int centerY,int count);
+	void Emit(int centerX,int centerY,int count,int color);
 
 	
 
