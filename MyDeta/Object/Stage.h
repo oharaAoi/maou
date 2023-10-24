@@ -54,7 +54,7 @@ private:
 	int gameBgm_;
 
 	//フラグ
-	int gemeBgmHandle_;
+	int gameBgmHandle_;
 	bool isStopSound_;
 
 	//音量
@@ -75,20 +75,27 @@ public:
 	void Draw();
 
 	//アクセッサ
+	/*中心の座標*/
 	Vector2 <float>GetPos() { return pos_; }
-
 	Vector2f GetScrollPos(int i) { return backGround_[i].pos; }
 
+	/*中心の半径*/
 	float GetRadius() { return radius_; }
 
+	/*風の範囲*/
 	float GetRangeRadius() { return rangeRadius_; }
 	void SetRangeRadius(float radius) { rangeRadius_ = radius; }
 
+	/*弾が消える範囲*/
 	float GetBulletVanishRange() { return bulletVanishRange_; }
 
-	int GetGemeBgmHandle() { return gemeBgmHandle_; }
-	void SetGameBgmHandle(int flag) { gemeBgmHandle_ = flag; }
+	/*音*/
+	int GetGemeBgmHandle() { return gameBgmHandle_; }
+	void SetGameBgmHandle(int flag) { gameBgmHandle_ = flag; }
 
+	void SetIsStopSound(bool isStopSound) { isStopSound_ = isStopSound; }
+
+	/*ブラックアウト*/
 	void SetIsBlackOut(bool isBlackOut) { isBlackOut_ = isBlackOut; }
 	bool GetIsBlackOut() { return isBlackOut_; }
 
@@ -96,8 +103,6 @@ public:
 	bool GetIsBlackOutFinish() { return isBlackOutFinish_; }
 
 	unsigned int GetBlackOutColor() { return blackOutColor_; }
-
-	void SetIsStopSound(bool isStopSound) { isStopSound_ = isStopSound; }
 
 };
 

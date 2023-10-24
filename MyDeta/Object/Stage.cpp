@@ -1,7 +1,7 @@
 ﻿#include "Stage.h"
 
 Stage::Stage() {
-	Init();
+	gameBgmHandle_ = -1;
 }
 
 void Stage::Init() {
@@ -57,20 +57,26 @@ void Stage::Init() {
 	changeT_ = 0.0f;
 
 	//==========================================
-	Novice::StopAudio(gemeBgmHandle_);
+	
 
 	gameBgm_ = Novice::LoadAudio("./images/Sounds/bgm/souldrive.mp3");
 
-	gemeBgmHandle_ = -1;
-	isStopSound_ = false;
+	isStopSound_ = true;
 
 	gameBgmVolume_ = 0.3f;
+
 
 	//デバック用
 	bulletVanishRange_ = 500.0f;
 }
 
 void Stage::Update(int waveNum) {
+	//音を鳴らす
+	if (isStopSound_) {
+		isStopSound_ = false;
+	}
+
+
 	for (int i = 0; i < kCloudMax; i++) {
 		cloud[i].pos.x -= cloud[i].velocity.x;
 
@@ -157,8 +163,8 @@ void Stage::Draw() {
 	//==========================================
 	//sound
 	if (!isStopSound_) {
-		PlayAudio(gemeBgmHandle_, gameBgm_, gameBgmVolume_, true);
+  		PlayAudio(gameBgmHandle_, gameBgm_, gameBgmVolume_, true);
 	}else {
-		Novice::StopAudio(gemeBgmHandle_);
+ 		Novice::StopAudio(gameBgmHandle_);
 	}
 }

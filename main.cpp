@@ -49,6 +49,13 @@ enum GameScene {
 	RESULT
 };
 
+struct Sounds {
+	int sound;
+	int handle;
+	float volume;
+	bool isSound;
+};
+
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
@@ -75,7 +82,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	//========================================================
 	// Source
-	/*Coordinate* cie_ = Coordinate::GetInstance();*/
 
 	//========================================================
 	//System
@@ -83,6 +89,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	PlayerRangeDetector range_;
 	range_.Init();
+
+	LoadFile loadFile_;
+	loadFile_.Init();
 
 	//========================================================
 	//Object
@@ -95,31 +104,35 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	Stage stage_;
 	stage_.Init();
+	int waveNum = 0;
 
 	Player player_;
 	player_.Init();
 
-	BoxTransition boxTransition;
-	Timer timer;
-
+	/* scene */
 	// scene change
 	float sceneT = 0.0f;
 	bool isChangeScene = false;
 
+	BoxTransition boxTransition;
+	Timer timer;
+
 	// game over
 	GameOver gameOver_;
 	gameOver_.Init();
-	/*bool isContinue = false;
-	float gameoverT = 0.0f;*/
 
 	Tutorial tutorial;
 
 	Result result;
 
-	LoadFile loadFile_;
-	loadFile_.Init();
+	//========================================================
+	//sound
+	Sounds gameStartSE{};
+	gameStartSE.sound = Novice::LoadAudio("./images/Sounds/sceneChangeSE/sceneChange.mp3");
+	gameStartSE.handle = -1;
+	gameStartSE.volume = 0.3f;
+	gameStartSE.isSound = false;
 
-	int waveNum = 0;
 
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
@@ -141,6 +154,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			if (keys[DIK_SPACE] && !preKeys[DIK_SPACE]) {
 				isChangeScene = true;
+				gameStartSE.isSound = true;
 			}
 
 			if (isChangeScene) {
@@ -149,6 +163,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				if (sceneT == 120.0f) {
 					scene = TUTORIAL;
 					isChangeScene = false;
+
+					gameStartSE.isSound = false;
+					Novice::StopAudio(gameStartSE.handle);
 				}
 
 			} else {
@@ -167,6 +184,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			boxTransition.Draw();
 			Novice::ScreenPrintf(10, 10, "scene:%d", scene);
+
+			//ゲームスタート時の音
+			if (gameStartSE.isSound) {
+				PlayAudio(gameStartSE.handle, gameStartSE.sound, gameStartSE.volume, false);
+			} 
 
 			///
 			/// ↑描画処理ここまで
@@ -327,6 +349,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 					loadFile_.WriteFile(timer.GetTimer());
 
 					loadFile_.LoadJsonFile(timer.GetBestTimer());
+
+					player_.SetIsWindSeStop(true);
 				}
 
 				//========================================================================
@@ -396,20 +420,20 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				range_.Init();
 				boss_.Init();
 				bossBullet_.Init();
-				stage_.Init();
 				player_.Init();
 				gameOver_.Init();
-
+				timer.Init();
+				stage_.Init();
 
 			} else if (gameOver_.GetChangeToTitle() == true) {
-
 				scene = TITLE;
 				range_.Init();
 				boss_.Init();
 				bossBullet_.Init();
-				stage_.Init();
 				player_.Init();
 				gameOver_.Init();
+				timer.Init();
+				stage_.Init();
 			}
 
 			///
@@ -438,6 +462,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			if (result.GetIsEndResult()) {
 				scene = GameScene::TITLE;
+				range_.Init();
+				boss_.Init();
+				bossBullet_.Init();
+				stage_.Init();
+				player_.Init();
+				gameOver_.Init();
+				timer.Init();
+				result.Init();
+				tutorial.Init();
 			}
 
 			///

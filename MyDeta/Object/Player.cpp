@@ -3,7 +3,9 @@
 Player::Player() {
 	white1x1GH = Novice::LoadTexture("./NoviceResources/white1x1.png");
 
-	Init();
+	weakWindHandle_ = -1;
+	strongWindHandle_ = -1;
+	overHeatRecoverHandle_ = -1;
 }
 
 Player::~Player() {
@@ -85,16 +87,18 @@ void Player::Init() { // 変数の初期化
 	strongWindSe_ = Novice::LoadAudio("./images/Sounds/PlayerSe/strongFan.mp3");
 	hitSe_ = Novice::LoadAudio("./images/Sounds/PlayerSe/playerHited.mp3");
 	playerDeathSe_ = Novice::LoadAudio("./images/Sounds/PlayerSe/playerDeath.mp3");
+	overHeatRecoverSE_ = Novice::LoadAudio("./images/Sounds/PlayerSe/overHeatRecoverSE.mp3");
 
 	//フラグ
-	weakWindHandle_ = -1;
-	strongWindHandle_ = -1;
+	isWindSeStop_ = false;
 	deathSeHandle_ = false;
+	isOverHeatRecover_ = false;
 
 	//音量
 	windSoundVolume_ = 0.2f;
 	hitSeVolume_ = 0.1f;
 	playerDeathSeVolume_ = 0.2f;
+	overHeatRecoverVolume_ = 0.2f;
 
 }
 
@@ -183,7 +187,13 @@ void Player::Update(char* keys, char* preKeys, Stage& stage_) { /// 更新処理
 				frameCountLimit_ = 10;
 			}
 
-			if (overHeat_ < 100.0f) { overHeat_ += 0.5f; }
+			if (overHeat_ < 100.0f) { 
+				overHeat_ += 0.5f; 
+
+				isOverHeatRecover_ = true;
+			} else {
+				isOverHeatRecover_ = false;
+			}
 
 			break;
 
@@ -199,6 +209,8 @@ void Player::Update(char* keys, char* preKeys, Stage& stage_) { /// 更新処理
 
 			if (overHeat_ > 0.0f) { overHeat_ -= 0.1f; }
 
+			isOverHeatRecover_ = false;
+
 			break;
 
 		case WindowStrength::STRONG:
@@ -212,6 +224,8 @@ void Player::Update(char* keys, char* preKeys, Stage& stage_) { /// 更新処理
 			}
 
 			if (overHeat_ > 0.0f) { overHeat_ -= 0.4f; }
+
+			isOverHeatRecover_ = false;
 
 			break;
 		}
@@ -228,6 +242,7 @@ void Player::Update(char* keys, char* preKeys, Stage& stage_) { /// 更新処理
 	if (hp_ <= 0) {
 		stage_.SetIsBlackOut(true);
 		stage_.SetIsStopSound(true);
+		isWindSeStop_ = true;
 
 		if (stage_.GetIsBlackOutFinish() == true) {
 			isAlive_ = false;
@@ -329,6 +344,17 @@ void Player::Draw() { /// 描画処理
 		Novice::StopAudio(weakWindHandle_);
 		PlayAudio(strongWindHandle_, strongWindSe_, windSoundVolume_, true);
 		break;
+	}
+
+	if (isWindSeStop_) {
+		Novice::StopAudio(strongWindHandle_);
+		Novice::StopAudio(weakWindHandle_);
+	}
+
+	if (isOverHeatRecover_) {
+		PlayAudio(overHeatRecoverHandle_, overHeatRecoverSE_, overHeatRecoverVolume_, true);
+	} else {
+		Novice::StopAudio(overHeatRecoverHandle_);
 	}
 
 	//playerのhit時の音

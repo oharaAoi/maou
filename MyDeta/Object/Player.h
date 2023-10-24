@@ -99,19 +99,30 @@ private:
 
 	//==========================================
 	//サウンド
-	//リソース
+	//風
 	int weakWindSe_;
 	int strongWindSe_;
+
+	bool isWindSeStop_;
+	int weakWindHandle_;
+
+	float windSoundVolume_;
+
+	//オーバーヒート
+	int overHeatRecoverSE_;
+
+	int overHeatRecoverHandle_;
+	bool isOverHeatRecover_;
+
+	float overHeatRecoverVolume_;
+
+	//ヒット時
 	int hitSe_;
 	int playerDeathSe_;
 
-	//フラグ
-	int weakWindHandle_;
 	int strongWindHandle_;
 	bool deathSeHandle_;
 
-	//音量
-	float windSoundVolume_;
 	float hitSeVolume_;
 	float playerDeathSeVolume_;
 
@@ -156,6 +167,9 @@ public:
 
 	void SetIsHit(bool flag) { isHit_ = flag; }
 	bool GetIsHit() { return isHit_; }
+
+	// isWindSeStop
+	void SetIsWindSeStop(bool isWindSeStop) { isWindSeStop_ = isWindSeStop; }
 
 	// windVolume
 	void SetWindVolume(Vector2<float> valume) { windVolume_ = valume; }
