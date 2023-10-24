@@ -36,6 +36,7 @@ private:
 
 	Progress progress_;
 	float progressFrame_;
+	bool isTriggerSpace_;
 
 	int tutorialGH_[3];
 

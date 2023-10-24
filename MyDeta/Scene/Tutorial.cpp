@@ -23,6 +23,8 @@ void Tutorial::Init() {
 	progress_ = MOVE;
 	progressFrame_ = 0.0f;
 
+	isTriggerSpace_ = false;
+
 }
 
 void Tutorial::Update(char* keys, char* preKeys,
@@ -58,9 +60,19 @@ void Tutorial::Update(char* keys, char* preKeys,
 			break;
 
 		case Progress::WINDOW:
+			
+			if (!isTriggerSpace_) {
+				if (keys[DIK_SPACE]) {
+					isTriggerSpace_ = true;
+				}
 
-			if (keys[DIK_SPACE]) {
-				progress_ = Progress::ENEMY;
+			} else {
+				progressFrame_++;
+
+				if (progressFrame_ > 60.0f * 5.0f/*s*/) {
+					progress_ = Progress::ENEMY;
+					progressFrame_ = 0.0f;
+				}
 			}
 
 			break;
@@ -130,9 +142,20 @@ void Tutorial::Draw(Player& player, Stage& stage, Boss boss, BossBullet bossBull
 
 	playerWindEmitter.Draw();
 
-	if (progress_ >= Progress::ENEMY) {
-		boss.Draw();
-		bossBullet.Draw();
+	// enemy Draw
+	switch (progress_) {
+		case Progress::ENEMY:
+
+			boss.Draw(progressFrame_ / 60.0f);
+
+			break;
+
+		case Progress::BULLET:
+
+			boss.Draw();
+			bossBullet.Draw();
+
+			break;
 	}
 
 	// window

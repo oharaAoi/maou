@@ -68,6 +68,9 @@ public:
 
 	void BossHpDecrece(char* keys, char* preKeys);
 
+	// default method overload
+	void Draw(float t);
+
 	//アクセッサ
 	//=================================================
 	Vector2 <float>GetPos() { return pos_; }

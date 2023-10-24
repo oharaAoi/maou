@@ -66,6 +66,8 @@ void Boss::BossHpDecrece(char* keys, char* preKeys) {
 	}
 }
 
+
+
 void Boss::UpDate(BossBullet& bossBullet_) {
 	//ボスのhpが一定量減った時
 	if (type_ == WAVE1) {
@@ -229,6 +231,89 @@ void Boss::Draw() {
 			1.0f,
 			0.0f,
 			0xffffffff
+		);
+	}
+}
+
+// default method overload
+void Boss::Draw(float t) {
+	if (t > 1.0f) { t = 1.0f; }
+
+	DrawRhombus(
+		{ kWindowWidth / 2.0f, kWindowHeight / 2.0f },
+		76.0f, 15.0f,
+		ShiftColor(t, 0x8a8a8a00, 0x8a8a8aFF),
+		white1x1GH
+	);
+
+	switch (type_) {
+		case WAVE1:
+			DrawRhombus(
+				{ kWindowWidth / 2.0f, kWindowHeight / 2.0f },
+				74.0f + 30.0f, 10.0f,
+				ShiftColor(t, 0xd8433900, 0xd8433940),
+				white1x1GH
+			);
+
+			DrawRhombus(
+				{ kWindowWidth / 2.0f, kWindowHeight / 2.0f },
+				74.0f + 30.0f + 20.0f, 10.0f,
+				ShiftColor(t, 0xd8433920, 0xd8433920),
+				white1x1GH
+			);
+
+			// main HP
+			DrawRhombusAnimation(
+				hp_ / 40.0f,
+				{ kWindowWidth / 2.0f, kWindowHeight / 2.0f },
+				74.0f, 20.0f,
+				ShiftColor(t, 0xd8433920, 0xd84339FF),
+				white1x1GH
+			);
+			break;
+
+		case WAVE2:
+			DrawRhombus(
+				{ kWindowWidth / 2.0f, kWindowHeight / 2.0f },
+				74.0f + 30.0f * 1, 10.0f,
+				0xd8433940,
+				white1x1GH
+			);
+
+			// main HP
+			DrawRhombusAnimation(
+				hp_ / 60.0f,
+				{ kWindowWidth / 2.0f, kWindowHeight / 2.0f },
+				74.0f, 20.0f,
+				0xd84339FF,
+				white1x1GH
+			);
+			break;
+
+		case WAVE3:
+			DrawRhombusAnimation(
+				hp_ / 80.0f,
+				{ kWindowWidth / 2.0f, kWindowHeight / 2.0f },
+				74.0f, 20.0f,
+				0xd84339FF,
+				white1x1GH
+			);
+			break;
+	}
+
+	if (isAlive_) {
+		Novice::DrawSpriteRect(
+			static_cast<int>(pos_.x - radius_ + cie_->GetOrigine().x),
+			static_cast<int>(pos_.y - radius_ + cie_->GetOrigine().y),
+			static_cast<int>(drawLt_.x),
+			static_cast<int>(drawLt_.y),
+			static_cast<int>(drawWidth_),
+			static_cast<int>(drawHeight_),
+			gh_,
+			spriteSize_.y / spriteSize_.x,
+			1.0f,
+			0.0f,
+			ShiftColor(t, 0xffffff00, 0xFFFFFFFF)
 		);
 	}
 }
