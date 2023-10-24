@@ -74,9 +74,6 @@ void Player::Init() { // 変数の初期化
 	overHeat_ = 100.0f;
 	isAlive_ = true;
 
-	blackOutCount_ = 0.0f;
-	blackOutColor_ = 0x00000000;
-
 	windVolume_.x = 1.2f;
 	windVolume_.y = 1.2f;
 
