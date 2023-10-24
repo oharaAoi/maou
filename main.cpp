@@ -351,8 +351,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 					loadFile_.LoadJsonFile(timer.GetBestTimer());
 
 					player_.SetIsWindSeStop(true);
-
-					player_.AllSoundStop();
 				}
 
 				//========================================================================
@@ -415,6 +413,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓更新処理ここから
 			/// 
 
+			//プレイヤーの音を止めてしまう
+			player_.AllSoundStop();
+
 			gameOver_.Update(keys, preKeys);
 
 			if (gameOver_.GetChangeToGame() == true) {
@@ -459,6 +460,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			///
 			/// ↓更新処理ここから
 			/// 
+
+			//プレイヤーの音を止めてしまう
+			player_.AllSoundStop();
 
 			result.Update(keys, preKeys);
 
