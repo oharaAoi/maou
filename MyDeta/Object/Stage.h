@@ -38,8 +38,15 @@ private:
 	Base cloud[kCloudMax];
 
 	//==========================================
+	//ブラックアウトの変数
+	bool isBlackOut_;
+	bool isBlackOutFinish_;
+	unsigned int blackOutColor_;
+
+	//==========================================
 	//フレームカウント
 	float changeT_;
+	float blackOutCount_;
 
 	//==========================================
 	//bgm
@@ -80,6 +87,14 @@ public:
 
 	int GetGemeBgmHandle() { return gemeBgmHandle_; }
 	void SetGameBgmHandle(int flag) { gemeBgmHandle_ = flag; }
+
+	void SetIsBlackOut(bool isBlackOut) { isBlackOut_ = isBlackOut; }
+	bool GetIsBlackOut() { return isBlackOut_; }
+
+	void SetIsBlackOutFinish(bool isBlackOutFinish) { isBlackOutFinish_ = isBlackOutFinish; }
+	bool GetIsBlackOutFinish() { return isBlackOutFinish_; }
+
+	unsigned int GetBlackOutColor() { return blackOutColor_; }
 
 };
 

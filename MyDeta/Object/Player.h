@@ -91,9 +91,7 @@ private:
 	int hp_;
 	float overHeat_;
 	bool isAlive_;
-
-	float blackOutCount_;
-	unsigned int blackOutColor_;
+	bool isHit_;
 
 	Vector2<float> windVolume_;
 
@@ -104,14 +102,18 @@ private:
 	//リソース
 	int weakWindSe_;
 	int strongWindSe_;
+	int hitSe_;
+	int playerDeathSe_;
 
 	//フラグ
 	int weakWindHandle_;
 	int strongWindHandle_;
+	bool deathSeHandle_;
 
 	//音量
 	float windSoundVolume_;
-
+	float hitSeVolume_;
+	float playerDeathSeVolume_;
 
 	//インスタンス
 	Coordinate* cie_ = Coordinate::GetInstance();
@@ -152,11 +154,18 @@ public:
 	void SetIsAlive(bool flag) { isAlive_ = flag; }
 	bool GetIsAlive() { return isAlive_; }
 
+	void SetIsHit(bool flag) { isHit_ = flag; }
+	bool GetIsHit() { return isHit_; }
+
 	// windVolume
 	void SetWindVolume(Vector2<float> valume) { windVolume_ = valume; }
 	Vector2<float> GetWindVolume() { return windVolume_; }
 
 	// windwStrength
 	WindowStrength GetWindowStrength() { return windowStrength_; }
+
+	// deathSeHandle
+	void SetDeathSeHandle(bool flag) { deathSeHandle_ = flag; }
+
 };
 

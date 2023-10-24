@@ -346,15 +346,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓描画処理ここから
 			/// 
 
-
 			stage_.Draw();
 			boss_.Draw();
 			range_.Draw();
 			emitter.Draw(); // エミッターの描画処理を呼ぶ
 			playerWindEmitter.Draw(); // プレイヤーの風の描画処理
 			playerDeadEmitter.Draw(); // プレイヤー死亡時のパーティクルの描画処理
-
-
 
 			bossBullet_.Draw();
 
@@ -363,6 +360,18 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			player_.Draw();
 
 			boxTransition.Draw();
+
+			if (stage_.GetIsBlackOut() == true) {
+				Novice::DrawBox(
+					0,
+					0,
+					1280,
+					720,
+					0.0f,
+					stage_.GetBlackOutColor(),
+					kFillModeSolid
+				);
+			}
 
 
 			///

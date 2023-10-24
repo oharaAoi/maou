@@ -49,6 +49,11 @@ void Stage::Init() {
 	cloud[3].gh_ = Novice::LoadTexture("./images/Resource/Stage/cloud/cloud4.png");
 
 	//==========================================
+	isBlackOut_ = false;
+	isBlackOutFinish_ = false;
+	blackOutColor_ = 0x00000000;
+
+	//==========================================
 	changeT_ = 0.0f;
 
 	//==========================================
@@ -85,6 +90,15 @@ void Stage::Update(int waveNum) {
 		if (backGround_[2].color != 0xffffffff) {
 			changeT_ += 0.01f;
 			backGround_[2].color = ShiftColor(changeT_, 0xffffff00, 0xffffffff);
+		}
+	}
+
+	if (isBlackOut_) {
+		blackOutCount_ += 0.01f;
+		blackOutColor_ = ShiftColor(blackOutCount_, 0x00000000, 0x000000FF);
+
+		if (blackOutCount_ >= 1) {
+			isBlackOutFinish_ = true;
 		}
 	}
 
