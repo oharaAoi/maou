@@ -294,7 +294,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				range_.Update(player_, bossBullet_);
 
 				//弾とプレイヤー
-				collision.CheckCollision(player_, bossBullet_);
+				collision.CheckCollision(player_, bossBullet_, emitter);
 
 				//弾と敵の当たり判定
 				collision.CheckCollision(boss_, bossBullet_, emitter);
