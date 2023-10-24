@@ -92,6 +92,7 @@ private:
 	float overHeat_;
 	bool isAlive_;
 	bool isHit_;
+	bool isRecover_;
 
 	Vector2<float> windVolume_;
 
@@ -122,12 +123,15 @@ private:
 	//ヒット時
 	int hitSe_;
 	int playerDeathSe_;
+	int recoverSE_;
 
 	int strongWindHandle_;
 	bool deathSeHandle_;
+	int recoverSEHandle_;
 
 	float hitSeVolume_;
 	float playerDeathSeVolume_;
+	float recoverSEVolume_;
 
 	//インスタンス
 	Coordinate* cie_ = Coordinate::GetInstance();
@@ -169,8 +173,13 @@ public:
 	void SetIsAlive(bool flag) { isAlive_ = flag; }
 	bool GetIsAlive() { return isAlive_; }
 
+	// isHit
 	void SetIsHit(bool flag) { isHit_ = flag; }
 	bool GetIsHit() { return isHit_; }
+
+	//isRecover
+	void SetIsRecover(bool isRecover) { isRecover_ = isRecover; }
+	bool GetIsRecover() { return isRecover_; }
 
 	// isWindSeStop
 	void SetIsWindSeStop(bool isWindSeStop) { isWindSeStop_ = isWindSeStop; }

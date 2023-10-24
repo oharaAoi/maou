@@ -19,7 +19,8 @@ enum BulletType {
 	SLOW,
 	FAST,
 	EXPLODE,
-	VANISH
+	VANISH,
+	RECOVER
 };
 
 //弾幕の種類
@@ -112,7 +113,7 @@ private:
 
 	Base object_[kBulletMax_];
 
-	int bulletGh_[4];
+	int bulletGh_[5];
 
 	//==============================
 	//弾の速度(waveごとに速度を上げる)
@@ -120,6 +121,7 @@ private:
 	float fastSpeed_;
 	float explodeSpeed_;
 	float vanishSpeed_;
+	float recoverSpeed_;
 
 	//==============================
 	//2点間の距離

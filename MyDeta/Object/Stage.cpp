@@ -63,7 +63,7 @@ void Stage::Init() {
 
 	isStopSound_ = true;
 
-	gameBgmVolume_ = 0.3f;
+	gameBgmVolume_ = 0.2f;
 
 
 	//デバック用

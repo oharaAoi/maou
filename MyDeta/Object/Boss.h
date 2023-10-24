@@ -49,6 +49,13 @@ private:
 	int drawCount_;
 	int drawCountLimit_;
 
+	//==============================
+	//sounds
+	int gaugeBreakSE_;
+	int gaugeBreakSEHandle_;
+	float gaugeBreakSEVolume_;
+	bool isGaugeBreakSE_;
+
 	//インスタンス
 	Coordinate* cie_ = Coordinate::GetInstance();
 
