@@ -2,6 +2,8 @@
 
 BoxTransition::BoxTransition() {
 	Init();
+
+	backgroundGH_ = Novice::LoadTexture("./images/resource/sceneChange/sceneChange.png");
 }
 
 BoxTransition::~BoxTransition() {
@@ -45,7 +47,7 @@ void BoxTransition::Update(float t) {
 void BoxTransition::Draw() {
 	for (int row = 0; row < kSubdivisionHeight_ + 1; row++) {
 		for (int column = 0; column < kSubdivisionWidth_ + 1; column++) {
-			Novice::DrawBox(
+			/*Novice::DrawBox(
 				static_cast<int>(object_[row][column].center.x - (object_[row][column].size.width / 2.0f)),
 				static_cast<int>(object_[row][column].center.y - (object_[row][column].size.height / 2.0f)),
 				static_cast<int>(object_[row][column].size.width),
@@ -53,6 +55,19 @@ void BoxTransition::Draw() {
 				0.0f,
 				0xFAFAFAFF,
 				kFillModeSolid
+			);*/
+
+			Novice::DrawSpriteRect(
+				static_cast<int>(object_[row][column].center.x - (object_[row][column].size.width / 2.0f)),
+				static_cast<int>(object_[row][column].center.y - (object_[row][column].size.height / 2.0f)),
+				static_cast<int>(object_[row][column].center.x - (object_[row][column].size.width / 2.0f)),
+				static_cast<int>(object_[row][column].center.y - (object_[row][column].size.height / 2.0f)),
+				static_cast<int>(object_[row][column].size.width),
+				static_cast<int>(object_[row][column].size.height),
+				backgroundGH_,
+				object_[row][column].size.width / 1280.0f, object_[row][column].size.height / 720.0f,
+				0.0f,
+				0xFFFFFFFF
 			);
 		}
 	}

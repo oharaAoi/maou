@@ -11,6 +11,8 @@
 class BoxTransition {
 private:
 
+	int backgroundGH_;
+
 	static const int kSubdivisionWidth_ = 16;
 	static const int kSubdivisionHeight_ = 9;
 
