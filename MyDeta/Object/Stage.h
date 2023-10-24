@@ -38,6 +38,10 @@ private:
 	Base cloud[kCloudMax];
 
 	//==========================================
+	//フレームカウント
+	float changeT_;
+
+	//==========================================
 	//bgm
 	//リソース
 	int gameBgm_;
@@ -58,12 +62,14 @@ public:
 
 	void Init();
 
-	void Update();
+	void Update(int waveNum);
 
 	void Draw();
 
 	//アクセッサ
 	Vector2 <float>GetPos() { return pos_; }
+
+	Vector2f GetScrollPos(int i) { return backGround_[i].pos; }
 
 	float GetRadius() { return radius_; }
 
@@ -71,6 +77,9 @@ public:
 	void SetRangeRadius(float radius) { rangeRadius_ = radius; }
 
 	float GetBulletVanishRange() { return bulletVanishRange_; }
+
+	int GetGemeBgmHandle() { return gemeBgmHandle_; }
+	void SetGameBgmHandle(int flag) { gemeBgmHandle_ = flag; }
 
 };
 

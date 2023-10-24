@@ -13,24 +13,19 @@ void Stage::Init() {
 	rangeRadius_ = 180.0f;
 	
 	backGround_[0].pos.x = 0;
-	backGround_[0].pos.y = 720;
+	backGround_[0].pos.y = 0;
 	backGround_[0].gh = Novice::LoadTexture("./images/Resource/Stage/backGround/bgWave1.png");
 	backGround_[0].color = 0xffffffff;
 
 	backGround_[1].pos.x = 0;
 	backGround_[1].pos.y = 0;
-	backGround_[1].gh = Novice::LoadTexture("./images/Resource/Stage/backGround/bgWave1.png");
-	backGround_[1].color = 0xffffffff;
+	backGround_[1].gh = Novice::LoadTexture("./images/Resource/Stage/backGround/bgWave2.png");
+	backGround_[1].color = 0xffffff00;
 
 	backGround_[2].pos.x = 0;
-	backGround_[2].pos.y = -720;
-	backGround_[2].gh = Novice::LoadTexture("./images/Resource/Stage/backGround/bgWave2.png");
-	backGround_[2].color = 0xffffffff;
-
-	backGround_[3].pos.x = 0;
-	backGround_[3].pos.y = -1440;
-	backGround_[3].gh = Novice::LoadTexture("./images/Resource/Stage/backGround/bgWave3.png");
-	backGround_[3].color = 0xffffffff;
+	backGround_[2].pos.y = 0;
+	backGround_[2].gh = Novice::LoadTexture("./images/Resource/Stage/backGround/bgWave3.png");
+	backGround_[2].color = 0xffffff00;
 	
 
 	//==========================================
@@ -54,18 +49,22 @@ void Stage::Init() {
 	cloud[3].gh_ = Novice::LoadTexture("./images/Resource/Stage/cloud/cloud4.png");
 
 	//==========================================
+	changeT_ = 0.0f;
+
+	//==========================================
+	Novice::StopAudio(gemeBgmHandle_);
+
 	gameBgm_ = Novice::LoadAudio("./images/Sounds/bgm/souldrive.mp3");
 
 	gemeBgmHandle_ = -1;
 
 	gameBgmVolume_ = 0.3f;
 
-
 	//デバック用
 	bulletVanishRange_ = 500.0f;
 }
 
-void Stage::Update() {
+void Stage::Update(int waveNum) {
 	for (int i = 0; i < kCloudMax; i++) {
 		cloud[i].pos.x -= cloud[i].velocity.x;
 
@@ -73,10 +72,26 @@ void Stage::Update() {
 			cloud[i].pos.x = static_cast<float>(Rand(1350, 1500));
 		}
 	}
+
+	if (waveNum == 1) {
+		if (backGround_[1].color != 0xffffffff) {
+			changeT_ += 0.01f;
+			backGround_[1].color = ShiftColor(changeT_, 0xffffff00, 0xffffffff);
+		}else {
+			changeT_ = 0.0f;
+		}
+
+	} else if (waveNum == 2) {
+		if (backGround_[2].color != 0xffffffff) {
+			changeT_ += 0.01f;
+			backGround_[2].color = ShiftColor(changeT_, 0xffffff00, 0xffffffff);
+		}
+	}
+
 }
 
 void Stage::Draw() {
-	for (int i = 0; i < 2; i++) {
+	for (int i = 0; i < 3; i++) {
 		Novice::DrawSprite(
 			static_cast<int>(backGround_[i].pos.x),
 			static_cast<int>(backGround_[i].pos.y),
