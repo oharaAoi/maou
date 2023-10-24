@@ -55,6 +55,7 @@ void CollisionManager::CheckCollision(Boss& boss_, BossBullet& bossBullet_, Emit
 				bossBullet_.SetPos({ static_cast<int>(kWindowWidth), static_cast<int>(kWindowHeight) }, i);
 				bossBullet_.SetIsPushBacked(false, i);
 
+				//敵のhpを減らす処理
 				if (bossBullet_.GetBulletType(i) != RECOVER) {
 					bossBullet_.SetIsHit(true, i);
 
