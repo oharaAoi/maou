@@ -274,7 +274,7 @@ void Player::Draw() { /// 描画処理
 		/// test guage
 		// over
 		switch (windowStrength_) {
-		case WindowStrength::OFF:
+		case WindowStrength::OFF: // koko
 
 			DrawRhombusAnimation(
 				overHeat_ / 100.0f,
