@@ -28,6 +28,7 @@ void PlayerDeadEmitter::Update()
 	if (circleAlpha_ > 0) {
 		circleAlpha_ -= 15;
 		circleRadius_ += 8.0f;
+		isGenerate_ = true;
 	} else {
 		circleDel_ = true;
 	}
@@ -69,4 +70,6 @@ void PlayerDeadEmitter::PlayerDeadEmit(int centerX, int centerY, int count)
 	circleRadius_ = 20.0f;
 	circleAlpha_ = 255;
 	circleDel_ = false;
+
+	isGenerate_ = false;
 }

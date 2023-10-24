@@ -29,5 +29,5 @@ public:
 	void Init();
 
 	void CheckCollision(Boss& boss_, BossBullet& bossBullet_,Emitter& emit);
-	void CheckCollision(Player& player_, BossBullet& bossBullet_);
+	void CheckCollision(Player& player_, BossBullet& bossBullet_, Emitter& emit);
 };

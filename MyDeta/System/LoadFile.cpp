@@ -17,15 +17,15 @@ void LoadFile::Init() {
 		inputFile.close();
 	} else {
 		if (!timeDate.contains(hiScore)) {
-			timeDate[hiScore] = { {"time", 999} };
+			timeDate[hiScore] = { {"time", 9999999} };
 		}
 
 		if (!timeDate.contains(secondScore)) {
-			timeDate[secondScore] = { {"time", 999} };
+			timeDate[secondScore] = { {"time", 9999999} };
 		}
 
 		if (!timeDate.contains(thirdScore)) {
-			timeDate[thirdScore] = { {"time", 999} };
+			timeDate[thirdScore] = { {"time", 9999999} };
 		}
 
 		std::ofstream outputFile(filePath);

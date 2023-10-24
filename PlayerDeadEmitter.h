@@ -13,6 +13,12 @@ public:
 
 	void PlayerDeadEmit(int centerX, int centerY, int count); //パーティクルの生成関数
 
+	bool GetIsGenerate() {
+		return isGenerate_;
+	}
+
+	void SetIsGenerate(bool flag) { isGenerate_ = flag; };
+
 private:
 	//インスタンス
 	Coordinate* cie_ = Coordinate::GetInstance();
@@ -26,5 +32,7 @@ private:
 	float circleRadius_ = 0.0f;
 	int circleAlpha_ = 0;
 	bool circleDel_ = false;
+
+	bool isGenerate_ = false;
 };
 

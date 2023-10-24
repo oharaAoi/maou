@@ -15,21 +15,45 @@ void CollisionManager::CheckCollision(Boss& boss_, BossBullet& bossBullet_, Emit
 
 		if (b2bLength_ < bossBullet_.GetRadius(i) + boss_.GetRadius()) {
 			if (bossBullet_.GetIsPushBacked(i) == true) {
-				//エフェクトの生成処理
-				emitter.Emit(static_cast<int>(bossBullet_.GetPos(i).x), static_cast<int>(bossBullet_.GetPos(i).y), 12);
+				//弾がボスに当たった時の処理
+				switch (bossBullet_.GetBulletType(i)) {
+				case SLOW:
+					boss_.SetHp(boss_.GetHp() - 1);
+					//エフェクトの生成処理
+					emitter.Emit(static_cast<int>(bossBullet_.GetPos(i).x), static_cast<int>(bossBullet_.GetPos(i).y), 6,0xFFFF00FF);
 
-				//弾の処理
-				if (bossBullet_.GetBarrageType() == CHASE || bossBullet_.GetBarrageType() == RANDAM) {
-					bossBullet_.SetIsShot(false, i);
-					bossBullet_.SetPos({ static_cast<int>(kWindowWidth), static_cast<int>(kWindowHeight) }, i);
-					bossBullet_.SetIsPushBacked(false, i);
-					bossBullet_.SetIsHit(true, i);
-				} else {
-					bossBullet_.SetPos({ static_cast<int>(kWindowWidth), static_cast<int>(kWindowHeight) }, i);
-					bossBullet_.SetIsPushBacked(false, i);
+					break;
+
+				case FAST:
+					boss_.SetHp(boss_.GetHp() - 2);
+
+					//エフェクトの生成処理
+					emitter.Emit(static_cast<int>(bossBullet_.GetPos(i).x), static_cast<int>(bossBullet_.GetPos(i).y), 12,0xFF0000FF);
+
+					break;
+
+				case EXPLODE:
+					boss_.SetHp(boss_.GetHp() - 2);
+
+					//エフェクトの生成処理
+					emitter.Emit(static_cast<int>(bossBullet_.GetPos(i).x), static_cast<int>(bossBullet_.GetPos(i).y), 12, 0x00FF00FF);
+					break;
+
+				case VANISH:
+					boss_.SetHp(boss_.GetHp() - 1);
+
+					//エフェクトの生成処理
+					emitter.Emit(static_cast<int>(bossBullet_.GetPos(i).x), static_cast<int>(bossBullet_.GetPos(i).y), 6, 0x0000ffFF);
+					break;
 				}
 
-				//ボスの処理
+				//弾の処理
+				bossBullet_.SetIsShot(false, i);
+				bossBullet_.SetPos({ static_cast<int>(kWindowWidth), static_cast<int>(kWindowHeight) }, i);
+				bossBullet_.SetIsPushBacked(false, i);
+				bossBullet_.SetIsHit(true, i);
+
+
 				if (bossBullet_.GetBulletType(i) == SLOW || bossBullet_.GetBulletType(i) == VANISH) {
 					boss_.SetHp(boss_.GetHp() - 1);
 				} else {
@@ -39,7 +63,7 @@ void CollisionManager::CheckCollision(Boss& boss_, BossBullet& bossBullet_, Emit
 				if (boss_.GetHp() == 40 || boss_.GetHp() == 20) {
 					boss_.SetBulletChange(true);
 				}
-				
+
 				if (boss_.GetHp() <= 0) {
 					boss_.SetIsAlive(false);
 					boss_.SetDeathCount(boss_.GetDeathCount() + 1);
@@ -49,11 +73,14 @@ void CollisionManager::CheckCollision(Boss& boss_, BossBullet& bossBullet_, Emit
 	}
 }
 
-void CollisionManager::CheckCollision(Player& player_, BossBullet& bossBullet_) {
+void CollisionManager::CheckCollision(Player& player_, BossBullet& bossBullet_, Emitter& emitter) {
 	for (int i = 0; i < BossBullet::kBulletMax_; i++) {
 		b2pLength_ = CheckLength(bossBullet_.GetPos(i), player_.GetPos());
 
 		if (b2pLength_ < player_.GetRadius() + bossBullet_.GetRadius(i)) {
+			//エフェクトの生成処理
+			emitter.Emit(static_cast<int>(bossBullet_.GetPos(i).x), static_cast<int>(bossBullet_.GetPos(i).y), 12,0xFFFFFFFF);
+
 			//弾の処理
 			bossBullet_.SetIsShot(false, i);
 			bossBullet_.SetPos({ 0.0f,0.0f }, i);

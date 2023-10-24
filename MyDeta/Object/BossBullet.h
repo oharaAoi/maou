@@ -89,9 +89,6 @@ private:
 		bool isPushBacked;
 		bool isHit;
 
-		//se
-		int bossHitSeHandle_;
-
 		//==============================
 		//タイプ
 		int bulletType;
@@ -100,9 +97,12 @@ private:
 		int explodeCount;
 
 		//==============================
-		// 距離
+		// 弾が範囲外に出た時の変数
 		//ステージ外に出た時の処理のための距離
 		float center2bLength;
+
+		//カウント
+		int rangeOutCount;
 
 		//==============================
 		//撃つ角度

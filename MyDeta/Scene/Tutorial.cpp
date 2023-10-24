@@ -123,7 +123,7 @@ void Tutorial::Update(char* keys, char* preKeys,
 	}
 
 	playerRangeDetector.Update(player, bossBullet);
-	collisionManager.CheckCollision(player, bossBullet);
+	collisionManager.CheckCollision(player, bossBullet, emitter);
 	collisionManager.CheckCollision(boss, bossBullet, emitter);
 }
 

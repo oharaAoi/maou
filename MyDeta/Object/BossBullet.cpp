@@ -33,9 +33,11 @@ void BossBullet::Init() {
 		object_[i].isShot = false;
 		object_[i].isPushBacked = false;
 		object_[i].isHit = false;
-		object_[i].bossHitSeHandle_ = -1;
 
 		object_[i].center2bLength = 0.0f;
+
+		//==============================
+		object_[i].rangeOutCount = 0;
 
 		//==============================
 		//描画で使う
@@ -74,8 +76,6 @@ void BossBullet::Init() {
 		object_[i].rotateMatrix;
 		object_[i].translateMatrix;
 		object_[i].worldMatrix;
-
-
 
 	}
 
@@ -117,9 +117,9 @@ void BossBullet::Init() {
 	bulletGh_[2] = Novice::LoadTexture("./images/Resource/BossBullet/explodeBullet.png");
 	bulletGh_[3] = Novice::LoadTexture("./images/Resource/BossBullet/vanishBullet.png");
 
-	bossHitSe_ = Novice::LoadAudio("./images/Sounds/HitSe/HitSe1.mp3");
+	bossHitSeVolume_ = 0.2f;
 
-	bossHitSeVolume_ = 0.3f;
+	bossHitSe_ = Novice::LoadAudio("./images/Sounds/HitSe/HitSe1.mp3");
 }
 
 //弾の種類をランダムにしたい時
@@ -331,14 +331,14 @@ void BossBullet::ExplodeBullet(int num, Emitter& emitter) {
 				//消す処理(エフェクトとかの処理もここでするかも)
 				if (explodeRadius_ > b2bLength_) {
 
-					emitter.Emit(static_cast<int>(object_[i].pos.x), static_cast<int>(object_[i].pos.y), 6);
+					emitter.Emit(static_cast<int>(object_[i].pos.x), static_cast<int>(object_[i].pos.y), 6,0xFFFFFFFF);
 
 					OutOfScreenInit(i);
 				}
 			}
 		}
 	}
-
+	emitter.Emit(static_cast<int>(object_[num].pos.x), static_cast<int>(object_[num].pos.y), 6,0xFFFFFFFF);
 	OutOfScreenInit(num);
 }
 
@@ -528,12 +528,12 @@ void BossBullet::Update(Vector2<float> bossPos, Player& player, Stage stage, Emi
 			if (object_[i].bulletType == EXPLODE) {
 				object_[i].explodeCount++;
 
-				if (object_[i].explodeCount >= 350) {
+				if (object_[i].explodeCount >= 250) {
 					Blinking(object_[i].color);
 				}
 
 				//爆発する範囲内のものをすべて初期化
-				if (object_[i].explodeCount >= 400) {
+				if (object_[i].explodeCount >= 300) {
 					ExplodeBullet(i, emitter);
 					object_[i].explodeCount = 0;
 				}
@@ -577,6 +577,11 @@ void BossBullet::Update(Vector2<float> bossPos, Player& player, Stage stage, Emi
 		//弾がプレイヤーの円周の外に出た時の処理
 		object_[i].center2bLength = CheckLength(stage.GetPos(), object_[i].pos);
 
+		if (object_[i].center2bLength > stage.GetRadius()) {
+
+		}
+
+		//弾がプレイヤーの赤円周の外に出た時の処理
 		if (object_[i].center2bLength > stage.GetBulletVanishRange()) {
 
 			if (barrageType_ == RANDAM || barrageType_ == CHASE) {
@@ -587,14 +592,6 @@ void BossBullet::Update(Vector2<float> bossPos, Player& player, Stage stage, Emi
 				}
 			}
 		}
-
-		//=====================================================
-		//音を鳴らす処理
-		if (object_[i].isHit) {
-			Novice::StopAudio(object_[i].bossHitSeHandle_);
-			object_[i].isHit = false;
-		}
-
 	}
 }
 
@@ -687,10 +684,12 @@ void BossBullet::Draw() {
 					object_[i].color,
 					kFillModeWireFrame);
 			}
+		}
 
-			if (object_[i].isHit) {
-				PlayAudio(object_[i].bossHitSeHandle_, bossHitSe_, bossHitSeVolume_);
-			}
+		//ヒット音を鳴らす
+		if (object_[i].isHit) {
+			Novice::PlayAudio(bossHitSe_, false, bossHitSeVolume_);
+			object_[i].isHit = false;
 		}
 	}
 }

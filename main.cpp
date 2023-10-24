@@ -26,6 +26,7 @@
 #include "MyDeta/Particle/Emitter.h"
 #include "MyDeta/Particle/Emitter2.h"
 #include "BossDeadParticle.h"
+#include "PlayerDeadEmitter.h"
 #include "PlayerWindEmitter.h"
 
 // MySceneChange //
@@ -61,13 +62,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	char keys[256] = { 0 };
 	char preKeys[256] = { 0 };
 
-	GameScene scene = TUTORIAL;
+	GameScene scene = GAME;
 
 	// エミッターのインスタンスを作成
 	Emitter emitter;
 
 	PlayerWindEmitter playerWindEmitter;
 
+	PlayerDeadEmitter playerDeadEmitter;
 
 	//========================================================
 	// Source
@@ -250,14 +252,25 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			// ==================================================
 			boss_.UpDate(bossBullet_);
-			
+
 			/* bossのwaveを保存 */
 			waveNum = boss_.GetType();
 
 			// ==================================================
 
+
+			playerDeadEmitter.Update(); //プレイヤー死亡時のエミッターの更新処理
+
+			if (player_.GetHp() <= 0 && playerDeadEmitter.GetIsGenerate() == false) { //プレイヤー死亡時にプレイヤーの位置にパーティクルを生成
+				playerDeadEmitter.PlayerDeadEmit(static_cast<int>(player_.GetPos().x), static_cast<int>(player_.GetPos().y), 16);
+			}
+			if (player_.GetHp() > 0) {
+				playerDeadEmitter.SetIsGenerate(false);
+			}
+
 			//デバック用
 			boss_.BossHpDecrece(keys, preKeys);
+
 
 			emitter.Update(); //エミッターの更新処理
 
@@ -290,8 +303,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			//弾の更新
 			range_.Update(player_, bossBullet_);
 
+
 			//弾とプレイヤー
-			collision.CheckCollision(player_, bossBullet_);
+			collision.CheckCollision(player_, bossBullet_, emitter);
+
 
 			//弾と敵の当たり判定
 			collision.CheckCollision(boss_, bossBullet_, emitter);
@@ -329,11 +344,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓描画処理ここから
 			/// 
 
+
 			stage_.Draw();
 			boss_.Draw();
 			range_.Draw();
 			emitter.Draw(); // エミッターの描画処理を呼ぶ
 			playerWindEmitter.Draw(); // プレイヤーの風の描画処理
+			playerDeadEmitter.Draw(); // プレイヤー死亡時のパーティクルの描画処理
+
 
 
 			bossBullet_.Draw();
