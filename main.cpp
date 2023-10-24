@@ -222,6 +222,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 					// -> GAME
 					player_.Init();
+					range_.Init();
 					boss_.Init();
 					bossBullet_.Init();
 					collision.Init();
