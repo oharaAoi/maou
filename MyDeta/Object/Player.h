@@ -93,9 +93,6 @@ private:
 	bool isAlive_;
 	bool isHit_;
 
-	float blackOutCount_;
-	unsigned int blackOutColor_;
-
 	Vector2<float> windVolume_;
 
 	WindowStrength windowStrength_;

@@ -229,10 +229,9 @@ void Player::Update(char* keys, char* preKeys, Stage& stage_) { /// 更新処理
 
 	//playerの生存確認
 	if (hp_ <= 0) {
-		blackOutCount_ += 0.01f;
-		blackOutColor_ = ShiftColor(blackOutCount_, 0x00000000, 0x000000FF);
+		stage_.SetIsBlackOut(true);
 
-		if (blackOutCount_ >= 1) {
+		if (stage_.GetIsBlackOutFinish() == true) {
 			isAlive_ = false;
 		}
 	}
@@ -304,17 +303,6 @@ void Player::Draw() { /// 描画処理
 
 			break;
 		}
-	} else {
-		//暗くするためのbox
-		Novice::DrawBox(
-			0,
-			0,
-			1280,
-			720,
-			0.0f,
-			blackOutColor_,
-			kFillModeSolid
-		);
 	}
 
 	//sounds
