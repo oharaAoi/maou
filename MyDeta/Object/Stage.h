@@ -54,7 +54,7 @@ private:
 	int gameBgm_;
 
 	//フラグ
-	int gemeBgmHandle_;
+	int gameBgmHandle_;
 	bool isStopSound_;
 
 	//音量
@@ -86,8 +86,8 @@ public:
 
 	float GetBulletVanishRange() { return bulletVanishRange_; }
 
-	int GetGemeBgmHandle() { return gemeBgmHandle_; }
-	void SetGameBgmHandle(int flag) { gemeBgmHandle_ = flag; }
+	int GetGemeBgmHandle() { return gameBgmHandle_; }
+	void SetGameBgmHandle(int flag) { gameBgmHandle_ = flag; }
 
 	void SetIsBlackOut(bool isBlackOut) { isBlackOut_ = isBlackOut; }
 	bool GetIsBlackOut() { return isBlackOut_; }

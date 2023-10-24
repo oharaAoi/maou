@@ -64,7 +64,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	
 
-	GameScene scene = GAME;
+	GameScene scene = TITLE;
 
 	// エミッターのインスタンスを作成
 	Emitter emitter;
@@ -396,20 +396,20 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				range_.Init();
 				boss_.Init();
 				bossBullet_.Init();
-				stage_.Init();
 				player_.Init();
 				gameOver_.Init();
-
+				timer.Init();
+				stage_.Init();
 
 			} else if (gameOver_.GetChangeToTitle() == true) {
-
 				scene = TITLE;
 				range_.Init();
 				boss_.Init();
 				bossBullet_.Init();
-				stage_.Init();
 				player_.Init();
 				gameOver_.Init();
+				timer.Init();
+				stage_.Init();
 			}
 
 			///
@@ -438,6 +438,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			if (result.GetIsEndResult()) {
 				scene = GameScene::TITLE;
+				range_.Init();
+				boss_.Init();
+				bossBullet_.Init();
+				stage_.Init();
+				player_.Init();
+				gameOver_.Init();
+				timer.Init();
+				result.Init();
+				tutorial.Init();
 			}
 
 			///
