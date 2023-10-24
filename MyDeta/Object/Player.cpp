@@ -6,6 +6,7 @@ Player::Player() {
 	weakWindHandle_ = -1;
 	strongWindHandle_ = -1;
 	overHeatRecoverHandle_ = -1;
+	overHeatWarningHandle_ = -1;
 }
 
 Player::~Player() {
@@ -79,7 +80,7 @@ void Player::Init() { // 変数の初期化
 	windVolume_.x = 1.2f;
 	windVolume_.y = 1.2f;
 
-	windowStrength_ = WindowStrength::WEAK;
+	windowStrength_ = WindowStrength::OFF;
 
 	//==========================================
 	//リソース
@@ -88,6 +89,7 @@ void Player::Init() { // 変数の初期化
 	hitSe_ = Novice::LoadAudio("./images/Sounds/PlayerSe/playerHited.mp3");
 	playerDeathSe_ = Novice::LoadAudio("./images/Sounds/PlayerSe/playerDeath.mp3");
 	overHeatRecoverSE_ = Novice::LoadAudio("./images/Sounds/PlayerSe/overHeatRecoverSE.mp3");
+	overHeatWarnigSE_ = Novice::LoadAudio("./images/Sounds/PlayerSe/overHeatWarningSE.mp3");
 
 	//フラグ
 	isWindSeStop_ = false;
@@ -99,6 +101,7 @@ void Player::Init() { // 変数の初期化
 	hitSeVolume_ = 0.1f;
 	playerDeathSeVolume_ = 0.2f;
 	overHeatRecoverVolume_ = 0.2f;
+	overHeatWarningVolume_ = 0.1f;
 
 }
 
@@ -187,8 +190,8 @@ void Player::Update(char* keys, char* preKeys, Stage& stage_) { /// 更新処理
 				frameCountLimit_ = 10;
 			}
 
-			if (overHeat_ < 100.0f) { 
-				overHeat_ += 0.5f; 
+			if (overHeat_ < 100.0f) {
+				overHeat_ += 0.5f;
 
 				isOverHeatRecover_ = true;
 			} else {
@@ -253,41 +256,41 @@ void Player::Update(char* keys, char* preKeys, Stage& stage_) { /// 更新処理
 void Player::Draw() { /// 描画処理
 	// over
 	switch (windowStrength_) {
-		case WindowStrength::OFF: // koko
+	case WindowStrength::OFF: // koko
+
+		DrawCircleAnimation(
+			overHeat_ / 100.0f,
+			{ kWindowWidth / 2.0f, kWindowHeight / 2.0f },
+			260.0f, 10.0f,
+			white1x1GH,
+			0x808080D0
+		);
+
+		break;
+
+	default:
+
+		if (overHeat_ > 30.0f) {
+			DrawCircleAnimation(
+				overHeat_ / 100.0f,
+				{ kWindowWidth / 2.0f, kWindowHeight / 2.0f },
+				260.0f, 10.0f,
+				white1x1GH,
+				0x0000faD0
+			);
+
+		} else {
 
 			DrawCircleAnimation(
 				overHeat_ / 100.0f,
-				{kWindowWidth / 2.0f, kWindowHeight / 2.0f},
+				{ kWindowWidth / 2.0f, kWindowHeight / 2.0f },
 				260.0f, 10.0f,
 				white1x1GH,
-				0x808080D0
+				0xfafa00D0
 			);
+		}
 
-			break;
-
-		default:
-
-			if (overHeat_ > 30.0f) {
-				DrawCircleAnimation(
-					overHeat_ / 100.0f,
-					{ kWindowWidth / 2.0f, kWindowHeight / 2.0f },
-					260.0f, 10.0f,
-					white1x1GH,
-					0x0000faD0
-				);
-
-			} else {
-
-				DrawCircleAnimation(
-					overHeat_ / 100.0f,
-					{ kWindowWidth / 2.0f, kWindowHeight / 2.0f },
-					260.0f, 10.0f,
-					white1x1GH,
-					0xfafa00D0
-				);
-			}
-
-			break;
+		break;
 	}
 
 	if (hp_ > 0) {
@@ -325,8 +328,17 @@ void Player::Draw() { /// 描画処理
 			gh_,
 			0xffffffff
 		);
+	}
 
-		
+
+	if (overHeat_ > 30.0f || overHeat_ == 0) {
+		Novice::StopAudio(overHeatWarningHandle_);
+	} else {
+		if (windowStrength_ != OFF) {
+			PlayAudio(overHeatWarningHandle_, overHeatWarnigSE_, overHeatWarningVolume_, true);
+		} else if (overHeat_ < 30.0f) {
+			Novice::StopAudio(overHeatWarningHandle_);
+		}
 	}
 
 	//sounds
@@ -346,6 +358,7 @@ void Player::Draw() { /// 描画処理
 		break;
 	}
 
+	//画面切り変え時に音を消す
 	if (isWindSeStop_) {
 		Novice::StopAudio(strongWindHandle_);
 		Novice::StopAudio(weakWindHandle_);
@@ -370,6 +383,13 @@ void Player::Draw() { /// 描画処理
 		Novice::PlayAudio(playerDeathSe_, false, hitSeVolume_);
 		deathSeHandle_ = false;
 	}
+}
+
+void Player::AllSoundStop() {
+	Novice::StopAudio(strongWindHandle_);
+	Novice::StopAudio(weakWindHandle_);
+	Novice::StopAudio(overHeatRecoverHandle_);
+	Novice::StopAudio(overHeatWarningHandle_);
 }
 
 // user method overload
