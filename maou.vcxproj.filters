@@ -95,9 +95,6 @@
     <ClCompile Include="MyDeta\Particle\Util.cpp">
       <Filter>MyDeta\Particle</Filter>
     </ClCompile>
-    <ClCompile Include="MyDeta\Source\Coordinate.cpp">
-      <Filter>MyDeta\Source</Filter>
-    </ClCompile>
     <ClCompile Include="MyDeta\System\PlayerRangeDetector.cpp">
       <Filter>MyDeta\System</Filter>
     </ClCompile>
@@ -148,6 +145,9 @@
     </ClCompile>
     <ClCompile Include="MyDeta\Scene\GameOver.cpp">
       <Filter>MyDeta\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="MyDeta\Source\Coordinate.cpp">
+      <Filter>MyDeta\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -233,6 +233,8 @@ public:
 	Barrage GetBarrageType() { return barrageType_; }
 	void SetBarrageType(Barrage type) { barrageType_ = type; }
 
+	int GetBulletType(int i) { return object_[i].bulletType; }
+
 	//=================================================
 	void SetSlowSpeed(float speed) { slowSpeed_ = speed; }
 	void SetFastSpeed(float speed) { fastSpeed_ = speed; }

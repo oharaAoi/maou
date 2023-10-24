@@ -30,7 +30,11 @@ void CollisionManager::CheckCollision(Boss& boss_, BossBullet& bossBullet_, Emit
 				}
 
 				//ボスの処理
-				boss_.SetHp(boss_.GetHp() - 1);
+				if (bossBullet_.GetBulletType(i) == SLOW || bossBullet_.GetBulletType(i) == VANISH) {
+					boss_.SetHp(boss_.GetHp() - 1);
+				} else {
+					boss_.SetHp(boss_.GetHp() - 2);
+				}
 
 				if (boss_.GetHp() == 40 || boss_.GetHp() == 20) {
 					boss_.SetBulletChange(true);

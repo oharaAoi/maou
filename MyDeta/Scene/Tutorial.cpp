@@ -128,6 +128,8 @@ void Tutorial::Update(char* keys, char* preKeys,
 }
 
 void Tutorial::Draw(Player& player, Stage& stage, Boss boss, BossBullet bossBullet, PlayerWindEmitter playerWindEmitter) {
+	stage.Draw();
+	
 	// skip
 	DrawRhombusAnimation(
 		pressFrame_ / 240.0f,
@@ -137,7 +139,6 @@ void Tutorial::Draw(Player& player, Stage& stage, Boss boss, BossBullet bossBull
 		white1x1GH_
 	);
 
-	stage.Draw();
 	player.Draw();
 
 	playerWindEmitter.Draw();
