@@ -414,7 +414,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓更新処理ここから
 			/// 
 
-			//プレイヤーの音を止めてしまう
+			//プレイヤーの音を止めてしまう(余裕があったら変えたい)
 			player_.AllSoundStop();
 
 			gameOver_.Update(keys, preKeys);
@@ -462,7 +462,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓更新処理ここから
 			/// 
 
-			//プレイヤーの音を止めてしまう
+			//プレイヤーの音を止めてしまう(余裕があったら変えたい)
 			player_.AllSoundStop();
 
 			result.Update(keys, preKeys);
