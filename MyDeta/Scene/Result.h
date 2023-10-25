@@ -20,6 +20,13 @@ private:
 
 	float resultFream_;
 
+	// spaceChange
+	Vector2f spaceGhPos_;
+	Vector2f size_;
+	Vector2f drawLt_;
+	int spaceGH_;
+	int spaceGhChangeCount_;
+
 	//sound
 	int gameClearSE_;
 

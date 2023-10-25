@@ -15,11 +15,22 @@ void Result::Init() {
 	isEndResult_ = false;
 	resultFream_ = 0.0f;
 
+	spaceGhPos_.x = 1100.0f;
+	spaceGhPos_.y = 600.0f;
+	size_.x = 200.0f;
+	size_.y = 64.0f;
+	drawLt_.x = 0.0f;
+	drawLt_.y = 0.0f;
+
+	spaceGH_ = Novice::LoadTexture("./images/Resource/result/space.png");
+	spaceGhChangeCount_ = 0;
+
 	gameClearSE_ = Novice::LoadAudio("./images/Sounds/gameClear/gameClearSE.mp3");
 
 	gameClearSEHandle_ = -1;
 
 	gameClearSEVolume_ = 0.2f;
+
 }
 
 void Result::Update(char* keys, char* preKeys) {
@@ -33,6 +44,19 @@ void Result::Update(char* keys, char* preKeys) {
 	} else {
 		if (resultFream_ > 0.0f) { resultFream_--; }
 		else if (resultFream_ == 0.0f) { isEndResult_ = true; }
+	}
+
+	//========================================
+	spaceGhChangeCount_++;
+
+	if (spaceGhChangeCount_ >= 40) {
+		if (drawLt_.x == 0) {
+			drawLt_.x = 200.0f;
+		} else {
+			drawLt_.x = 0.0f;
+		}
+
+		spaceGhChangeCount_ = 0;
 	}
 }
 
@@ -77,6 +101,23 @@ void Result::Draw(Timer timer) {
 			{ (kWindowWidth / 2.0f) - (((21.0f * 2.0f) * 3.0f) / 2.0f), 420.0f + (bi * 60.0f)},
 			{ 21.0f * 2.0f, 32.0f * 2.0f },
 			*(bestTime + bi), ShiftColor(EaseInOutExpo(resultFream_ / 60.0f), 0xFAFA0000, 0xFAFA00FF)
+		);
+	}
+
+	// goTitle
+	if (resultFream_ == 60.0f) {
+		Novice::DrawSpriteRect(
+			static_cast<int>(spaceGhPos_.x),
+			static_cast<int>(spaceGhPos_.y),
+			static_cast<int>(drawLt_.x),
+			static_cast<int>(drawLt_.y),
+			static_cast<int>(size_.x),
+			static_cast<int>(size_.y),
+			spaceGH_,
+			size_.y / (size_.x),
+			1.0f,
+			0.0f,
+			0xFFFFFFFF
 		);
 	}
 

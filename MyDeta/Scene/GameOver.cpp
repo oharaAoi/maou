@@ -55,6 +55,8 @@ void GameOver::Init() {
 
 	playSound_ = false;
 	isSelectMoveSE_ = false;
+	isSceneChangeSE_ = false;
+	
 
 	Novice::StopAudio(gameOverBgm_);
 
@@ -63,6 +65,10 @@ void GameOver::Init() {
 void GameOver::Update(char* keys, char* preKeys) {
 	if (isSelectMoveSE_) {
 		isSelectMoveSE_ = false;
+	}
+
+	if (isSceneChangeSE_) {
+		isSceneChangeSE_ = false;
 	}
 
 	if (keys[DIK_W] && !preKeys[DIK_W]) {
@@ -92,6 +98,8 @@ void GameOver::Update(char* keys, char* preKeys) {
 		} else {
 			changeToTitle_ = true;
 		}
+
+		isSceneChangeSE_ = true;
 	}
 
 	if (goToGame_) {
@@ -163,11 +171,17 @@ void GameOver::Draw() {
 
 	//==========================================
 	if (!changeToGame_ && !changeToTitle_) {
-		PlayAudio(gameOverBgmHandle_, gameOverBgm_, gameOverBgmVolume_, false);
-		Novice::StopAudio(sceneChangeSEHandle_);
+		if (gameOverBgmHandle_ == -1) {
+			PlayAudio(gameOverBgmHandle_, gameOverBgm_, gameOverBgmVolume_, false);
+		}
 	} else {
-		Novice::PlayAudio(scnenChangeSE_, false, sceneChangeSEVolume_);
 		Novice::StopAudio(gameOverBgmHandle_);
+	}
+
+	if (isSceneChangeSE_) {
+		Novice::PlayAudio(scnenChangeSE_, false, sceneChangeSEVolume_);
+	} else {
+		Novice::StopAudio(sceneChangeSEHandle_);
 	}
 
 	if (isSelectMoveSE_) {
