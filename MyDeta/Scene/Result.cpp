@@ -46,6 +46,7 @@ void Result::Update(char* keys, char* preKeys) {
 		else if (resultFream_ == 0.0f) { isEndResult_ = true; }
 	}
 
+	//========================================
 	spaceGhChangeCount_++;
 
 	if (spaceGhChangeCount_ >= 40) {
