@@ -25,7 +25,7 @@ private:
 
 	//==========================================
 
-	static const int kCloudMax = 4;
+	static const int kCloudMax = 9;
 
 	struct Base {
 		Vector2f pos;
@@ -47,6 +47,7 @@ private:
 	//フレームカウント
 	float changeT_;
 	float blackOutCount_;
+	int cloudMoveTime_;
 
 	//==========================================
 	//bgm

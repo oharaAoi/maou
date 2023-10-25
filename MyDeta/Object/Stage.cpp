@@ -34,8 +34,16 @@ void Stage::Init() {
 		cloud[i].pos.x = static_cast<float>(Rand(200, 1500));
 		cloud[i].pos.y = static_cast<float>(Rand(100, 600));
 
-		cloud[i].velocity.x = 0.5f;
-		cloud[i].velocity.y = 0.0f;
+		if (i % 3 == 0) {
+			cloud[i].velocity.x = 0.5f;
+			cloud[i].velocity.y = 0.0f;
+		} else if (i % 3 == 1) {
+			cloud[i].velocity.x = 0.3f;
+			cloud[i].velocity.y = 0.0f;
+		} else {
+			cloud[i].velocity.x = 0.4f;
+			cloud[i].velocity.y = 0.0f;
+		}
 
 		cloud[i].size.x = 64.0f;
 		cloud[i].size.y = 64.0f;
@@ -47,11 +55,17 @@ void Stage::Init() {
 	cloud[1].gh_ = Novice::LoadTexture("./images/Resource/Stage/cloud/cloud2.png");
 	cloud[2].gh_ = Novice::LoadTexture("./images/Resource/Stage/cloud/cloud3.png");
 	cloud[3].gh_ = Novice::LoadTexture("./images/Resource/Stage/cloud/cloud4.png");
+	cloud[4].gh_ = Novice::LoadTexture("./images/Resource/Stage/cloud/cloud3.png");
+	cloud[5].gh_ = Novice::LoadTexture("./images/Resource/Stage/cloud/cloud2.png");
+	cloud[6].gh_ = Novice::LoadTexture("./images/Resource/Stage/cloud/cloud1.png");
+	cloud[7].gh_ = Novice::LoadTexture("./images/Resource/Stage/cloud/cloud1.png");
+	cloud[8].gh_ = Novice::LoadTexture("./images/Resource/Stage/cloud/cloud2.png");
 
 	//==========================================
 	isBlackOut_ = false;
 	isBlackOutFinish_ = false;
 	blackOutColor_ = 0x00000000;
+	cloudMoveTime_ = 0;
 
 	//==========================================
 	changeT_ = 0.0f;
@@ -107,6 +121,17 @@ void Stage::Update(int waveNum) {
 		if (blackOutCount_ >= 1) {
 			isBlackOutFinish_ = true;
 		}
+	}
+
+	cloudMoveTime_++;
+
+	if (cloudMoveTime_ >= 60) {
+		for (int i = 0; i < kCloudMax; i++) {
+			cloud[i].velocity.y = static_cast<float>(Rand(-2, 2));
+			cloud[i].pos.y += cloud[i].velocity.y;
+		}
+
+		cloudMoveTime_ = 0;
 	}
 }
 
