@@ -1,14 +1,21 @@
-#include "Tutorial.h"
+﻿#include "Tutorial.h"
 
 Tutorial::Tutorial() {
 
 	Init();
 
-	
+
 
 	tutorialGH_[0] = Novice::LoadTexture("./Images/Resource/Tutorial/tutorial1.png");
 	tutorialGH_[1] = Novice::LoadTexture("./Images/Resource/Tutorial/tutorial2.png");
 	tutorialGH_[2] = Novice::LoadTexture("./Images/Resource/Tutorial/tutorial3.png");
+
+	bulletExplanationGH_[0] = Novice::LoadTexture("./images/Resource/Tutorial/bullet1.png");
+	bulletExplanationGH_[1] = Novice::LoadTexture("./images/Resource/Tutorial/bullet2.png");
+	bulletExplanationGH_[2] = Novice::LoadTexture("./images/Resource/Tutorial/bullet3.png");
+	bulletExplanationGH_[3] = Novice::LoadTexture("./images/Resource/Tutorial/bullet4.png");
+	bulletExplanationGH_[4] = Novice::LoadTexture("./images/Resource/Tutorial/bullet5.png");
+
 }
 
 Tutorial::~Tutorial() {
@@ -24,6 +31,9 @@ void Tutorial::Init() {
 	progressFrame_ = 0.0f;
 
 	isTriggerSpace_ = false;
+
+	bulletExplanationCount_ = 0;
+	bulletExplanationChange_ = false;
 
 }
 
@@ -97,6 +107,10 @@ void Tutorial::Update(char* keys, char* preKeys,
 
 			if (progressFrame_ < 60.0f * 10/*s*/) {
 				progressFrame_++;
+
+				if (progressFrame_ >= 300) {
+					bulletExplanationChange_ = true;
+				}
 
 			} else {
 				isEndTutorial_ = true;
@@ -205,6 +219,91 @@ void Tutorial::Draw(Player& player, Stage& stage, Boss boss, BossBullet bossBull
 				0.0f,
 				0xFFFFFFFF
 			);
+
+			//弾の説明
+			if (!bulletExplanationChange_) {
+				DrawWindow(
+					{ 1060, 250 },
+					{ 200, 80 },
+					0xFAFAFAFF
+				);
+
+				DrawWindow(
+					{ 1060, 350 },
+					{ 200, 100 },
+					0xFAFAFAFF
+				);
+
+				Novice::DrawSprite(
+					950,
+					200,
+					bulletExplanationGH_[0],
+					0.8f,
+					0.8f,
+					0.0f,
+					0xFFFFFFFF
+				);
+
+				Novice::DrawSprite(
+					950,
+					300,
+					bulletExplanationGH_[1],
+					0.8f,
+					0.8f,
+					0.0f,
+					0xFFFFFFFF
+				);
+			} else {
+
+				DrawWindow(
+					{ 1060, 250 },
+					{ 200, 80 },
+					0xFAFAFAFF
+				);
+
+				DrawWindow(
+					{ 1060, 350 },
+					{ 200, 90 },
+					0xFAFAFAFF
+				);
+
+				DrawWindow(
+					{ 1060, 450 },
+					{ 200, 90 },
+					0xFAFAFAFF
+				);
+
+
+				Novice::DrawSprite(
+					950,
+					200,
+					bulletExplanationGH_[2],
+					0.8f,
+					0.8f,
+					0.0f,
+					0xFFFFFFFF
+				);
+
+				Novice::DrawSprite(
+					950,
+					300,
+					bulletExplanationGH_[3],
+					0.8f,
+					0.8f,
+					0.0f,
+					0xFFFFFFFF
+				);
+
+				Novice::DrawSprite(
+					950,
+					400,
+					bulletExplanationGH_[4],
+					0.8f,
+					0.8f,
+					0.0f,
+					0xFFFFFFFF
+				);
+			}
 
 			break;
 

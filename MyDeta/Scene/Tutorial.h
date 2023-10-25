@@ -40,6 +40,11 @@ private:
 
 	int tutorialGH_[3];
 
+	int bulletExplanationGH_[5];
+
+	int bulletExplanationCount_;
+	bool bulletExplanationChange_;
+
 public:
 	
 	// constructor & destructor
