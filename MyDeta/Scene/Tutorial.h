@@ -30,6 +30,7 @@ private:
 
 	int japaneseFontGH_;
 	int white1x1GH_;
+	int spaceGH_;
 
 	bool isEndTutorial_;
 	float pressFrame_;

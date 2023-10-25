@@ -9,6 +9,8 @@ Tutorial::Tutorial() {
 	tutorialGH_[0] = Novice::LoadTexture("./Images/Resource/Tutorial/tutorial1.png");
 	tutorialGH_[1] = Novice::LoadTexture("./Images/Resource/Tutorial/tutorial2.png");
 	tutorialGH_[2] = Novice::LoadTexture("./Images/Resource/Tutorial/tutorial3.png");
+
+	spaceGH_ = Novice::LoadTexture("./Images/Resource/Tutorial/space.png");
 }
 
 Tutorial::~Tutorial() {
@@ -209,5 +211,8 @@ void Tutorial::Draw(Player& player, Stage& stage, Boss boss, BossBullet bossBull
 			break;
 
 	}
+
+	// skip
+
 
 }
