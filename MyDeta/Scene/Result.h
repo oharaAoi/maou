@@ -29,10 +29,13 @@ private:
 
 	//sound
 	int gameClearSE_;
-
 	int gameClearSEHandle_;
-
 	float gameClearSEVolume_;
+
+	int resultEndSE_;
+	int resultEndSEHandle_;
+	float  resultEndSEVolume_;
+	bool isResultEndSE_;
 
 public:
 

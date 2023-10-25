@@ -195,8 +195,8 @@ void Player::Update(char* keys, char* preKeys, Stage& stage_) { /// 更新処理
 
 			if (keys[DIK_SPACE] && !preKeys[DIK_SPACE]) {
 				windowStrength_ = WEAK;
-				windVolume_.x = 1.2f;
-				windVolume_.y = 1.2f;
+				windVolume_.x = 1.3f;
+				windVolume_.y = 1.3f;
 				stage_.SetRangeRadius(150.0f);
 				frameCountLimit_ = 10;
 			}
