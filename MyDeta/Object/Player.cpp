@@ -269,6 +269,15 @@ void Player::Update(char* keys, char* preKeys, Stage& stage_) { /// 更新処理
 	}
 }
 
+void Player::AllSoundStop() {
+	isRecover_ = false;
+	Novice::StopAudio(strongWindHandle_);
+	Novice::StopAudio(weakWindHandle_);
+	Novice::StopAudio(overHeatRecoverHandle_);
+	Novice::StopAudio(overHeatWarningHandle_);
+	isOverHeatRecover_ = false;
+}
+
 void Player::Draw() { /// 描画処理
 	// over
 	switch (windowStrength_) {
@@ -406,13 +415,6 @@ void Player::Draw() { /// 描画処理
 		Novice::PlayAudio(playerDeathSe_, false, hitSeVolume_);
 		deathSeHandle_ = false;
 	}
-}
-
-void Player::AllSoundStop() {
-	Novice::StopAudio(strongWindHandle_);
-	Novice::StopAudio(weakWindHandle_);
-	Novice::StopAudio(overHeatRecoverHandle_);
-	Novice::StopAudio(overHeatWarningHandle_);
 }
 
 // user method overload

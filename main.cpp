@@ -380,6 +380,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 						if (resultChangeTime > resultChangeTimeLimit) {
 							scene = RESULT;
 
+							player_.AllSoundStop();
+
 							loadFile_.WriteFile(timer.GetTimer());
 
 							loadFile_.LoadJsonFile(timer.GetBestTimer());
