@@ -81,6 +81,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	PlayerDeadEmitter playerDeadEmitter;
 
+	BossDeadParticle bossDeadParticle;
+
 	//========================================================
 	// Source
 
@@ -187,6 +189,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓描画処理ここから
 			/// 
 
+
 			title.Draw();
 
 			boxTransition.Draw();
@@ -284,6 +287,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 				player_.Update(keys, preKeys, stage_);
 
+				//ボス死亡時にパーティクルを生成（ボスの更新処理より先に置かないと生成されない）
+				if (boss_.GetIsAlive() == false) {
+					bossDeadParticle.Start(0, 0);
+				}
+
 				// ==================================================
 				boss_.UpDate(bossBullet_);
 
@@ -294,6 +302,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 
 				playerDeadEmitter.Update(); //プレイヤー死亡時のエミッターの更新処理
+
+				bossDeadParticle.Update(); //ボス死亡時のパーティクルの更新処理
 
 				if (player_.GetHp() <= 0 && playerDeadEmitter.GetIsGenerate() == false) { //プレイヤー死亡時にプレイヤーの位置にパーティクルを生成
 					playerDeadEmitter.PlayerDeadEmit(static_cast<int>(player_.GetPos().x), static_cast<int>(player_.GetPos().y), 16);
@@ -387,6 +397,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			emitter.Draw(); // エミッターの描画処理を呼ぶ
 			playerWindEmitter.Draw(); // プレイヤーの風の描画処理
 			playerDeadEmitter.Draw(); // プレイヤー死亡時のパーティクルの描画処理
+			bossDeadParticle.Draw(); //ボス死亡時のパーティクルの描画処理
 
 			bossBullet_.Draw();
 
