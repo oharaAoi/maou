@@ -72,7 +72,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 
 
-	GameScene scene = RESULT;
+	GameScene scene = GAME;
 
 	// エミッターのインスタンスを作成
 	Emitter emitter;

@@ -2,6 +2,8 @@
 
 GameOver::GameOver() {
 	Init();
+
+	gameOverBgmHandle_ = -1;
 }
 
 void GameOver::Init() {
@@ -45,11 +47,9 @@ void GameOver::Init() {
 
 	gameOverBgmVolume_ = 0.02f;
 
-	gameOverBgmHandle_ = -1;
-
 	playSound_ = false;
 
-	/*Novice::StopAudio(gameOverBgm_)*/
+	Novice::StopAudio(gameOverBgm_);
 
 }
 
@@ -73,8 +73,11 @@ void GameOver::Update(char* keys, char* preKeys) {
 	if (keys[DIK_SPACE] && !preKeys[DIK_SPACE]) {
 		if (goToGame_) {
 			changeToGame_ = true;
+			Novice::StopAudio(gameOverBgmHandle_);
+
 		} else {
 			changeToTitle_ = true;
+			Novice::StopAudio(gameOverBgmHandle_);
 		}
 	}
 
@@ -146,8 +149,9 @@ void GameOver::Draw() {
 	);
 
 	//==========================================
-
-	PlayAudio(gameOverBgmHandle_, gameOverBgm_, gameOverBgmVolume_, false);
+	if (!changeToGame_ && !changeToTitle_) {
+		PlayAudio(gameOverBgmHandle_, gameOverBgm_, gameOverBgmVolume_, false);
+	}
 
 	Novice::ScreenPrintf(1000, 100, "obj[0].pos.x:%f", object_[0].pos.x);
 }
