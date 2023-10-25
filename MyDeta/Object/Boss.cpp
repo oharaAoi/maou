@@ -53,16 +53,16 @@ void Boss::Init() {
 
 void Boss::BulletSpeedChange(BossBullet& bossBullet_) {
 	if (type_ == WAVE2) {
+		bossBullet_.SetSlowSpeed(2.0f);
+		bossBullet_.SetFastSpeed(3.0f);
+		bossBullet_.SetExplodeSpeed(2.5f);
+		bossBullet_.SetVanishSpeed(2.5f);
+
+	} else if (type_ == WAVE3) {
 		bossBullet_.SetSlowSpeed(2.5f);
 		bossBullet_.SetFastSpeed(3.5f);
 		bossBullet_.SetExplodeSpeed(3.0f);
 		bossBullet_.SetVanishSpeed(3.0f);
-
-	} else if (type_ == WAVE3) {
-		bossBullet_.SetSlowSpeed(3.0f);
-		bossBullet_.SetFastSpeed(4.0f);
-		bossBullet_.SetExplodeSpeed(3.5f);
-		bossBullet_.SetVanishSpeed(3.5f);
 	}
 
 }
@@ -124,8 +124,8 @@ void Boss::UpDate(BossBullet& bossBullet_) {
 			//==============================
 			//バレットの状態を変える
 			bossBullet_.SetRandTypeMax(4);
-			bossBullet_.SetRandamCoolTimeLimit(20);
-			bossBullet_.SetChaseCoolTimeLimit(20);
+			bossBullet_.SetRandamCoolTimeLimit(15);
+			bossBullet_.SetChaseCoolTimeLimit(15);
 			BulletSpeedChange(bossBullet_);
 
 			//==============================
@@ -142,8 +142,8 @@ void Boss::UpDate(BossBullet& bossBullet_) {
 			//==============================
 			//バレットの状態を変える
 			bossBullet_.BulletShotChange(RANDAM);
-			bossBullet_.SetRandamCoolTimeLimit(15);
-			bossBullet_.SetChaseCoolTimeLimit(15);
+			bossBullet_.SetRandamCoolTimeLimit(10);
+			bossBullet_.SetChaseCoolTimeLimit(10);
 			BulletSpeedChange(bossBullet_);
 
 			//==============================

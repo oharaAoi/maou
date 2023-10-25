@@ -381,12 +381,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 							scene = RESULT;
 
 							player_.AllSoundStop();
+							player_.SetIsWindSeStop(true);
 
 							loadFile_.WriteFile(timer.GetTimer());
-
 							loadFile_.LoadJsonFile(timer.GetBestTimer());
 
-							player_.SetIsWindSeStop(true);
+							isResultChange = false;
+							resultChangeTime = 0;
 						}
 					}
 

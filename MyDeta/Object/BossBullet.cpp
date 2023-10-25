@@ -303,7 +303,7 @@ void BossBullet::BulletShotChange(Barrage type) {
 		coolTimeLimit_ = coolTimeChaseLimit_;
 
 	} else if (barrageType_ == FOURS) {
-		coolTimeLimit_ = 25;
+		coolTimeLimit_ = 20;
 
 	} else if (barrageType_ == ALL) {
 		coolTimeLimit_ = 25;
@@ -311,10 +311,6 @@ void BossBullet::BulletShotChange(Barrage type) {
 	} else if (barrageType_ == ROTATE) {
 		coolTimeLimit_ = 10;
 	}
-
-	/*for (int i = 0; i < kBulletMax_; i++) {
-		OutOfScreenInit(i);
-	}*/
 }
 
 //絵を進行方向に回転させる
