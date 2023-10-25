@@ -577,8 +577,8 @@ void BossBullet::Update(Vector2<float> bossPos, Player& player, Stage stage, Emi
 					slowdownCount_++;
 
 					if (slowdownCount_ >= 15) {
-						object_[i].velocity.x *= 0.92f;
-						object_[i].velocity.y *= 0.92f;
+						object_[i].velocity.x *= 0.88f;
+						object_[i].velocity.y *= 0.88f;
 
 						slowdownCount_ = 0;
 					}

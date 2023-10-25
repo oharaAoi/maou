@@ -202,7 +202,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				title.Draw();
 
 				boxTransition.Draw();
-				Novice::ScreenPrintf(10, 10, "scene:%d", scene);
 
 				//ゲームスタート時の音
 				if (gameStartSE.isSound) {
@@ -328,9 +327,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 					if (player_.GetHp() > 0) {
 						playerDeadEmitter.SetIsGenerate(false);
 					}
-
-					//デバック用
-					boss_.BossHpDecrece(keys, preKeys);
 
 
 					emitter.Update(); //エミッターの更新処理
