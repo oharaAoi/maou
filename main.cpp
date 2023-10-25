@@ -234,6 +234,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 						collision.Init();
 						stage_.Init();
 						result.Init();
+
 					}
 
 
@@ -365,13 +366,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 					//========================================================================
 					//3WAVE目にボスを倒していたらresultに移行
 					if (boss_.GetType() == WAVE3 && boss_.GetIsAlive() == false) {
-						/*scene = RESULT;
+						scene = RESULT;
 
 						loadFile_.WriteFile(timer.GetTimer());
 
 						loadFile_.LoadJsonFile(timer.GetBestTimer());
 
-						player_.SetIsWindSeStop(true);*/
+						player_.SetIsWindSeStop(true);
 					}
 
 					//========================================================================
