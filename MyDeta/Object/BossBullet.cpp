@@ -228,6 +228,8 @@ void BossBullet::OutOfScreenInit(int i) {
 	object_[i].isShot = false;
 	object_[i].isPushBacked = false;
 
+	object_[i].rangeOutCount = 0;
+
 	/*object_[i].bulletType = SLOW;*/
 }
 
@@ -595,7 +597,11 @@ void BossBullet::Update(Vector2<float> bossPos, Player& player, Stage stage, Emi
 		object_[i].center2bLength = CheckLength(stage.GetPos(), object_[i].pos);
 
 		if (object_[i].center2bLength > stage.GetRadius()) {
+			object_[i].rangeOutCount++;
 
+			if (object_[i].rangeOutCount >= 360) {
+				OutOfScreenInit(i);
+			}
 		}
 
 		//弾がプレイヤーの赤円周の外に出た時の処理
