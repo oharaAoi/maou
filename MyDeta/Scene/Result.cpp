@@ -15,7 +15,7 @@ void Result::Init() {
 	isEndResult_ = false;
 	resultFream_ = 0.0f;
 
-	spaceGhPos_.x = 1100.0f;
+	spaceGhPos_.x = 1000.0f;
 	spaceGhPos_.y = 600.0f;
 	size_.x = 200.0f;
 	size_.y = 64.0f;

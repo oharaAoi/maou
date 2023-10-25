@@ -355,10 +355,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 					//========================================================================
 					/* 弾の処理 */
-					//撃つ弾の種類を決める(デバック用)
-
-					bossBullet_.BulletShotSelect(keys, preKeys);
-
 					//弾を進める
 					bossBullet_.Update(boss_.GetPos(), player_, stage_, emitter);
 
@@ -414,11 +410,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 						gameOver_.Init();
 						scene = GAME_OVER;
 						isGame = false;
-					}
-
-
-					if (keys[DIK_G]) {
-						scene = GAME_OVER;
 					}
 				}
 
