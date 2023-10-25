@@ -197,7 +197,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			//ゲームスタート時の音
 			if (gameStartSE.isSound) {
 				Novice::PlayAudio(gameStartSE.sound, false, gameStartSE.volume);
-				/*PlayAudio(gameStartSE.handle, gameStartSE.sound, gameStartSE.volume, false);*/
 			} 
 
 			///
