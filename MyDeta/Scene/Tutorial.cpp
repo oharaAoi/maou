@@ -223,19 +223,19 @@ void Tutorial::Draw(Player& player, Stage& stage, Boss boss, BossBullet bossBull
 			//弾の説明
 			if (!bulletExplanationChange_) {
 				DrawWindow(
-					{ 1060, 250 },
-					{ 200, 80 },
+					{ 1130, 250 },
+					{ 210, 80 },
 					0xFAFAFAFF
 				);
 
 				DrawWindow(
-					{ 1060, 350 },
-					{ 200, 100 },
+					{ 1130, 350 },
+					{ 210, 100 },
 					0xFAFAFAFF
 				);
 
 				Novice::DrawSprite(
-					950,
+					1020,
 					200,
 					bulletExplanationGH_[0],
 					0.8f,
@@ -245,7 +245,7 @@ void Tutorial::Draw(Player& player, Stage& stage, Boss boss, BossBullet bossBull
 				);
 
 				Novice::DrawSprite(
-					950,
+					1020,
 					300,
 					bulletExplanationGH_[1],
 					0.8f,
@@ -256,26 +256,26 @@ void Tutorial::Draw(Player& player, Stage& stage, Boss boss, BossBullet bossBull
 			} else {
 
 				DrawWindow(
-					{ 1060, 250 },
-					{ 200, 80 },
+					{ 1130, 250 },
+					{ 210, 80 },
 					0xFAFAFAFF
 				);
 
 				DrawWindow(
-					{ 1060, 350 },
-					{ 200, 90 },
+					{ 1130, 350 },
+					{ 210, 90 },
 					0xFAFAFAFF
 				);
 
 				DrawWindow(
-					{ 1060, 450 },
-					{ 200, 90 },
+					{ 1130, 450 },
+					{ 210, 90 },
 					0xFAFAFAFF
 				);
 
 
 				Novice::DrawSprite(
-					950,
+					1020,
 					200,
 					bulletExplanationGH_[2],
 					0.8f,
@@ -285,7 +285,7 @@ void Tutorial::Draw(Player& player, Stage& stage, Boss boss, BossBullet bossBull
 				);
 
 				Novice::DrawSprite(
-					950,
+					1020,
 					300,
 					bulletExplanationGH_[3],
 					0.8f,
@@ -295,7 +295,7 @@ void Tutorial::Draw(Player& player, Stage& stage, Boss boss, BossBullet bossBull
 				);
 
 				Novice::DrawSprite(
-					950,
+					1020,
 					400,
 					bulletExplanationGH_[4],
 					0.8f,
