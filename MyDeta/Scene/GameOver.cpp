@@ -28,6 +28,8 @@ void GameOver::Init() {
 
 	object_[0].gh = Novice::LoadTexture("./images/Resource/GameOver/goToGame.png");
 
+	object_[0].color = 0xFFFFFFFF;
+
 	//==========================================
 	//タイトルへ
 	object_[1].width = 256;
@@ -40,6 +42,8 @@ void GameOver::Init() {
 	object_[1].size.y = 1.0f;
 
 	object_[1].gh = Novice::LoadTexture("./images/Resource/GameOver/goToTitle.png");
+
+	object_[1].color = 0xFFFFFFFF;
 
 	//==========================================
 	bgGh_ = Novice::LoadTexture("./images/Resource/GameOver/GameOver.png");
@@ -109,12 +113,18 @@ void GameOver::Update(char* keys, char* preKeys) {
 		object_[1].size.x = 1.0f;
 		object_[1].size.y = 1.0f;
 
+		object_[0].color = 0xFFFFFFFF;
+		object_[1].color = 0x808080FF;
+
 	} else {
 		object_[0].size.x = 1.0f;
 		object_[0].size.y = 1.0f;
 
 		object_[1].size.x = 1.2f;
 		object_[1].size.y = 1.2f;
+
+		object_[0].color = 0x808080FF;
+		object_[1].color = 0xFFFFFFFF;
 	}
 
 }
@@ -147,7 +157,7 @@ void GameOver::Draw() {
 		static_cast<int>(object_[0].width),
 		static_cast<int>(object_[0].height),
 		object_[0].gh,
-		0xFFFFFFFF
+		object_[0].color
 	);
 
 	//==========================================
@@ -166,7 +176,7 @@ void GameOver::Draw() {
 		static_cast<int>(object_[1].width),
 		static_cast<int>(object_[1].height),
 		object_[1].gh,
-		0xFFFFFFFF
+		object_[1].color
 	);
 
 	//==========================================

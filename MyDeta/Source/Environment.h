@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-const char kWindowTitle[] = "回王";
+const char kWindowTitle[] = "1103_送風のマタサブロー";
 
 /***********************************
  * グローバル変数 *

@@ -16,6 +16,7 @@ private:
 		float height;
 		Vector2f size;
 		int gh;
+		unsigned int color;
 	};
 
 	Base object_[kSelectMax];
