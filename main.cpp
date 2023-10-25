@@ -72,7 +72,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 
 
-	GameScene scene = RESULT;
+	GameScene scene = GAME_OVER;
 
 	// エミッターのインスタンスを作成
 	Emitter emitter;
@@ -440,28 +440,47 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 				gameOver_.Update(keys, preKeys);
 
-				if (gameOver_.GetChangeToGame() == true) {
-					scene = GAME;
-					range_.Init();
-					boss_.Init();
-					bossBullet_.Init();
-					player_.Init();
-					gameOver_.Init();
-					timer.Init();
-					stage_.Init();
-					tutorial.Init();
+				if (isChangeScene) {
+					if (sceneT < 120.0f) { sceneT++; }
 
-				} else if (gameOver_.GetChangeToTitle() == true) {
-					scene = TITLE;
-					range_.Init();
-					boss_.Init();
-					bossBullet_.Init();
-					player_.Init();
-					gameOver_.Init();
-					timer.Init();
-					stage_.Init();
-					tutorial.Init();
+					if (sceneT == 120.0f) {
+						isChangeScene = false;
+
+						if (gameOver_.GetChangeToGame() == true) {
+							scene = GAME;
+							range_.Init();
+							boss_.Init();
+							bossBullet_.Init();
+							player_.Init();
+							gameOver_.Init();
+							timer.Init();
+							stage_.Init();
+							tutorial.Init();
+
+						} else if (gameOver_.GetChangeToTitle() == true) {
+							scene = TITLE;
+							range_.Init();
+							boss_.Init();
+							bossBullet_.Init();
+							player_.Init();
+							gameOver_.Init();
+							timer.Init();
+							stage_.Init();
+							tutorial.Init();
+						}
+					}
+
+				} else {
+					if (sceneT > 0.0f) { sceneT--; }
+
+					if (gameOver_.GetChangeToTitle() || gameOver_.GetChangeToGame()) {
+						isChangeScene = true;
+					}
 				}
+
+				boxTransition.Update(sceneT);
+
+				
 
 				///
 				/// ↑更新処理ここまで
@@ -472,6 +491,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				/// 
 
 				gameOver_.Draw();
+				boxTransition.Draw();
 
 				///
 				/// ↑描画処理ここまで
