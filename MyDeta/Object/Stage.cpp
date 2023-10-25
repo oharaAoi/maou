@@ -94,7 +94,7 @@ void Stage::Update(int waveNum) {
 	for (int i = 0; i < kCloudMax; i++) {
 		cloud[i].pos.x -= cloud[i].velocity.x;
 
-		if (cloud[i].pos.x <= -100) {
+		if (cloud[i].pos.x <= -150) {
 			cloud[i].pos.x = static_cast<float>(Rand(1350, 1500));
 		}
 	}
