@@ -155,304 +155,304 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 
 		switch (scene) {
-		case TITLE:
+			case TITLE:
 
-			///
-			/// ↓更新処理ここから
-			/// 
+				///
+				/// ↓更新処理ここから
+				/// 
 
-			if (gameStartSE.isSound) {
-				gameStartSE.isSound = false;
-				Novice::StopAudio(gameStartSE.handle);
-			}
-
-			if (keys[DIK_SPACE] && !preKeys[DIK_SPACE]) {
-				isChangeScene = true;
-				gameStartSE.isSound = true;
-			}
-
-			title.Update();
-
-			if (isChangeScene) {
-				if (sceneT < 120.0f) { sceneT++; }
-
-				if (sceneT == 120.0f) {
-					scene = TUTORIAL;
-					isChangeScene = false;
+				if (gameStartSE.isSound) {
+					gameStartSE.isSound = false;
+					Novice::StopAudio(gameStartSE.handle);
 				}
 
-			} else {
-				if (sceneT > 0.0f) { sceneT--; }
-			}
+				if (keys[DIK_SPACE] && !preKeys[DIK_SPACE]) {
+					isChangeScene = true;
+					gameStartSE.isSound = true;
+				}
 
-			boxTransition.Update(sceneT);
+				title.Update();
 
-			///
-			/// ↑更新処理ここまで
-			/// 
+				if (isChangeScene) {
+					if (sceneT < 120.0f) { sceneT++; }
 
-			///
-			/// ↓描画処理ここから
-			/// 
+					if (sceneT == 120.0f) {
+						scene = TUTORIAL;
+						isChangeScene = false;
+					}
+
+				} else {
+					if (sceneT > 0.0f) { sceneT--; }
+				}
+
+				boxTransition.Update(sceneT);
+
+				///
+				/// ↑更新処理ここまで
+				/// 
+
+				///
+				/// ↓描画処理ここから
+				/// 
 
 
-			title.Draw();
+				title.Draw();
 
-			boxTransition.Draw();
-			Novice::ScreenPrintf(10, 10, "scene:%d", scene);
+				boxTransition.Draw();
+				Novice::ScreenPrintf(10, 10, "scene:%d", scene);
 
-			//ゲームスタート時の音
-			if (gameStartSE.isSound) {
-				Novice::PlayAudio(gameStartSE.sound, false, gameStartSE.volume);
-
-			}
-
-			///
-			/// ↑描画処理ここまで
-			/// 
-
-			break;
-
-		case TUTORIAL:
-
-			///
-			/// ↓更新処理ここから
-			/// 
-
-			if (tutorial.GetIsEndTutorial()) {
-				isChangeScene = true;
-			}
-
-			if (isChangeScene) {
-				if (sceneT < 120.0f) { sceneT++; }
-
-				if (sceneT == 120.0f) {
-					scene = GAME;
-					isChangeScene = false;
-
-					// -> GAME
-					player_.Init();
-					range_.Init();
-					boss_.Init();
-					bossBullet_.Init();
-					collision.Init();
-					stage_.Init();
-					result.Init();
+				//ゲームスタート時の音
+				if (gameStartSE.isSound) {
+					Novice::PlayAudio(gameStartSE.sound, false, gameStartSE.volume);
 
 				}
 
+				///
+				/// ↑描画処理ここまで
+				/// 
 
-			} else {
-				if (sceneT > 0.0f) { sceneT--; }
-			}
+				break;
 
-			tutorial.Update(keys, preKeys, player_, stage_, boss_, bossBullet_, emitter, collision, range_, playerWindEmitter);
-			boxTransition.Update(sceneT);
+			case TUTORIAL:
 
-			///
-			/// ↑更新処理ここまで
-			///
+				///
+				/// ↓更新処理ここから
+				/// 
 
-			///
-			/// ↓描画処理ここから
-			/// 
-
-			tutorial.Draw(player_, stage_, boss_, bossBullet_, playerWindEmitter, emitter);
-			boxTransition.Draw();
-			Novice::ScreenPrintf(10, 10, "scene:%d", scene);
-
-			///
-			/// ↑描画処理ここまで
-			/// 
-
-			break;
-
-		case GAME:
-
-			///
-			/// ↓更新処理ここから
-			/// 
-
-			if (isChangeScene) {
-				if (sceneT < 120.0f) { sceneT++; }
-
-				if (sceneT == 120.0f) {
-					scene = GAME;
-					isChangeScene = false;
+				if (tutorial.GetIsEndTutorial()) {
+					isChangeScene = true;
 				}
 
-			} else {
-				if (sceneT > 0.0f) { sceneT--; }
-			}
+				if (isChangeScene) {
+					if (sceneT < 120.0f) { sceneT++; }
 
-			boxTransition.Update(sceneT);
+					if (sceneT == 120.0f) {
+						scene = GAME;
+						isChangeScene = false;
 
-			// ==================================================
+						// -> GAME
+						player_.Init();
+						range_.Init();
+						boss_.Init();
+						bossBullet_.Init();
+						collision.Init();
+						stage_.Init();
+						result.Init();
 
-			if (!isChangeScene) {
+					}
 
-				stage_.Update(waveNum);
 
-				player_.Update(keys, preKeys, stage_);
+				} else {
+					if (sceneT > 0.0f) { sceneT--; }
+				}
 
-				// ==================================================
-				boss_.UpDate(bossBullet_);
+				tutorial.Update(keys, preKeys, player_, stage_, boss_, bossBullet_, emitter, collision, range_, playerWindEmitter);
+				boxTransition.Update(sceneT);
 
-				/* bossのwaveを保存 */
-				waveNum = boss_.GetType();
+				///
+				/// ↑更新処理ここまで
+				///
+
+				///
+				/// ↓描画処理ここから
+				/// 
+
+				tutorial.Draw(player_, stage_, boss_, bossBullet_, playerWindEmitter, emitter);
+				boxTransition.Draw();
+				Novice::ScreenPrintf(10, 10, "scene:%d", scene);
+
+				///
+				/// ↑描画処理ここまで
+				/// 
+
+				break;
+
+			case GAME:
+
+				///
+				/// ↓更新処理ここから
+				/// 
+
+				if (isChangeScene) {
+					if (sceneT < 120.0f) { sceneT++; }
+
+					if (sceneT == 120.0f) {
+						scene = GAME;
+						isChangeScene = false;
+					}
+
+				} else {
+					if (sceneT > 0.0f) { sceneT--; }
+				}
+
+				boxTransition.Update(sceneT);
 
 				// ==================================================
 
-				playerDeadEmitter.Update(); //プレイヤー死亡時のエミッターの更新処理
+				if (!isChangeScene) {
 
-				bossDeadParticle.Update(); //ボス死亡時のパーティクルの更新処理
+					stage_.Update(waveNum);
 
-				if (player_.GetHp() <= 0 && playerDeadEmitter.GetIsGenerate() == false) { //プレイヤー死亡時にプレイヤーの位置にパーティクルを生成
-					playerDeadEmitter.PlayerDeadEmit(static_cast<int>(player_.GetPos().x), static_cast<int>(player_.GetPos().y), 16);
-				}
-				if (player_.GetHp() > 0) {
-					playerDeadEmitter.SetIsGenerate(false);
-				}
+					player_.Update(keys, preKeys, stage_);
 
-				//デバック用
-				boss_.BossHpDecrece(keys, preKeys);
+					// ==================================================
+					boss_.UpDate(bossBullet_);
 
+					/* bossのwaveを保存 */
+					waveNum = boss_.GetType();
 
-				emitter.Update(); //エミッターの更新処理
+					// ==================================================
 
-				// プレイヤーの状態によって風エフェクトの消滅までの時間、速さ、発生間隔を変更
-				switch (player_.GetWindowStrength()) {
-				case OFF:
-					playerWindEmitter.Update(player_.GetPos(), boss_.GetPos(), 0, 0, 1000);
+					playerDeadEmitter.Update(); //プレイヤー死亡時のエミッターの更新処理
 
-					break;
+					bossDeadParticle.Update(); //ボス死亡時のパーティクルの更新処理
 
-				case WEAK:
-					playerWindEmitter.Update(player_.GetPos(), boss_.GetPos(), 20, 6, 7);
+					if (player_.GetHp() <= 0 && playerDeadEmitter.GetIsGenerate() == false) { //プレイヤー死亡時にプレイヤーの位置にパーティクルを生成
+						playerDeadEmitter.PlayerDeadEmit(static_cast<int>(player_.GetPos().x), static_cast<int>(player_.GetPos().y), 16);
+					}
+					if (player_.GetHp() > 0) {
+						playerDeadEmitter.SetIsGenerate(false);
+					}
 
-					break;
-
-				case STRONG:
-					playerWindEmitter.Update(player_.GetPos(), boss_.GetPos(), 20, 12, 4);
-
-					break;
-				}
-
-				//========================================================================
-				/* 弾の処理 */
-				//撃つ弾の種類を決める(デバック用)
-
-				bossBullet_.BulletShotSelect(keys, preKeys);
-
-				//弾を進める
-				bossBullet_.Update(boss_.GetPos(), player_, stage_, emitter);
-
-				//弾の更新
-				range_.Update(player_, bossBullet_);
+					//デバック用
+					boss_.BossHpDecrece(keys, preKeys);
 
 
-				//弾とプレイヤー
-				collision.CheckCollision(player_, bossBullet_, emitter);
+					emitter.Update(); //エミッターの更新処理
+
+					// プレイヤーの状態によって風エフェクトの消滅までの時間、速さ、発生間隔を変更
+					switch (player_.GetWindowStrength()) {
+						case OFF:
+							playerWindEmitter.Update(player_.GetPos(), boss_.GetPos(), 0, 0, 1000);
+
+							break;
+
+						case WEAK:
+							playerWindEmitter.Update(player_.GetPos(), boss_.GetPos(), 20, 6, 7);
+
+							break;
+
+						case STRONG:
+							playerWindEmitter.Update(player_.GetPos(), boss_.GetPos(), 20, 12, 4);
+
+							break;
+					}
+
+					//========================================================================
+					/* 弾の処理 */
+					//撃つ弾の種類を決める(デバック用)
+
+					bossBullet_.BulletShotSelect(keys, preKeys);
+
+					//弾を進める
+					bossBullet_.Update(boss_.GetPos(), player_, stage_, emitter);
+
+					//弾の更新
+					range_.Update(player_, bossBullet_);
 
 
-				//弾と敵の当たり判定
-				collision.CheckCollision(boss_, bossBullet_, emitter);
+					//弾とプレイヤー
+					collision.CheckCollision(player_, bossBullet_, emitter);
 
 
-				//========================================================================
+					//弾と敵の当たり判定
+					collision.CheckCollision(boss_, bossBullet_, emitter);
 
-				timer.Update();
 
-				//========================================================================
-				//3WAVE目にボスを倒していたらresultに移行
-				if (!isResultChange) {
-					if (boss_.GetType() == WAVE3 && boss_.GetIsAlive() == false) {
-						bossDeadParticle.Start(0, 0);
-						isResultChange = true;
+					//========================================================================
+
+					timer.Update();
+
+					//========================================================================
+					//3WAVE目にボスを倒していたらresultに移行
+					if (!isResultChange) {
+						if (boss_.GetType() == WAVE3 && boss_.GetIsAlive() == false) {
+							bossDeadParticle.Start(0, 0);
+							isResultChange = true;
+						}
+					}
+
+					//60フレームたったらシーンを切り替える
+					if (isResultChange) {
+						resultChangeTime++;
+
+						if (resultChangeTime > resultChangeTimeLimit) {
+							scene = RESULT;
+
+							loadFile_.WriteFile(timer.GetTimer());
+
+							loadFile_.LoadJsonFile(timer.GetBestTimer());
+
+							player_.SetIsWindSeStop(true);
+						}
+					}
+
+					//========================================================================
+					//playerが死んだらgameOverへ
+					if (player_.GetIsAlive() == false) {
+						gameOver_.Init();
+						scene = GAME_OVER;
+					}
+
+
+					if (keys[DIK_G]) {
+						scene = GAME_OVER;
 					}
 				}
 
-				//60フレームたったらシーンを切り替える
-				if (isResultChange) {
-					resultChangeTime++;
+				///
+				/// ↑更新処理ここまで
+				/// 
 
-					if (resultChangeTime > resultChangeTimeLimit) {
-						scene = RESULT;
+				///
+				/// ↓描画処理ここから
+				/// 
 
-						loadFile_.WriteFile(timer.GetTimer());
+				stage_.Draw();
+				boss_.Draw();
+				range_.Draw();
+				emitter.Draw(); // エミッターの描画処理を呼ぶ
+				playerWindEmitter.Draw(); // プレイヤーの風の描画処理
+				playerDeadEmitter.Draw(); // プレイヤー死亡時のパーティクルの描画処理
+				bossDeadParticle.Draw(); //ボス死亡時のパーティクルの描画処理
 
-						loadFile_.LoadJsonFile(timer.GetBestTimer());
+				bossBullet_.Draw();
 
-						player_.SetIsWindSeStop(true);
-					}
+				timer.Draw();
+
+				player_.Draw();
+
+				boxTransition.Draw();
+
+				if (stage_.GetIsBlackOut() == true) {
+					Novice::DrawBox(
+						0,
+						0,
+						1280,
+						720,
+						0.0f,
+						stage_.GetBlackOutColor(),
+						kFillModeSolid
+					);
 				}
 
-				//========================================================================
-				//playerが死んだらgameOverへ
-				if (player_.GetIsAlive() == false) {
-					gameOver_.Init();
-					scene = GAME_OVER;
-				}
 
+				///
+				/// ↑描画処理ここまで
+				/// 
 
-				if (keys[DIK_G]) {
-					scene = GAME_OVER;
-				}
-			}
+				break;
 
-			///
-			/// ↑更新処理ここまで
-			/// 
+			case GAME_OVER:
 
-			///
-			/// ↓描画処理ここから
-			/// 
+				///
+				/// ↓更新処理ここから
+				/// 
 
-			stage_.Draw();
-			boss_.Draw();
-			range_.Draw();
-			emitter.Draw(); // エミッターの描画処理を呼ぶ
-			playerWindEmitter.Draw(); // プレイヤーの風の描画処理
-			playerDeadEmitter.Draw(); // プレイヤー死亡時のパーティクルの描画処理
-			bossDeadParticle.Draw(); //ボス死亡時のパーティクルの描画処理
+				//プレイヤーの音を止めてしまう(余裕があったら変えたい)
+				player_.AllSoundStop();
 
-			bossBullet_.Draw();
-
-			timer.Draw();
-
-			player_.Draw();
-
-			boxTransition.Draw();
-
-			if (stage_.GetIsBlackOut() == true) {
-				Novice::DrawBox(
-					0,
-					0,
-					1280,
-					720,
-					0.0f,
-					stage_.GetBlackOutColor(),
-					kFillModeSolid
-				);
-			}
-
-
-			///
-			/// ↑描画処理ここまで
-			/// 
-
-			break;
-
-		case GAME_OVER:
-
-			///
-			/// ↓更新処理ここから
-			/// 
-
-			//プレイヤーの音を止めてしまう(余裕があったら変えたい)
-			player_.AllSoundStop();
-
-			gameOver_.Update(keys, preKeys);
+				gameOver_.Update(keys, preKeys);
 
 				if (isChangeScene) {
 					if (sceneT < 120.0f) { sceneT++; }
@@ -494,92 +494,92 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 				boxTransition.Update(sceneT);
 
-				
+
 
 				///
 				/// ↑更新処理ここまで
 				/// 
 
-			///
-			/// ↓描画処理ここから
-			/// 
+				///
+				/// ↓描画処理ここから
+				/// 
 
 				gameOver_.Draw();
 				boxTransition.Draw();
 
-			///
-			/// ↑描画処理ここまで
-			/// 
+				///
+				/// ↑描画処理ここまで
+				/// 
 
-			break;
+				break;
 
-		case RESULT:
+			case RESULT:
 
-			///
-			/// ↓更新処理ここから
-			/// 
+				///
+				/// ↓更新処理ここから
+				/// 
 
-			//プレイヤーの音を止めてしまう(余裕があったら変えたい)
-			player_.AllSoundStop();
+				//プレイヤーの音を止めてしまう(余裕があったら変えたい)
+				player_.AllSoundStop();
 
-			result.Update(keys, preKeys);
+				result.Update(keys, preKeys);
 
 
 
-			if (isChangeScene) {
-				if (sceneT < 120.0f) { sceneT++; }
+				if (isChangeScene) {
+					if (sceneT < 120.0f) { sceneT++; }
 
-				if (sceneT == 120.0f) {
-					scene = GameScene::TITLE;
-					isChangeScene = false;
+					if (sceneT == 120.0f) {
+						scene = GameScene::TITLE;
+						isChangeScene = false;
 
-					// Init
-					range_.Init();
-					boss_.Init();
-					bossBullet_.Init();
-					stage_.Init();
-					player_.Init();
-					gameOver_.Init();
-					timer.Init();
-					tutorial.Init();
+						// Init
+						range_.Init();
+						boss_.Init();
+						bossBullet_.Init();
+						stage_.Init();
+						player_.Init();
+						gameOver_.Init();
+						timer.Init();
+						tutorial.Init();
 
+					}
+
+				} else {
+					if (sceneT > 0.0f) { sceneT--; }
+
+					if (result.GetIsEndResult()) {
+						isChangeScene = true;
+					}
 				}
 
-			} else {
-				if (sceneT > 0.0f) { sceneT--; }
 
-				if (result.GetIsEndResult()) {
-					isChangeScene = true;
-				}
-			}
+				boxTransition.Update(sceneT);
 
+				///
+				/// ↑更新処理ここまで
+				/// 
 
-			boxTransition.Update(sceneT);
+				///
+				/// ↓描画処理ここから
+				/// 
 
-			///
-			/// ↑更新処理ここまで
-			/// 
+				boss_.Draw();
+				stage_.Draw();
+				player_.Draw();
+				range_.Draw();
+				emitter.Draw(); // エミッターの描画処理を呼ぶ
+				playerWindEmitter.Draw(); // プレイヤーの風の描画処理
 
-			///
-			/// ↓描画処理ここから
-			/// 
+				result.Draw(timer);
 
-			boss_.Draw();
-			stage_.Draw();
-			player_.Draw();
-			range_.Draw();
-			emitter.Draw(); // エミッターの描画処理を呼ぶ
-			playerWindEmitter.Draw(); // プレイヤーの風の描画処理
+				boxTransition.Draw();
 
-			result.Draw(timer);
+				///
+				/// ↑描画処理ここまで
+				/// 
 
-			boxTransition.Draw();
-
-			///
-			/// ↑描画処理ここまで
-			/// 
-
-			break;
+				break;
 		}
 
 		// フレームの終了
