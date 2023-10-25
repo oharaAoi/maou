@@ -72,7 +72,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 
 
-	GameScene scene = RESULT;
+	GameScene scene = TITLE;
 
 	// エミッターのインスタンスを作成
 	Emitter emitter;
@@ -369,6 +369,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 						if (boss_.GetType() == WAVE3 && boss_.GetIsAlive() == false) {
 							bossDeadParticle.Start(0, 0);
 							isResultChange = true;
+							player_.AllSoundStop();
 						}
 					}
 

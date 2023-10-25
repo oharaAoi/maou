@@ -59,10 +59,10 @@ void Boss::BulletSpeedChange(BossBullet& bossBullet_) {
 		bossBullet_.SetVanishSpeed(3.0f);
 
 	} else if (type_ == WAVE3) {
-		bossBullet_.SetSlowSpeed(3.5f);
-		bossBullet_.SetFastSpeed(4.5f);
-		bossBullet_.SetExplodeSpeed(4.0f);
-		bossBullet_.SetVanishSpeed(4.0f);
+		bossBullet_.SetSlowSpeed(3.0f);
+		bossBullet_.SetFastSpeed(4.0f);
+		bossBullet_.SetExplodeSpeed(3.5f);
+		bossBullet_.SetVanishSpeed(3.5f);
 	}
 
 }
