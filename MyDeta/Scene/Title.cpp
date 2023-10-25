@@ -31,6 +31,10 @@ void Title::Update() {
 
 	for (int ai = 0; ai < animationNum_; ai++) {
 		animationFrame_[ai] = frame_ - (60.0f * ai);
+
+		if (animationFrame_[ai] > 60.0f) {
+			animationFrame_[ai] = 60.0f;
+		}
 	}
 
 }
@@ -60,7 +64,7 @@ void Title::Draw() {
 	Novice::DrawLine(
 		kWindowWidth,
 		280 + 150,
-		static_cast<int>(Lerp(EaseInExpo(animationFrame_[0] / 60.0f), kWindowWidth, 0.0f)),
+		static_cast<int>(Lerp(EaseInQuad(animationFrame_[0] / 60.0f), kWindowWidth, 0.0f)),
 		280 + 150,
 		0x000000FF
 	);
@@ -77,7 +81,7 @@ void Title::Draw() {
 		270 + 730,
 		kWindowHeight,
 		270 + 730,
-		static_cast<int>(Lerp(EaseOutExpo(animationFrame_[0] / 60.0f), kWindowHeight, 0.0f)),
+		static_cast<int>(Lerp(EaseOutQuad(animationFrame_[0] / 60.0f), kWindowHeight, 0.0f)),
 		0x000000FF
 	);
 
@@ -138,7 +142,7 @@ void Title::Draw() {
 		0.5f,
 		0.5f,
 		0.0f,
-		0xFFFFFFFF
+		ShiftColor(EaseInOutExpo(animationFrame_[2] / 60.0f), 0xFFFFFF00, 0xFFFFFFFF)
 	);
 
 	Novice::DrawSprite(
@@ -148,7 +152,7 @@ void Title::Draw() {
 		0.5f,
 		0.5f,
 		0.0f,
-		0xFFFFFFFF
+		ShiftColor(EaseInOutExpo(animationFrame_[2] / 60.0f), 0xFFFFFF00, 0xFFFFFFFF)
 	);
 
 	Novice::DrawSprite(
@@ -158,6 +162,6 @@ void Title::Draw() {
 		0.5f,
 		0.5f,
 		0.0f,
-		0xFFFFFFFF
+		ShiftColor(EaseInOutExpo(animationFrame_[2] / 60.0f), 0xFFFFFF00, 0xFFFFFFFF)
 	);
 }

@@ -114,7 +114,7 @@ void Result::Draw(Timer timer) {
 			static_cast<int>(size_.x),
 			static_cast<int>(size_.y),
 			spaceGH_,
-			size_.y / (size_.x),
+			200.0f / 400.0f,
 			1.0f,
 			0.0f,
 			0xFFFFFFFF
