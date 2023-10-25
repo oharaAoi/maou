@@ -86,7 +86,11 @@ void CollisionManager::CheckCollision(Player& player_, BossBullet& bossBullet_, 
 
 			if (b2pLength_ < player_.GetRadius() + bossBullet_.GetRadius(i)) {
 				//エフェクトの生成処理
-				emitter.Emit(static_cast<int>(bossBullet_.GetPos(i).x), static_cast<int>(bossBullet_.GetPos(i).y), 12, 0xFFFFFFFF);
+				if (bossBullet_.GetBulletType(i) != RECOVER) {
+					emitter.Emit(static_cast<int>(bossBullet_.GetPos(i).x), static_cast<int>(bossBullet_.GetPos(i).y), 12, 0xFFFFFFFF);
+				} else {
+					emitter.Emit(static_cast<int>(bossBullet_.GetPos(i).x), static_cast<int>(bossBullet_.GetPos(i).y), 6, 0x00ff7fFF);
+				}
 
 				//弾の処理
 				bossBullet_.SetIsShot(false, i);

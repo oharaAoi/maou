@@ -252,7 +252,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓描画処理ここから
 			/// 
 
-			tutorial.Draw(player_, stage_, boss_, bossBullet_, playerWindEmitter);
+			tutorial.Draw(player_, stage_, boss_, bossBullet_, playerWindEmitter,emitter);
 			boxTransition.Draw();
 			Novice::ScreenPrintf(10, 10, "scene:%d", scene);
 
