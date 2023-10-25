@@ -266,7 +266,7 @@ void Player::Draw() { /// 描画処理
 	case WindowStrength::OFF: // koko
 
 		DrawCircleAnimation(
-			overHeat_ / 100.0f,
+			(overHeat_ / 100.0f),
 			{ kWindowWidth / 2.0f, kWindowHeight / 2.0f },
 			260.0f, 10.0f,
 			white1x1GH,
@@ -279,7 +279,7 @@ void Player::Draw() { /// 描画処理
 
 		if (overHeat_ > 30.0f) {
 			DrawCircleAnimation(
-				overHeat_ / 100.0f,
+				(overHeat_ / 100.0f),
 				{ kWindowWidth / 2.0f, kWindowHeight / 2.0f },
 				260.0f, 10.0f,
 				white1x1GH,
@@ -289,7 +289,7 @@ void Player::Draw() { /// 描画処理
 		} else {
 
 			DrawCircleAnimation(
-				overHeat_ / 100.0f,
+				(overHeat_ / 100.0f),
 				{ kWindowWidth / 2.0f, kWindowHeight / 2.0f },
 				260.0f, 10.0f,
 				white1x1GH,

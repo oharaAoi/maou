@@ -33,8 +33,6 @@ void BoxTransition::Init() {
 
 void BoxTransition::Update(float t) {
 
-	if (t < 120.0f) { t++; }
-
 	for (int row = 0; row < kSubdivisionHeight_ + 1; row++) {
 		for (int column = 0; column < kSubdivisionWidth_ + 1; column++) {
 			object_[row][column].size.width = Lerp(DivideParameter(EaseInOutSine(t / 120.0f), kSubdivisionHeight_, row), 0.0f, maxSize_.width);

@@ -98,7 +98,7 @@ void Title::Draw() {
 	// allBox
 	Novice::DrawBox(
 		1280, 0,
-		static_cast<int>(Lerp(EaseOutQuint(animationFrame_[2] / 60.0f), 0.0f, -kWindowWidth)), 720,
+		static_cast<int>(Lerp(EaseOutQuint(animationFrame_[2] / 40.0f), 0.0f, -kWindowWidth)), 720,
 		0.0f,
 		0x000000FF,
 		kFillModeSolid
