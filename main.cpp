@@ -117,6 +117,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	float sceneT = 0.0f;
 	bool isChangeScene = false;
 
+	int gameStartTime = 0;
+	bool isGame = 0;
+
 	int resultChangeTime = 0;
 	int resultChangeTimeLimit = 60;
 	bool isResultChange = false;
@@ -288,8 +291,20 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				boxTransition.Update(sceneT);
 
 				// ==================================================
+				if (!isGame) {
+					if (!isChangeScene) {
+						gameStartTime++;
 
-				if (!isChangeScene) {
+						if (gameStartTime >= 60) {
+							isGame = true;
+							gameStartTime = 0;
+						}
+					}
+				}
+
+				// ==================================================
+
+				if (isGame) {
 
 					stage_.Update(waveNum);
 
@@ -388,6 +403,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 							isResultChange = false;
 							resultChangeTime = 0;
+
+							isGame = false;
 						}
 					}
 
@@ -396,6 +413,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 					if (player_.GetIsAlive() == false) {
 						gameOver_.Init();
 						scene = GAME_OVER;
+						isGame = false;
 					}
 
 

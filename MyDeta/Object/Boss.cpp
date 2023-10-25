@@ -124,8 +124,8 @@ void Boss::UpDate(BossBullet& bossBullet_) {
 			//==============================
 			//バレットの状態を変える
 			bossBullet_.SetRandTypeMax(4);
-			bossBullet_.SetRandamCoolTimeLimit(15);
-			bossBullet_.SetChaseCoolTimeLimit(15);
+			bossBullet_.SetRandamCoolTimeLimit(13);
+			bossBullet_.SetChaseCoolTimeLimit(13);
 			BulletSpeedChange(bossBullet_);
 
 			//==============================
@@ -142,8 +142,8 @@ void Boss::UpDate(BossBullet& bossBullet_) {
 			//==============================
 			//バレットの状態を変える
 			bossBullet_.BulletShotChange(RANDAM);
-			bossBullet_.SetRandamCoolTimeLimit(10);
-			bossBullet_.SetChaseCoolTimeLimit(10);
+			bossBullet_.SetRandamCoolTimeLimit(11);
+			bossBullet_.SetChaseCoolTimeLimit(11);
 			BulletSpeedChange(bossBullet_);
 
 			//==============================
