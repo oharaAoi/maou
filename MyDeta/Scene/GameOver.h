@@ -35,6 +35,15 @@ private:
 	int gameOverBgmHandle_;
 	float gameOverBgmVolume_;
 
+	int scnenChangeSE_;
+	int sceneChangeSEHandle_;
+	float sceneChangeSEVolume_;
+
+	int selectMoveSE_;
+	int selectMoveSEHAndle_;
+	float selectMoveSEVolume_;
+	bool isSelectMoveSE_;
+
 	bool playSound_;
 
 
