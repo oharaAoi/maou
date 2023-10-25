@@ -234,7 +234,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 						collision.Init();
 						stage_.Init();
 						result.Init();
-						gameOver_.Init();
 					}
 
 
