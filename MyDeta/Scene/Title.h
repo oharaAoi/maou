@@ -1,6 +1,5 @@
 #pragma once
 #include <Novice.h>
-#include <ImGui.h>
 
 // sorce //
 #include "MyDeta/Source/Environment.h"
