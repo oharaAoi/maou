@@ -30,7 +30,11 @@ void Player::Init() { // 変数の初期化
 	radius_ = 20.0f;
 	rangeRadius_ = 35.0f;
 
-	radianSpeed_ = 0.0f;
+	/*radianSpeed_ = 0.0f;*/
+
+	radianPlusSpeed_ = 0.0f;
+	radianMinusSpeed_ = 0.0f;
+
 	theta_ = 3.0f / 4.0f * (float)M_PI;
 	//==========================================
 	frameCount_ = 0;
@@ -111,30 +115,35 @@ void Player::Update(char* keys, char* preKeys, Stage& stage_) { /// 更新処理
 	if (isAlive_) {
 		//======================================================
 		//playerの移動
+		/// Plus
 		if (keys[DIK_A]) {
-			radianSpeed_ += 0.05f;
+			radianPlusSpeed_ += 0.05f;
+
+		} else {
+			radianPlusSpeed_ *= 0.92f;
 		}
 
+		// Clamp
+		if (radianPlusSpeed_ > 1.0f) {
+			radianPlusSpeed_ = 1.0f;
+		}
+
+		/// Minus
 		if (keys[DIK_D]) {
-			radianSpeed_ -= 0.05f;
+			radianMinusSpeed_ += 0.05f;
+
+		} else {
+			radianMinusSpeed_ *= 0.92f;
 		}
 
-		if (radianSpeed_ > 1.0f) {
-			radianSpeed_ = 1.0f;
-
-		} else if (radianSpeed_ < -1.0f) {
-			radianSpeed_ = -1.0f;
+		// Clamp
+		if (radianMinusSpeed_ > 1.0f) {
+			radianMinusSpeed_ = 1.0f;
 		}
 
-		if (!keys[DIK_A] && !keys[DIK_D]) {
-			radianSpeed_ *= 0.92f;
-		}
+		
 
-		if (!keys[DIK_A] && !keys[DIK_D]) {
-			radianSpeed_ *= 0.92f;
-		}
-
-		theta_ += radianSpeed_ / 100.0f * (float)M_PI;
+		theta_ += (radianPlusSpeed_ - radianMinusSpeed_) / 100.0f * (float)M_PI;
 
 		pos_.x = stage_.GetPos().x + (stage_.GetRadius() * cosf(theta_));
 		pos_.y = stage_.GetPos().y + (stage_.GetRadius() * sinf(theta_));
@@ -412,30 +421,33 @@ void Player::Update(char* keys, Stage& stage_, Restrictions restriction) {
 	case MOVE_ONLY:
 
 		//playerの移動
+		/// Plus
 		if (keys[DIK_A]) {
-			radianSpeed_ += 0.05f;
+			radianPlusSpeed_ += 0.05f;
+
+		} else {
+			radianPlusSpeed_ *= 0.92f;
 		}
 
+		// Clamp
+		if (radianPlusSpeed_ > 1.0f) {
+			radianPlusSpeed_ = 1.0f;
+		}
+
+		/// Minus
 		if (keys[DIK_D]) {
-			radianSpeed_ -= 0.05f;
+			radianMinusSpeed_ += 0.05f;
+
+		} else {
+			radianMinusSpeed_ *= 0.92f;
 		}
 
-		if (radianSpeed_ > 1.0f) {
-			radianSpeed_ = 1.0f;
-
-		} else if (radianSpeed_ < -1.0f) {
-			radianSpeed_ = -1.0f;
+		// Clamp
+		if (radianMinusSpeed_ > 1.0f) {
+			radianMinusSpeed_ = 1.0f;
 		}
 
-		if (!keys[DIK_A] && !keys[DIK_D]) {
-			radianSpeed_ *= 0.92f;
-		}
-
-		if (!keys[DIK_A] && !keys[DIK_D]) {
-			radianSpeed_ *= 0.92f;
-		}
-
-		theta_ += radianSpeed_ / 100.0f * (float)M_PI;
+		theta_ += (radianPlusSpeed_ - radianMinusSpeed_) / 100.0f * (float)M_PI;
 
 		pos_.x = stage_.GetPos().x + (stage_.GetRadius() * cosf(theta_));
 		pos_.y = stage_.GetPos().y + (stage_.GetRadius() * sinf(theta_));

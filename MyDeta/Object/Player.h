@@ -85,7 +85,11 @@ private:
 
 	//==========================================
 	//角度やhpなどのステータス
-	float radianSpeed_;
+	/*float radianSpeed_;*/
+
+	float radianPlusSpeed_;
+	float radianMinusSpeed_;
+
 	float theta_;
 
 	int hp_;
