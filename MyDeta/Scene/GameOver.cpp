@@ -43,7 +43,7 @@ void GameOver::Init() {
 	//==========================================
 	gameOverBgm_ = Novice::LoadAudio("./images/Sounds/bgm/gameOver.mp3");
 
-	gameOverBgmVolume_ = 0.2f;
+	gameOverBgmVolume_ = 0.02f;
 
 	gameOverBgmHandle_ = -1;
 
