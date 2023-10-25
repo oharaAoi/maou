@@ -102,7 +102,7 @@ void Player::Init() { // 変数の初期化
 	windSoundVolume_ = 0.2f;
 	hitSeVolume_ = 0.02f;
 	playerDeathSeVolume_ = 0.2f;
-	overHeatRecoverVolume_ = 0.2f;
+	overHeatRecoverVolume_ = 0.1f;
 	overHeatWarningVolume_ = 0.1f;
 	recoverSEVolume_ = 0.2f;
 }
