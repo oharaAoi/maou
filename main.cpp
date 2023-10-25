@@ -81,6 +81,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	PlayerDeadEmitter playerDeadEmitter;
 
+	BossDeadParticle bossDeadParticle;
+
 	//========================================================
 	// Source
 
@@ -155,6 +157,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓更新処理ここから
 			/// 
 
+			if (gameStartSE.isSound) {
+				gameStartSE.isSound = false;
+				Novice::StopAudio(gameStartSE.handle);
+			}
+
 			if (keys[DIK_SPACE] && !preKeys[DIK_SPACE]) {
 				isChangeScene = true;
 				gameStartSE.isSound = true;
@@ -168,9 +175,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				if (sceneT == 120.0f) {
 					scene = TUTORIAL;
 					isChangeScene = false;
-
-					gameStartSE.isSound = false;
-					Novice::StopAudio(gameStartSE.handle);
 				}
 
 			} else {
@@ -187,6 +191,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓描画処理ここから
 			/// 
 
+
 			title.Draw();
 
 			boxTransition.Draw();
@@ -194,7 +199,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			//ゲームスタート時の音
 			if (gameStartSE.isSound) {
-				PlayAudio(gameStartSE.handle, gameStartSE.sound, gameStartSE.volume, false);
+				Novice::PlayAudio(gameStartSE.sound, false, gameStartSE.volume);
+
 			} 
 
 			///
@@ -222,6 +228,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 					// -> GAME
 					player_.Init();
+					range_.Init();
 					boss_.Init();
 					bossBullet_.Init();
 					collision.Init();
@@ -245,7 +252,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓描画処理ここから
 			/// 
 
-			tutorial.Draw(player_, stage_, boss_, bossBullet_, playerWindEmitter);
+			tutorial.Draw(player_, stage_, boss_, bossBullet_, playerWindEmitter,emitter);
 			boxTransition.Draw();
 			Novice::ScreenPrintf(10, 10, "scene:%d", scene);
 
@@ -283,6 +290,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 				player_.Update(keys, preKeys, stage_);
 
+				//ボス死亡時にパーティクルを生成（ボスの更新処理より先に置かないと生成されない）
+				if (boss_.GetIsAlive() == false) {
+					bossDeadParticle.Start(0, 0);
+				}
+
 				// ==================================================
 				boss_.UpDate(bossBullet_);
 
@@ -293,6 +305,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 
 				playerDeadEmitter.Update(); //プレイヤー死亡時のエミッターの更新処理
+
+				bossDeadParticle.Update(); //ボス死亡時のパーティクルの更新処理
 
 				if (player_.GetHp() <= 0 && playerDeadEmitter.GetIsGenerate() == false) { //プレイヤー死亡時にプレイヤーの位置にパーティクルを生成
 					playerDeadEmitter.PlayerDeadEmit(static_cast<int>(player_.GetPos().x), static_cast<int>(player_.GetPos().y), 16);
@@ -386,6 +400,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			emitter.Draw(); // エミッターの描画処理を呼ぶ
 			playerWindEmitter.Draw(); // プレイヤーの風の描画処理
 			playerDeadEmitter.Draw(); // プレイヤー死亡時のパーティクルの描画処理
+			bossDeadParticle.Draw(); //ボス死亡時のパーティクルの描画処理
 
 			bossBullet_.Draw();
 

@@ -10,7 +10,7 @@ void Stage::Init() {
 
 	radius_ = 300.0f;
 
-	rangeRadius_ = 180.0f;
+	rangeRadius_ = 300.0f;
 	
 	backGround_[0].pos.x = 0;
 	backGround_[0].pos.y = 0;

@@ -78,8 +78,8 @@ void Player::Init() { // 変数の初期化
 	overHeat_ = 100.0f;
 	isAlive_ = true;
 
-	windVolume_.x = 1.2f;
-	windVolume_.y = 1.2f;
+	windVolume_.x = 0.0f;
+	windVolume_.y = 0.0f;
 
 	windowStrength_ = WindowStrength::OFF;
 

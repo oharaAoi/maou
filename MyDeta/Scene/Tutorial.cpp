@@ -125,9 +125,10 @@ void Tutorial::Update(char* keys, char* preKeys,
 	playerRangeDetector.Update(player, bossBullet);
 	collisionManager.CheckCollision(player, bossBullet, emitter);
 	collisionManager.CheckCollision(boss, bossBullet, emitter);
+	emitter.Update();
 }
 
-void Tutorial::Draw(Player& player, Stage& stage, Boss boss, BossBullet bossBullet, PlayerWindEmitter playerWindEmitter) {
+void Tutorial::Draw(Player& player, Stage& stage, Boss boss, BossBullet bossBullet, PlayerWindEmitter playerWindEmitter,Emitter emitter) {
 	stage.Draw();
 	
 	// skip
@@ -142,6 +143,8 @@ void Tutorial::Draw(Player& player, Stage& stage, Boss boss, BossBullet bossBull
 	player.Draw();
 
 	playerWindEmitter.Draw();
+	
+	emitter.Draw();
 
 	// enemy Draw
 	switch (progress_) {

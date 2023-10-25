@@ -3,6 +3,7 @@
 #include <math.h>
 #include <Novice.h>
 #include "MyDeta/Source/MyStruct.h"
+#include "MyDeta/Source/Coordinate.h"
 
 class BossDeadParticle
 {
@@ -15,6 +16,9 @@ public:
 	void Start(int posX,int posY); //この関数が呼ばれたときにパーティクルを生成する
 
 private:
+	//インスタンス
+	Coordinate* cie_ = Coordinate::GetInstance();
+
 	struct Circle {
 		Vector2<float> pos_;
 		Vector2<float> velocity_;
@@ -24,7 +28,7 @@ private:
 	};
 
 	Circle circle_[8];
-	int speed_ = 6;
+	int speed_ = 8;
 
 };
 

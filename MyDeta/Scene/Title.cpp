@@ -7,6 +7,10 @@ Title::Title() {
 	
 	backgroundGH_ = Novice::LoadTexture("./images/resource/stage/background/bgWave1.png");
 	titleGH_ = Novice::LoadTexture("./images/resource/title/title.png");
+
+	otLogicGh_ = Novice::LoadTexture("./images/Resource/credit/otLogic.png");
+	pokketSoundGh_ = Novice::LoadTexture("./images/Resource/credit/pokettoSound.png");
+	soundEffectGh_ = Novice::LoadTexture("./images/Resource/credit/soundEffect.png");
 }
 
 Title::~Title() {
@@ -130,5 +134,34 @@ void Title::Draw() {
 		0xFAFAFAFF
 	);
 
-	
+	//soundEffect credit
+	Novice::DrawSprite(
+		900,
+		680,
+		soundEffectGh_,
+		0.5f,
+		0.5f,
+		0.0f,
+		0xFFFFFFFF
+	);
+
+	Novice::DrawSprite(
+		1000,
+		680,
+		otLogicGh_,
+		0.5f,
+		0.5f,
+		0.0f,
+		0xFFFFFFFF
+	);
+
+	Novice::DrawSprite(
+		1120,
+		680,
+		pokketSoundGh_,
+		0.5f,
+		0.5f,
+		0.0f,
+		0xFFFFFFFF
+	);
 }

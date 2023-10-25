@@ -32,7 +32,8 @@ void BossDeadParticle::Draw()
 	for (int i = 0; i < 8; i++) {
 		if (circle_[i].del_ == false) {
 			Novice::DrawEllipse(
-				static_cast<int>(circle_[i].pos_.x), static_cast<int>(circle_[i].pos_.y),
+				static_cast<int>(circle_[i].pos_.x) + static_cast<int>(cie_->GetOrigine().x),
+				static_cast<int>(circle_[i].pos_.y) + static_cast<int>(cie_->GetOrigine().y),
 				circle_[i].radius_, circle_[i].radius_,
 				0.0f,
 				0xFFFFFF00 + circle_[i].alpha_,

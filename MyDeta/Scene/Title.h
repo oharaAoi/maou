@@ -22,6 +22,13 @@ private:
 	static const int animationNum_ = 3;
 	float animationFrame_[animationNum_];
 
+	//======================================
+	// soundEffect credit
+	int otLogicGh_;
+	int pokketSoundGh_;
+	int soundEffectGh_;
+
+
 public:
 
 	// constructor & destructor
