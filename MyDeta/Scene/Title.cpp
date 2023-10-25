@@ -11,6 +11,8 @@ Title::Title() {
 	otLogicGh_ = Novice::LoadTexture("./images/Resource/credit/otLogic.png");
 	pokketSoundGh_ = Novice::LoadTexture("./images/Resource/credit/pokettoSound.png");
 	soundEffectGh_ = Novice::LoadTexture("./images/Resource/credit/soundEffect.png");
+
+	spaceGH_ = Novice::LoadTexture("./images/resource/title/space.png");
 }
 
 Title::~Title() {
@@ -129,6 +131,14 @@ void Title::Draw() {
 	Novice::DrawSprite(
 		0, 0,
 		titleGH_,
+		1.0f, 1.0f,
+		0.0f,
+		0xFAFAFAFF
+	);
+
+	Novice::DrawSprite(
+		0, 0,
+		spaceGH_,
 		1.0f, 1.0f,
 		0.0f,
 		0xFAFAFAFF

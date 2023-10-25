@@ -14,6 +14,7 @@ private:
 
 	int backgroundGH_;
 	int titleGH_;
+	int spaceGH_;
 
 	float frame_;
 
