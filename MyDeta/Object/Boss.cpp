@@ -23,6 +23,7 @@ void Boss::Init() {
 	deathCount_ = 0;
 
 	frameCount_ = 0;
+	bulletChangeCount_ = 0;
 
 	type_ = WAVE1;
 
@@ -101,12 +102,12 @@ void Boss::UpDate(BossBullet& bossBullet_) {
 		}
 
 	} else if (type_ == WAVE3) {
-		frameCount_++;
+		bulletChangeCount_++;
 
-		if (frameCount_ >= 400) {
+		if (bulletChangeCount_ >= 400) {
 			bossBullet_.BulletShotChange(static_cast<Barrage>(Rand(1, 5)));
 			bossBullet_.BarrageInit();
-			frameCount_ = 0;
+			bulletChangeCount_ = 0;
 		}
 	}
 

@@ -30,6 +30,7 @@ private:
 	//==============================
 	int deathCount_;
 	int frameCount_;
+	int bulletChangeCount_;
 
 	//==============================
 	BossType type_;
