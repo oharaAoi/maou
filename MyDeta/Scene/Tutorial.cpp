@@ -150,11 +150,48 @@ void Tutorial::Draw(Player& player, Stage& stage, Boss boss, BossBullet bossBull
 	// skip
 	DrawRhombusAnimation(
 		pressFrame_ / 240.0f,
-		{ 100.0f, 100.0f, },
+		{ 140.0f, 100.0f, },
 		30.0f, 10.0f,
 		0xFAFAFAFF,
 		white1x1GH_
 	);
+
+	
+
+	// skip
+	if (pressFrame_ == 60.0f * 4) {
+		// skip window
+		DrawWindow(
+			{ 20 + (242.0f / 2.0f), 150.0f + (38.0f / 2.0f) },
+			{ 252.0f, 48.0f },
+			0xFAFAFAFF
+		);
+
+		Novice::DrawSprite(
+			20, 150,
+			spaceGH_,
+			1.0f, 1.0f,
+			0.0f,
+			0xFAFAFAFF
+		);
+
+	} else {
+		// skip window
+		DrawWindow(
+			{ 20 + (242.0f / 2.0f), 150.0f + (38.0f / 2.0f) },
+			{ 252.0f, 48.0f },
+			0xD0D0D0FF
+		);
+
+		Novice::DrawSprite(
+			20, 150,
+			spaceGH_,
+			1.0f, 1.0f,
+			0.0f,
+			0xA0A0A0FF
+		);
+	}
+	
 
 	player.Draw();
 
@@ -311,7 +348,7 @@ void Tutorial::Draw(Player& player, Stage& stage, Boss boss, BossBullet bossBull
 
 	}
 
-	// skip
 
+	
 
 }
