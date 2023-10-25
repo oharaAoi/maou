@@ -31,19 +31,32 @@ void Result::Init() {
 
 	gameClearSEVolume_ = 0.2f;
 
+	resultEndSE_ = Novice::LoadAudio("./images/Sounds/gameClear/resultFinishSE.mp3");
+	resultEndSEHandle_ = -1;
+	resultEndSEVolume_ = 0.2f;
+	isResultEndSE_ = false;
+
 }
 
 void Result::Update(char* keys, char* preKeys) {
 
+	//========================================
+	if (isResultEndSE_) {
+		isResultEndSE_ = false;
+	}
+
+	//========================================
+
 	if (!isPressSpace_) {
-		if (resultFream_ < 60.0f) { resultFream_++; }
-		else if (resultFream_ == 60.0f) {
-			if (keys[DIK_SPACE] && !preKeys[DIK_SPACE]) { isPressSpace_ = true; }
+		if (resultFream_ < 60.0f) { resultFream_++; } else if (resultFream_ == 60.0f) {
+			if (keys[DIK_SPACE] && !preKeys[DIK_SPACE]) {
+				isPressSpace_ = true;
+				isResultEndSE_ = true;
+			}
 		}
 
 	} else {
-		if (resultFream_ > 0.0f) { resultFream_--; }
-		else if (resultFream_ == 0.0f) { isEndResult_ = true; }
+		if (resultFream_ > 0.0f) { resultFream_--; } else if (resultFream_ == 0.0f) { isEndResult_ = true; }
 	}
 
 	//========================================
@@ -87,18 +100,18 @@ void Result::Draw(Timer timer) {
 
 	// time
 	timer.DrawTimer(
-		{ (kWindowWidth / 2.0f) - (((21.0f * 2.0f) * 3.0f) / 2.0f) + 10.0f, 240.0f},
-		{21.0f * 2.0f, 32.0f * 2.0f},
+		{ (kWindowWidth / 2.0f) - (((21.0f * 2.0f) * 3.0f) / 2.0f) + 10.0f, 240.0f },
+		{ 21.0f * 2.0f, 32.0f * 2.0f },
 		timer.GetTimer(), ShiftColor(EaseInOutExpo(resultFream_ / 60.0f), 0xFAFAFA00, 0xFAFAFAFF)
 	);
-	
+
 	// best time
-	float *bestTime = timer.GetBestTimer();
+	float* bestTime = timer.GetBestTimer();
 
 	for (int bi = 0; bi < 3; bi++) {
 
 		timer.DrawTimer(
-			{ (kWindowWidth / 2.0f) - (((21.0f * 2.0f) * 3.0f) / 2.0f), 420.0f + (bi * 60.0f)},
+			{ (kWindowWidth / 2.0f) - (((21.0f * 2.0f) * 3.0f) / 2.0f), 420.0f + (bi * 60.0f) },
 			{ 21.0f * 2.0f, 32.0f * 2.0f },
 			*(bestTime + bi), ShiftColor(EaseInOutExpo(resultFream_ / 60.0f), 0xFAFA0000, 0xFAFA00FF)
 		);
@@ -124,5 +137,9 @@ void Result::Draw(Timer timer) {
 	//音を鳴らす
 	if (gameClearSEHandle_ == -1) {
 		PlayAudio(gameClearSEHandle_, gameClearSE_, gameClearSEVolume_, false);
+	}
+
+	if (isResultEndSE_) {
+		PlayAudio(resultEndSEHandle_, resultEndSE_, resultEndSEVolume_, false);
 	}
 }
