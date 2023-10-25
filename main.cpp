@@ -72,7 +72,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 
 
-	GameScene scene = GAME;
+	GameScene scene = GAME_OVER;
 
 	// エミッターのインスタンスを作成
 	Emitter emitter;
@@ -234,6 +234,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 						collision.Init();
 						stage_.Init();
 						result.Init();
+						gameOver_.Init();
 					}
 
 
@@ -377,6 +378,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 					//========================================================================
 					//playerが死んだらgameOverへ
 					if (player_.GetIsAlive() == false) {
+						gameOver_.Init();
 						scene = GAME_OVER;
 					}
 
@@ -446,7 +448,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 					boss_.Init();
 					bossBullet_.Init();
 					player_.Init();
-					gameOver_.Init();
 					timer.Init();
 					stage_.Init();
 					tutorial.Init();
@@ -457,7 +458,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 					boss_.Init();
 					bossBullet_.Init();
 					player_.Init();
-					gameOver_.Init();
 					timer.Init();
 					stage_.Init();
 					tutorial.Init();
