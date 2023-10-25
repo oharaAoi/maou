@@ -226,14 +226,6 @@ void Boss::Draw() {
 	}
 
 	if (isAlive_) {
-		/*Novice::DrawEllipse(static_cast<int>(pos_.x + cie_->GetOrigine().x),
-			static_cast<int>(pos_.y + cie_->GetOrigine().y),
-			static_cast<int>(radius_),
-			static_cast<int>(radius_),
-			0.0f,
-			color_,
-			kFillModeSolid);*/
-
 		Novice::DrawSpriteRect(
 			static_cast<int>(pos_.x - radius_ + cie_->GetOrigine().x),
 			static_cast<int>(pos_.y - radius_ + cie_->GetOrigine().y),

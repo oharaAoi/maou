@@ -173,6 +173,4 @@ void GameOver::Draw() {
 	if (isSelectMoveSE_) {
 		Novice::PlayAudio(selectMoveSE_, false, selectMoveSEVolume_);
 	}
-
-	Novice::ScreenPrintf(1000, 100, "obj[0].pos.x:%f", object_[0].pos.x);
 }
