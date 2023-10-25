@@ -291,6 +291,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				boxTransition.Update(sceneT);
 
 				// ==================================================
+				//画面が完全に変わるまでの待ち
 				if (!isGame) {
 					if (!isChangeScene) {
 						gameStartTime++;
