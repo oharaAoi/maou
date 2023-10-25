@@ -64,4 +64,3 @@ public:
 	void SetPlaySound(bool playSound) { playSound_ = playSound; }
 	bool GetPlaySound() { return  playSound_; }
 };
-

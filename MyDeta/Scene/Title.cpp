@@ -25,13 +25,9 @@ void Title::Init() {
 }
 
 void Title::Update() {
-	/// ImGui ...
-	ImGui::Begin("TITLE");
-	ImGui::DragFloat("frame", &frame_, 1.0f);
 
-	ImGui::End();
-
-	frame_++;
+	if (frame_ < animationNum_ * 60.0f) { frame_++; }
+	
 
 	for (int ai = 0; ai < animationNum_; ai++) {
 		animationFrame_[ai] = frame_ - (60.0f * ai);
