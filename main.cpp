@@ -155,6 +155,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓更新処理ここから
 			/// 
 
+			if (gameStartSE.isSound) {
+				gameStartSE.isSound = false;
+				Novice::StopAudio(gameStartSE.handle);
+			}
+
 			if (keys[DIK_SPACE] && !preKeys[DIK_SPACE]) {
 				isChangeScene = true;
 				gameStartSE.isSound = true;
@@ -168,9 +173,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				if (sceneT == 120.0f) {
 					scene = TUTORIAL;
 					isChangeScene = false;
-
-					gameStartSE.isSound = false;
-					Novice::StopAudio(gameStartSE.handle);
 				}
 
 			} else {
@@ -194,7 +196,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			//ゲームスタート時の音
 			if (gameStartSE.isSound) {
-				PlayAudio(gameStartSE.handle, gameStartSE.sound, gameStartSE.volume, false);
+				Novice::PlayAudio(gameStartSE.sound, false, gameStartSE.volume);
+				/*PlayAudio(gameStartSE.handle, gameStartSE.sound, gameStartSE.volume, false);*/
 			} 
 
 			///
